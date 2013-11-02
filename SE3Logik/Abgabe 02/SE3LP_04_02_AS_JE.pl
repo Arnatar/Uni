@@ -1,10 +1,22 @@
-%Abgabe 02 Arne Struck, Jan Esdonk
+  %Abgabe 02 Arne Struck, Jan Esdonk
 
 %Pr‰sentationsbereitschaft: ????
 
 
 %----------Aufgabe 1-------------
+/*
+1.P1 ist der Groﬂvater von P2
 
+2.P1 ist ein (Halb-)geschwisterkind von P2. Halb deshalb, weil die
+Mutter nicht gekl‰rt ist.
+
+3.P2 ist der Onkel von P1.
+
+4.P2 ist der Schwager von P1.
+
+5.P2 ist ein Halbgeschwisterkind von P1 (sie haben unterschiedliche
+V‰ter).
+*/
 
 
 
