@@ -1,0 +1,183 @@
+% Commands
+
+\newcommand{\authorinfo}{Tim Dobert, Kai Sonnenwald, Arne Struck}
+\newcommand{\titleinfo}{GDB [HA] zum 1. 11. 2013}
+\newcommand{\qed}{\ \square}
+
+% ------------------------------------------------------
+
+% Packages & Stuff
+
+\documentclass[a4paper,11pt,fleqn]{scrartcl}
+\usepackage[german,ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[top=1.3in, bottom=1.2in, left=0.9in, right=0.9in]{geometry}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+%\usepackage{pgfplots}
+\usepackage{multicol}
+\usepackage[parfill]{parskip}
+%\usetikzlibrary{calc}
+%\usetikzlibrary{patterns}
+
+
+
+% ------------------------------------------------------
+
+% Title & Pages
+
+\title{\titleinfo}
+\author{\authorinfo}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\authorinfo}
+\fancyhead[R]{\titleinfo}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+    \maketitle
+    \begin{enumerate}
+        \item[\textbf{1.}]
+        \begin{enumerate}
+                \item Informationssysteme stellen einen so genanntes MAT-System (Mensch/Aufgabe/Technik) dar. Sie
+                sind zentrale Bestandteile in rechnergestützten Prozessen.Informationssysteme müssen Daten schreiben,             
+                manipulieren/modifizieren/nutzbar machen und löschen können.
+                
+                \item 
+                    \begin{itemize}
+                        \item Logische Datenunabhängikeit bezieht sich auf die strukturellen Änderungen einer Datenbank.
+                            Eine solche Änderung würde also nichts an der grundlegenden Funktionsweise der Datenbank ändern.
+                        \item Physische Datenunabhängikeit bezieht sich auf eine physische Umstrukturierung, bei einer solchen
+                            hat der Eingriff keine Auswirkung auf die Organisation und Wirkungsweise der Datenbank.
+                    \end{itemize}
+
+                \item \begin{itemize}
+                            \item Online Spiele müssen Accounts und zugehörige Attribute wie beispielsweise Spielerstatistiken,
+                            Ausrüstung, Kämpfe etc. verwalten.  
+                            \item Parteien/Vereine brauchen Informationssysteme für die Mitgliederverwaltung.
+                            Es müssen beispielsweise Mitgliederlisten mit den dazugehörigen Informationen, Beitragszahlungen 
+                            etc. verwaltet werden. 
+                            \item Die Ergebnisse der NSA-Spionage, die ihre Ergebnisse einzelnen Personen/Profilen zuordnen
+                             muss. Beispielsweise: Bewegungs-/Aufenthaltsdaten, Kommunikationsabfragen. \\
+                       \end{itemize}
+            \end{enumerate}  
+        \item[\textbf{2.}]
+        \begin{enumerate}
+            \item[a)]\quad \\
+            \begin{tabular}{c|c}
+                Objekttyp & Eigenschaft \\ \hline\hline
+                User & UserID, UserName \\ \hline 
+                Gemeinschaft & GemeinschaftsID, List: UserId \\ \hline
+                Mannschaft & Mannschaftsname\\ \hline
+                Begegnung & BegegnungsID, Ergenbnis, List(2): Mannschaft \\ \hline
+                Tipp & TippID, UserID, BegegnungsID, StandTipp\\ \hline 
+                   Wettbewerb & WettbewerbsID, GemeinschaftsID, List: BegegnungsID, List: TippID\\ \hline
+                PunkteBoard & WettbewerbsID, UserID, Punkte\\ \hline 
+            \end{tabular}
+            \newpage
+            \item[b)]%\quad \\
+            Bei der Anmeldung eines neuen Nutzers, wird der Tabelle \texttt{User} ein neuer Eintrag hinzugefügt. Das Erstellen einer
+             Gemeinschaft führt zu einem neuen Eintrag in der \texttt{Gemeinschaft}-Tabelle. Die dazu hinzugefügten Benutzer werden in der 
+              UserID-Liste gespeichert. Auf die Tabellen \texttt{Mannschaft} und \texttt{Begegnung} haben die Nutzer keinen Zugriff, sie werden von der
+               Verwaltung aktualisiert. Das Hinzufügen eines Wettbewerbs zu einer Gemeinschaft, führt zu einem neuen Eintrag
+                in der \texttt{Wettbewerb}-Tabelle mit ihrer ID. Dabei können vom  Gemeinschaftsgründer neue Elemente in die Begegnungsliste und
+                 von Nutzern neue in die Tipp-Liste eingefügt werden.
+                  \newline
+            Vergleichend mit den Anforderungen aus dem Skript halten wir folgende Eigenschaften für besonders wichtig in 
+            unserer Datenbank:
+            \begin{enumerate}
+                \item \textbf{Robustheit(Persistenz, Atomarität):}
+                \begin{itemize}
+                    \item Durchgeführte Aktionen sollen nicht verloren gehen.
+                    \item Änderungen werden entweder ganz oder gar nicht ausgeführt, um zu gewährleisten, dass keine 
+                    beschädigten Datensätze entstehen.
+                \end{itemize}
+                \item \textbf{Nutzerfreundlichkeit:}
+                \begin{itemize}
+                    \item Nutzbarkeit ohne Kenntnisse über Datenbanken muss als Spieler nutzbar sein.
+                    \item Die Programmschnittstellen (für Entwickler) sollten leicht und verständlich sein.
+                \end{itemize}
+                \item \textbf{Portierbarkeit:}
+                \begin{itemize}
+                    \item Da heutzutage von vielen Geräten und Systemen auf Funktionen zugegriffen wird, sollte sie portierbar 
+                    sein.
+                    \item Unterschiedliche Anwendungsspezifikationen führen zu unterschiedlichen Zugriffsanwendungen (bspw.: 
+                    Desktopanwendung für Verwaltende Ebene, Webanwendung für die User).
+                \end{itemize}
+                \item \textbf{Isolationseigenschaften:}
+                \begin{itemize}
+                    \item Mehrbenutzerbetrieb muss ohne Konflikte machbar sein.
+                    \item Leistung muss auch bei Belastung stabil bleiben (viele Spieler könnten zu ähnlichen Zeiten 
+                    zugreifen).
+                \end{itemize}
+                \item \textbf{Kontrolle der operationalen Daten durch das System:}
+                \begin{itemize}
+                    \item Verhinderung der Abgabe mehrerer Tipps einer Person auf das selbe Spiel.
+                    \item Verteilung unterschiedlicher Rechte an unterschiedliche Nutzergruppen (mehr Rechte für die 
+                    Verwalter).
+                \end{itemize}
+            \end{enumerate}
+            
+        \end{enumerate}
+        \item[\textbf{3.}]\quad \\
+        \textbf{Dateisystem:}
+            \begin{enumerate}
+                \item[A]
+                \begin{enumerate}
+                    \item Informationen noch nicht geschrieben: \\
+                        Die Änderung im Arbeitsspeicher hatte noch keinen Einfluss auf die Daten auf der Platte. \\
+                    \item Informationen bereits geschrieben (teilweise): \\
+                        Wenn jedes Konto als eigene Datei gespeichert ist, wird Konto 5 der Betrag abgezogen, aber nicht auf 
+                        Konto 7 addiert. das Geld ist also verloren. \\
+                \end{enumerate}
+                \item[B]
+                \begin{enumerate}
+                    \item Informationen noch nicht geschrieben: \\
+                        Es wird ein Auszug für Konto 7 gedruckt, auf dem steht, dass eine Überweisung stattgefunden hat. Die 
+                        Beträge haben sich aber nicht geändert.
+                    \item Informationen bereits geschrieben (teilweise): \\
+                        Die Überweisung hat richtig stattgefunden, es wird aber nur ein Auszug für Konto 7 gedruckt. \\
+                \end{enumerate}
+            \end{enumerate}
+        \textbf{Datenbanksystem:}
+        \begin{enumerate}
+                \item[A]
+                \begin{enumerate}
+                    \item Informationen noch nicht geschrieben: \\
+                        Die Änderung im Arbeitsspeicher hatte noch keinen Einfluss auf die Daten auf der Platte. \\
+                    \item Informationen bereits geschrieben (teilweise): \\
+                        Das System würde die Subtraktion rückgängig machen um zu verhindern, das Geld verloren geht. \\
+                \end{enumerate}
+                \item[B]
+                \begin{enumerate}
+                    \item Informationen noch nicht geschrieben: \\
+                        Die Überweisung findet nicht statt, da nichts auf die Platte geschrieben wurde. \\
+                    \item Informationen bereits geschrieben (teilweise): \\
+                        Je nachdem ob das Drucken des Auszuges mit zu der atomaren Transaktion einer Überweisung gehört, wird 
+                        sie entweder rückgängig gemacht oder es gibt keinen Ausdruck für Konto 5.\\
+                \end{enumerate}
+            \end{enumerate}
+        \item[\textbf{4.}]
+        \begin{enumerate}
+            \item[a)]\quad \\
+            Die erste Anfrage erstellt eine Tabelle namens \texttt{gdb\_gruppe041.user} mit den 
+            Spalten \texttt{id, name} und \texttt{passwort}. Die zweite Anfrage fügt dieser 
+            Tabelle eine Zeile hinzu. Dabei ist die id=1, der Name \texttt{gdbNutzer} und das 
+            passwort \glqq geheim\grqq. 
+            \item[b)]\quad \\
+            Die erste Zeile wählt aus allen Datenbankeinträgen in der Tabelle 
+            \texttt{gdb\_gruppe041.user} diejenigen aus, bei denen \texttt{name} \texttt{gdbNutzer} ist. 
+            Es wird dann der Eintrag geliefert, der in a hinzugefügt wurde. 
+            \item[c)]\quad \\
+            Die Architektur von MySQL folgt der Drei-Schema Architektur. Sie besitzt ebenfalls 
+            eine externe, konzeptuelle und interne Ebene. Die Dokumentation ist noch um einiges 
+            detaillierter und zeigt an, welche Komponenten zu diesen drei Ebenen gehören.
+        \end{enumerate}
+    \end{enumerate}
+
+\end{document}

@@ -1,0 +1,279 @@
+% Commands
+
+\newcommand{\authorinfo}{Arne Struck, Lars Thoms}
+\newcommand{\titleinfo}{AD [HA] zum 22. 10. 2013}
+\newcommand{\qed}{\ \square}
+
+% ------------------------------------------------------
+
+% Packages & Stuff
+
+\documentclass[a4paper,11pt,fleqn]{scrartcl}
+\usepackage[german,ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[top=1.3in, bottom=1.2in, left=0.9in, right=0.9in]{geometry}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{pgfplots}
+\usepackage{multicol}
+\usepackage[parfill]{parskip}
+\usetikzlibrary{calc}
+\usetikzlibrary{patterns}
+
+
+% ------------------------------------------------------
+
+% Title & Pages
+
+\title{\titleinfo}
+\author{\authorinfo}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\authorinfo}
+\fancyhead[R]{\titleinfo}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+\maketitle
+	\begin{enumerate}
+		\item[\textbf{1}]
+		\begin{enumerate}
+			\item[(a)]\quad \\
+			\begin{itemize}
+  				\item $f_{10} \prec f_7:$ $n^{-1}$ tendiert gegen 0, wächst also negativ.
+  				\item $f_7 \prec f_8:\ f_7$ hat ein 0-Wachstum und $f_8$ wächst positiv.
+  				\item $f_8 \prec f_3:\ \lim\limits_{n\rightarrow \infty}\frac{\log(\log(n))}{log(n)}\rightarrow 0$
+  				\item $f_3 \asymp f_4:\ \frac{3\log(n)}{\log(n)} = 3$ Damit sind beide in der gleichen Wachstumsklasse.
+  				\item $f_4 \prec f_{12}:\ \log^2(n)$ wächst leicht ersichtlich schneller, als $\log(n)$.
+  				\item $f_{12} \prec f_2:\ f_{12}$ ist eine logarithmische, $f_2$ ist eine polynomielle Funktion, polynomielle Funktionen wachsen schneller.
+  				\item $f_2 \prec f_9:\ f_2$ ist nicht in der gleichen Wachstumsklasse, wie $f_9$ da die Exponenten verschieden sind.
+  				\item $f_9 \prec f_5:$ die höchste Potenz in $f_5$ ist 1, die höchste in $f_9$ ist 0,5.
+  				\item $f_5 \prec f_{14}:$ die höchste Potenz in $f_5$ ist 1, die höchste in $f_{14}$ ist 8.
+  				\item $f_{14} \prec f_1:\ f_1$ ist die erste Exponentialfunktion, wächst dementsprechend schneller, als alle vorherigen Funktionen.
+  				\item $f_1 \prec f_{13}:\ 8^n = 2^{n\cdot 3}$ damit ist gezeigt, dass $f_1$ langsamer wächst.
+  				\item $f_{13} \prec f_{11}:\ f_{11}$ ist eine fakultative Funktion, welche schneller wachsen, als exponentielle Funktionen.
+  				\item $f_{11} \prec f_6:\ n! = n\cdot (n-1) \cdot ... \cdot 1\quad n^n = n_n \cdot n_{n-1} \cdot ... \cdot n_1$ damit ist der Vergleich eindeutig gezeigt.
+			\end{itemize}
+			\item[(b)]\quad \\
+			\begin{enumerate}
+				\item[(i)]
+				Da gilt : $\log_b(n) = \frac{\log_2(n)}{log_2(b)}$ kann nun ein b gewählt werden, welches den Zielvergleich erfüllt.
+				\item[(ii)]
+				Dass die Aussage gilt ist leicht ersichtlich, wenn man sich die Definitionen ansieht:
+				$f\in \mathcal{O}(g) \Leftrightarrow \lim\limits_{n\rightarrow\infty}\frac{f(n)}{g(n)}<\infty$ \\
+				$g\in \omega(f) \Leftrightarrow \lim\limits_{n\rightarrow\infty}\frac{g(n)}{f(n)}=\infty
+				\Leftrightarrow \lim\limits_{n\rightarrow\infty}\frac{f(n)}{g(n)} = 0$ \\
+				Da $0 < \infty$ gilt, muss die Aussage gelten.
+				\item[(iii)]
+				Der Beweis ist in Fälle gegliedert. \\
+				Fall 1: $f_c(n)\in\Theta(n)\Leftarrow c = 1:$ \\
+				\begin{center}
+					$\sum\limits_{i=0}^n c^i = n$ für $c = 1$ 
+				\end{center}
+				\quad \\ \\
+				Fall 2: $f_c(n)\in\Theta(n)\Rightarrow c = 1:$ \\
+				\begin{center}
+					\(				
+					\begin{array}{rl}
+						f_c(n) &\overset{*}{=} \frac{1-c^{n+1}}{1-c} \\
+						& = \frac{1}{1-c} - \frac{1}{1-c} \cdot c^{n+1} \in\Theta (c^n)\\
+						& \text{\tiny{*Summenformel}}
+					\end{array}
+					\) \\ \(
+					\begin{array}{rl}
+						\text{für c > 1 gilt: } & \lim\limits_{n\rightarrow\infty}\frac{c^n}{n} = \infty \\
+						\text{für c < 1 gilt: } & \lim\limits_{n\rightarrow\infty}\frac{c^n}{n} = 0 \\
+					\end{array}
+					\) \\
+				\end{center}
+				Also ist es ersichtlich, dass die Behauptung nur für c = 1 gilt. \\ \\
+			\end{enumerate}
+		\end{enumerate}
+		
+		\item[\textbf{2}]
+		\begin{enumerate}
+			\item[a)] \quad \\
+			\begin{enumerate}
+				\item[Beh.:]\quad \\
+					$F_{n+1} \geq 2^{0.5(n+1)}\land F_n \geq 2^{0.5n}\ \forall n\geq 6$
+				\item[I.Anf.:]\quad \\
+					$F_6 = 8 \geq 2^{0.5\cdot 6} = 8$ \\
+					$F_7 = 13 \geq 2^{0.5\cdot 7} \approx 11.31 $
+				\item[I.A.:]\quad \\
+					Die Behauptung gilt für ein frei wählbares, aber festes $n\in\mathbb{N}|n\geq 6$
+				\item[I.S.:] (zu zeigen: $F_{n+2}\geq 2^{0.5(n+2)}$) \\ \\
+				    \(
+					\begin{array}{rl}
+						F_{n+2} &= F_{n+1} +F_n \\
+						& \overset{\tiny{IA}}{\geq} 2^{0.5(n+1)} + 2^{0.5n} \\
+						& = 2^{0.5n} \cdot 2^{0.5} + 2^{0.5n} \\
+						& = 2^{0.5n} \cdot \big(2^{0.5} + 1\big) \\
+						& \geq 2^{0.5n+2} =  2^{0.5n} \cdot 2
+					\end{array}
+					\) \\ \\
+					Dies gilt, da $2 < 2^{0.5}+1 \qed$
+			\end{enumerate} \quad \\
+			\newpage
+			\item[b)] \quad \\
+			\begin{enumerate}
+				\item[Beh.:]\quad \\
+					$F_{n+1} \leq 2^{0.9(n+1)}\land F_n \leq $
+				\item[I.Anf.:]\quad \\
+					$F_0 = 0 \leq 2^{0.9\cdot 0}  = 1 $\\ 
+					$F_1 = 1 <= 2^{0.9 * 1} \approx 1.866$
+				\item[I.A.:]\quad \\
+					Die Behauptung gilt für ein frei wählbares, aber festes $n\in\mathbb{N}$
+				\item[I.S.:] (z.z.: $F_{n + 2} <= 2^{0.9(n + 2)}$) \\ \\
+					\(
+					\begin{array}{rl}
+						F_{n+2} &= F_{n+1} + F_n \\
+    				    &\overset{\tiny{IA}}{\leq} 2^{0.9(n + 1)} + 2^{0.9n} \\
+    				    &= 2^{0.9n} \cdot 2^{0.9} + 2^{0.9n} \\
+    				    &= 2^{0.9n} \cdot \big(2^{0.9} + 1\big) \\
+    					&\leq 2^{0.9(n + 2)} = 2^{0.9n} \cdot 2^{0.9 \cdot 2} \\
+					\end{array}
+					\)\\ \\
+					Dies gilt, da $2.866 \approx 2^{0.9} + 1 < 2^{0.9 \cdot 2}\approx 3.482 \qed$
+			\end{enumerate}
+		\end{enumerate}
+		
+		\item[\textbf{3}]
+		\begin{enumerate}
+			\item[(a)]\quad \\
+			\begin{enumerate}				
+				\item[Beh.:]\quad \\
+					\(
+					\begin{pmatrix}
+						F_{n+1} \\
+						F_{n+2}
+					\end{pmatrix}
+					= 
+					\begin{pmatrix}
+						0 & 1 \\
+						1 & 1
+					\end{pmatrix}
+					^n \cdot
+					\begin{pmatrix}
+						F_{0} \\
+						F_{1}
+					\end{pmatrix}
+					\)
+				\item[I.Anf.:]\quad \\
+					\(
+					\begin{pmatrix}
+						F_0 \\
+						F_1
+					\end{pmatrix}
+					= 
+					\begin{pmatrix}
+						0 & 1 \\
+						1 & 1
+					\end{pmatrix}
+					^0 \cdot
+					\begin{pmatrix}
+						0 \\
+						1
+					\end{pmatrix}
+					=
+					\begin{pmatrix}
+						1 & 0 \\
+						0 & 1
+					\end{pmatrix}
+					\cdot
+					\begin{pmatrix}
+						0 \\
+						1
+					\end{pmatrix}
+					=
+					\begin{pmatrix}
+						0 \\
+						1
+					\end{pmatrix}
+					\)
+				\item[I.A.:]\quad \\
+					Die Behauptung gilt für ein frei wählbares, aber festes $n\in\mathbb{N}$
+				\item[I.S.:] z.z.:
+					\(
+					\begin{pmatrix}
+						F_{n+1} \\
+						F_{n+2}
+					\end{pmatrix}
+					= 
+					\begin{pmatrix}
+						0 & 1 \\
+						1 & 1
+					\end{pmatrix}
+					^n \cdot
+					\begin{pmatrix}
+						0 & 1 \\
+						1 & 1
+					\end{pmatrix}
+					\cdot
+					\begin{pmatrix}
+						F_{0} = 0 \\
+						F_{1} = 1
+					\end{pmatrix}
+					\) \\ \\ \\
+					\(
+					\begin{array}{rl}
+					
+						\begin{pmatrix}
+							0 & 1 \\
+							1 & 1
+						\end{pmatrix}
+						\cdot
+						\begin{pmatrix}
+							0 & 1 \\
+							1 & 1
+						\end{pmatrix}
+						^n\cdot
+						\begin{pmatrix}
+							F_{0} \\
+							F_{1}
+						\end{pmatrix}
+						&\overset{IA}{=}
+						\begin{pmatrix}
+							0 & 1 \\
+							1 & 1
+						\end{pmatrix}
+						\cdot
+						\begin{pmatrix}
+							F_{n} \\
+							F_{n+1}
+						\end{pmatrix} \\ \\
+						&=
+						\begin{pmatrix}
+							F_{n+1} \\
+							F_{1}+F_{n+1}
+						\end{pmatrix} \\ \\
+						&=
+						\begin{pmatrix}
+							F_{n+1} \\
+							F_{n+2}
+						\end{pmatrix} \qed
+					\end{array}
+					\) 
+					
+					\end{enumerate}\newpage
+					
+			\item[(b)]\quad \\
+			Für die Berechnung wird eine binäre Exponentiation (Square \& Multiply, bekannt aus DM) angewandt.
+			Damit ist eine Laufzeit von $\log(n)$ erreicht, wenn es sich beim Exponenten um eine Zweierpotenz
+			von	$n$ handelt. Zur Laufzeit kommen nun nur noch Summanden für die Additionen der einzelnen 
+			Ergebnisse des Verfahrens hinzugefügt, wenn $n$ nicht einer Zweierpotenz entspricht.
+			Also kann die Berechnung in $\mathcal{O}(\log(n))$ durchgeführt werden. \\ \\
+
+			\item[(c)]\quad \\
+			Die Anzahl der Multiplikationen ist $8\cdot(n-1)+4$ (die 4 ist als Addition zu vernachlässigen).
+			Die Zeit berechnet sich durch das Anwenden des Verfahrens aus (b) und den gegebenen Informationen 
+			wie folgt: $\log(n)\cdot 8(n-1)^{1.59}$. \\
+			Da $\lim\limits_{n\rightarrow\infty} \frac{\log(n)\cdot 8(n-1)^{1.59}}{n^2} = 0$ gilt ist gezeigt, 
+			dass das Matrizenverfahren echt schneller ist.
+		\end{enumerate}	
+	\end{enumerate}
+\end{document}
