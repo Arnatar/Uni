@@ -86,22 +86,19 @@ false.
 %4.
 
 /*
-Gesucht ist ein Abgleich der Autoren und Titel der buecher und
-hoerbuecher.
+Gesucht ist ein Abgleich der Autoren und Titel der buecher und ebuecher.
 
-?- produkt(PIdBuch,buch,Titel,Autor,_,_,_),produkt(PIdHoerbuch,hoerbuch,Titel,Autor,_,_,_).
-PIdBuch = 12346,
-Titel = hoffnung,
-Autor = sand_molly,
-PIdHoerbuch = 34567 ;
-PIdBuch = 12347,
-Titel = winterzeit,
+?-produkt(PIdBuch,buch,Titel,Autor,_,_,_),produkt(Ebuch,ebuch,Titel,Autor,_,_,_).
+PIdBuch = 12345,
+Titel = sonnenuntergang,
+Autor = hoffmann_susanne,
+Ebuch = 23456 ;
+PIdBuch = 12348,
+Titel = blutrache,
 Autor = wolf_michael,
-PIdHoerbuch = 34568 ;
-PIdBuch = 12349,
-Titel = winterzeit,
-Autor = wolf_michael,
-PIdHoerbuch = 34568.
+Ebuch = 23458 ;
+false.
+
 */
 
 %5.:
@@ -110,14 +107,16 @@ PIdHoerbuch = 34568.
 Gesucht sind die Autoren,Titel der buecher, welche keine
 Entsprechung in den hoerbuechern haben.
 
-?- produkt(PIdBuch,buch,Titel,Autor,_,_,_),(\+ produkt(PIdHoerbuch,hoerbuch,Titel,Autor,_,_,_)).
-PIdBuch = 12345,
-Titel = sonnenuntergang,
-Autor = hoffmann_susanne ;
-PIdBuch = 12348,
-Titel = blutrache,
+?- produkt(PIdBuch,buch,Titel,Autor,_,_,_),(\+ produkt(PIdebuch,ebuch,Titel,Autor,_,_,_)).
+PIdBuch = 12346,
+Titel = hoffnung,
+Autor = sand_molly ;
+PIdBuch = 12347,
+Titel = winterzeit,
 Autor = wolf_michael ;
-false.
+PIdBuch = 12349,
+Titel = winterzeit,
+Autor = wolf_michael.
 */
 
 %6.:
