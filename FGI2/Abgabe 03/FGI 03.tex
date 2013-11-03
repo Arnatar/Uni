@@ -45,14 +45,48 @@
 		\item[1.]\quad \\
         	\(
         	\begin{array}{lcl}
-        		L(A_1) &=& a^+ + (bca^* d)^+\\
+        		L(A_1) &=& (bca^* d)^*a^*\\
                 L(A_2) &=& (a+b)((a+c)(a+d)(a+b))^*\\
         		L^\omega(A_1) &=& (a)^{\omega} + (bca^* d)^{\omega} + (bca^* d)^{\omega} a^{\omega}\\
         		L^\omega(A_2) &=& ((a+b)(a+c)(a+d))^{\omega}
 	        \end{array}
         	\)
         \item[2.]\quad \\
+    	    \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2.6cm]
+					%nodes
+					\node[initial,state] 	(QT)    		   		{$q,t$};
+					\node[state,accepting]  (PU) [right of = QT]	{$p,u$};
+					\node[state]			(PT) [right of = PU]	{$p,t$};	
+					\node[state]			(PV) [right of = PT]	{$p,v$};
+						
+					\node[state]			(RU) [below of = QT]	{$r,u$};
+					\node[state]			(SV) [right of = RU]	{$s,v$};
+					\node[state]			(ST) [right of = SV]	{$s,t$};
+					\node[state]			(SU) [right of = ST]	{$s,u$};
+					
+					
+					%initial graph
+					\path[->]				(QT) edge 				node{a}				(PU);
+					\path[->]				(QT) edge 				node{b}				(RU);
+					\path[->]				(PU) edge [bend left]  	node{a}				(PV);
+					\path[->]				(RU) edge 				node{c}				(SV);
+					\path[->]				(SV) edge 				node{a}				(ST);
+					\path[->]				(SV) edge 				node{d}				(QT);
+					\path[->]				(ST) edge 				node{a}				(SU);
+					\path[->]				(PV) edge 				node{a}				(PT);
+					\path[->]				(PT) edge 				node{a}				(PU);
+					\path[->]				(SU) edge [bend left]	node{a}				(SV);
+					
+			\end{tikzpicture} \\
         \item[3.]\quad \\
+        	\(
+			\begin{array}{lcl}
+				L(A_3)&=&(bc(aaa)^*d)^*a(aaa)^* \\
+   		        L^\omega(A_3)&=&(bc(aaa)^*d)^*a(aaa)^\omega \\ 
+	            L(A_1)\bigcap L(A_2) &=& (bc(aaa)^*d)^* a(aaa)^*
+			\end{array}			        	
+        	\)
+        	
         \item[4.]\quad \\
         \item[5.]\quad \\
         
