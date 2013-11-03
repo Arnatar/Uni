@@ -47,7 +47,7 @@
         	\begin{array}{lcl}
         		L(A_1) &=& (bca^* d)^*a^*\\
                 L(A_2) &=& (a+b)((a+c)(a+d)(a+b))^*\\
-        		L^\omega(A_1) &=& (a)^{\omega} + (bca^* d)^{\omega} + (bca^* d)^{\omega} a^{\omega}\\
+        		L^\omega(A_1) &=& (bca^* d)^{\omega} + (bca^* d)^* a^{\omega}\\
         		L^\omega(A_2) &=& ((a+b)(a+c)(a+d))^{\omega}
 	        \end{array}
         	\)
@@ -78,20 +78,225 @@
 					\path[->]				(SU) edge [bend left]	node{a}				(SV);
 					
 			\end{tikzpicture} \\
+            
         \item[3.]\quad \\
         	\(
-			\begin{array}{lcl}
+			\begin{array}{lclcl}
 				L(A_3)&=&(bc(aaa)^*d)^*a(aaa)^* \\
    		        L^\omega(A_3)&=&(bc(aaa)^*d)^*a(aaa)^\omega \\ 
-	            L(A_1)\bigcap L(A_2) &=& (bc(aaa)^*d)^* a(aaa)^*
+	            L(A_1)\cap L(A_2) &=& (bc(aaa)^*d)^* a(aaa)^* &=& L(A_3) \\
+                L^\omega(A_1)\cap L^\omega(A_2) &=& (bc(aaa)^*d)^\omega + (bc(aaa)^*d)^* a(a)^\omega
 			\end{array}			        	
-        	\)
-        	
+        	\) \\
+            $L(A_3)$ sowie der Schnitt von $L(A_1)$ und $L(A_2)$ sind identisch, was zu erwarten war, da $A_3$ extra konstruiert wurde, um den Schnitt er beiden ursprünglichen Automaten zu akzeptieren. \\
+            $L^\omega(A_3)$ ist eine Teilmenge von $L^\omega(A_1)\cap L^\omega(A_2)$.
+            \newpage
         \item[4.]\quad \\
+        \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=3cm]
+					%nodes
+					\node[initial,state, accepting](QT1)  	   		{$q,t,1$};
+					\node[state]  			(PU2) [right of = QT1]	{$p,u,2$};
+					\node[state]			(PV2) [right of = PU2]	{$p,v,2$};
+					\node[state]			(PT2) [right of = PV2]	{$p,t,2$};
+                    \node[state,accepting]  (PU1) [below of = PT2]	{$p,u,1$};
+					                    
+                    \node[state]			(RU2) [below of = QT1]	{$r,u,2$};
+                    \node[state]			(SV1) [below of = RU2]	{$s,v,1$};
+                    
+                    \node[state]			(ST1) [right of = SV1]	{$s,t,1$};
+                    \node[state]			(SU1) [right of = ST1]	{$s,u,1$};
+
+
+					%initial graph
+					\path[->]		(QT1)edge		node{a} (PU2);
+                    \path[->]		(PU2)edge		node{a} (PV2);
+                    \path[->]		(PV2)edge		node{a} (PT2);
+                    \path[->]		(PT2)edge		node{a} (PU1);
+                    \path[->]		(PU1)edge		node{a} (PV2);
+                             
+                    \path[->]		(QT1)edge		node{b} (RU2);
+                    \path[->]		(RU2)edge		node{c} (SV1);
+                    \path[->]		(SV1)edge		node{a} (ST1);
+                    \path[->]		(ST1)edge		node{a} (SU1);
+                    \path[->]		(SU1)edge [bend left] node{a} (SV1);
+                    \path[->]		(SV1)edge [bend left] node{d} (QT1);
+
+					
+			\end{tikzpicture} \\
         \item[5.]\quad \\
-        
+        	\(
+        	\begin{array}{lcl}
+            	L(A_4) &=& ((bc(aaa)^*d)^* aaaa(aaa)^*)? \\
+                L^\omega(A_4) &=& (bc(aaa)^*d)^\omega + (bc(aaa)^*d)^* a(a)^\omega \\
+                L(A_1)\cap L(A_2) &=& (bc(aaa)^*d)^* a(aaa)^*
+            \end{array}
+            \) \\ \\
+            \(L(A_1)\cap L(A_2)\) kann kene Teilmenge von $L(A_4)$ sein, da es ein Wort (a) bilden kann, 
+            welches kein Element von $L(A_4)$ ist. umgekehrt kann $L(A_4)$ auch keine Teilmenge von
+            \(L(A_1)\cap L(A_2)\), da $L(A_4)$ das leere Wort bilden kann, \(L(A_1)\cap L(A_2)\) aber nicht. 
+            \\ \\
+            Per Definition akzeptiert der Produktautomat $A_4$, konstruiert nach Satz 1.21, genau den Schnitt
+            der Sprachen der Automaten $A_1$ und $A_2$. Daraus folgt: \\
+            $L^\omega(A_4) = (bc(aaa)^*d)^\omega + (bc(aaa)^*d)^* a(a)^\omega = L^\omega(A_1)\cap
+            L^\omega(A_2)$
         \end{enumerate}
-    \item[\textbf{3.4.}]
-	    Bisimilar: TS1, TS3 sowie TS2 und TS4.
+     \item[\textbf{3.4.}]\quad \\
+		\textbf{Bisimulationsrelation:} \\ \\
+		\(TS_1\underline{\leftrightarrow}TS_3\) und \(TS_3\underline{\leftrightarrow}TS_1:\) \\
+    	\(
+    		\big\{(z_0,q_0),(z_1,q_2),(z_2,q_1),(z_4,q_0),(z_5,q_2),(z_6,q_1),(z_7,q_2),(z_8,q_0),(z_9,q_2),
+    		(z_{10},q_1),(z_{11},q_2),...\big\}
+    	\) \\ \\
+    	
+    	\(TS_2\underline{\leftrightarrow}TS_4\) und \(TS_4\underline{\leftrightarrow}TS_2:\) \\
+	    \(
+	    \big\{(p_0,r_0),(p_1,r_2),(p_2,r_1),(p_4,r_0),(p_5,r_2),(p_6,r_1),(p_7,r_2),(p_8,r_0),(p_9,r_2),
+    		(p_{10},r_1),(p_{11},r_2),...\big\}
+	    \) \\ \newpage
+	    \textbf{Definitionsnachweis \(TS_1\underline{\leftrightarrow}TS_3\):}
+	    \begin{enumerate}
+	    	\item[a)]\quad \\
+	    		Die Startzustände sind in der ersten Relation als Tupel zu finden.
+	    	\item[b)]\quad \\
+            \begin{enumerate}
+				\item[Beh.:]\quad \\
+                \(\forall (z_n,q_m)\in \mathcal{B} |\in \mathbb{N}, m\in[0,1,2] \)\\ \\
+					\(z_{4n}\overset{c}{\underset{TS1}{\rightarrow}}z_{4n+1}\ \exists\ q_0 \in 
+					TS3:q_0\overset{c}{\underset{TS3}{\rightarrow}}q_2 \land (z_{4n+1},q_2)\in \mathcal{B}\) \\
+					
+					\(q_0\overset{c}{\underset{TS3}{\rightarrow}}q_2\ \exists\ z_{4n} \in 
+					TS1:z_{4n}\overset{c}{\underset{TS1}{\rightarrow}}z_{4n+1} \land (q_2,z_{4n+1})\in
+					\mathcal{B}\) \\
+					
+					\(z_{4n-2}\overset{d}{\underset{TS1}{\rightarrow}}z_{4n-1}\ \exists\ q_1 \in 
+					TS3:q_1\overset{d}{\underset{TS3}{\rightarrow}}q_2 \land (z_{4n-1},q_2)\in \mathcal{B}\) \\
+					
+					\(q_1\overset{d}{\underset{TS3}{\rightarrow}}q_2\ \exists\ z_{4n-2} \in 
+					TS1:z_{4n-2}\overset{d}{\underset{TS1}{\rightarrow}}z_{4n-1} \land (q_2,z_{4n-1})\in
+					\mathcal{B}\) \\
+					
+					\(z_{4n-2}\overset{b}{\underset{TS1}{\rightarrow}}z_{4n}\ \exists\ q_0 \in 
+					TS3:q_0\overset{b}{\underset{TS3}{\rightarrow}}q_1 \land (z_{4n},q_1)\in \mathcal{B}\) \\
+					
+					\(q_0\overset{b}{\underset{TS3}{\rightarrow}}q_1\ \exists\ z_{4n-2} \in 
+					TS1:z_{4n-2}\overset{b}{\underset{TS1}{\rightarrow}}z_{4n} \land (q_1,z_{4n})\in
+					\mathcal{B}\) \\
+					
+					\(z_{4n}\overset{a}{\underset{TS1}{\rightarrow}}z_{4(n+1)-1}\ \exists\ q_1 \in 
+					TS3:q_1\overset{a}{\underset{TS3}{\rightarrow}}q_0 \land (z_{4n},q_0)\in \mathcal{B}\) \\
+					
+					\(q_1\overset{a}{\underset{TS3}{\rightarrow}}q_0\ \exists\ z_{4n} \in 
+					TS1:z_{4n}\overset{a}{\underset{TS1}{\rightarrow}}z_{4(n+1)-1} \land (q_0,z_{4(n+1)-1})\in
+					\mathcal{B}\) \\
+					
+				\item[I.Anf.:]\quad \(n\in [0,1]\) \\
+					\(z_0\overset{c}{\rightarrow}z_1\ \exists\ q_0\overset{c}{\rightarrow}q_2\land(z_1,q_2)\) \\
+					\(q_0\overset{c}{\rightarrow}q_2\ \exists\ z_0\overset{c}{\rightarrow}z_1\land(z_1,q_2)\) \\
+					\(z_2\overset{d}{\rightarrow}z_3\ \exists\ q_1\overset{d}{\rightarrow}q_2\land(z_3,q_2)\) \\
+					\(q_1\overset{d}{\rightarrow}q_2\ \exists\ z_2\overset{d}{\rightarrow}z_3\land(z_3,q_2)\)
+\\
+					\(z_2\overset{b}{\rightarrow}z_4\ \exists\ q_1\overset{b}{\rightarrow}q_0\land(z_4,q_0)\)
+\\
+					\(q_1\overset{b}{\rightarrow}q_0\ \exists\ z_2\overset{b}{\rightarrow}z_4\land(z_4,q_0)\)
+\\
+					\(z_0\overset{a}{\rightarrow}z_2\ \exists\ q_0\overset{a}{\rightarrow}q_1\land(z_2,q_1)\)
+\\
+					\(q_0\overset{a}{\rightarrow}q_1\ \exists\ z_0\overset{a}{\rightarrow}z_2\land(z_2,q_1)\)
+\\
+				\item[I.A.:]
+					Die Behauptung gilt für ein bestimmtes, aber frei wählbares \(n\in \mathbb{N}\).
+				\newpage
+				\item[I.S.:] (zu zeigen: Da die Bisimulation zyklisch ist, muss ein 4er-Zyklus (I.A.)
+				nachgewiesen werden) \\ \\
+					Schritt 1:
+					\(z_{4(n+1)}\overset{c}{\underset{TS1}{\rightarrow}}z_{4(n+1)+1}\ \exists\ q_0 \in 
+					TS3:q_0\overset{c}{\underset{TS3}{\rightarrow}}q_2 \land (z_{4(n+1)+1},q_2)\in
+					\mathcal{B}\) \\
+					
+					\(q_0\overset{c}{\underset{TS3}{\rightarrow}}q_2\ \exists\ z_{4(n+1)} \in 
+					TS1:z_{4(n+1)}\overset{c}{\underset{TS1}{\rightarrow}}z_{4(n+1)+1} \land
+					(q_2,z_{4(n+1)+1})\in
+					\mathcal{B}\) \\
+					
+					\(z_{4(n+1)-2}\overset{d}{\underset{TS1}{\rightarrow}}z_{4(n+1)-1}\ \exists\ q_1 \in 
+					TS3:q_1\overset{d}{\underset{TS3}{\rightarrow}}q_2 \land (z_{4(n+1)-1},q_2)\in
+					 \mathcal{B}\) \\
+					
+					\(q_1\overset{d}{\underset{TS3}{\rightarrow}}q_2\ \exists\ z_{4(n+1)-2} \in 
+					TS1:z_{4(n+1)-2}\overset{d}{\underset{TS1}{\rightarrow}}z_{4(n+1)-1} \land 
+					(q_2,z_{4(n+1)-1})\in \mathcal{B}\) \\
+					
+					\(z_{4(n+1)-2}\overset{b}{\underset{TS1}{\rightarrow}}z_{4(n+1)}\ \exists\ q_0 \in 
+					TS3:q_0\overset{b}{\underset{TS3}{\rightarrow}}q_1 \land (z_{4(n+1)},q_1)\in \mathcal{B}\) \\
+					
+					\(q_0\overset{b}{\underset{TS3}{\rightarrow}}q_1\ \exists\ z_{4(n+1)-2} \in 
+					TS1:z_{4(n+1)-2}\overset{b}{\underset{TS1}{\rightarrow}}z_{4(n+1)} \land 
+					(q_1,z_{4(n+1)})\in \mathcal{B}\) \\
+					
+					\(z_{4n}\overset{a}{\underset{TS1}{\rightarrow}}z_{4((n+1)+1)-1}\ \exists\ q_1 \in 
+					TS3:q_1\overset{a}{\underset{TS3}{\rightarrow}}q_0 \land (z_{4(n+1)},q_0)\in \mathcal{B}\) \\
+					
+					\(q_1\overset{a}{\underset{TS3}{\rightarrow}}q_0\ \exists\ z_{(4n+1)} \in 
+					TS1:z_{4(n+1)}\overset{a}{\underset{TS1}{\rightarrow}}z_{4((n+1)+1)-1} \land 
+					(q_0,z_{4((n+1)+1)-1})\in \mathcal{B}\) \\				
+				
+				Schritt 2:
+				
+					\(z_{4n+4}\overset{c}{\underset{TS1}{\rightarrow}}z_{4n+1+4}\ \exists\ q_0 \in 
+					TS3:q_0\overset{c}{\underset{TS3}{\rightarrow}}q_2 \land (z_{4n+1+4},q_2)\in \mathcal{B}\) \\
+					
+					\(q_0\overset{c}{\underset{TS3}{\rightarrow}}q_2\ \exists\ z_{4n+4} \in 
+					TS1:z_{4n+4}\overset{c}{\underset{TS1}{\rightarrow}}z_{4n+1+4} \land (q_2,z_{4n+1+4})\in
+					\mathcal{B}\) \\
+					
+					\(z_{4n-2+4}\overset{d}{\underset{TS1}{\rightarrow}}z_{4n-1+4}\ \exists\ q_1 \in 
+					TS3:q_1\overset{d}{\underset{TS3}{\rightarrow}}q_2 \land (z_{4n-1+4},q_2)\in \mathcal{B}\) \\
+					
+					\(q_1\overset{d}{\underset{TS3}{\rightarrow}}q_2\ \exists\ z_{4n-2+4} \in 
+					TS1:z_{4n-2+4}\overset{d}{\underset{TS1}{\rightarrow}}z_{4n-1+4} \land (q_2,z_{4n-1+4})\in
+					\mathcal{B}\) \\
+					
+					\(z_{4n-2+4}\overset{b}{\underset{TS1}{\rightarrow}}z_{4n+4}\ \exists\ q_0 \in 
+					TS3:q_0\overset{b}{\underset{TS3}{\rightarrow}}q_1 \land (z_{4n+4},q_1)\in \mathcal{B}\) \\
+					
+					\(q_0\overset{b}{\underset{TS3}{\rightarrow}}q_1\ \exists\ z_{4n-2+4} \in 
+					TS1:z_{4n-2+4}\overset{b}{\underset{TS1}{\rightarrow}}z_{4n+4} \land (q_1,z_{4n+4})\in
+					\mathcal{B}\) \\
+					
+					\(z_{4n}\overset{a}{\underset{TS1}{\rightarrow}}z_{4(n+1)-1+4}\ \exists\ q_1 \in 
+					TS3:q_1\overset{a}{\underset{TS3}{\rightarrow}}q_0 \land (z_{4n+4},q_0)\in \mathcal{B}\) \\
+					
+					\(q_1\overset{a}{\underset{TS3}{\rightarrow}}q_0\ \exists\ z_{4n+4} \in 
+					TS1:z_{4n+4}\overset{a}{\underset{TS1}{\rightarrow}}z_{4(n+1)-1+4} \land 
+					(q_0,z_{4(n+1)-1+4})\in
+					\mathcal{B}\) \\ \\
+					Da jedes z um 4 Stellen verschoben wird, wird der Viererzyklus kompletiert dadurch ist 
+					nachgewiesen, \(TS1\underline{\leftrightarrow}TS3\) gilt.
+			\end{enumerate}
+	    	
+	    	\item[c)]\quad \\ 
+	    	Da alle \(z_{4n-1}\) und \(z_{4n+1}\) Auf \(q_2\) abgebildet werden und alles
+	    	Endzustände sind geht der c)-Teil aus dem b)-Teil hervor. \\
+	    	\\
+	    	Anmerkung: War das ernsthaft mit "weisen sie für eine davon nach..." gemeint? Wenn nicht in Zukunft 
+	    	bitte eindeutiger ausdrücken, da ein Nachweis einem formalen Beweis gleichzusetzen ist. \\
+	    \end{enumerate}
+	    
+	    \textbf{Nichtbisimilaritätsnachweis:} \\
+	        TS2 und TS3 sind nicht bisimilar. Versuchte man, die Bisimulationsrelation aufzustellen, würde man
+	        auf einen Fehler stoßen: \\
+                $TS_2\underline{\leftrightarrow}TS_3: \mathcal{B} = \{(P0,Q0),(P4,Q1)\}$ \\
+                Bereits hier ist die Relation Fehlerhaft. Man erreicht P4 von P0 und Q1 von Q0 aus mit einem a,
+                jedoch kann nun von P4 aus ein Endzustand mithilfe eines c erreicht werden, von Q1 aus jedoch
+                nicht. $\qed$ \\ \\
+                TS3 und TS4 sind ebenfalls nicht bisimilar. Wieder wird versucht, die Bisimulationsrelation 
+                aufzustellen: \\
+                $TS_3\underline{\leftrightarrow}TS_4: \mathcal{B} = \{(Q0, R0),(Q1,R0)\}$ \\
+                Von Q0 kann Q1 mit einem a erreicht werden, und von R0 kann R0 ebenfalls mit einem a erreicht
+                werden. Jedoch können Q1 und R0 gar nicht bisimilar sein, da R0 ein Startzustand ist und Q1
+                nicht. \\
+                Unabhängig davon ist es leicht ersichtlich, dass TS3 und TS4 nicht bisimilar sind, da ihr
+                Aufbau sehr ähnlich ist. Der einzige Unterschied sind die beiden Schleifen an R0 bzw. R1.
+                Hieran erkennt man bereits trivialerweise, dass TS3 und TS4 nicht bisimilar sein können. $\qed$
     \end{enumerate}
 \end{document}
