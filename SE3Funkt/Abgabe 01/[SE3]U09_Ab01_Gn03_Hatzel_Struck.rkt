@@ -15,19 +15,7 @@
   (/ (* deg pi) 180)
 )
 
-;Aufgabe 1.2:
-(define
-  (my-acos a)
-  (cond
-    [(= a 0) (degToRad 90)]
-    [(> a 0)
-       (atan (/ (sqrt(- 1 (* a a))) a ))
-    ]
-    [(< a 0)
-       (+ (atan (/ (sqrt (- 1 (* a a))) a )) (degToRad 180)) 
-    ]
-  )  
-)
+;Aufgabe 1.2: ich war noch nie gut bei den Trigs
 
 ;Aufgabe 1.3:
 (define
