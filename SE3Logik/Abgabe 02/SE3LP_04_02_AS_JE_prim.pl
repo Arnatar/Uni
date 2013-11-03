@@ -23,7 +23,7 @@ Väter).
 
 %----------Aufgabe 2--------------
 
-%?-[medien].
+%?-[SE3LP_04_02_AS_JE_medien].
 
 %1.:
 /*
@@ -150,6 +150,61 @@ ErgebnisPId = 12349, ErgebnisAnzahl = 83.
 
 */
 
+%-----------Aufgabe 3-----------
+/*
+?-[SE3LP_04_02_AS_JE_Aufgabe3]
+
+Beispielanfragen:
+
+Alle Schüler Ids die in dem Fach Sport mit einer 2 abgeschnitten haben:
+note(ZeugnisId, sport, 2), zeugnis(ZeugnisId, SchuelerId).
+
+Alle Noten des Faches Englisch:
+note(ZeugnisId, englisch, Note).
+
+Alle Noten des Schülers 3:
+zeugnis(ZeugnisId, 3), note(ZeugnisId, Fach, Note).
+
+Alle Schüler die mit 2 oder besser in Englisch abgeschnitten haben:
+note(ZeugnisId, englisch, Note), Note =< 2, zeugnis(ZeugnisId, SchuelerId).
+
+Alle Zeugnisse des Schülers 2:
+zeugnis(ZeugnisId, 2).
+
+*/
+
+
+
+%-----------Aufgabe 4-----------
+
+
+/*
+Prädikat
+Ein Prädikat ist eine Menge von Klauseln, welche den selben Namen haben.
+
+Beispiel:
+uni(hamburg).
+uni(bremen).
+
+Diese Klauseln gehören zum Prädikat uni
+
+Klausel
+Klauseln können Regeln und Fakten definieren. Diese Klauseln bilden das
+Prolog Programm, welches einen Sachverhalt beschreibt.
+
+Beispiel:
+uni(hamburg).
+uni(bremen).
+austausch_moeglich(X, Y):- uni(X), uni(y).
+
+
+Struktur
+Eine Struktur hat einen Namen und mindestens ein Element. Die Elemente
+sind jeweils Terme. Eine häufig verwendete Struktur ist die Liste.
+
+Beispiel:
+se3(uni('hamburg'), studiengang('informatik'))
+*/
 
 
 
