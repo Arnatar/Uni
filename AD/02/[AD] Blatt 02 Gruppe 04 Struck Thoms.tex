@@ -184,11 +184,52 @@
 		\item[\textbf{3.}]
 		\begin{enumerate}
 			\item[a)]\quad \\
-				\textcolor{red}{TODO}
+				\(
+				\begin{array}{rcl}
+				\Big(x\cdot \frac{\ln(n)}{\ln(x)}\Big)' &=& 
+					\frac{\ln(n)}{\ln(x)}+\Big(\frac{\ln(n)}{\ln(x)}\Big)' \\
+					&=& \frac{\ln(n)}{\ln(x)} - \frac{\ln(n)\ln(x)'}{(\ln(x))^2} \\
+					&=& \frac{\ln(n)}{\ln(x)} - \frac{\ln(n)\ln(x)'}{(\ln(x))^2} \\
+					&=& \frac{\ln(n)}{\ln(x)} - \frac{\ln(n)}{x(\ln(x))^2} \\
+					&=& \frac{\ln(n)\ln(x)}{\ln(x)^2} - \frac{\ln(n)}{x(\ln(x))^2} \\
+					&=& \frac{\ln(n)(\ln(x)-1)}{\ln(x)^2} \\
+				\end{array} 
+				\)
+				Man sieht, dass einer der Faktoren im Zähler 0 sein muss, damit \(\frac{\ln(n)(\ln(x)-1)}{\ln(x)^2} = 0\)
+				gilt. Da n beliebig, aber fest ist, ist die Frage, für welches x dies gilt. Wenn $x = e$ gilt, dann 
+				folgt \(\frac{\ln(n)(\ln(e)-1)}{\ln(e)^2} = \frac{0}{1}\)
 			\item[b)]\quad \\
-				\textcolor{red}{TODO}
+				Wir wissen aus b), dass das ideale $x = k = e$ gilt, da $k\in\mathbb{N}$ gilt und $e$ näher an 3, als an 2 ist,
+				ist $k=3$ die optimale Belegung für jedes $n$ \\ \\
+				\(
+				\begin{array}{rcl}
+					\lceil 3 \cdot\log_3(10^1)\rceil &=& 7 \\
+					\lceil 3 \cdot\log_3(10^2)\rceil &=& 13 \\
+					\lceil 3 \cdot\log_3(10^3)\rceil &=& 19 \\
+					\lceil 3 \cdot\log_3(10^4)\rceil &=& 26 \\
+					\lceil 3 \cdot\log_3(10^5)\rceil &=& 32 \\
+					\lceil 3 \cdot\log_3(10^6)\rceil &=& 38 \\
+					\lceil 3 \cdot\log_3(10^7)\rceil &=& 45 \\
+					\lceil 3 \cdot\log_3(10^8)\rceil &=& 51 \\
+					\lceil 3 \cdot\log_3(10^9)\rceil &=& 57 \\
+				\end{array}
+				\) \quad \quad
+				\(
+				\begin{array}{rcl}
+					\lceil 2 \cdot\log_2(10^1)\rceil &=& 7 \\
+					\lceil 2 \cdot\log_2(10^2)\rceil &=& 14 \\
+					\lceil 2 \cdot\log_2(10^3)\rceil &=& 20 \\
+					\lceil 2 \cdot\log_2(10^4)\rceil &=& 27 \\
+					\lceil 2 \cdot\log_2(10^5)\rceil &=& 34 \\
+					\lceil 2 \cdot\log_2(10^6)\rceil &=& 40 \\
+					\lceil 2 \cdot\log_2(10^7)\rceil &=& 47 \\
+					\lceil 2 \cdot\log_2(10^8)\rceil &=& 54 \\
+					\lceil 2 \cdot\log_2(10^9)\rceil &=& 60 \\
+				\end{array}
+				\)
 			\item[c)]\quad \\
-				\textcolor{red}{TODO}
+				k = 2 wird verwendet, weil die momentane Rechnerstrukturen, Binärstrukturen einfacher verarbeiten können.
+				
 			\item[d)]\quad \\
 				\textcolor{red}{TODO}
 			\item[e)]\quad \\
