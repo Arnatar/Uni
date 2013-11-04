@@ -44,14 +44,15 @@
 		\item[\textbf{1.}]
 		\begin{enumerate}
 			\item[a)]\quad \\
-				Es liegen \(k^l\) Blätter maximal in der l. Ebene. Leicht ersichtlich aus dem Folgenden: \\
-				0. Ebene (root):\(1 = k^0\), 1. Ebene: \(k = k^1\), 2. Ebene: \(k\cdot k = k^2\),\\
+				Es liegen \(k^l\) Blätter maximal in der l. Ebene. Von jedem Knoten gehen k Knoten ab, das führt zum 
+				folgenden: 0. Ebene (root): \(1 = k^0\), 1. Ebene: \(k = k^1\), 2. Ebene: \(k\cdot k = k^2\),\\
 				3. Ebene: \(k\cdot k \cdot k = k^3\) ... l.Ebene: \(k^l\)
 			\item[b)]\quad \\
-				Der volle Baum hat \(\sum\limits_{i=0}^lk^i\) Blätter, die Summe aller Ebenen (eine volle Ebene 
-				bemisst sich, wie in a) dargestellt auf \(k^l\)).
+				Der volle Baum hat \(\sum\limits_{i=0}^l k^i = \frac{k^{i+1}-1}{k-1}=\frac{k^i+k^i\cdot(k-1)}{k-1}=
+				\frac{k^i-1}{k-1}+k^i\) Knoten, die Summe der Knoten aller Ebenen (eine volle Ebene bemisst sich, wie in a)
+				dargestellt auf \(k^l\)).
 			\item[c)]\quad \\
-				Der vollständige Baum hat \(\sum\limits_{i=0}^{l-1}k^i +c\ |c\in\mathbb{N}:1\leq c\leq k^l\)
+				Der vollständige Baum hat \(\sum\limits_{i=0}^{l-1}k^i +c = \frac{k^i-1}{k-1}+k^i-k^l+c\ |c\in\mathbb{N}:1\leq c\leq k^l\)				
 				Blätter. Der vollständige Baum ist bis zu seiner vorletzten Ebene maximal gefüllt, deswegen die 
 				Summe bis $l-1$, c repräsentiert die Anzahl der Blätter in der letzten Ebene, welche zwischen 
 				einem (sonst wäre der Baum voll und hätte l-1 Ebenen) und $k^l$ (ein voller Baum ist 
@@ -64,9 +65,22 @@
 		\item[\textbf{2.}]
 		\begin{enumerate}
 			\item[a)]\quad \\
-				\textcolor{red}{TODO}
+				Die Laufzeit kann wie folgt (für OrderX) hergeleitet werden, die Reihenfolge der prints ist nicht relevant. 
+				\(
+				\begin{array}{lll}
+					print(v) &\quad & \Theta(1) \\
+					OrderX(l) &\quad & \mathcal{O}(\frac{k-1}{2}) \\
+					OrderX(r) &\quad & \mathcal{O}(\frac{k-1}{2})
+				\end{array}
+				\) \\
+				Das master-Theorem ist nun anwendbar, \\ \\
+				\(T(k)=2T(\big\lceil\frac{ k-1}{2}\big\rceil)+\mathcal{O}(k^0)\) \\
+				Da \(\log_2 2 = 1\) gilt, folgt \(\mathcal{O}(k^1)\) 
+				
 			\item[b)]\quad \\
-				\textcolor{red}{TODO}
+				Die  Laufzeiten sind bei gleicher Knotenzahl identische (wie in a) zu sehen, alle Algorithmen haben die
+				gleiche Anzahl an Aufrufen, da nirgends abgebrochen wird, außer wenn keine Kindknoten verfügbar sind).
+				
 			\newpage
 			\item[c)]\quad \\
 				\begin{tikzpicture}[every node/.style={draw,circle,inner sep=1.2pt},
@@ -76,7 +90,7 @@
                 				    level 4/.style={sibling distance=6.25mm}]
                 				    \node{N}
                 				    	child{node{A}
-	                							child{node{0}
+	                							child{node{O}
 	                								child{node{E}
 	                									child{node{I}}
 	                								}
@@ -99,9 +113,15 @@
 	                					};
 					
 				\end{tikzpicture} \\ \\
-				Order1: NAOEIFMRLUSGARTH \\
-				Order2: IEOFARMLNGSAUTRH \\
-				Order3: IEFORLMAGASTHRUN \\
+				Order1: \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
+							\hline N&A&O&E&I&F&M&R&L&U&S&G&A&R&T&H \\ \hline
+						\end{tabular} \\
+				Order2: \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
+							\hline I&E&O&F&A&R&M&L&N&G&S&A&U&T&R&H \\ \hline
+						\end{tabular}  \\
+				Order3: \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
+							\hline I&E&F&O&R&L&M&A&G&A&S&T&H&R&U&N \\ \hline
+						\end{tabular}  \\
 			\item[d)]\quad \\
 				Der LOVELYTREE nach Order 2: \\ \\
 				\begin{tikzpicture}[every node/.style={draw,circle,inner sep=1.2pt},
@@ -125,7 +145,9 @@
                 				    	}
                 				    ;					
 				\end{tikzpicture} \\ \\
-				Nach Level-Order: TEEOYRELVL \\
+				Nach Level-Order: Order3: \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
+							\hline T&E&E&O&Y&R&E&L&V&L\\ \hline
+						\end{tabular}  \\ \\
 				\newpage
 			\item[e)]\quad \\
 				Ternärer Baum mit vorgegebener Befehlsreihenfolge: \\ \\
@@ -155,7 +177,9 @@
                 				    	}
                 				    ;					
 				\end{tikzpicture} \\ \\
-				Ausgabe: ALGORITHMSAREFUN
+				Ausgabe: Order3: \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
+							\hline A&L&G&O&R&I&T&H&M&S&A&R&E&F&U&N \\ \hline
+						\end{tabular}  \\
 		\end{enumerate}
 		\item[\textbf{3.}]
 		\begin{enumerate}
