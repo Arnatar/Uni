@@ -1,0 +1,192 @@
+% Commands
+
+\newcommand{\authorinfo}{Arne Struck, Lars Thoms}
+\newcommand{\titleinfo}{AD [HA] zum 6. 11. 2013}
+\newcommand{\qed}{\ \square}
+
+% ------------------------------------------------------
+
+% Packages & Stuff
+
+\documentclass[a4paper,11pt,fleqn]{scrartcl}
+\usepackage[german,ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[top=1.3in, bottom=1.2in, left=0.9in, right=0.9in]{geometry}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{pgfplots}
+\usepackage{multicol}
+\usepackage[parfill]{parskip}
+\usetikzlibrary{calc}
+\usetikzlibrary{patterns}
+
+
+% ------------------------------------------------------
+
+% Title & Pages
+
+\title{\titleinfo}
+\author{\authorinfo}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\authorinfo}
+\fancyhead[R]{\titleinfo}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+		\item[\textbf{1.}]
+		\begin{enumerate}
+			\item[a)]\quad \\
+				Es liegen \(k^l\) Blätter maximal in der l. Ebene. Leicht ersichtlich aus dem Folgenden: \\
+				0. Ebene (root):\(1 = k^0\), 1. Ebene: \(k = k^1\), 2. Ebene: \(k\cdot k = k^2\),\\
+				3. Ebene: \(k\cdot k \cdot k = k^3\) ... l.Ebene: \(k^l\)
+			\item[b)]\quad \\
+				Der volle Baum hat \(\sum\limits_{i=0}^lk^i\) Blätter, die Summe aller Ebenen (eine volle Ebene 
+				bemisst sich, wie in a) dargestellt auf \(k^l\)).
+			\item[c)]\quad \\
+				Der vollständige Baum hat \(\sum\limits_{i=0}^{l-1}k^i +c\ |c\in\mathbb{N}:1\leq c\leq k^l\)
+				Blätter. Der vollständige Baum ist bis zu seiner vorletzten Ebene maximal gefüllt, deswegen die 
+				Summe bis $l-1$, c repräsentiert die Anzahl der Blätter in der letzten Ebene, welche zwischen 
+				einem (sonst wäre der Baum voll und hätte l-1 Ebenen) und $k^l$ (ein voller Baum ist 
+				vollständig) Blättern.
+			\item[d)]\quad \\
+				Der Baum hat n-1 Kanten, da jeder Knoten (bis auf den Wurzelknoten) eine Kante besitzt durch 
+				die er mit seinem Elternknoten verbunden ist.
+		\end{enumerate}
+		
+		\item[\textbf{2.}]
+		\begin{enumerate}
+			\item[a)]\quad \\
+				\textcolor{red}{TODO}
+			\item[b)]\quad \\
+				\textcolor{red}{TODO}
+			\newpage
+			\item[c)]\quad \\
+				\begin{tikzpicture}[every node/.style={draw,circle,inner sep=1.2pt},
+                	    			level 1/.style={sibling distance=50mm},
+			        	            level 2/.style={sibling distance=25mm},
+            				        level 3/.style={sibling distance=12.5mm},
+                				    level 4/.style={sibling distance=6.25mm}]
+                				    \node{N}
+                				    	child{node{A}
+	                							child{node{0}
+	                								child{node{E}
+	                									child{node{I}}
+	                								}
+	                								child{node{F}}
+	                							}
+	                							child{node{M}
+	                								child{node{R}}
+	                								child{node{L}}
+	                							}
+	                					}
+	                					child{node{U}
+	                						child{node{S}
+	                							child{node{G}}
+	                							child{node{A}}
+	                						}
+	                						child{node{R}
+	                							child{node{T}}
+	                							child{node{H}}
+	                						}
+	                					};
+					
+				\end{tikzpicture} \\ \\
+				Order1: NAOEIFMRLUSGARTH \\
+				Order2: IEOFARMLNGSAUTRH \\
+				Order3: IEFORLMAGASTHRUN \\
+			\item[d)]\quad \\
+				Der LOVELYTREE nach Order 2: \\ \\
+				\begin{tikzpicture}[every node/.style={draw,circle,inner sep=1.2pt},
+                	    			level 1/.style={sibling distance=50mm},
+			        	            level 2/.style={sibling distance=25mm},
+            				        level 3/.style={sibling distance=12.5mm},
+                				    level 4/.style={sibling distance=6.25mm}]
+                				    \node{T}
+                				    	child{node{E}
+                				    		child{node{O}
+                				    			child{node{L}}
+                				    			child{node{V}}
+                				    		}
+                				    		child{node{Y}
+												child{node{L}}
+                				    		}
+                				    	}
+                				    	child{node{E}
+											child{node{R}}
+											child{node{E}}                				    	
+                				    	}
+                				    ;					
+				\end{tikzpicture} \\ \\
+				Nach Level-Order: TEEOYRELVL \\
+				\newpage
+			\item[e)]\quad \\
+				Ternärer Baum mit vorgegebener Befehlsreihenfolge: \\ \\
+				\begin{tikzpicture}[every node/.style={draw,circle,inner sep=1.2pt},
+                	    			level 1/.style={sibling distance=40mm},
+			        	            level 2/.style={sibling distance=12.5mm},
+            				        level 3/.style={sibling distance=10mm}]
+                				    \node{N}
+                				    	child{node{A}
+                				    		child{node{M}
+												child{node{T}}                				    			
+												child{node{H}}
+												child{node{I}}
+                				    		}  
+                				    		child{node{S}}
+                				    		child{node{R}}
+                				    	}
+                				    	child{node{U}
+        	        				    	child{node{E}}
+    	            				    	child{node{F}}
+	                				    	child{node{R}}
+                				    	}
+                				    	child{node{o}
+        	        				    	child{node{L}}
+    	            				    	child{node{G}}
+	                				    	child{node{A}}
+                				    	}
+                				    ;					
+				\end{tikzpicture} \\ \\
+				Ausgabe: ALGORITHMSAREFUN
+		\end{enumerate}
+		\item[\textbf{3.}]
+		\begin{enumerate}
+			\item[a)]\quad \\
+				\textcolor{red}{TODO}
+			\item[b)]\quad \\
+				\textcolor{red}{TODO}
+			\item[c)]\quad \\
+				\textcolor{red}{TODO}
+			\item[d)]\quad \\
+				\textcolor{red}{TODO}
+			\item[e)]\quad \\
+				\textcolor{red}{TODO}
+			\item[f)]\quad \\
+				\textcolor{red}{TODO}
+		\end{enumerate}
+		\item[\textbf{4.}]
+		\begin{enumerate}
+			\item[a)]\quad \\
+				\textcolor{red}{TODO}
+			\item[b)]\quad \\
+				\textcolor{red}{TODO}
+			\item[c)]\quad \\
+				\textcolor{red}{TODO}
+		\end{enumerate}
+		\item[\textbf{5.}]
+		\begin{enumerate}
+			\item[a)]\quad \\
+				\textcolor{red}{TODO}
+			\item[b)]\quad \\
+				\textcolor{red}{TODO}
+		\end{enumerate}
+	\end{enumerate}
+\end{document}
