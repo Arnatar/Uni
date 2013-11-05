@@ -13,7 +13,7 @@
 \usepackage[german,ngerman]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[top=1.3in, bottom=1in, left=0.9in, right=0.9in]{geometry}
+\usepackage[top=1.3in, bottom=1.2in, left=0.9in, right=0.9in]{geometry}
 \usepackage{lmodern}
 \usepackage{amssymb}
 \usepackage{amsmath}
@@ -421,7 +421,7 @@
 			\item[c)]\quad \\
 				Die erste Möglichkeit ist in merge $x[1] \leq y[1]$ zu $x[1] \geq y[1]$ 
 				abzuändern, wie folgt dargestellt: 
-					\begin{algorithmic}
+					\begin{algorithmic} \\
 						\Function{merge}{$x[1..k],y[1..l]$}
 							\If {$k = 0$} \State \Return $y[1..l]$
 							\EndIf
@@ -436,7 +436,7 @@
 					\end{algorithmic}
 				\newpage
 				Oder man stellt die Ausführung der Konkatenation in merge um, wie im Folgenden:
-				\begin{algorithmic}
+				\begin{algorithmic} \\
 						\Function{merge}{$x[1..k],y[1..l]$}
 							\If {$k = 0$} \State \Return $y[1..l]$
 							\EndIf
@@ -454,39 +454,35 @@
 		\begin{enumerate}
 			\item[a)]\quad \\
 			Man nutzt einen Stack, um den Queue-Eingang (in) und einen um den Queue-Ausgang (out) zu 
-			simulieren.	Soll ein Element(e) in die Queue eingefügt werden, wird nun jedes Element des
-			Ausgang-Stacks auf den Eingang-Stack geschrieben, somit liegen die Elemente auf dem Eingang-
-			Stack in reverser Reihenfolge vor. Dann wird das hinzuzufügende Element auf dem Eingang-Stack 
-			push aufgerufen. Darauf werden alle Elemente des Eingang-Stacks auf den Ausgang-Stack 
-			geschoben, nun kann man wieder auf das erste Element, welches auf die Stacks geschrieben
-			wurde zugreifen. Somit ist das First-in-First-Out-Prinzip erfüllt. Soll nun ein Element
-			entfernt werden wird einfach auf dem Ausgang-Stack pop aufgerufen. Die worst-case-Laufzeit 
-			beträgt für Enqueue() $\mathcal{O}(n)$, die von Dequeue() beträgt $\mathcal{O}$(1).
-			\begin{algorithmic}
-					\Function{Dequeue}{}
-						\State {out.pop()}
-					\EndFunction
+			simulieren.	Soll ein Element(e) in die Queue eingefügt werden, wird einfach einmal push auf 
+			dem Eingang-Stack ausgeführt. Soll nun ein Element aus der Schlange entfernt werden, wird der 
+			Eingang-Stack komplett auf den Ausgang-Stapel umgestapelt (sie liegen hier also in reverser 
+			Reihenfolge vor), daraufhin wird das oberste Element gepullt. Als Abschluss wird der Ausgang-
+			Stapel zurück auf den Eingang-Stapel umgestapelt. Auf diese Weise ist das First-in-First-Out-
+			Prinzip erfüllt. Die worst-case-Laufzeit beträgt für Dequeue() $\mathcal{O}(n)$, die von
+			Enqueue() beträgt $\mathcal{O}$(1).
+			\begin{algorithmic} \\
 					\Function{Enqueue}{e}
-						\If{out.isEmpty()} 
-							\State {out.push(e)}
-						\Else
-							\While{(!out.isEmpty)}
-								\State{element a $\gets$ out.pop()}
-								\State{in.push(a)}
-							\EndWhile
-							\State {in.push(e)}
-							\While{(!in.isEmpty)}
-								\State{element b $\gets$ in.pop()}
-								\State{out.push(b)}
-							\EndWhile
-						\EndIf
+						\State {in.push(e)}
+					\EndFunction
+					\Function{Dequeue}{}
+						\While{!in.isEmpty()}
+							\State{out.push(in.pop)}
+						\EndWhile
+						\State{out.pull()}
+						\While{!out.isEmpty()}
+							\State{in.push(out.pop)}
+						\EndWhile			
 					\EndFunction
 			\end{algorithmic}	
 			\item[b)]\quad \\
-				Da eine beliebige Folge n gebraucht wird, kann man bei einem Stack mit mehr als 2 
-				Elementen Dequeue()Dequeue()Dequeue() als n festlegen.
-				Da Dequeue() eine einstellig Funktion ist, kann man davon ausgehen, dass die worst-case-
-				Laufzeit gleich der best-case-Laufzeit gleich $\mathcal{O}(1)$ ist.
+				Die worst-case-Laufzeit der Folge von $n$ Operationen ist $n \cdot k$, wobei k den Betrag 
+				der Menge der Elemente auf den Stacks darstellt. Die worst-case-Laufzeit ist ein ewiges 
+				hintereinanderausführen von Dequeue() (so lange k groß genug ist). Damit liegt $T_n$ in 
+				$\mathcal{O}(n)$, die amortisierte Laufzeit berechnet sich dann wie folgt: $\frac{n\cdot 
+				k}{n}=k$. $k$ ist zwar keine Konstante (da sie durch Dequeue verringert wird), aber
+				selbst wenn man $k$ als eine solche auffasst liegt die amortisierte Laufzeit in 
+				$\mathcal{O}(1)$.
 		\end{enumerate}
 	\end{enumerate}
 \end{document}
