@@ -19,6 +19,9 @@
 \usepackage{enumerate}
 \usepackage{fancyhdr}
 \usepackage{pgfplots}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
 \usepackage{multicol}
 \usepackage[parfill]{parskip}
 \usetikzlibrary{calc}
@@ -195,9 +198,11 @@
 					&=& \frac{\ln(n)(\ln(x)-1)}{\ln(x)^2} \\
 				\end{array} 
 				\)
-				Man sieht, dass einer der Faktoren im Zähler 0 sein muss, damit \(\frac{\ln(n)(\ln(x)-1)}{\ln(x)^2} = 0\)
-				gilt. Da n beliebig, aber fest ist, ist die Frage, für welches x dies gilt. Wenn $x = e$ gilt, dann 
-				folgt \(\frac{\ln(n)(\ln(e)-1)}{\ln(e)^2} = \frac{0}{1}\)
+				Man sieht, dass einer der Faktoren im Zähler 0 sein muss, damit \(\frac{\ln(n)
+				(\ln(x)-1)}{\ln(x)^2} = 0\)	gilt. Da n beliebig, aber fest ist, ist die Frage,
+				für welches x dies gilt. Wenn $x = e$ gilt, dann 	folgt \(\frac{\ln(n)
+				(\ln(e)-1)}{\ln(e)^2} = \frac{0}{1}\) \\
+				Da es sich um die einzige Extremstelle handelt, ist es das gesuchte Minimum.
 			\item[b)]\quad \\
 				Wir wissen aus b), dass das ideale $x = k = e$ gilt, da $k\in\mathbb{N}$ gilt und $e$ näher an 3, als an 2 ist,
 				ist $k=3$ die optimale Belegung für jedes $n$ \\ \\
@@ -228,28 +233,254 @@
 				\end{array}
 				\)
 			\item[c)]\quad \\
-				k = 2 wird verwendet, weil die momentane Rechnerstrukturen, Binärstrukturen einfacher verarbeiten können.
-				
+				k = 2 wird verwendet, weil die momentane Rechnerstrukturen, Binärstrukturen
+				einfacher verarbeiten können.
+			\newpage
 			\item[d)]\quad \\
-				\textcolor{red}{TODO}
+				Da der Wurzelknoten des jeweiligen Max-Heaps das größte Kind darstellt, ist der 
+				Aufwand für einmal vertauschen 1. Allerdings wird durch das Vertauschen im Max-
+				Heap die Max-Heap-Eigenschaft gestört und muss wieder hergestellt werden. 
+				Dies dauert im worst-case $\frac{k}{2}$ Schritte. Es treten allerdings nicht 
+				nur Veränderungen im Max-Heap des Elternknotens auf, sondern auch in dem des 
+				(ehemaligen) Kindknotens und dem des Elternknotens des Elternknotens. Auch 
+				diese müssten wieder Heapified werden. Da für einen Binär-Heap mit k Elementen
+				$2\lceil\log_2(k)\rceil\cdot 2$ und es 3 zu verändernde Max-Heaps existieren
+				gilt folgt: $k \cdot 3 \cdot (\lceil\log_2(k)\rceil + 2) + 1$ für die 
+				notwendige Schrittzahl.
+				
 			\item[e)]\quad \\
-				\textcolor{red}{TODO}
+				Es sind 2 Vertauschungen vom Originalbaum weg notwendig: \\ \\
+				\begin{tabular}{ccccc}
+					\begin{tikzpicture}[every node/.style={draw,circle,inner sep=1.2pt},
+					                    level 1/.style={sibling distance=22.5mm},
+                					    level 2/.style={sibling distance=12.5mm},
+					 	                level 3/.style={sibling distance=6.25mm}
+                				    	]
+        	        	\node{1}
+                    		child{node{8}
+                      			child{node{7}}
+                      			child{node{3}}
+                    		}
+                    		child{node{6}
+                      			child{node{5}}
+                      			child{node{2}}
+                    		};
+                	\end{tikzpicture} & \quad \quad &
+					\begin{tikzpicture}[every node/.style={draw,circle,inner sep=1.2pt},
+					                    level 1/.style={sibling distance=22.5mm},
+                					    level 2/.style={sibling distance=12.5mm},
+					 	                level 3/.style={sibling distance=6.25mm}
+                				    	]
+               		    \node{8}
+                    		child{node{1}
+                      			child{node{7}}
+                      			child{node{3}}
+                    		}
+                    		child{node{6}
+                      			child{node{5}}
+                      			child{node{2}}
+                    		};
+                	\end{tikzpicture} & \quad \quad &
+                	\begin{tikzpicture}[every node/.style={draw,circle,inner sep=1.2pt},
+					                    level 1/.style={sibling distance=22.5mm},
+                					    level 2/.style={sibling distance=12.5mm},
+					 	                level 3/.style={sibling distance=6.25mm}
+                				    	]
+                  		\node{8}
+                    		child{node{7}
+                      			child{node{1}}
+                      			child{node{3}}
+                    		}
+                    		child{node{6}
+                     			child{node{5}}
+                      			child{node{2}}
+                    		};
+                	\end{tikzpicture}
+				\end{tabular} \\ \\ \\
+				Es ist eine Vertauschung vom Originalbaum notwendig: \\ \\
+				\begin{tabular}{ccc}
+					\begin{tikzpicture}[every node/.style={draw,circle,inner sep=1.2pt},
+					                    level 1/.style={sibling distance=22.5mm},
+                					    level 2/.style={sibling distance=12.5mm},
+					 	                level 3/.style={sibling distance=6.25mm}
+                				    	]
+						\node{8}
+                    		child{node{1}
+                      			child{node{7}}
+                      			child{node{3}}
+ 		                   	}
+                    		child{node{6}
+                      			child{node{5}}
+			                    child{node{2}}
+                    		};
+					\end{tikzpicture} & \quad \quad &
+					\begin{tikzpicture}[every node/.style={draw,circle,inner sep=1.2pt},
+					                    level 1/.style={sibling distance=22.5mm},
+                					    level 2/.style={sibling distance=12.5mm},
+					 	                level 3/.style={sibling distance=6.25mm}
+                				    	]
+						\node{8}
+                    		child{node{7}
+                      			child{node{1}}
+ 			                    child{node{3}}
+                    		}
+                    		child{node{6}
+                      			child{node{5}}
+                      			child{node{2}}
+		                    };
+					\end{tikzpicture}
+				\end{tabular}
+				
 			\item[f)]\quad \\
-				\textcolor{red}{TODO}
+				Wir wissen, dass ein k-närer Baum $\lceil k\log_k(n)\rceil$ Schritte benötigt, 
+				daraus folgt folgender Beweis:
+				\begin{enumerate}
+					\item[Beh.:]\quad \\
+						\(\forall n\in\mathbb{N}\) gilt: \(\lceil 3\log_3(n)\rceil\leq 
+						\lceil 2\log_2(n)\rceil\)
+					\item[I.Anf.:]\quad \\
+						\(\lceil 3\log_3(1)\rceil = 0 = \lceil 2\log_2(1)\rceil\)
+					\item[I.A.:]\quad \\
+						Die Behauptung gilt für ein bestimmtes, aber frei wählbares 
+						\(n\in\mathbb{N}\)
+					\newpage
+					\item[I.S.:] \((z.z.: \lceil 3\log_3(n+1)\rceil\leq\lceil 2\log_2(n+1)
+						\rceil)\) \\ \\
+						\(
+						\begin{array}{rclccl}
+							\lceil3\log_3(n+1)\rceil &=& \big\lceil 3\frac{\ln(n+1)}{\ln(3)} 
+							\big\rceil \\
+							&=&\big\lceil \ln(n+1)\frac{3}{\ln(3)} \big\rceil
+							&\leq &&
+							\big\lceil \ln(n+1)\frac{2}{\ln(2)} \big\rceil \\	
+							&&&&=& \big\lceil 2\frac{\ln(n+1)}{\ln(2)} \big\rceil \\
+							&&&&=& \lceil 2\log_2(n+1) \rceil
+						\end{array}
+						\) \\
+						Damit ist die Behauptung bewiesen $\qed$
+				\end{enumerate}
 		\end{enumerate}
+		
 		\item[\textbf{4.}]
 		\begin{enumerate}
 			\item[a)]\quad \\
-				\textcolor{red}{TODO}
+				merge(22579,1248) \\
+				1 $\circ$ merge(22579,248) \\
+				12 $\circ$ merge(2579,248) \\
+				122 $\circ$ merge(579,248) \\
+				1222 $\circ$ merge(579,48) \\
+				12224 $\circ$ merge(579,8) \\
+				122245 $\circ$ merge(79,8) \\
+				1222457 $\circ$ merge(9,8) \\
+				12224578 $\circ$ merge(9,[]) \\
+				122245789 \\
 			\item[b)]\quad \\
-				\textcolor{red}{TODO}
+				Input(splitted): 6 7 8 3 4 2 9 1 \\ \\
+				\begin{tikzpicture}[
+                            position label/.style={
+                                        below = 3pt,
+                                        text height = 1.5ex,
+                                        text depth = 1ex
+                                },
+                                brace/.style={
+                                        decoration={brace, mirror},
+                                        decorate
+                                }]
+
+                        \node [position label] (alvl1) at (0,0) {$6$};
+                        \node [position label] (alvl2) at (0.5,0) {$7$};
+                        \node [position label] (alvl3) at (1,0) {$8$};
+                        \node [position label] (alvl4) at (1.5,0) {$3$};
+                        \node [position label] (alvl5) at (2,0) {$4$};
+                        \node [position label] (alvl6) at (2.5,0) {$2$};
+                        \node [position label] (alvl7) at (3,0) {$9$};
+                        \node [position label] (alvl8) at (3.5,0) {$1$};
+
+                        \draw [brace] (alvl1.south) -- (alvl2.south);
+                        \draw [brace] (alvl3.south) -- (alvl4.south);
+                        \draw [brace] (alvl5.south) -- (alvl6.south);
+                        \draw [brace] (alvl7.south) -- (alvl8.south);
+
+                        \node [position label] (blvl1) at (0.25,-0.7) {$67$};
+                        \node [position label] (blvl2) at (1.25,-0.7) {$38$};
+                        \node [position label] (blvl3) at (2.25,-0.7) {$24$};
+                        \node [position label] (blvl4) at (3.25,-0.7) {$19$};
+
+                        \draw [brace,decoration={raise=4ex}] (alvl1.south) -- (alvl4.south);
+                        \draw [brace,decoration={raise=4ex}] (alvl5.south) -- (alvl8.south);
+
+                        \node [position label] (clvl1) at (0.75,-1.4) {$3678$};
+                        \node [position label] (clvl2) at (2.75,-1.4) {$1249$};
+
+                        \draw [brace,decoration={raise=8ex}] (alvl1.south) -- (alvl8.south);
+
+                        \node [position label] (dlvl1) at (1.75,-2.1) {$12346789$};
+                \end{tikzpicture}
+				
 			\item[c)]\quad \\
-				\textcolor{red}{TODO}
+				Die erste Möglichkeit ist in merge $x[1] \leq y[1]$ zu $x[1] \geq y[1]$ 
+				abzuändern, wie folgt dargestellt: \\
+					\begin{algorithmic}
+						\Function{merge}{$x[1..k],y[1..l]$}
+							\If {$k = 0$} \State \Return $y[1..l]$
+							\EndIf
+							\If {$l = 0$} \State \Return $x[1..k]$
+							\EndIf
+							\If {$x[1]\geq y[1]$} \State 
+								\Return{$x[1]\ \circ$ \Call{merge}{$x[2..k],y[1..l]$}}
+							\Else \State 
+								\Return{$y[1]\ \circ$ \Call{merge}{$x[1..k],y[2..l]$}}
+							\EndIf
+						\EndFunction
+					\end{algorithmic}
+				\newpage
+				Oder man stellt die Ausführung der Konkatenation in merge um, wie im Folgenden: \\
+				\begin{algorithmic}
+						\Function{merge}{$x[1..k],y[1..l]$}
+							\If {$k = 0$} \State \Return $y[1..l]$
+							\EndIf
+							\If {$l = 0$} \State \Return $x[1..k]$
+							\EndIf
+							\If {$x[1]\leq y[1]$} \State 
+								\Return{\Call{merge}{$x[2..k],y[1..l]\ \circ x[1]$}}
+							\Else \State 
+								\Return{\Call{merge}{$x[1..k],y[2..l]\ \circ y[1]$}}
+							\EndIf
+						\EndFunction
+					\end{algorithmic}
 		\end{enumerate}
 		\item[\textbf{5.}]
 		\begin{enumerate}
 			\item[a)]\quad \\
-				\textcolor{red}{TODO}
+			Man nutzt einen Stack, um den Queue-Eingang (in) und einen um den Queue-Ausgang (out) zu 
+			simulieren.	Soll ein Element(e) in die Queue eingefügt werden, wird nun jedes Element des
+			Ausgang-Stacks auf den Eingang-Stack geschrieben, somit liegen die Elemente auf dem Eingang-
+			Stack in reverser Reihenfolge vor. Dann wird das hinzuzufügende Element auf dem Eingang-Stack 
+			push aufgerufen. Darauf werden alle Elemente des Eingang-Stacks auf den Ausgang-Stack 
+			geschoben, nun kann man wieder auf das erste Element, welches auf die Stacks geschrieben
+			wurde zugreifen. Somit ist das First-in-First-Out-Prinzip erfüllt. Soll nun ein Element
+			entfernt werden wird einfach auf dem Ausgang-Stack pop aufgerufen. \\
+			
+			\begin{algorithmic}
+					\Function{Dequeue}{}
+						\State {out.pop()}
+					\EndFunction
+					\Function{Enqueue}{e}
+						\If{out.isEmpty()} 
+							\State {out.push(e)}
+						\Else
+							\While{!out.isEmpty}
+								\State{element a $\gets$ out.pop()}
+								\State{in.push(a)}
+							\EndWhile
+							\State {in.push(e)}
+							\While{!in.isEmpty}
+								\State{element b $\gets$ in.pop()}
+								\State{out.push(b)}
+							\EndWhile
+						\EndIf
+					\EndFunction
+			\end{algorithmic}	
 			\item[b)]\quad \\
 				\textcolor{red}{TODO}
 		\end{enumerate}
