@@ -118,25 +118,28 @@
 (power 2.35 5)
 
 ; Aufgabe 2.3:
+
+(define limit (expt 10 1000)) ;Hier wird das Limit gesetzt welches die Genauigkeit bestimmt.
+;Zwecks optimierung wird das Limit als Konstante zuvor berechnet sodass es nicht in jedem rekursiven Aufruf neu berechnet wird.
 (define (eul n)
-  (if (= n 0) 
-    1
+  (if (< (fac n) limit) 
     (+
       (/ 1 (fac n))
-      (eul (- n 1))
+      (eul (+ n 1))
     )
+    0
   )
 )
 
-;Das letzte Glied muss die entsprechende Groesse aufweisen also:
-(*(eul 1000) (expt 10 1001))
+;
+(*(eul 0) (expt 10 1001))
 
 
 ; Aufgabe 2.4:
 
 (define (leibnizRow n)
   (if (= n 0)
-  1
+    1
     (+
       (/ 
         (expt -1 n)
@@ -152,41 +155,28 @@
 
 ;Die Lebniz-Reihe nähert sich leider nur sehr langsam pi an, daher sind nur die
 ;ersten stellen identisch.
-(*(leibnizRow 5000) 4 (expt 10 1001))
+(define (pistart n)
+  (*(leibnizRow (- n 1)) 4 (expt 10 1001))
+)
+
+(pistart 5000)
 
 
 ;Aufgabe 3:
 
 (define (type-of n)
-  (if (boolean? n)
-    'boolean
-    (if (pair? n)
-      'pair
-      (if (symbol? n)
-        'symbol
-        (if (number? n)
-          'number
-          (if (char? n)
-            'char
-            (if (string? n)
-              'string
-              (if (vector? n)
-                'vector
-                (if (procedure? n)
-                  'procedure
-                  'noneOfThem
-                )
-              )
-            )
-          )
-        )
-      )
-    )
+  (cond
+    [(boolean? n) 'boolean]
+    [(pair? n) 'pair]
+    [(symbol? n) 'symbol]
+    [(number? n) 'number]
+    [(char? n) 'char]
+    [(string? n) 'string]
+    [(vector? n) 'vector]
+    [(procedure? n) 'procedure]
+    [else 'noneOfThem]
   )
 )
-
-;Schöner zu lesen wäre eine Implementation mit when, könnte aber schwierig
-;werden, wenn es sich um keinen der Typen handelt. 
 
 ;Tests:
 (type-of (+ 3 7))
