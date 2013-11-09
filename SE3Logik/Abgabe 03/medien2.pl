@@ -6,9 +6,10 @@ find_unterkat(Kategorie,Ergebnis):-
 	findall(SubKategorie,
 		kategorie(_,SubKategorie,UId),Ergebnis).
 
-find_double_name(Ergebnis):-
-	kategorie(_,Kategorie,_),
-	findall(Kategorie,kategorie(_,Kategorie,_),Ergebnis).
+find_double_name(Kategorien):-
+	findall(Kategorie,kategorie(_,Kategorie,_),Ergebnis),
+	sort(Ergebnis, Kategorien). % gefilterte Liste
+% 	Listen subtrahieren?
 %	(kategorie(UId2,Kategorie,_),
 %	\+ UId1 = UId2).
 

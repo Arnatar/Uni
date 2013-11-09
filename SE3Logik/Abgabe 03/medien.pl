@@ -27,7 +27,7 @@ letzter_verkauf(Kategorie,Titel,Autor,Verlag,Jahr) :-
 % nicht verkauft.
 %veraltet(-PId,+Titel,-Lager)
 veraltet(PId,Titel,Lager):-
-% Produkt finden, dessen Lager grˆﬂer als 0 ist.
+% Produkt finden, dessen Lager gr√∂√üer als 0 ist.
 	produkt(PId,_,Titel,_,_,_,Lager),
 	Lager > 0,
 % Produkt darf nicht 2012 verkauft worden sein.
@@ -39,19 +39,21 @@ veraltet(PId,Titel,Lager):-
 produktAnzahl(Kategorie,Ergebnis):-
 % Alle Produkte der Kategorie in einer Liste sammeln
 	findall(Kategorie,produkt(_,Kategorie,_,_,_,_,_),List),
-% L‰nge der Liste ausgeben
+% L√§nge der Liste ausgeben
 	length(List,Ergebnis).
 
 
 %2.:
-k_Verkauft(Kategorie,Ergebnis):-
+
+% Hilfsfunktion zum durchgehen der Kategorie
+verkauft(Kategorie,Ergebnis):-
 	produkt(PId,Kategorie,_,_,_,_,_),
 	findall(Anzahl,verkauft(PId,_,_,Anzahl),List),
 	sum_list(List,Ergebnis).
 
+% Berechnung der Verkaufszahlen einer Kategorie
 kategorieVerkauft(Kategorie,Ergebnis):-
-	produkt(PId,Kategorie,_,_,_,_,_),
-	findall(Anzahl,verkauft(PId,_,_,Anzahl),List),
+	findall(Anzahl, verkauft(Kategorie,Anzahl), List),
 	sum_list(List,Ergebnis).
 
 sum_list([],0).
@@ -67,6 +69,14 @@ gewinn(Jahr,PId,Ergebnis):-
 	verkauft(PId,Jahr,Preis1,Anzahl1),
 	verkauft(PId,Jahr2,Preis2,Anzahl2),
 	Ergebnis is (Preis2 * Anzahl2)-(Preis1 * Anzahl1).
+	
+% Ich interpretiere die Aufgabenstellung so, dass es um die Differenz geht von dem Umsatz vom Jahr zu dem Umsatz
+% der erzielt worden w√§re mit den Preis aus dem vorherigen Jahr und den Verkaufszahlen des angegebenen Jahres.
+nachlass(Jahr,Differenz):-
+	Jahr2 is Jahr - 1,
+	verkauft(PId,Jahr,Preis1,Anzahl),
+	verkauft(PId,Jahr2,Preis2,_),
+	Differenz is (Preis2 * Anzahl - Preis1 * Anzahl).
 
 
 % produkt(PId,Kategorie,Titel,Autor,Verlag,Jahr,Lagerbestand).
@@ -141,23 +151,3 @@ verkauft(34568,2009,3,112).
 verkauft(34568,2010,3,89).
 verkauft(34568,2011,3,75).
 verkauft(34568,2012,3,23).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
