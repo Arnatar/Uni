@@ -1,9 +1,21 @@
 :- dynamic produkt/7, verkauft/4.        % ermoeglicht dynamische Veraenderung
 %:- multifile produkt/7, verkauft/4.      % ermoeglicht verteilte Definition in mehreren Files
 
-%Wir interpretieren aktuell als 2012 (letzte Verkaufsdaten)
+/*
+Variablen wird ihr Wert in der logischen Programmierung durch
+Unifikation übergeben. Diese Werte werden ausschließlich über Backtracking
+aufgelöst, der Scope ist also nur lokal beziehungsweise in der momentanen Ebene
+des Backtrackings. Bei dem objektorientierten Paradigma werden Variablen hingegen im physikalischem Speicher bereiche zugewiesen, eine Variable in der
+Objektorientierung entspricht also einem Speicherbereich.
+In der funktionalen Programmierung wird die Variable zur Wertübergabe an
+Funktionen verwendet, der Scope ist hier also nur lokal.
+*/
+
 
 %---------Aufgabe 2----------
+%
+%Wir interpretieren aktuell als 2012 (letzte Verkaufsdaten)
+%
 %1.:
 %finde_preis(+Kategorie,+Titel,+Autor,+Verlag,-Preis)
 finde_preis(Kategorie,Titel,Autor,Verlag,Preis) :-
@@ -45,17 +57,22 @@ produktAnzahl(Kategorie,Ergebnis):-
 
 %2.:
 
-% Hilfsfunktion zum durchgehen der Kategorie
-kVerkauft(Kategorie,Ergebnis):-
-	produkt(PId,Kategorie,_,_,_,_,_),
-	findall(Anzahl,verkauft(PId,_,_,Anzahl),List),
-	sum_list(List,Ergebnis).
-
 % Berechnung der Verkaufszahlen einer Kategorie
+% kategorieVerkauft(+Kategorie,-Ergebnis)
 kategorieVerkauft(Kategorie,Ergebnis):-
+% Fasst Zwischenergebnisse zusammen und summiert sie
 	findall(Anzahl, kVerkauft(Kategorie,Anzahl), List),
 	sum_list(List,Ergebnis).
 
+% Hilfsfunktion zum durchgehen der Kategorie
+kVerkauft(Kategorie,Ergebnis):-
+	produkt(PId,Kategorie,_,_,_,_,_),
+% Findet verkäufe für das durch PId spezifizierte Produkt und speichert
+% es in einer Liste
+	findall(Anzahl,verkauft(PId,_,_,Anzahl),List),
+	sum_list(List,Ergebnis).
+
+% Summiert Werte einer Liste durch Rekursion auf.
 sum_list([],0).
 sum_list([Head | Tail], Total):-
     sum_list(Tail, Sum1),
@@ -63,19 +80,18 @@ sum_list([Head | Tail], Total):-
 
 
 %3.:
-%
-gewinn(Jahr,PId,Ergebnis):-
-	Jahr2 is Jahr - 1,
-	verkauft(PId,Jahr,Preis1,Anzahl1),
-	verkauft(PId,Jahr2,Preis2,Anzahl2),
-	Ergebnis is (Preis2 * Anzahl2)-(Preis1 * Anzahl1).
-	
-% Ich interpretiere die Aufgabenstellung so, dass es um die Differenz geht von dem Umsatz vom Jahr zu dem Umsatz
-% der erzielt worden wÃ¤re mit den Preis aus dem vorherigen Jahr und den Verkaufszahlen des angegebenen Jahres.
+
+% Wir interpretieren die Aufgabenstellung so, dass es um die Differenz
+% geht von dem Umsatz vom Jahr zu dem Umsatz der erzielt worden wÃ¤re
+% mit den Preis aus dem vorherigen Jahr und den Verkaufszahlen des
+% angegebenen Jahres.
 nachlass(Jahr,Differenz):-
+% Berechnung des Vorjahres
 	Jahr2 is Jahr - 1,
+% Preise im Jahr und Vorjahr herausfinden.
 	verkauft(PId,Jahr,Preis1,Anzahl),
 	verkauft(PId,Jahr2,Preis2,_),
+% Differenz der Preise Berechnen.
 	Differenz is (Preis2 * Anzahl - Preis1 * Anzahl).
 
 
