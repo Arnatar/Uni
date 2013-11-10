@@ -19,11 +19,11 @@ find_double_name(Ergebnis):-
 % Hilfsfunktion.
 fdnhelper(Ergebnis):-
 % Aufgenommen werden alle gleichen Kategorien
-	kategorie(UId1,Ergebnis,_),
+	(kategorie(UId1,Ergebnis,_),
 	kategorie(UId2,Kategorie2,_),
 	Ergebnis = Kategorie2,
 % Kein Selbstabgleich.
-	\+ UId1 = UId2.
+	\+ UId1 = UId2).
 
 
 % kategorie(Id_Unterkategorie,Name_Unterkategorie,Id_Oberkategorie)
