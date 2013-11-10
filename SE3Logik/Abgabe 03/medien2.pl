@@ -1,52 +1,6 @@
 :- dynamic kategorie/3.        % ermoeglicht dynamische Veraenderung
 %:- multifile kategorie/3.      % ermoeglicht verteilte Definition in mehreren Files
 
-%----------Aufgabe 4-------------
-%
-%1.:
-% find_unterkat(+Kategorie,-Ergebnis)
-find_unterkat(Kategorie,Ergebnis):-
-% Zusammentragen
-	findall(Subkat,find_unterkatH(Kategorie,Subkat),Ergebnis).
-
-find_unterkatH(Kategorie,Ergebnis):-
-% Findet die UIds zur Kategorie
-	kategorie(UId,Kategorie,_),
-% Sucht alle Subkategorien (UId ist gleich der der Oberkategorie)
-	kategorie(_,Ergebnis,UId).
-
-
-
-%2.:
-find_double_name(Ergebnis):-
-% Alle Ergebnisse Zusammentragen und Dublikate löschen.
-	findall(HList,fdnhelper(HList),List),
-	sort(List, Ergebnis).
-
-% Hilfsfunktion.
-fdnhelper(Ergebnis):-
-% Aufgenommen werden alle gleichen Kategorien
-	kategorie(UId1,Ergebnis,_),
-	kategorie(UId2,Kategorie2,_),
-	Ergebnis = Kategorie2,
-% Kein Selbstabgleich.
-	\+ UId1 = UId2.
-
-
-%3.:
-no_unterkat(UId,Kategorie):-
-% Kategorie und UId herausfinden.
-	kategorie(UId,Kategorie,_),
-% keine Unterkategorie bedeutet als Ergebnis für find_unterkat eine
-% leere Liste.
-	(find_unterkat(Kategorie,List),
-	List = []).
-
-
-%4.:
-
-
-
 % kategorie(Id_Unterkategorie,Name_Unterkategorie,Id_Oberkategorie)
 kategorie(1,buch,0).
 kategorie(2,ebuch,0).
