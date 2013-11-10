@@ -4,10 +4,17 @@
 %----------Aufgabe 4-------------
 %
 %1.:
+% find_unterkat(+Kategorie,-Ergebnis)
 find_unterkat(Kategorie,Ergebnis):-
+% Zusammentragen
+	findall(Subkat,find_unterkatH(Kategorie,Subkat),Ergebnis).
+
+find_unterkatH(Kategorie,Ergebnis):-
+% Findet die UIds zur Kategorie
 	kategorie(UId,Kategorie,_),
-	findall(SubKategorie,
-		kategorie(_,SubKategorie,UId),Ergebnis).
+% Sucht alle Subkategorien (UId ist gleich der der Oberkategorie)
+	kategorie(_,Ergebnis,UId).
+
 
 
 %2.:
@@ -24,6 +31,20 @@ fdnhelper(Ergebnis):-
 	Ergebnis = Kategorie2,
 % Kein Selbstabgleich.
 	\+ UId1 = UId2.
+
+
+%3.:
+no_unterkat(UId,Kategorie):-
+% Kategorie und UId herausfinden.
+	kategorie(UId,Kategorie,_),
+% keine Unterkategorie bedeutet als Ergebnis für find_unterkat eine
+% leere Liste.
+	(find_unterkat(Kategorie,List),
+	List = []).
+
+
+%4.:
+
 
 
 % kategorie(Id_Unterkategorie,Name_Unterkategorie,Id_Oberkategorie)
