@@ -71,16 +71,15 @@ produktAnzahl(Kategorie,Ergebnis):-
 
 
 %2.:
-
 % Berechnung der Verkaufszahlen einer Kategorie
 % kategorieVerkauft(+Kategorie,-Ergebnis)
 kategorieVerkauft(Kategorie,Ergebnis):-
 % Fasst Zwischenergebnisse zusammen und summiert sie
-	findall(Anzahl, kVerkauft(Kategorie,Anzahl), List),
+	findall(Anzahl, kVerkauftHelper(Kategorie,Anzahl), List),
 	sum_list(List,Ergebnis).
 
 % Hilfsfunktion zum durchgehen der Kategorie
-kVerkauft(Kategorie,Ergebnis):-
+kVerkauftHelper(Kategorie,Ergebnis):-
 	produkt(PId,Kategorie,_,_,_,_,_),
 % Findet verkäufe für das durch PId spezifizierte Produkt und speichert
 % es in einer Liste
@@ -127,9 +126,9 @@ ein_nachlass(Jahr,Differenz):-
 % find_unterkat(+Kategorie,-Ergebnis)
 find_unterkat(Kategorie,Ergebnis):-
 % Zusammentragen
-        findall(Subkat,find_unterkatH(Kategorie,Subkat),Ergebnis).
+        findall(Subkat,find_unterkatHelper(Kategorie,Subkat),Ergebnis).
 
-find_unterkatH(Kategorie,Ergebnis):-
+find_unterkatHelper(Kategorie,Ergebnis):-
 % Findet die UIds zur Kategorie
         kategorie(UId,Kategorie,_),
 % Sucht alle Subkategorien (UId ist gleich der der Oberkategorie)
@@ -138,6 +137,7 @@ find_unterkatH(Kategorie,Ergebnis):-
 
 
 %2.:
+%find_double_name(-Ergebnis)
 find_double_name(Ergebnis):-
 % Alle Ergebnisse Zusammentragen und Dublikate löschen.
         findall(HList,fdnhelper(HList),List),
@@ -154,6 +154,7 @@ fdnhelper(Ergebnis):-
 
 
 %3.:
+%no_unterkat(-UId,-Kategorie)
 no_unterkat(UId,Kategorie):-
 % Kategorie und UId herausfinden.
         kategorie(UId,Kategorie,_),
