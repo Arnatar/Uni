@@ -46,14 +46,14 @@ produktAnzahl(Kategorie,Ergebnis):-
 %2.:
 
 % Hilfsfunktion zum durchgehen der Kategorie
-verkauft(Kategorie,Ergebnis):-
+kVerkauft(Kategorie,Ergebnis):-
 	produkt(PId,Kategorie,_,_,_,_,_),
 	findall(Anzahl,verkauft(PId,_,_,Anzahl),List),
 	sum_list(List,Ergebnis).
 
 % Berechnung der Verkaufszahlen einer Kategorie
 kategorieVerkauft(Kategorie,Ergebnis):-
-	findall(Anzahl, verkauft(Kategorie,Anzahl), List),
+	findall(Anzahl, kVerkauft(Kategorie,Anzahl), List),
 	sum_list(List,Ergebnis).
 
 sum_list([],0).
