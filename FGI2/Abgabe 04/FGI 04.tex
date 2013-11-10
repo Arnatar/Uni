@@ -39,15 +39,39 @@
 
 \begin{document}
 \maketitle
-	\begin{enumerate}
-	\item[\textbf{4.3.}]
-		\begin{enumerate}
-			\item[1.]\quad \\
-			\item[2.]\quad \\
-			\item[3.]\quad \\
-			\item[4.]\quad \\
-			\item[5.]\quad \\
-       	\end{enumerate}
-	\item[\textbf{4.4.}]
+        \begin{enumerate}
+        \item[\textbf{4.3.}]
+                \begin{enumerate}
+                        \item[1.]\quad \\
+                        	$L(TS_{Waschmaschine}) = n((fn)+((cw+wc)sg^*d))^*$ \\
+                            $L^\omega(TS_{Waschmaschine}) = n(\{fn\}\cup\{wcs\}\{g\}^*\{d\}\cup\{cws\}\{g\}^*\{d\})^\omega$
+                        \item[2.]\quad \\
+                        	$SS(M)=1(2(((3 + 4)56^+)+1))^\omega$
+                        \item[3.]\quad \\
+                        	Wir sind uns nicht über die genaue Anforderung dieser Aufgabe im Klaren. Im Grunde ist $E_S(SS(M))$ nur der gleiche $\omega$-reguläre Ausdruck wie SS(M), nur werden die Zustandsnamen durch Etiketten substituiert. Da man aber laut Aufgabe einfach die Zustandsnamen nehmen soll, bleibt es doch gleich... \\
+                            Siehe Definition 2.18 auf Seite 36 sowie die Anmerkung dazu und Beispiel 2.19 auf Seite 37 im Skript. \\
+                        	$E_S(SS(M)) = 1(2(((3 + 4)56^+)+1))^\omega$
+                        \item[4.]\quad \\
+                        	$Sat(Start \land Error) = \{2,5\}$\\
+                            $Sat(Heat) = \{4,7\}$\\
+                            Sei $\pi = 13(125253)^\omega$\\
+                           	Hier gilt $Start \land Error$, jedoch niemals $Heat$. Somit gilt die LTL-Formel nicht.
+                        \item[5.]\quad \\
+                        	Sei $\pi = (13)^\omega$\\
+                            Somit ist $f$ nicht erfüllt.\\
+                            Mit $\pi = 1(25)^\omega$ ist $f$ erfüllt.
+               \end{enumerate}
+        \item[\textbf{4.4.}]\quad \\
+        \(
+		\begin{array}{|l|c|c|}
+		f & M_{ofen}, \pi \models f & M_{ofen}\models f \\ \hline
+		\circ \neg (Start\land Heat) & \checkmark &\checkmark \\
+		\square \neg Start &\times&\times \\
+		\square (Start \Rightarrow Close)&\times&\times \\
+		\square \lozenge (Heat \lor Error \lor \neg Start)&\checkmark&\checkmark \\
+		\lozenge ((Start\land Close\land \neg Error)\textbf{U}\ Heat)&\times&\times \\
+		\square ((Close\land \neg Heat\land Start)\Rightarrow \circ \circ \neg Heat)&\checkmark&\times \\		
+		\end{array}
+		\)
     \end{enumerate}
 \end{document}
