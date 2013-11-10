@@ -85,13 +85,7 @@ sum_list([Head | Tail], Total):-
 % geht von dem Umsatz vom Jahr zu dem Umsatz der erzielt worden wäre
 % mit den Preis aus dem vorherigen Jahr und den Verkaufszahlen des
 % angegebenen Jahres.
-% nachlass (+Jahr,-Ergebnis)
-nachlass(Jahr,Ergebnis):-
-% Alle Differenzen Summieren
-	findall(X,ein_nachlass(Jahr,X),List),
-	sum_list(List,Ergebnis).
-
-ein_nachlass(Jahr,Differenz):-
+nachlass(Jahr,Differenz):-
 % Berechnung des Vorjahres
 	Jahr2 is Jahr - 1,
 % Preise im Jahr und Vorjahr herausfinden.
