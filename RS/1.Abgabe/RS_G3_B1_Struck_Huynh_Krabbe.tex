@@ -1,0 +1,181 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{pgfplots}
+\usepackage{scrpage2}\pagestyle{scrheadings}
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+
+\newcommand{\titleinfo}{Hausaufgaben zum 29. 10. 2012}
+\title{\titleinfo}
+\author{Tronje Krabbe 6435002, The-Vinh Jackie Huynh 6388888,\\Arne Struck 6326505}
+\date{\today}
+\chead{\titleinfo}
+\ohead{\today}
+\setheadsepline{1pt}
+\setcounter{secnumdepth}{0}
+\setlength{\textheight}{22cm}
+\newcommand{\qed}{\ \square}
+
+\begin{document}
+\maketitle
+\notag
+\section{1.}
+	\subsection{a)}
+			Ein Interpreter übersetzt Befehle von höheren Ebenen in Befehle niederer Ebenen. Dies 
+			erfolgt zur Laufzeit des interpretierten Programmes. 
+	\subsection{b)}
+			Ein Compiler übersetzt, wie ein Interpreter Befehle von höheren Ebenen auf niedrigere 
+			Ebenen (meistens die Systemebene). Allerdings erzeugt der Compiler zu diesem Zweck eine 
+			auf der Zielebene ausführbare Datei, die Analyse des Codes erfolgt also vor der Laufzeit 
+			der compilierten Programmes. 
+	\subsection{c)}
+			Eine virtuelle Maschine ist die Simulation einer Hardwareebene auf einem Host-System.
+			Für Programme einer höheren Ebene bildet sie die eine neue L0-Ebene, auch wenn in 
+			Wahrheit das Programm von der VM weiter verarbeitet wird. 
+
+
+\section{2.}
+	\(T(i)\) sei die Dauer eines Befehls auf der Ebene \(Li\).
+	\[
+	\begin{array}{rcl}
+		T(0) &=& k \\
+		T(1) &=& n\cdot k \\
+		T(2) &=& n^2\cdot k \\
+		T(3) &=& n^3\cdot k \\
+		T(i) &=& n^i\cdot k
+	\end{array}
+	\]
+	Um von der Ebene 0 zur Ebene 1  zu gelangen werden \(n\cdot k\) Nanosekunden benötigt, da 
+	für diesen Sprung \(n\) Befehle benötigt werden und diese Befehle auf der Ebene 0 pro Befehl 
+	\(k\) Nanosekunden zur Ausführung benötigen.
+	Um zur Ebene \(2\ (=0+1+1)\) zu gelangen werden wieder \(n\) Befehle benötigt, also \(n\cdot 
+	n\cdot k\). Nach diesem Muster erklärt sich die finale Formel für die Ebene \(i\).
+	
+	
+\section{3.}
+	\subsection{Vorteile:}
+		Das von-Neumann-Konzept ist sehr wichtig für das Compiler-Prinzip, denn so kann ein 
+		Compiler Maschinencode im Speicher erzeugen.\\
+		Des weiteren kann sich ein Programm selber optimieren, indem es sich manipulieren.\\
+		Durch das Prinzip kann der Hardwareaufwand verringert werden. \\
+		Aufgrund des sequentiellen Ablaufs erfolgt ein einfacher Programmablauf.
+		
+	\subsection{Nachteile:}	
+		Selbstmodifikation kann zu Laufzeitfehlern führen. Dies kann auch gezielt von Schadsoftware 
+		genutzt werden.\\
+		Es existiert nur eine Verbindung zwischen Speicher und Prozessor, weshalb nur eine 
+		Aktion auf einmal bearbeitet werden kann.
+
+
+\section{4.}
+	\subsection{a)}
+		\subsubsection{Nach der Formel:}
+			\underline{Multiplikationen:}
+			\begin{align}
+				x^n &\Rightarrow n-1 \text{ Multiplikationen} \\
+    			\\
+    			a\cdot x^6 &\Rightarrow (5+1)\cdot 6\, ns = 36\, ns \\
+    			b\cdot x^5 &\Rightarrow (4+1)\cdot 6\, ns = 30\, ns \\
+   		 		c\cdot x^4 &\Rightarrow (3+1)\cdot 6\, ns = 24\, ns \\
+   		 		d\cdot x^3 &\Rightarrow (2+1)\cdot 6\, ns = 18\, ns \\
+   		 		e\cdot x^2 &\Rightarrow (1+1)\cdot 6\, ns = 12\, ns \\
+   	 			f\cdot x^1 &\Rightarrow (0+1)\cdot 6\, ns = 6\, ns 
+			\end{align}
+			\[36\, ns+30\, ns+24\, ns+18\, ns+12\, ns+6\, ns=126\, ns\]\\
+   		 	\underline{Additionen:}\\
+    			Innerhalb des Polynoms wird 6 mal Addiert, also müssen zu den \(126\, ns\ 6\, ns\) 
+    			addiert werden.\\
+				\\    	
+	    	Also dauert die Berechnung nach der Formel insgesamt \(132\, ns\)\\
+ 
+    	\subsubsection{Horner-Schema:}
+			\begin{align}
+				f(x)&= a\cdot x^6+b\cdot x^5+ c\cdot x^4+d \cdot x^3+e\cdot x^2+ f\cdot x + g \\
+				f(x)&= (a\cdot x^5+b\cdot x^4+ c\cdot x^3+d \cdot x^2+e\cdot x+ f) \cdot x + g \\
+				f(x)&= ((a\cdot x^4+b\cdot x^3+ c\cdot x^2+d \cdot x+e)\cdot x+ f) \cdot x + g \\
+				f(x)&= (((a\cdot x^3+b\cdot x^2+ c\cdot x+d) \cdot x+e)\cdot x+ f) \cdot x + g \\
+				f(x)&= ((((a\cdot x^2+b\cdot x+ c)\cdot x+d) \cdot x+e)\cdot x+ f) \cdot x + g \\
+				f(x)&= (((((a\cdot x+b)\cdot x+ c)\cdot x+d) \cdot x+e)\cdot x+ f) \cdot x + g 
+			\end{align}			    
+			Nun lässt sich sehen, dass die Menge der Rechenoperationen durch das Horner-Schema auf 
+			\(6\) Additionen und \(6\) Multiplikationen reduziert wurde. Daraus folgt:
+			\[6\cdot 1\, ns+6\cdot 6\, ns=42\, ns\]
+			Also beträgt die durch das Horner-Schema benötigte Zeit nur \(42\, ns\).
+				
+	\subsection{b)}
+		\(		
+		\begin{array}{rcccl}
+			a&=&x+1	\\
+			b&=&a\cdot a &=& (x+1)^2 \\
+			c&=&b\cdot b &=& (x+1)^4 \\
+			d&=&c\cdot c &=& (x+1)^8 \\
+			e&=&d\cdot d &=& (x+1)^{16} \\
+			y&=&e\cdot c\cdot b \cdot a &=& (x+1)^{23} 
+		\end{array}
+		\) \\ \\
+		Es wird eine Addition für  \(a\) benötigt. Des weiteren werden \(b\) eine, für \(c\) eine 
+		weitere und für \(e\) 2 weitere Multiplikationen benötigt. Um \(y\) zu erhalten, werden noch 
+		3 weitere Multiplikationen genutzt. Also braucht \((x+1)^{23}\) insgesamt 7 Multiplikationen.
+		Daraus folgt, dass die CPU insgesamt \((7\cdot 6+1)\, ns=43\, ns\) benötigt.
+		
+		
+		
+\section{5.}	
+	\subsection{a)}
+		Im folgenden rechnen wir damit, dass ein Jahr genau 365,25 Tage besitzt und nehmen den 
+		Fehler durch die Ungenauigkeit der Schaltjahre in kauf.\\ \\
+		\(
+		\begin{array}{llclcl}
+			\text{Pro Tag:} & 5\,\frac{\text{MiB}}{\text{s}}\cdot (60\cdot 60\cdot 24)\,\text{s} &=& 
+				432000\,\text{MiB} &=& 421,875\,\text{GiB} \\
+			\text{Pro Jahr:} & 421,875\,\text{GiB}\cdot 365,25 &\approx & 154089,844\,\text{GiB} 	
+				&\approx & 150,5\,\text{TiB} \\
+			\text{Pro Leben:} & 150,5\,\text{TiB}\cdot 80 &\approx & 12040\,\text{TiB}
+		\end{array}
+		\)
+
+	\subsection{b)}
+		\(x\) sei die Anzahl der Jahre, die noch zum Wachstum der durchschnittlichen Festplattengröße 
+		benötigt werden. 
+		\begin{align}
+			12040 &= 2\cdot 1,45^x \\
+			6020 &= 1,45^x \\
+			x &= \log_{1,45}(6020) \\
+			x &\approx 23,4222 
+		\end{align}
+		Also ist nach 24 Jahren die benötigte Festplattengröße erreicht, das wäre im Jahr 2036.
+		24 Jahre, da nach genau 23 Jahren die Festplatten noch nicht genügend Speicher haben, dies 
+		geschieht erst im Verlauf des Jahres 2035.
+
+	\subsection{c)}
+		\(x\) sei die Anzahl der Jahre, die noch zum Wachstum der durchschnittlichen Festplattengröße 
+		benötigt werden. 
+		\begin{align}
+			12040\,\text{TiB} &= \frac{32}{1024}\,\text{TiB} \cdot 1,52^x \\
+			385280 &= 1,52^x \\
+			x &= \log_{1,52}(385280) \\
+			x &\approx 30,7175
+		\end{align}
+		Also ist nach 31 Jahren die benötigte Festplattengröße erreicht, das wäre im Jahr 2043.
+		31 Jahre, da nach genau 30 Jahren die Festplatten noch nicht genügend Speicher haben, dies 
+		geschieht erst im Verlauf des Jahres 2042.
+		
+	\subsection{d)}
+		\[
+		\begin{array}{lclcl}
+			140\,\text{MiB}&=& \frac{140}{1024}\,\text{GiB}&=& \frac{140}{1024\cdot 1024}
+				\,\text{TiB}\\\\
+			\frac{12040\,\text{TiB}}{\frac{140}{1024\cdot 1024}\,\text{TiB}} &=& \frac{12624855040}
+				{140} &=& 90177536\\
+		\end{array}
+		\]\\
+		Also werden ungefähr (da mit einem gerundeten Ausgangswert gerechnet wurde) 90177536 
+		Magnetbänder für die Aufzeichnung benötigt.		
+
+\end{document}

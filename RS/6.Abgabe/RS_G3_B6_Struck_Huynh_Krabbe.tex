@@ -1,0 +1,124 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{pgfplots}
+\usepackage{scrpage2}\pagestyle{scrheadings}
+\usepackage{tikz}
+\usepackage{listings}
+\usetikzlibrary{patterns}
+
+\newcommand{\titleinfo}{Hausaufgaben zum 30. 11. 2012}
+\title{\titleinfo}
+\author{Tronje Krabbe 6435002, The-Vinh Jackie Huynh 6388888,\\Arne Struck 6326505}
+\date{\today}
+\chead{\titleinfo}
+\ohead{\today}
+\setheadsepline{1pt}
+\setcounter{secnumdepth}{0}
+\lstset{language=Java}
+\newcommand{\qed}{\ \square}
+
+\begin{document}
+\maketitle
+\notag
+\section{1.}
+	Es gibt keine zyklisch-einschrittigen Binärcodes die eine ungerade Zahl an Codewörtern besitzt, 
+	denn falls ein Zeichen von einem Codewort verändert wird, muss dieses auch wieder auf
+	seinen Ursprungszustand rückführbar sein (um einen zyklischen Binärcode zu erhalten), also wird
+	dafür ein weiteres Codewort gebraucht.
+	Analog funktioniert auch die Veränderung von mehr als einem Codewort, allerdings werden hierfür 
+	natürlich mehr Schritte gebraucht. 
+	
+\section{2.}
+	\subsection{a)}
+		Die Minimaldistanz beträgt 4. Dies kann leicht verifiziert werden, indem ein Datenbit an 
+		einer beliebigen Stelle verändert wird (innerhalb der Reichweite, also 7\(\times\)7). 
+		Allerdings verändert dies die Paritätsbits der jeweils zugehörigen Spalte und der zugehörigen
+		Zeile, was dazu führt, dass das Paritätsbit \(p_{7,7}\) auch angepasst werden muss.
+	
+	\subsection{b)}
+		Ein Einbitfehler an einer beliebigen Position \((i,j\)) führt automatisch zur Verfälschung
+		der	entsprechenden Paritätsbits der Zeile \(i\) und Spalte \(j\). Also wir der Fehler erkannt
+		und	kann durch die Information von Zeile und Spalte auch lokalisiert werden und somit
+		korrigiert werden. \\
+		\\		
+		Ein Zweibitfehler an den beliebigen Positionen \(((i_1,j_1),(i_2,j_2))\) führt zu 2 Fällen.
+		Bei dem ersten Fall sind Spalte bzw. Zeile der beiden Fehler identisch
+		\(((i_1 = i_2)\land(j_1\neq j_2))\) oder \(((i_1\neq i_2)\land(j_1 = j_2))\). Daraus
+		resultiert,	durch die doppelte Fehlerbelegung entweder die Spalten oder Zeilenparität korrekt
+		ist, allerdings kann das Vorliegen eines Fehlers dennoch an den jeweils anderen Paritäten 
+		abgelesen werden. Da aber aufgrund der Fehlenden Informationen keine Möglichkeit gegeben ist
+		den Fehler eindeutig zu lokalisieren, kann er auch nicht korrigiert werden. \\
+		Im zweiten Fall sind die Positionen der Fehler weder in Spalte, noch in Zeile identisch
+		\((i_1\neq i_2)\land(j_1\neq j_2)\). Hier wird der Fehler erkannt, kann jedoch auch nicht 
+		lokalisiert werden, da die Fehler an 2 verschiedenen Positionen liegen könnte
+		\(((i_1,j_1)\land(i_2,j_2))\) oder \(((i_1,j_2)\land(i_2,j_1))\). Also kann er nicht behoben 
+		werden. \\
+		\\
+		Analog zur Zweibitfehlern gestaltet sich der Sachverhalt bei Dreibitfehlern. Hier existieren 
+		weitaus mehr Fälle, als bei Zweibitfehlern. Allerdings ist auch hier in jeglicher Anordnung 
+		mindestens eine Zeilen- oder Spaltenparität gestört, sodass ein Fehler erkannt wird. \\
+		Auch dieser kann nicht korrigiert werden, da wie im Abschnitt über die Zweibitfehler 
+		angedeutet die einzelnen Fehler nicht lokalisiert und somit auch nicht korrigiert werden 
+		können.	
+		
+		
+	\subsection{c)}
+		Ein nicht erkennbarer Vierbitfehler wäre \(d_{0,0},\ d_{0,1},\ d_{1,0},\ d_{1,1}\) oder 
+		jegliche andere Anordnung der Fehler, bei denen sich 2 Fehler in einer Spalte und 2 Fehler in 
+		einer Zeile befinden sind nicht erkennbar, da sie die Paritätsfehler aufheben.
+		
+	
+	\subsection{d)}
+		Die Gesamtzahl der Vierbitfehler ist äquivalent zu dem aus der Kombinatorik bekanntem Ziehen 
+		ohne Reihenfolge und ohne Zurücklegen:
+			\(\begin{pmatrix}
+				81\\4
+			\end{pmatrix}=
+			1663740\) Vierbitfehler existieren. \\ \\
+		Die Anzahl der nichterkannten Vierbitfehler errechnet sich wie folgt: 
+		\(\frac{81\cdot 8\cdot 8\cdot 1}{4}=1296\) \\
+		Der Anteil der nichterkannten Fehler beträgt also \(\frac{1296}{1663740}\approx 0,0007897\)
+
+	
+\section{3.}
+	\subsection{a)}
+		Das 9. Codewort entspricht 1110000. Durch die Verfälschung von \(c_7\) ergibt sich 1110001.\\
+		\begin{align}
+			x_a &= 1\oplus 1\oplus 0\oplus 1 = 1 \\
+			x_b &= 1\oplus 1\oplus 0\oplus 1 = 1\\
+			x_c &= 0\oplus 0\oplus 0\oplus 1 = 1
+		\end{align}
+		Daraus folgt das Prüfwort 111 oder 7, womit der Fehler lokalisiert ist.
+		
+	
+	\subsection{b)}
+		Um die n-te Zeile der Generatormatrix G zu erhalten, wird aus dem Schema abgelesen, welche 	
+		Datenbits den Wert des jeweiligen Codebits \((c_n)\) bestimmen. Das führt zu 2 Fällen, 
+		entweder ist \(c_n\) ein Paritätsbit \((p_m)\) oder ein Datenbit \((d_o)\). \\
+		Wenn \(c_n\) ein Paritätsbit ist, so wird in der n-ten Matrixzeile jedes Bit gesetzt, welches 
+		(laut Zuordnungsvorschrift) zur Berechnung des entsprechenden Paritätsbits benötigt wird. \\
+		Ist \(c_n\) hingegen ein Datenbit \((d_o)\), dann wird in der Matrix das m-te Bit gesetzt. \\
+		Daraus resultiert eine Matrix, welche für jedes Datenbit eine Spalte und jedes Zeichenbit 
+		eine Zeile besitzt. \\ 
+		\\	
+		Die Prüfmatrix H resultiert aus den Prüfgruppen (durch die farbigen Punkte über dem 
+		Tabellenteil des Schemas dargestellt). Sie entsprechen zeilenweise gelesen den Zeilen der 
+		Prüfmatrix in entgegengesetzter Reihenfolge (Reihenfolge der Spalten). Ein Punkt codiert in 
+		diesem Fall eine 1, kein Punkt eine 0. \\
+		\[\textbf{H}=\begin{pmatrix}
+			1&0&1&0&1&0&1&... \\
+			0&1&1&0&0&1&1&... \\
+			0&0&0&1&1&1&1&... \\
+			0&0&0&0&0&0&0&... \\
+			0&0&0&0&0&0&0&... \\
+		\end{pmatrix}\]
+
+
+
+\end{document}

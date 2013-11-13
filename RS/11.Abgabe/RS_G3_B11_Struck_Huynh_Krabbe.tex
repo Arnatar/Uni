@@ -1,0 +1,97 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{pgfplots}
+\usepackage{scrpage2}\pagestyle{scrheadings}
+\usepackage{tikz}
+\usepackage{listings}
+\usetikzlibrary{patterns}
+
+\newcommand{\titleinfo}{Hausaufgaben zum 18. 1. 2013}
+\title{\titleinfo}
+\author{Tronje Krabbe 6435002, The-Vinh Jackie Huynh 6388888,\\Arne Struck 6326505}
+\date{\today}
+\chead{\titleinfo}
+\ohead{\today}
+\setheadsepline{1pt}
+\setcounter{secnumdepth}{0}
+\lstset{language=Java}
+\newcommand{\qed}{\ \square}
+
+\begin{document}
+\maketitle
+
+\section{11.1}
+	\begin{itemize}
+		\item a) 30
+		\item b) 40
+		\item c) 50
+		\item d) 30
+		\item e) 40
+	\end{itemize}
+
+\section{11.2)}
+	1. Befehlsformat: \\
+	\framebox[2cm]{3 bit}\framebox[3cm]{5 bit}\framebox[10cm]{24 bit}
+	Opcode \hspace{1,3cm} Register \hspace{4,9cm} Adresse
+\\
+\\
+2. Befehlsformat: \\
+\framebox[2cm]{3 bit}\framebox[3.5cm]{7 bit}\framebox[3cm]{5 bit}\framebox[3cm]{5 bit}\framebox[3.5cm]{12 bit}
+Codepräfix \hspace{0,9cm} Opcode 2 \hspace{1,4cm} Register 1 \hspace{1cm} Register 2 \hspace{1,2cm} Adresse
+\\
+\\
+3. Befehlsformat: \\
+\framebox[2cm]{3 bit}\framebox[3.5cm]{7 bit}\framebox[2,5cm]{4 bit}\framebox[7cm]{18 bit}
+Codepräfix \hspace{0.7cm} Codepräfix 2 \hspace{0,8cm} Opcode 3\hspace{3cm} ungenutzt 
+
+\newpage
+\section{11.3}
+	\subsection{a)} 0000\ 1011\ 1001
+	
+	\subsection{b)} Nicht darstellbar, der Abstand vom ersten 1-bit bis zum letzten 1-bit im
+	 Ergebnis ist 9 Stellen, dies kann nicht in imm8 dargestellt werden.
+
+	\subsection{c)} Da eine Rotation um 29 Stellen nötig wäre nicht darstellbar.
+
+	\subsection{d)} 1110\ 0110\ 0011
+
+	\subsection{e)} 0010\ 0000\ 1001
+
+\section{Aufgabe 4)}
+	\subsection{a)}
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|}
+				\hline
+				0-Adress: & 0-Adress: & 2-Adress: & 3-Adress:\\ \hline
+				PUSH F & LOAD D		& MUL B,C & MOV M,B \\
+				PUSH E & MUL E		& SUB B,A & MUL M,C \\
+				PUSH D & ADD F  	& MUL D,E & SUB M,A \\
+				MUL	   & STORE M	& ADD D,F & MOV N,D \\
+				ADD	   & LOAD B		& DIV A,D & MUL N,E \\
+				PUSH C & MUL C		& MOV M,A & ADD N,F \\
+				PUSH B & SUB A		&	 * 	  &	DIV M,N \\
+				MUL	   & DIV M		&	 *    &     *   \\
+				SUB	   &     *		&	 *    &     *   \\						
+				DIV	   &     *		&	 *    &     *   \\						
+				POP R  &     *		&	 *    &     *   \\ \hline
+			\end{tabular}
+		\end{center}				 
+		
+	\subsection{b)}
+		\begin{center}
+			\begin{tabular}{c|c|c|c|c}
+				Maschine & Opcodes & Registernummer & Speicheradressen & Größe \\ \hline
+				0-Adress & \(12\times 8\) bit& \(0\times 4\) bit& \(7\time 16\) bit& 208 bit\\
+				1-Adress & \(11\times 8\) bit& \(0\times 4\) bit& \(11\time 16\) bit& 264 bit\\
+				2-Adress & \(6 \times 8\) bit& \(0\times 4\) bit& \(12\time 16\) bit& 240 bit\\
+				3-Adress & \(12\times 8\) bit& \(22\times 4\) bit& \(7\time 16\) bit& 296 bit\\
+			\end{tabular}
+		\end{center}
+	
+\end{document}

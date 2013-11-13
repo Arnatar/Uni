@@ -1,0 +1,170 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{pgfplots}
+\usepackage{scrpage2}\pagestyle{scrheadings}
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+
+\newcommand{\titleinfo}{Hausaufgaben zum 9. 11. 2012}
+\title{\titleinfo}
+\author{Tronje Krabbe 6435002, The-Vinh Jackie Huynh 6388888,\\Arne Struck 6326505}
+\date{\today}
+\chead{\titleinfo}
+\ohead{\today}
+\setheadsepline{1pt}
+\setcounter{secnumdepth}{0}
+\setlength{\textheight}{23cm}
+\newcommand{\qed}{\ \square}
+
+\begin{document}
+\maketitle
+\notag
+\section{1.}
+	\subsection{a)}
+		\[
+		\begin{array}{cl}
+			&1385-0532 \\
+			\Leftrightarrow &1385+K_ {10}(0532)_{10} \\
+			=&1385+9468+1 \\ 
+			=&[1]\underline{0854} \\
+		\end{array}\\
+		\]
+		
+
+	\subsection{b)}
+		\[
+		\begin{array}{cl}
+			&0372-0687 \\
+			\Leftrightarrow & 0372 + K_{10}(0687)_{10} \\
+			=&0372+9312+1 \\
+			=&9685 \\
+			\overset{*}{\Leftrightarrow} & K_{10}(9685)_{10} \\
+			=& (-)315
+		\end{array}
+		\]
+
+
+	\subsection{c)}
+	\[
+	\begin{array}{cl}
+		 &010101101001_2-001000010100_2 \\
+		 \Leftrightarrow & 010101101001_2 + K_2(001000010100)_2 \\
+		=&010101101001_2+110111101100_2 \\
+		=&[1]\underline{001101010101_2} = \underline{853_{10}}\\
+	\end{array}
+	\]
+
+	
+	\subsection{d)}
+	\[
+	\begin{array}{cl}
+		 &000101110100_2-001010101111_2 \\
+		 \Leftrightarrow & 000101110100_2 + K_2(001010101111)_2 \\
+		=&000101110100_2+110101010001_2 \\
+		=&111011000101_2 \\	
+		\overset{*}{\Leftrightarrow} & K_2(111011000101)_2 \\
+		=& \underline{000100111010_2} = \underline{(-)315_{10}}\\
+	\end{array}
+	\] \\
+	* Da eine negative Zahl erwartet wird (Das Ergebnis ist größer als \(4999_{10}\)), muss noch das 
+	entsprechende Komplement gebildet werden.
+	
+\section{2.}
+	\subsection{a)}
+		Im Zehnersystem:
+		\begin{align}
+			 &(69,242\mid 3)_{10} \\
+			\Rightarrow & 69,242\cdot 10^3\\
+			=&6,9242\cdot 10^4		
+		\end{align}
+		
+	\subsection{b)}
+		Im Binärsystem:
+		\begin{align}
+			&(-11001,01\mid -110)_2 \\
+			\Rightarrow & -11001,01\cdot 10^{-110} \\
+			= & -1,100101\cdot 10^{-010}
+		\end{align}
+	\subsection{c)}	
+		Im Hexadezimalsystem:
+		\begin{align}
+			&(-0,002\text{D4A}\mid \text{E}) \\
+			\Rightarrow & -0,002\text{D4A} \cdot 10^\text{E} \\
+			=&-0,2\text{D4A}\cdot 10^\text{B}
+		\end{align}
+		
+
+\section{3.}	
+	\subsection{a)}
+		\(1011011\) in Gleitkommadarstellung: \\ \\
+		\(0\quad 1000\ 0101\quad 0110\ 1100\ 0000\ 0000\ 0000\ 000\)		
+		
+	\subsection{b)}
+		\(-1010 1000, 101\) in Gleitkommadarstellung: \\ \\
+		\(1\quad 1000\ 0110\quad 0101\ 0001\ 0100\ 0000\ 0000\ 000\)
+\newpage
+\section{4.}
+	\subsection{a)}
+		\[
+		\begin{array}{rrcl}
+			&8,626 \cdot 10^5  + 9,9442 \cdot 10^7 &=& 0,08626 \cdot 10^7 + 9,9442 \cdot 10^7 \\
+			&&=&(0,08626 + 9,9442) \cdot 10^7
+		\end{array}
+		\] \\	
+		\[
+		\begin{array}{cl}
+				 	 &\ \, 0,08626  \\
+					+&\ \, 9,9442   \\ \hline
+			\text{Ü} & 1 1,1 1\ \ \\ \hline\hline
+			&10,03046
+		\end{array}
+		\] \\
+		\[
+		\begin{array}{rcl}
+			10,03046\cdot 10^7 = 1,003046 \cdot 10^8 \approx \underline{1,0030\cdot 10^8}
+		\end{array}
+		\]
+		
+	\subsection{b)}
+		\[
+		\begin{array}{rrcl}
+			&8,626 \cdot 10^5  + 9,9442 \cdot 10^7 &=& 0,0863 \cdot 10^7 + 9,9442 \cdot 10^7 \\
+			&&=&(0,0863 + 9,9442) \cdot 10^7
+		\end{array}
+		\] \\	
+		\[
+		\begin{array}{cl}
+				 	 &\ \, 0,0863  \\
+					+&\ \, 9,9442   \\ \hline
+			\text{Ü} & 1 1,1 1\ \ \\ \hline\hline
+			&10,0305
+		\end{array}
+		\] \\
+		\[
+		\begin{array}{rcl}
+			10,0305\cdot 10^7 \approx \underline{1,0031 \cdot 10^8}
+		\end{array}
+		\]
+
+	\subsection{c)}
+		Das in a) genutzte Rundungsverfahren ist das genauere und damit vorzuziehende.
+		In b) wird eine doppelte Rundung durchgeführt welche dazu führt, dass \(0,46\) zu \(1\) wird. 
+		und somit ein weitaus ungenaueres Ergebnis liefert.
+
+\section{5.}
+	\[
+	\begin{array}{rcll}
+			5,6538 \cdot 10^7 \cdot 3,1415 \cdot 10^4 &=& (5,6538 \cdot 3,1415) \cdot 10^{7+4}&\mid \text{Vorzeichen: } 0\oplus 0 = 0 \\
+			&=&17,7614127 \cdot 10^{11} \\
+			&\approx & 1,7761 \cdot 10^{12}
+	\end{array}
+	\]
+
+
+\end{document}

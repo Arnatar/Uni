@@ -1,0 +1,245 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{pgfplots}
+\usepackage{scrpage2}\pagestyle{scrheadings}
+\usepackage{tikz}
+\usepackage{listings}
+\usetikzlibrary{patterns}
+
+\newcommand{\titleinfo}{Hausaufgaben zum 23. 11. 2012}
+\title{\titleinfo}
+\author{Tronje Krabbe 6435002, The-Vinh Jackie Huynh 6388888,\\Arne Struck 6326505}
+\date{\today}
+\chead{\titleinfo}
+\ohead{\today}
+\setheadsepline{1pt}
+\setcounter{secnumdepth}{0}
+\lstset{language=Java}
+\newcommand{\qed}{\ \square}
+
+\begin{document}
+\maketitle
+\notag
+\section{1.}
+	\begin{lstlisting}
+		...
+		int b1 = (a1 << 2 | a2 >>> 4) % 256;
+		int b2 = (a2 << 4 | a3 >>> 2) % 256;
+		int b3 = (a3 << 6 | a4) % 256;
+		...
+	\end{lstlisting}
+	Der Modulo 256 wird benötigt, damit nur die 8 letzten Bits übernommen werden, sofern die b's 
+	nicht vorher so definiert wurden, dass sie nur die 8 letzten Bits annehmen.
+	
+
+\section{2.}
+	\subsection{a)}
+		\begin{align}
+			\frac{360^{\circ}}{15^{\circ}} &= 24 \text{ Codewörter} 
+		\end{align}
+		
+	\subsection{b)}
+		\textbf{2 Codewörter:} \\ \\
+		\(
+		\begin{array}{ccc}
+			0&\ & 1
+		\end{array}
+		\)\\ \\
+		\textbf{4 Codewörter:} \\ \\
+		\(
+		\begin{array}{ccc}
+			00&\ & 01 \\
+			11&\ & 10 
+		\end{array}
+		\)\\ \\
+		\textbf{8 Codewörter:} \\ \\
+		\(
+		\begin{array}{ccccccc}
+			(000)&\ & 001 &\ & 011&\ & 010 \\
+			110&\ & 111 &\ & 101&\ & (100) 
+		\end{array}
+		\)\\ \\
+		\newpage
+		\begin{flushleft}
+			\textbf{12 Codewörter:} \\
+		\end{flushleft}		
+		(die Wörter in () wurden schon hier weggelassen, um in 2 Schritten 
+		auf ein valides Ergebnis zu kommen.) \\ \\
+		\(
+		\begin{array}{ccccccccccccc}
+			0001&\ & 0011&\	& 0010 &\ & 0110&\ &0111&\ & 0101 \\
+			1101&\ & 1111&\ & 1110 &\ & 1010&\ &1011&\ & 1001
+		\end{array}
+		\)\\ \\
+		\textbf{24 Codewörter:} \\ \\
+		\(
+		\begin{array}{cccccccccccccccccccccccccccccccccccccc}
+			00001&\ &00011&\ &00010&\ &00110&\ &00111&\ &00101&\ &01101&\ &01111 \\
+			01110&\ &01010&\ &01011&\ &01001 \\
+			11001&\ &11011&\ &11010&\ &11110&\ &11111&\ &11101&\ &10101&\ &10111 \\
+			10110&\ &10010&\ &10011&\ &10001 \\
+		\end{array}
+		\)
+		
+	
+\section{3.}
+	\subsection{a)}
+		\begin{figure}[!h]
+	        \centering
+			\begin{tikzpicture}[x=2em,y=-1.5em,every node=radius\=3]
+	        	\tikzstyle{n}=[draw,circle,radius=3cm,font=\small,inner sep=0,minimum 
+	                       size=2.3em]
+	
+		            \node[n] (R) at (-1,0) {1};
+	
+	    	        \node[n] (R0) at (-3,3) {0,57};
+	
+	              	\node[n] (R00) at (-4,6) {0,27};
+	        		\node[n,label=below:d] (R01) at (-2,6) {0,3};
+	                \node[n] (R1) at (3,4.5) {0,43};
+	
+	                \node[n] (R000) at (-3,9) {0,15};
+	                \node[n,label=below:k] (R001) at (-5,9) {0,12};
+	                \node[n] (R10) at (1,9) {0,23};
+	                \node[n] (R11) at (5,9) {0,2};
+	
+	                \node[n,label=below:l] (R0000) at (-2,12) {0,6};
+	                \node[n] (R0001) at (-4,12) {0,9};
+	                \node[n,label=below:a] (R100) at (0.25,12) {0,12};
+	                \node[n] (R101) at (2,12) {0,11};
+	                \node[n,label=below:j] (R110) at (4,12) {0,1};
+	                \node[n,label=below:g] (R111) at (6,12) {0,1};
+	
+	                \node[n] (R00010) at (-3,15) {0,04};
+	                \node[n,label=below:c] (R00011) at (-5,15) {0,05};
+	                \node[n] (R1010) at (1,15) {0,06};
+	                \node[n,label=below:f] (R1011) at (3,15) {0,05};
+	
+	                \node[n,label=below:e] (R000100) at (-4,18) {0,02};
+	                \node[n,label=below:h] (R000101) at (-2,18) {0,02};
+	                \node[n,label=below:b] (R10100) at (0,18) {0,03};
+	                \node[n,label=below:i] (R10101) at (2,18) {0,03};
+	
+	                \draw
+		                (R) to (R0)
+	                    (R) to (R1)
+	
+	    	            (R0) to (R00)
+	                    (R0) to (R01)
+	                    (R1) to (R10)
+	                    (R1) to (R11)
+	
+	                    (R00) to (R000)
+	                    (R00) to (R001)
+	                    (R10) to (R100)
+	                    (R10) to (R101)
+	                    (R11) to (R110)
+	                    (R11) to (R111)
+	
+	                    (R000) to (R0000)
+	                    (R000) to (R0001)
+	                    (R101) to (R1010)
+	                    (R101) to (R1011)
+	
+	            		(R0001) to (R00010)
+	                    (R0001) to (R00011)
+	                    (R1010) to (R10100)
+	                    (R1010) to (R10101)
+	
+	                    (R00010) to (R000100)
+	                    (R00010) to (R000101)
+	                    ;
+			\end{tikzpicture}
+		\end{figure}
+                \textbf{Codierung:} Linke Kante entspricht 0, rechte Kante entspricht 1. \\ \\
+               \begin{center}
+	               \begin{tabular}{|c|l|c|l|}
+	               		\hline
+	               		Symbol & Codierung & Symbol &Codierung \\ \hline
+	               		a & 100 & g & 111 \\
+	               		b & 10100 & h & 001011 \\
+	               		c & 00100 & i & 10101 \\
+	               		d & 01 & j & 110 \\
+	             		e & 001010 & k & 000 \\
+	             		f & 1011 & l & 0010 \\ \hline
+	               \end{tabular}
+               \end{center}
+               
+                
+	\subsection{b)}
+		\(
+		\begin{array}{lcl}
+			H &=& -2 \cdot 0,02 \cdot \log_2(0,02) -2 \cdot 0,03 \cdot \log_2(0,03)-2\cdot 0,05 
+			\cdot\log_2(0,05) \\ 
+			&& -2 \cdot 0,1 \cdot \log_2(0,1) -2 \cdot 0,12 \cdot \log_2(0,12)-0,3\cdot\log_2(0,3)
+			-0,06\cdot\log_2(0,06) \\
+			&\approx & 3,125
+		\end{array}
+		\)
+
+	
+\section{4.}	
+	\subsection{a)}
+		\begin{tabular}{l|c|c|c|c|c|c|c|c|c|c}
+		Ziffer& 0&1&2&3&4&5&6&7&8&9\\ \hline
+		Codierung&0001&0010&0011&0100&0101&0110&0111&1000&1001&1010
+		\end{tabular}
+		\begin{align}
+			H_0&=10\cdot 0,1\cdot \log_2(2^4) = \log_2(16)=4\text{ Bit} \\
+			H &= -10\cdot 0,1\cdot \log_2(0,1) \approx 3,219\text{ Bit} \\
+			R &= H_0-H = 4+\log_2(0,1) \approx 0,678 \text{ Bit} 
+		\end{align}
+		
+	\subsection{b)}
+		Will man die 100 verschiedenen Paare binär codieren, braucht man mindesten sieben stellige 
+		Binärworte, also eine Wortlänge von \(2^7\). Da aber jeder Ziffer eine Tetrade zugeordnet 
+		werden soll, muss die Wortbreite \(2^8\) betragen. \\
+		Eine mögliche Neucodierung wäre, analog zu a) die bisherige Codierung jeder Ziffer um eine 
+		Stelle zu verschieben und diese dann zu gruppieren. \\
+		\(\Rightarrow \Big\{00010001,00010010,...,10101010\Big\}\)
+		\begin{align}
+			H_0&=100\cdot 0,01\cdot \log_2(2^8) = \log_2(128)=8\text{ Bit} \\
+			H &= -100\cdot 0,01\cdot \log_2(0,01) \approx 6,643\text{ Bit} \\
+			R_{ges} &= H_0-H = 7+\log_2(0,01) \approx 1,356 \text{ Bit} \\ 
+			R &= 0,01\cdot \log_2(2^7)- 0,01\cdot \log_2(0,01) \approx 0,1464
+		\end{align}
+		
+	\subsection{c)}
+		Da bei 1000 verschiedenen Paaren \(2^8=256\) offensichtlich nicht mehr ausreicht, muss die 
+		neue Wortbreite \(2^{12} = 4096\) betragen. \\
+		\begin{align}
+			H_0&= 0,001\cdot\log_2(2^{12}) = 0,012
+		\end{align}
+		Dies gilt analog auch für 10000 Paare (4 Stellen), allerdings reicht hier auch nicht 
+		\(2^{12}\), da auch hier wieder zu wenig Kombinationsmöglichkeiten vorhanden sind.
+		also ist es \(2^{16}\) 
+		\begin{align}
+			H_0&= 0,0001\cdot\log_2(2^{16}) = 0,0016 
+		\end{align}
+			
+	\subsection{d)}
+		Bei variabler Codierungslängen ergibt sich folgende Aufteilung: \\ \\
+		\begin{tabular}{c|c|c|c|c|c|c|c|c|c}
+			0&1&2&3&4&5&6&7&8&9 \\ \hline
+			0000&0001&001&010&011&100&101&110&1110&1111
+		\end{tabular}
+		\begin{align}
+			H_0 &= \frac{1}{10} \cdot (6\cdot 3 + 4\cdot 4) \\
+			&= 3,4 \\
+			R &= 3,4 -\log_2(0,1) = H_0 - H \\
+			&\approx 0,078 \\
+		\end{align}
+		Die Redundanz hat sich deutlich verringert. \\
+		Da sich die Redundanz aber auch mit dem Kombinieren von Zahlen zu Gruppen verringert könnte 
+		man beide Verfahren kombinieren, um die Redundanz noch weiter zu verringern.
+		
+
+
+
+\end{document}

@@ -1,0 +1,231 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{pgfplots}
+\usepackage{scrpage2}\pagestyle{scrheadings}
+\usepackage{tikz}
+\usepackage{listings}
+\usetikzlibrary{patterns, calc}
+\input {kvmacros}
+
+
+\newcommand{\titleinfo}{Hausaufgaben zum 21. 12. 2012}
+\title{\titleinfo}
+\author{Tronje Krabbe 6435002, The-Vinh Jackie Huynh 6388888,\\Arne Struck 6326505}
+\date{\today}
+\chead{\titleinfo}
+\ohead{\today}
+\setheadsepline{1pt}
+\setcounter{secnumdepth}{0}
+\lstset{language=Java}
+\newcommand{\qed}{\ \square}
+
+\begin{document}
+\maketitle
+\notag
+\tikzstyle{kvloop}=[draw, opacity=1, line width=0.4mm, rounded corners=2mm]
+\section{9.1}
+\begin{tikzpicture}[x=0.5cm,y=0.5cm]
+        \foreach \y/\l in {0/C,-2/D,-4/Q (D-Latch),-6/Q (D-FF)} {
+            \draw[step=1,draw=gray] (0, \y) grid (18,{1+\y});
+            \draw[draw=black,thin] (0, \y) to (0,{1.4 + \y})
+                (-0.4, \y) to (18.4, \y)
+                (-0.4, {1 + \y}) -> (0, {1 + \y});
+
+            \node[label=left:\tiny0] at (0, \y) {};
+            \node[label=left:\tiny1] at (0, {\y + 1}) {};
+
+            \node[label=left:\small\l] at (-1, {\y + 0.5}) {};
+        }
+
+        % C input
+        \draw[draw=black,very thick] (0, 0) to (2, 0) to (2, 1) to (3, 1) to (3, 0) to (5, 0) to
+        (5, 1) to (6, 1) to (6, 0) to (8, 0) to (8, 1) to (10, 1) to (10, 0) to (12, 0) to (12, 1)
+        to (15, 1) to (15, 0) to (16, 0) to (16, 1) to (18, 1);
+
+        % D input
+        \draw[draw=black,very thick] (0, -2) to (1, -2) to (1, -1) to (4, -1) to (4, -2) to (7, -2) 
+        to (7, -1) to (9, -1) to (9, -2) to (11, -2) to (11, -1) to (12, -1) to (12, -2) to (14, -2)
+        to (14, -1) to (17, -1) to (17, -2) to (18, -2);
+
+        % D-Latch
+        \draw[draw=black,very thick] (0, -4) to (3, -4) to (3, -3) to (6, -3) to (6, -4) to (9, -4)
+            to (9, -3) to (10, -3) to (10, -4) to (17, -4) to (17, -3) to (18, -3);
+
+        % D-Flipflip
+        \draw[draw=black,very thick] (0, -6) to (3, -6) to (3, -5) to (6, -5) to (6, -6) to (9, -6)
+        to (9, -5) to (13, -5) to (13,-6) to (17,-6) to (17,-5) to (18, -5);
+
+
+    \end{tikzpicture}
+	
+\section{9.2}
+    \subsection{a)}
+    \begin{center}
+	    \begin{tabular}{ccc}
+  			1. Flipflop mit Multiplexer: &\quad\quad & 2. Flipflop mit Taktausblendung: \\ \\
+	        \begin{tabular}{|c|c|c||c|}\hline
+	            D & E & CLK & $Q^+$ \\ \hline
+	            0 & 0 & 0 & Q \\
+	            0 & 0 & $\uparrow$ & Q \\
+	            0 & 1 & 0 & Q \\
+	            0 & 1 & $\uparrow$ & 0 \\
+	            1 & 0 & 0 & Q \\
+	            1 & 0 & $\uparrow$ & Q \\
+	            1 & 1 & 0 & Q \\
+	            1 & 1 & $\uparrow$ & 1 \\ \hline
+	        \end{tabular}
+	       	&\quad\quad &
+	        \begin{tabular}{|c|c|c||c|}\hline
+	            D & E & CLK & $Q^+$ \\ \hline
+	            0 & 0 & 0 & Q \\
+	            0 & 0 & 1 & Q \\
+	            0 & 1 & 0 & Q \\
+	            0 & 1 & 1 & 0 \\
+	            1 & 0 & 0 & Q \\
+	            1 & 0 & 1 & Q \\
+	            1 & 1 & 0 & Q \\
+	            1 & 1 & 1 & 1 \\ \hline
+	        \end{tabular}  
+    	\end{tabular}
+    \end{center}
+    
+	\newpage
+    \subsection{b)}
+        Flipflops werden zur Speicherung von Daten verwendet. Die Schaltungen in diesem Fall
+        garantieren, dass ein Datum (D) nur gespeichert wird, wenn eine Enable Signal (E) gegeben,
+        und gerade getaktet (CLK) wird.
+
+    \subsection{c)}
+        Nachteil beim Ersten: Da D zuerst durch einen Multiplexer läuft, bevor es das Flipflop
+        erreicht, kommt es einen Takt später als das Clock-Signal. Dies kann dazu führen, dass ein
+        falsches D gespeichert wird. Nachteil beim Flipflop mit Taktausblendung: Dadurch, dass E und
+        CLK durch ein AND-Gatter verknüpft sind, kommt das Taktsignal immer einen Takt später als D,
+        was dazu führen kann, dass ein falsches D eingelesen und gespeichert wird. 
+
+	
+\section{9.3}
+	\subsection{a)}
+		\begin{center}
+			\begin{tikzpicture}[x=2em,y=-1.5em,every node=radius\=3]
+		        	\tikzstyle{node}=[draw,circle,radius=3cm,font=\small,inner sep=0,minimum 
+		                       size=2.3em]
+	                	\node [node] (z0) at (1,6) {$z_0$};
+						\node [node] (z1) at (2.5,2.75) {$z_1$};
+						\node [node] (z2) at (6,1) {$z_2$};
+						\node [node] (z3) at (9.5,2.75) {$z_3$};
+						\node [node] (z4) at (11,6) {$z_4$};
+						\node [node] (z5) at (9.5,9.5) {$z_5$};
+						\node [node] (z6) at (6,11) {$z_6$};
+						\node [node] (z7) at (2.5,9.5) {$z_7$};
+						
+						\draw[thick, ->] (z0) [bend left = 15 pt] to (z1);
+						\draw[thick, ->] (z1) [bend left = 15 pt] to (z2);
+						\draw[thick, ->] (z2) [bend left = 15 pt] to (z3);
+						\node[label={right:i=1}] at ($(z2)+(1.5,-0.2)$) {};
+						\draw[thick, ->] (z3) [bend left = 15 pt] to (z4);
+						\draw[thick, ->] (z4) [bend left = 15 pt] to (z5);
+						\draw[thick, ->] (z5) [bend left = 15 pt] to (z6);
+						\draw[thick, ->] (z6) [bend left = 15 pt] to (z7);
+						\draw[thick, ->] (z7) [bend left = 15 pt] to (z0);
+						\draw[thick, ->] (z2) [loop] to (z2);
+						\node[label={right:i=0}] at ($(z2)+(0.9,-2)$) {};
+	
+		    \end{tikzpicture}
+		\end{center}
+		  
+	\subsection{b)}
+		\begin{center}
+			\begin{tabular}{|c| c c c || c c c | c c c | c c c |}\hline
+				i & $z_2$ & $z_1$ & $z_0$ & $z_{2}^+$ & $z_{1}^+$ & $z_{0}^+$ & $rt_H$ & $ge_H$ & 
+				$gr_H$ & $rt_N$ & $ge_N$ & $gr_N$ \\ \hline
+
+				* & 0 & 0 & 0 & 0 & 0 & 1 &	1 & 0 & 0 & 1 & 0 & 0\\
+				* & 0 & 0 & 1 & 0 & 1 & 0 & 1 & 1 & 0 & 1 & 0 & 0\\
+				0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 0\\
+				1 & 0 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 1 & 1 & 0 & 0\\
+				* & 0 & 1 & 1 & 1 & 0 & 0 & 0 & 1 & 0 & 1 & 0 & 0\\
+				* & 1 & 0 & 0 & 1 & 0 & 1 & 1 & 0 & 0 & 1 & 0 & 0\\
+				* & 1 & 0 & 1 & 1 & 1 & 0 & 1 & 0 & 0 & 1 & 1 & 0\\
+				* & 1 & 1 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 1\\
+				* & 1 & 1 & 1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 0\\ \hline
+			\end{tabular}
+		\end{center}
+		
+	\subsection{c)}
+		\kvnoindex
+		\begin{center}
+			\begin{tabular}{lll}
+				\karnaughmap{3}{$rt_H$}{{$z_1$}{$z_2$}{$z_0$}}{11110011}{}
+				{
+					\put(-2,0.5){\oval(3.9,0.8)[]}
+					\put(-3,1){\oval(1.9,1.9)[]}
+				}&\quad\quad &
+				\karnaughmap{3}{$ge_H$}{{$z_1$}{$z_2$}{$z_0$}}{010001000}{}
+				{
+					\put(-2,1.5){\oval(1.9,0.9)[]}
+				} \\
+				DNF: $z_0\land\overline{z_2}$ &\quad\quad &
+				DNF: $z_2\vee \overline{z_1}$ \\ \\ \\
+
+				\karnaughmap{3}{$gr_H$}{{$z_1$}{$z_2$}{$z_0$}}{000010000}{}
+				{
+					\put(-0.5,1.5){\oval(0.9,0.9)[]}
+				}&\quad\quad &
+				\karnaughmap{3}{$rt_N$}{{$z_1$}{$z_2$}{$z_0$}}{11111100}{}
+				{
+					\put(-3,1){\oval(1.9,1.9)[]}
+					\put(-2,1.5){\oval(3.9,0.8)[]}
+				} \\
+				DNF: $\overline{z_2}\land\overline{z_1}\land\overline{z_0}$ &\quad\quad &
+				DNF: $\overline{z_2}\vee \overline{z_1}$ \\ \\ \\
+				
+				\karnaughmap{3}{$ge_N$}{{$z_1$}{$z_2$}{$z_0$}}{00010001}{}
+				{
+					\put(-2,0.5){\oval(1.9,0.8)[]}
+				}&\quad\quad &
+				\karnaughmap{3}{$gr_N$}{{$z_1$}{$z_2$}{$z_0$}}{00000010}{}
+				{
+					\put(-0.5,0.5){\oval(0.9,0.9)[]}
+				} \\
+				DNF: $z_2\land z_0$ &\quad\quad &
+				DNF: $z_2\land z_1\land\overline{z_0}$ 
+			\end{tabular}
+		\end{center}
+		\newpage
+		\begin{center}
+			\begin{tabular}{lll}
+				\karnaughmap{3}{$z^+_2$}{{$z_1$}{$z_2$}{$z_0$}}{00110110}{}
+				{
+					\put(-3,0.5){\oval(1.9,0.8)[]}
+					\put(0,0.5){\oval(1.9,0.9)[l]}
+					\put(-4,0.5){\oval(1.9,0.9)[r]}
+				}&\quad\quad &
+				\karnaughmap{3}{$z^+_1$}{{$z_1$}{$z_2$}{$z_0$}}{01011010}{}
+				{
+					\put(-0.5,1){\oval(0.9,1.9)[]}
+					\put(-2.5,1){\oval(0.9,1.9)[]}
+				} \\				
+				DNF: $(z_2\land\overline{z_1})\vee (z_2\land \overline{z_0})\vee(z_0\land 
+				z_1\land \overline{z_2})$ &\quad\quad &
+				DNF: $(z_0\land \overline{z_1})\vee (z_1\land \overline{z_0})$ \\ \\ \\
+
+				\karnaughmap{3}{$z^+_0$}{{$z_1$}{$z_2$}{$z_0$}}{00101010}{}
+				{
+					\put(0,0.5){\oval(1.9,0.8)[l]}
+					\put(-4,0.5){\oval(1.9,0.8)[r]}
+					\put(-0.5,1){\oval(0.9,1.9){}}
+				} \\
+				DNF: $(z_1\land \overline{z_0})\vee (z_2\land \overline{z_0})$
+			\end{tabular}
+		\end{center}
+
+
+	
+
+\end{document}

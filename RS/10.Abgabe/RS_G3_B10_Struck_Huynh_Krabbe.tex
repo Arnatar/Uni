@@ -1,0 +1,174 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, left=2.5cm, right=2.5cm, top=4cm]{geometry}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{pgfplots}
+\usepackage{scrpage2}\pagestyle{scrheadings}
+\usepackage{tikz}
+\usepackage{listings}
+\usetikzlibrary{patterns, arrows, automata}
+
+\newcommand{\titleinfo}{Hausaufgaben zum 11. 1. 2013}
+\title{\titleinfo}
+\author{Tronje Krabbe 6435002, The-Vinh Jackie Huynh 6388888,\\Arne Struck 6326505}
+\date{\today}
+\chead{\titleinfo}
+\ohead{\today}
+\setheadsepline{1pt}
+\setcounter{secnumdepth}{0}
+\lstset{language=Java}
+\newcommand{\qed}{\ \square}
+
+\begin{document}
+\maketitle
+\notag
+\section{10.1}
+	
+	\subsection{a)}
+		Wir nehmen an, dass Zähler (dekrementierend) und Hauptautomat eigene Zustände besitzen. Bis 
+		der Zähler nicht bei 0 angekommen ist, weist der aktuelle Zustand des Hauptautomates auf 
+		sich selber. Sobald der Zähler auf 0 steht, wird der Zustand des Hauptautomates zum nächsten 
+		Zustand	weiter geschaltet. \\
+		Aus dem neuen Zustand im Hauptautomaten wird der korrekte Startpunkt für eine neue Zählung 
+		gewählt (Ampelphasen sind erfahrungsgemäß unterschiedlich lang, woraus sich unterschiedlich 
+		zu 	wartende Zeiten ergeben. Des weiteren hat die Taktung natürlich auch einen Einfluss auf 
+		den zu 	wählenden Zählerstart). Nun beginnt der Zähler erneut und der Vorgang wiederholt 
+		sich. \\
+		Bei einem inkrementierenden Zähler müsste es folgende Leitungen geben: Zähler-Reset und 
+		Zählerstand \\
+
+
+	\subsection{b)}
+		Hier liegen 2 verschiedene Zustände (die der beiden Automaten) vor, allerdings ist nicht 
+		geklärt, welcher Zustand bei Wechsel als Eingabe für den anderen Automaten verwendet werden
+		soll, das Verhalten ist also undefiniert. Eine kleine Verzögerung soll nun bewirken, dass
+		immer der Vorzustand des anderen Automaten als Eingang verwendet wird (bei gleicher 
+		Taktung). Bei dieser Variante sieht die Grünphase wie folgt aus:
+		\begin{itemize}
+			\item Ausgangszustände: Zähler auf 1, Ampel auf Rot/Gelb 
+			\item Zähler springt auf 0, die Ampel bleibt auf Rot/Gelb (der Vorzustand des Zählers 
+			ist 1).
+		 	\item Die Ampel springt auf Grün. 
+		 	\item Da die Ampel auf Rot/Gelb stand (Vorzustand), wechselt der Zähler auf den neuen 
+		 	Ausgangswert. 
+		 	\item Der Zähler fängt an zu zählen. 
+		 	\item Der Zähler springt auf 0, die Ampel bleibt auf Grün. 
+		 	\item Die Ampel schaltet auf Gelb...  
+		\end{itemize}
+		
+
+
+	\subsection{c)}
+		Im Gegensatz zu Teil b) werden die Zustände nicht gegenseitig abgefragt, während sich diese 
+		ändern. So existieren nur feste Zustände: 
+		\begin{itemize}
+			\item Ausgangszustände: Zähler auf 1, Ampel auf Rot/Gelb. 
+			\item Zähler springt auf 0, Ampel auf Rot/Gelb. 
+			\item Ampel springt auf Grün. 
+			\item Die Ampel steht auf Grün, deswegen wechselt der Zähler auf die für die Grünphase 
+			vorgesehene	Zeit. 
+			\item Ampel wartet auf Zählerzustand 0. 
+			\item Zähler zählt abwärts bis 0. 
+			\item Ampel wechselt auf Gelb. 
+			\item Zähler wechselt auf die für Gelbphase vorgesehene Zeit.
+		\end{itemize}
+		
+
+	\subsection{d)}
+		Der Hauptautomat hat die vier Zustände $Z_0$ bis $Z_3$. Außerdem werden die Werte $z_0$ und 
+		$z_1$ definiert, die den Zuständen der Zählerautomaten angeben, wann der durchgeführt werden
+		soll (also führen sie vom Hauptautomaten zum Zähler). \\ 
+		Des weiteren wird $e$ definiert, welches als Enablesignal für den Hauptautomaten dient ($e$ 
+		führt also vom Zähler zum Hauptautomaten). 
+		
+		
+		\begin{center}
+			\begin{tabular}{ccc}
+				\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+				semithick]
+				\tikzstyle{every state}=[circle split, draw]
+				
+				\node[state] (A) {$Z_0$ \nodepart{lower} 
+				$\overline{z_1} \overline{z_0} $  };
+				\node[state] (B) [above right of=A] {$Z_1$ \nodepart{lower} 
+				$\overline{z_1}z_0$ };
+				\node[state] (C) [below right of=B] {$Z_2$ \nodepart{lower}
+				$z_1\overline{z_0} $};
+				\node[state] (D) [below right of=A]	{$Z_3$\nodepart{lower}
+				$z_1z_0$};
+				
+				
+				\path (A) edge node {e} (B)
+				edge [loop left] node {$\overline{e}$} (A)
+				(B) edge [loop above] node {$\overline{e}$} (B)
+				edge node {e} (C)
+				(C) edge node {e} (D)
+				edge [loop right] node {$\overline{e}$} (C)
+				(D) edge [loop below] node {$\overline{e}$} (D)
+				edge node {e} (A);
+				\end{tikzpicture}
+				&\quad\quad &
+				\begin{tabular}{ll}
+					$\overline{z_1} \overline{z_0}$: Reset bei 30000 \\
+					$\overline{z_1}z_0$: Reset bei 3000 \\
+					$z_1\overline{z_0}$: Reset bei 35000 \\
+					$z_1z_0$: Reset bei 5000 \\ \\
+					$Z_0$: rot \\
+					$Z_1$: rotgelb \\
+					$Z_2$: grün \\
+					$Z_3$: gelb			
+				\end{tabular}
+								
+			\end{tabular}
+		\end{center}
+
+
+\section{10.2}
+	\subsection{a)}
+		\begin{center}
+			\begin{tabular}{|c|c|c||c|c||c|c|c||c|c|}
+	        	\hline
+	            $Z$ & $z_1$ & $z_0$ & $x_1$ & $x_0$ & $Z^+$ & $z^+_1$ & $z^+_0$ & $y_1$ & $y_0$ \\
+	            \hline
+	            0 & 0 & 0 & * & 0 & 1 & 0 & 1 & 1 & 0 \\
+	            0 & 0 & 0 & * & 1 & 0 & 0 & 0 & 1 & 0 \\
+	            1 & 0 & 1 & * & 0 & 1 & 0 & 1 & 0 & 1 \\
+	            1 & 0 & 1 & 0 & 1 & 3 & 1 & 1 & 0 & 1 \\
+	            1 & 0 & 1 & 1 & 1 & 2 & 1 & 0 & 0 & 1 \\
+	            2 & 1 & 0 & 0 & 0 & 1 & 0 & 1 & 0 & 1 \\
+	            2 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 1 \\
+	            2 & 1 & 0 & 1 & * & 2 & 1 & 0 & 0 & 1 \\
+	            3 & 1 & 1 & * & 0 & 2 & 1 & 0 & 1 & 1 \\
+	            3 & 1 & 1 & * & 1 & 3 & 1 & 1 & 1 & 1 \\ \hline
+	     	\end{tabular}
+		\end{center}
+		\begin{align}
+			\delta(z_1, z_0, x_1, x_0) &= (z^+_1(z_1, z_0, x_1, x_0), z^+_0(z_1, z_0, x_1, x_0)) \\
+			z^+_1(z_1, z_0, x_1, x_0) &= z_1z_0 \vee z_1x_1 \vee z_0x_0 \\
+			z^+_0(z_1, z_0, x_1, x_0) &= z_1z_0x_0 \vee \overline{z_1}\;\overline{x_0} \vee
+			z_0\overline{x_1}x_0 \vee \overline{z_0}\;\overline{x_1}\;\overline{x_0}
+		\end{align}
+		
+	\subsection{b)}
+		\[\lambda(z_1, z_0) = (z_1 \oplus z_0 \oplus 1, z_1 \vee z_0)\]
+		
+	\subsection{c)}
+		\begin{align}
+			Z_0&: x_0\wedge \overline{x_0}=0 \\
+			Z_1&: \overline{x_0} \wedge x_1x_0 \wedge \overline{x_1}x_0 =0  \\
+			Z_2&: x_1\wedge\overline{x_1}x_0\wedge \overline{x_1}\overline{x_0}=0 \\
+			Z_3&: x_0\wedge \overline{x_0}=0
+		\end{align}
+		\begin{align}
+			Z_0&: x_0\vee \overline{x_0}=1 \\
+			Z_1&: \overline{x_0} \vee x_1x_0 \vee \overline{x_1}x_0 =1  \\
+			Z_2&: x_1\vee\overline{x_1}x_0\vee \overline{x_1}\overline{x_0}=1 \\
+			Z_3&: x_0\vee \overline{x_0}=1
+		\end{align}
+
+\end{document}

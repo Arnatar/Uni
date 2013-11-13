@@ -1,0 +1,383 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{pgfplots}
+\usepackage{scrpage2}\pagestyle{scrheadings}
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+
+\newcommand{\titleinfo}{Hausaufgaben zum 2. 11. 2012}
+\title{\titleinfo}
+\author{Tronje Krabbe 6435002, The-Vinh Jackie Huynh 6388888,\\Arne Struck 6326505}
+\date{\today}
+\chead{\titleinfo}
+\ohead{\today}
+\setheadsepline{1pt}
+\setcounter{secnumdepth}{0}
+\setlength{\textheight}{22cm}
+\newcommand{\qed}{\ \square}
+
+\begin{document}
+\maketitle
+\notag
+\section{1.}
+	\subsection{a)}
+		64-bit Register haben (in diesem Fall) eine Wortbreite von \(2^{64}-1\), da allerdings nach 
+			dem Moment des Überlaufs gefragt wurde, muss noch eine 1 addiert werden. \\
+		\(3,2\, GHz\) entsprechen \(3,2\cdot 10^9s^{-1}\). \\
+		Daraus folgt: \\
+		\[
+			\frac{(2^{64}-1+1)}{3,2\cdot 10^9 \cdot 60\cdot 60\cdot 24\cdot 365,25} 
+			\text{ Jahre}\approx 182,669 \text{ Jahre}
+		\]
+	\subsection{b)}
+		Bei Mehrkernprozessoren könnten die TSCs durch verschiedene Ereignisse, beispielsweise ein 
+		Taktausfall bei einem der Prozessoren unsynchron sein und Probleme verursachen.
+		
+\section{2.}
+	\subsection{a)}
+		\(
+		\begin{array}{rclclcc}
+			53 &:& 2 &=& 26 &\text{ Rest } &1 \\
+			26 &:& 2 &=& 13 &\text{ Rest } &0 \\
+			13 &:& 2 &=& 6  &\text{ Rest } &1 \\
+			6  &:& 2 &=& 3  &\text{ Rest } &0 \\
+			3  &:& 2 &=& 1  &\text{ Rest } &1 \\
+			1  &:& 2 &=& 0  &\text{ Rest } &1 \\	
+		\end{array}
+		\)\\ \\ \\
+		\(
+		\begin{array}{lcc}
+			\text{Oktal:}&\underbrace{110}\ &\underbrace{101} \\
+				&6&5 \\ \\
+			\text{Hexadezimal:}&\underbrace{0011}\ &\underbrace{0101} \\
+				&3&5
+		\end{array}
+		\)
+		\(
+			\quad\Rightarrow 53_{10} \leftrightarrow 110101_2 \leftrightarrow 65_8 \leftrightarrow 
+			35_{16}
+		\) \\
+	
+	\subsection{b)}
+		\(
+		\begin{array}{rclclcc}
+			2012 &:& 2 &=& 1006 &\text{ Rest } &0 \\
+			1006 &:& 2 &=& 503  &\text{ Rest } &0 \\
+			503  &:& 2 &=& 251  &\text{ Rest } &1 \\
+			251  &:& 2 &=& 125  &\text{ Rest } &1 \\
+			125  &:& 2 &=& 62   &\text{ Rest } &1 \\
+			62   &:& 2 &=& 31   &\text{ Rest } &0 \\
+			31   &:& 2 &=& 15   &\text{ Rest } &1 \\
+			15   &:& 2 &=& 7    &\text{ Rest } &1 \\
+			7    &:& 2 &=& 3    &\text{ Rest } &1 \\
+			3    &:& 2 &=& 1    &\text{ Rest } &1 \\
+			1    &:& 2 &=& 0    &\text{ Rest } &1 \\	
+		\end{array}
+		\)\\ \\ \\
+		\(
+		\begin{array}{lcccc}
+			\text{Oktal:}&\underbrace{011}\ &\underbrace{111}\ &\underbrace{011}\ &\underbrace{100}\\
+				&3&7&3&4 \\ \\
+			\text{Hexadezimal:}&\underbrace{0111}\ &\underbrace{1101}\ &\underbrace{1100} \\
+				&7&\text{D}&\text{C}
+		\end{array}
+		\)
+		\(
+		\begin{array}{rlcl}
+			\Rightarrow & 2012_{10} &\leftrightarrow & 11111011100_2 \leftrightarrow 3734_8 \\ 
+			    &&\leftrightarrow & \text{7DC}_{16}\\
+		\end{array}
+		\)
+		
+	\subsection{c)}
+		\(
+		\begin{array}{rclclcc}
+			5,5625 &=& 5&+&0,5625 \\ \\
+		\end{array} \\
+		\begin{array}{rclclcc}
+			\textbf{5:}\\			
+			5 &:& 2 &=& 2 &\text{ Rest } &1 \\
+			2 &:& 2 &=& 1 &\text{ Rest } &0 \\
+			1 &:& 2 &=& 0 &\text{ Rest } &1 \\
+		\end{array} \\ \\ \\
+		\begin{array}{rclclcc}	
+			\textbf{0,5625:}\\
+			0,5625 &\cdot & 2 &=& 1,125 & \text{ Vorkommastelle: } &1 \\
+			0,125  &\cdot & 2 &=& 0,25  & \text{ Vorkommastelle: } &0 \\
+			0,25   &\cdot & 2 &=& 0,5   & \text{ Vorkommastelle: } &0 \\
+			0,5    &\cdot & 2 &=& 1     & \text{ Vorkommastelle: } &1 \\
+		\end{array} \\ \\ \\
+		\begin{array}{lcccc}
+			\text{Oktal:}&\underbrace{101}&,\ &\underbrace{100}\ &\underbrace{100} \\
+				&5&,&4&4 \\ \\
+			\text{Hexadezimal:}&\underbrace{0101}&,\ &\underbrace{1001}\  \\
+				&5&,&9 \\
+		\end{array}
+		\quad\Rightarrow 5,5625_{10}\leftrightarrow 101,1001_2\leftrightarrow 5,44_8 \leftrightarrow 
+		5,9_{16} \\
+		\)\\ \\ \\
+		
+	\subsection{d)}
+		\(	
+		375,375=375+0,375\\ \\
+		\begin{array}{rclclcc}
+			\textbf{375:}\\			
+			375 &:& 2 &=& 187 &\text{ Rest } &1 \\
+			187 &:& 2 &=& 93  &\text{ Rest } &1 \\
+			93  &:& 2 &=& 46  &\text{ Rest } &1 \\
+			46  &:& 2 &=& 23  &\text{ Rest } &0 \\
+			23  &:& 2 &=& 11  &\text{ Rest } &1 \\
+			11  &:& 2 &=& 5   &\text{ Rest } &1 \\
+			5   &:& 2 &=& 2   &\text{ Rest } &1 \\
+			2  &:& 2  &=& 1   &\text{ Rest } &0 \\
+			1  &:& 2  &=& 0   &\text{ Rest } &1 \\
+		\end{array} \\ \\ \\
+		\begin{array}{rclclcc}	
+			\textbf{0,375:}\\
+			0,375 &\cdot & 2 &=& 0,75 & \text{ Vorkommastelle: } &0 \\
+			0,75  &\cdot & 2 &=& 1,5  & \text{ Vorkommastelle: } &1 \\
+			0,5   &\cdot & 2 &=& 1    & \text{ Vorkommastelle: } &1 \\
+		\end{array} \\ \\ \\
+		\begin{array}{lcccccc}
+			\text{Oktal:}&\underbrace{101}\ &\underbrace{110}\ &\underbrace{111}&,&\underbrace{011} \\
+				&5&6&7&,& 3\\ \\
+			\text{Hexadezimal:}&\underbrace{0001}\ &\underbrace{0111}&\ \underbrace{0111}\ &,& 
+			\underbrace{0110}  \\
+				&1&7&7&,&6 \\
+		\end{array}
+		\)
+		\(
+		\begin{array}{rlcl}
+			\quad\Rightarrow & 375,375_{10}&\leftrightarrow & 101110111,011_2\leftrightarrow 567,3_8 \\ 
+				&&\leftrightarrow & 177,6_{16} \\
+		\end{array}		
+		\)\\ \\ \\
+	
+		
+	
+\section{3.}
+	\subsection{a)}
+		\(		
+		1110,1001 = 1110+0,1001 \\ \\		
+		\begin{array}{rclcl}
+			0\cdot 2^0 &=& 0 \\
+			1\cdot 2^1 &=& 2 \\
+			1\cdot 2^2 &=& 4 \\
+			1\cdot 2^3 &=& 8 \\
+		\end{array} 
+		\quad\quad\quad\Rightarrow 0+2+4+8 = 14_{10}\leftrightarrow 1110_2 \\
+		\) \\ \\
+		\(
+		\begin{array}{rclcl}
+			1\cdot 2^{-1} &=& 0,5 \\
+			0\cdot 2^{-2} &=& 0 \\
+			0\cdot 2^{-3} &=& 0 \\
+			1\cdot 2^{-4} &=& 0,0625 \\
+		\end{array} 
+		\Rightarrow 0,5+0,0625 = 0,5625_{10}\leftrightarrow 0,1001_2 \\ \\ \\
+		\Rightarrow 14+0,5625 = 14,5625_{10} \leftrightarrow 1110,1001_2 \\
+		\)
+		
+	
+	\subsection{b)}
+		\(
+		10101,10011 = 10101+0,10011 \\ \\
+		\begin{array}{rclcl}
+			1\cdot 2^0 &=& 1 \\
+			0\cdot 2^1 &=& 0 \\
+			1\cdot 2^2 &=& 4 \\
+			0\cdot 2^3 &=& 0 \\			
+			1\cdot 2^4 &=& 16 \\
+		\end{array}
+		\quad\quad\quad\Rightarrow 1+4+16 = 21_{10}\leftrightarrow 10101_2 \\
+		\)\\ \\
+		\(
+		\begin{array}{rclcl}
+			1\cdot 2^{-1} &=& 0,5 \\
+			0\cdot 2^{-2} &=& 0 \\
+			0\cdot 2^{-3} &=& 0 \\
+			1\cdot 2^{-4} &=& 0,0625 \\
+			1\cdot 2^{-5} &=& 0,03125 \\
+		\end{array}
+		\Rightarrow 0,5+0,0625+0,03125 = 0,59375_{10}\leftrightarrow 0,10011_2 \\ \\ \\
+		\Rightarrow 21+0,59375 = 21,59375_{10} \leftrightarrow 10101,10011_2 \\
+		\)
+	
+	
+\section{4.}
+		\(
+		\begin{array}{rclcllc}
+  			25487 &:& 2 &=& 12743  &\text{ Rest: }& 1 \\
+     		12743 &:& 2 &=&  6371  &\text{ Rest: }& 1 \\
+ 		     6371 &:& 2 &=&  3185  &\text{ Rest: }& 1 \\
+    		 3185 &:& 2 &=&  1592  &\text{ Rest: }& 1 \\
+      		 1592 &:& 2 &=&   796  &\text{ Rest: }& 0 \\
+       		  796 &:& 2 &=&   398  &\text{ Rest: }& 0 \\
+       	      398 &:& 2 &=&   199  &\text{ Rest: }& 0 \\
+      		  199 &:& 2 &=&    99  &\text{ Rest: }& 1 \\ 
+       		   99 &:& 2 &=&    49  &\text{ Rest: }& 1 \\
+        	   49 &:& 2 &=&    24  &\text{ Rest: }& 1 \\
+        	   24 &:& 2 &=&    12  &\text{ Rest: }& 0 \\
+         	   12 &:& 2 &=&     6  &\text{ Rest: }& 0 \\
+         	    6 &:& 2 &=&     3  &\text{ Rest: }& 0 \\
+         		3 &:& 2 &=&     1  &\text{ Rest: }& 1 \\
+         		1 &:& 2 &=&     0  &\text{ Rest: }& 1 \\
+		\end{array} 
+		\)
+		\begin{tabular}{cc}
+		\quad \quad
+		\end{tabular}
+		\(
+		\begin{array}{rclcllc}
+			15190 &:& 2 &=&  7595  &\text{ Rest: }& 0 \\
+    	 	 7595 &:& 2 &=&  3797  &\text{ Rest: }& 1 \\
+      		 3797 &:& 2 &=&  1898  &\text{ Rest: }& 1 \\
+      		 1898 &:& 2 &=&   949  &\text{ Rest: }& 0 \\
+      	 	  949 &:& 2 &=&   474  &\text{ Rest: }& 1 \\ 
+       		  474 &:& 2 &=&   237  &\text{ Rest: }& 0 \\ 
+       		  237 &:& 2 &=&   118  &\text{ Rest: }& 1 \\
+       		  118 &:& 2 &=&    59  &\text{ Rest: }& 0 \\ 
+        	   59 &:& 2 &=&    29  &\text{ Rest: }& 1 \\
+      	 	   29 &:& 2 &=&    14  &\text{ Rest: }& 1 \\ 
+        	   14 &:& 2 &=&     7  &\text{ Rest: }& 0 \\
+        	    7 &:& 2 &=&     3  &\text{ Rest: }& 1 \\
+	            3 &:& 2 &=&     1  &\text{ Rest: }& 1 \\ 
+    	        1 &:& 2 &=&     0  &\text{ Rest: }& 1 \\
+    	        &&
+		\end{array}	\\ \\
+		\quad\quad\quad\Rightarrow 15190_{10} = 11101101010110_2  
+		\quad\quad\quad\quad\quad\quad\quad\Rightarrow 25487_{10} = 110001110001111_2 \\\\
+		\)\\ \\
+		\begin{tabular}{crc}
+			 & 110\ 0011\ 1000\ 1111 \\
+			+&  11\ 1011\ 0101\ 0110 \\ \hline 
+			Ü& 100\ 0110\ 0011\ 1100 \\ \hline\hline
+			 &1001\ 1110\ 1110\ 0101
+		\end{tabular}
+		\begin{tabular}{cc}
+		\quad &= \quad \\
+		\quad &= \quad \\
+		\quad & \quad \\
+		\quad & \quad \\
+		\end{tabular}
+		\begin{tabular}{rc}
+			 25487 \\
+			 15190 \\ \hline
+			 10100\\ \hline\hline
+			 40677
+		\end{tabular}\\
+		\(
+		\begin{array}{rclcllc}
+    		40677 &:& 2 &=& 20338  &\text{ Rest: }& 1 \\
+    		20338 &:& 2 &=& 10169  &\text{ Rest: }& 0 \\
+     		10169 &:& 2 &=&  5084  &\text{ Rest: }& 1 \\
+     		 5084 &:& 2 &=&  2542  &\text{ Rest: }& 0 \\
+     		 2542 &:& 2 &=&  1271  &\text{ Rest: }& 0 \\
+     		 1271 &:& 2 &=&   635  &\text{ Rest: }& 1 \\
+     		  635 &:& 2 &=&   317  &\text{ Rest: }& 1 \\
+    	 	  317 &:& 2 &=&   158  &\text{ Rest: }& 1 \\
+   	          158 &:& 2 &=&    79  &\text{ Rest: }& 0 \\
+  		       79 &:& 2 &=&    39  &\text{ Rest: }& 1 \\
+        	   39 &:& 2 &=&    19  &\text{ Rest: }& 1 \\
+        	   19 &:& 2 &=&     9  &\text{ Rest: }& 1 \\
+         		9 &:& 2 &=&     4  &\text{ Rest: }& 1 \\
+         		4 &:& 2 &=&     2  &\text{ Rest: }& 0 \\
+         		2 &:& 2 &=&     1  &\text{ Rest: }& 0 \\
+         		1 &:& 2 &=&     0  &\text{ Rest: }& 1 \\
+		\end{array}\\ \\ \\
+		\Rightarrow 1001111011100101_2 = 40677_{10} \\ \\
+		\)
+		\(
+		\textbf{110001110001111:} \\ \\
+		\begin{array}{ll}
+			\text{Oktal: }& \underbrace{110}_6\ \underbrace{001}_1\ \underbrace{110}_6\ 
+				\underbrace{001}_1\ \underbrace{111}_7 \\
+			\text{Hexadezimal: }& \underbrace{0110}_6\ \underbrace{0011}_3\ \underbrace{1000}_8\ 
+				\underbrace{1111}_F \\
+		\end{array}	\\ \\
+		\textbf{11101101010110:} \\ \\
+		\begin{array}{ll}
+			\text{Oktal: }&\underbrace{011}_3\ \underbrace{101}_5\ \underbrace{101}_5\ 
+				\underbrace{010}_2\ \underbrace{110}_6 \\
+			\text{Hexadezimal: }&\underbrace{0011}_3\ \underbrace{1011}_B\ \underbrace{0101}_5\
+				\underbrace{0110}_6
+		\end{array} \\ \\
+		\textbf{1001111011100101:} \\ \\
+		\begin{array}{ll}
+			\text{Oktal: }& \underbrace{001}_1\ \underbrace{001}_1\ \underbrace{111}_7\ 
+				\underbrace{011}_3\ \underbrace{100}_4\ \underbrace{101}_5 \\
+			\text{Hexadezimal: }& \underbrace{1001}_9\ \underbrace{1110}_E\ 
+				\underbrace{1110}_E\underbrace{0101}_5
+		\end{array}			
+		\)
+		
+
+\section{5.}
+	\[	
+	\begin{array}{clrrrrrrrr}
+		 &\,\ 10010011\cdot 111001 		\\ \hline
+		 &\,\ 10010011			   		\\
+		 &\ \ \ 10010011	       		\\
+		 &\,\ \ \ \ 10010011		   	\\
+		 &\ \ \ \ \ \ 00000000	   		\\
+		 &\,\ \ \ \ \ \ \ 00000000	   	\\
+		 &\ \ \ \ \ \ \ \ \ 10010011  \\ \hline
+		Ü& 11111111100000\\ \hline\hline
+		 & 10000010111011
+	\end{array}
+	\]
+	
+	
+\section{6.}
+	\subsection{a)}
+	\[	
+	\begin{array}{ll}
+		&K_{10}(4,582)_{10}: n=2, m=4 \\
+		&10^2 -4,582 = 95,418
+	\end{array}
+	\]
+			
+	\subsection{b)}
+	\[
+	\begin{array}{ll}
+		&K_{9}(0,1274)_{10}: n=2, m=4 \\
+		&10^2-10^{-4}-0,1274=99,8725
+	\end{array}
+	\]
+	
+	\subsection{c)}
+	\[
+	\begin{array}{ll}
+		& K_2(1,011)_2: n=2,m=3 \\
+		& 2^2_{10}-1,011_2=10,101
+	\end{array}
+	\]
+	
+	\subsection{d)}
+	\[
+	\begin{array}{ll}
+		&K_1(100,01)_2: n=4,m=3 \\
+		&2^4_{10}-2^{-3}-100,01=1011,101
+	\end{array}
+	\]
+
+
+\section{7.}
+	\begin{tabular}{|r|r||r|r|r|r|r|}
+		\hline
+		Aufgabe & Bitmuster & Dualsystem & Betrag & Exzess-127 & Einerkomplement & Zweierkomplement 
+			\\ \hline\hline
+		(a) &0000 1001 &   9 &    9 & -118 &    9 &    9 \\ \hline
+		(b) &0110 0101 & 101 &  101 &  -26 &  101 &  101 \\ \hline
+		(c) &1000 0001 & 129 &   -1 &    2 & -126 & -127 \\ \hline
+		(d) &1111 1011 & 251 & -123 &  124 &   -4 &   -5 \\ \hline
+	\end{tabular}
+
+
+\end{document}
