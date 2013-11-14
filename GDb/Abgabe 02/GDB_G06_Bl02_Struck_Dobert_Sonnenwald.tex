@@ -45,30 +45,98 @@
 		\begin{enumerate}
 		\item[(a)] \quad \\
 			\begin{tikzpicture}
-
-				\node[entity] (e1) {E1};
-				\node[attribut] (e1-a1) [above left =5mm and 4mm of e1.north] {\underline{A1}} edge (e1);
-				\node[attribut] (e1-a2)  [above right=5mm and 4mm of e1.north] {A2} edge (e1);
-				\node[multivalentattribut] (e1-a3)  [right=5mm of e1] {A3} edge (e1);
-
-				\node[entity] (e2) [below left =1cm and 1mm of e1.south] {E1} edge [erbt] (e1);
-				\node[entity] (e3)      [below right=1cm and 1mm of e1.south] {E3} edge [erbt] (e1);
-				\node[entity] (e4) [right =7cm of e3] {E4};
-
-				\node[weakentity] (e5) [below =3cm of e3] {E5};
-				\node[attribut] (e5-a1)  [right=5mm of e5] {\dashuline{A1}} edge (e5);
-
-				\node[relationship] (r1) [right=2cm of e3] {R1};
-				\path (r1) edge node[at end,anchor=north west] {$[0;2]$} (e3);
-				\path (r1) edge node[at end,anchor=north east] {$[7;9]$} (e4);
-
-
-				\node[weakrelationship] (r2) [below=1cm of e3] {R2};
-				\path (r2) edge node[at end,anchor=north west] {$1$} (e3);
-				\path (r2) edge node[at end,anchor=south east] {$8$} (e5);
-
-			\end{tikzpicture} \\
-		
+				%Person
+				\node[entity] (person) {Person};
+				\node[attribut] (pName) [below right =0.5cm of person] {\underline{Name}} edge(person);
+				\node[attribut] (pVorName) [above =0.6cm of person] {\underline{Vorname}} edge(person);
+				\node[attribut] (gebD) [above right  =0.6cm of person] {Geburtsdatum} edge(person);
+				
+				%leitet
+				\node[relationship] (leitet) [right  =3cm of person] {leitet};
+				
+				%Studio
+				\node[entity] (studio) [right  =2.5cm of leitet] {Studio};
+				\node[attribut] (sName) [above =0.8cm of studio] {\underline{Name}} edge(studio);
+				
+				%produziert
+				\node[relationship] (produziert) [below  =2cm of studio] {produziert};
+				
+				%verhandeln
+				\node[relationship] (verhand) [left  =2cm of produziert] {Verhandlung};
+				\node[attribut] (budget) [above left =0.6cm of verhand] {Budget} edge(verhand);
+				\node[attribut] (vdatum) [above =0.6cm of verhand] {Datum} edge(verhand);
+				
+				%Film
+				\node[entity] (film) [below  =2cm of produziert] {Film};
+				\node[attribut] (fName) [above right =0.6cm of film] {\underline{Titel}} edge(film);
+				\node[attribut] (fdDay) [right =0.5cm of film] {erster Drehtag} edge(film);
+				\node[attribut] (ldDay) [below right  =0.8cm of film] {letzter Drehtag} edge(film);
+				
+				%führt Regie
+				\node[relationship] (dregie) [left  =1.2cm of film] {führt Regie};
+				
+				%Regisseur
+				\node[entity] (regisseur) [left  =1.2cm of dregie] {Regisseur};
+				
+				%isa
+				\node[relationship] (isa) [below  =2.5cm of person] {ist ein};
+				
+				%Schauspieler
+				\node[entity] (schauspieler)[below  =4cm of isa] {Schauspieler};
+				\node[multivalentattribut] (mZeichen) [below  =0.4cm of schauspieler] {Markenzeichen} edge(schauspieler);
+				
+				%spielt
+				\node[relationship] (spielt)[below = 1.025cm of dregie] {spielt};
+				\node[attribut] (dbegin) [below  =0.7cm of spielt] {Drehbeginn} edge(spielt);
+				\node[attribut] (dend) [below right =0.5cm of spielt] {Drehende} edge(spielt);
+				
+				%präferiert
+				\node[relationship] (praef) [below = 6cm of regisseur] {präferiert};
+				
+				%gehört zu
+				\node[relationship] (joins) [below = 6cm of film] {gehört zu};
+				
+				%Genre
+				\node[entity] (genre) [right = 1.4cm of praef] {Genre};
+				\node[attribut] (gname) [below =0.4cm of genre] {\underline{Name}} edge(genre);
+				
+				%Char
+				\node[entity] (char) [below = 1.5cm of mZeichen] {Charakter};
+				\node[attribut] (cid) [above =0.4cm of char] {\underline{CID}} edge(char);
+				\node[attribut] (cname) [below =0.4cm of char] {Name} edge(char);
+				
+				%Paths
+				%leitet
+				\path (leitet) edge node[midway, above] {$1$} (person);
+				\path (studio) edge node[midway, above] {$n$} (leitet);
+				%Verhandlung
+				\path (studio) edge node[midway, above] {$m$} (verhand);
+				\path (film) edge node[midway, above right] {$1$} (verhand);
+				\path (regisseur) edge node[midway, above left] {$n$} (verhand);
+				%produziert
+				\path (studio) edge node[midway, right] {$o$} (produziert);
+				\path (film) edge node[midway, right] {$1$} (produziert);
+				%führt Regie
+				\path (film) edge node[midway, above] {$1$} (dregie);
+				\path (regisseur) edge node[midway, above] {$m$} (dregie);
+				%isa
+				\path (isa) edge[erbt] (person);
+				\path (regisseur) edge[erbt] (isa);
+				\path (schauspieler) edge[erbt] (isa);
+				%spielt
+				\path (schauspieler) edge node[midway, above] {$n$} (spielt);
+				\path (spielt) edge node[midway, above left] {$o$} (film);
+				\path (spielt) edge node[midway, below right] {$p$} (char);
+				%präferiert
+				\path (praef) edge node[midway, left] {$1$} (regisseur);
+				\path (praef) edge node[midway, above] {$n$} (genre);
+				%gehört zu
+				\path (genre) edge node[midway, above] {$m$} (joins);
+				\path (joins) edge node[midway, right] {$[0,4]$} (film);
+				
+			\end{tikzpicture}
+		    \newpage
+		    
 		\item[(b)]
 			\begin{itemize}
 				\item Ein Film kann nicht ohne Budget produziert werden.
@@ -115,6 +183,7 @@
 			\end{itemize} \quad 
 	\end{enumerate}
 
+	\newpage
 	\item[\textbf{3.:}]
 	\begin{enumerate}
 		\item[(a)]
