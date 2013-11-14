@@ -72,7 +72,9 @@
 		\item[(b)]
 			\begin{itemize}
 				\item Ein Film kann nicht ohne Budget produziert werden.
-				\item Ein Schauspieler kann nur in Filmen mitspielen, deren erster Drehtag nach seinem Geburtstag war.
+				\item Kein Element kann vor seiner Entstehung an einer Relation partizipieren.
+				\item Es kann nicht nach dem Dreh über das Budget verhandelt werden.
+				\item Ein Studio kann nicht über einen Film verhandeln, welches es nicht produziert.
 			\end{itemize} \quad
 		\end{enumerate}
 
@@ -89,7 +91,7 @@
 		\item[(b)]
 			\begin{itemize}
 				\item Eine Universität besitzt einen eindeutigen Namen.
-				\item Ein Hörsaal besitzt einen eindeutigen Namen und eine Platzzahl.
+				\item Ein Hörsaal besitzt einen Namen und eine Platzzahl.
 				\item Eine Universität hat beliebig viele, aber mindestens einen Hörsaal.
 				\item Ein Hörsaal existiert nur als Teil der Universität und gehört auch nur zu einer Universität.
 			\end{itemize} \quad
@@ -98,7 +100,7 @@
 			\begin{itemize}
 				\item Ein Auftrag besitzt eine eindeutige ANR und ein Datum.
 				\item Ein Ersatzteil ist eindeutig identifiziert über seinen Namen und das Automodell, zudem hat es einen Preis.
-				\item Ein Reparaturtyp von eindeutiger Art und hat einen Festpreis.
+				\item Ein Reparaturtyp ist von eindeutiger Art und hat einen Festpreis.
 				\item Eine Reparatur findet an einem bestimmten Datum zu einer bestimmten Zeit statt.
 				\item Eine Reparatur kann beliebig viele Aufträge umfassen.
 				\item Für eine Reparatur können beliebig viele Ersatzteile benötigt werden.
@@ -119,7 +121,7 @@
 			\begin{itemize}
 				\item Eindeutigkeit: Es darf keine zwei Datensätze mit dem gleichen Schlüssel geben.
 				\item Minimalität: Der Schlüssel der Tabelle besteht aus so wenigen Attributen wie möglich. Wenn es in einer 
-				Attributkombination die Möglichkeitgibt, auch mit weniger Attributen aus dieser Kombination einen eindeutigen 
+				Attributkombination die Möglichkeit gibt, auch mit weniger Attributen aus dieser Kombination einen eindeutigen 
 				Schlüssel zu bieten, ist diese nicht minimal.
 				\item Beispiele in diesem Kontext:
 				\begin{enumerate}
@@ -135,8 +137,8 @@
 			minimal ist. Je mehr Datensätze vorhanden sind, desto größer ist die Wahrscheinlichkeit, dass viele Attribute zur 
 			eindeutigen Identifizierung eines einzelnen Datensatz benötigt werden. Und je mehr Attribute nötig sind, desto mehr 
 			Rechenaufwand wird für die Schlüsselverwaltung gebraucht. Damit wird es ineffizient. Zur Lösung bietet sich die 
-			Einführung eines ID-Feldes an, das nie null gesetzt werden darf und in dem einfach ein Integerwert hochgezählt wird 
-			für jeden neuen Datensatz. 	
+			Einführung eines ID-Feldes an, das nie null gesetzt werden darf und in dem einfach ein Integerwert inkrementiert 
+			wird für jeden neuen Datensatz. 	
 		\end{enumerate}	
 	\end{enumerate}
 \end{document}
