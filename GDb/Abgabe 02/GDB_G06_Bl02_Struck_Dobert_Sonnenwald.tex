@@ -1,7 +1,7 @@
 % Commands
 
 \newcommand{\authorinfo}{Tim Dobert, Kai Sonnenwald, Arne Struck}
-\newcommand{\titleinfo}{GDB [HA] zum 1. 11. 2013}
+\newcommand{\titleinfo}{GDB [HA] zum 14. 11. 2013}
 \newcommand{\qed}{\ \square}
 
 % ------------------------------------------------------
@@ -40,8 +40,10 @@
 
 \begin{document}
     \maketitle
-	\section*{1.:}
-		\subsection*{a)}	
+	\begin{enumerate}
+		\item[\textbf{1.:}]
+		\begin{enumerate}
+		\item[(a)] \quad \\
 			\begin{tikzpicture}
 
 				\node[entity] (e1) {E1};
@@ -65,34 +67,34 @@
 				\path (r2) edge node[at end,anchor=north west] {$1$} (e3);
 				\path (r2) edge node[at end,anchor=south east] {$8$} (e5);
 
-			\end{tikzpicture}
+			\end{tikzpicture} \\
 		
-		\subsection*{b)}
+		\item[(b)]
 			\begin{itemize}
 				\item Ein Film kann nicht ohne Budget produziert werden.
 				\item Ein Schauspieler kann nur in Filmen mitspielen, deren erster Drehtag nach seinem Geburtstag war.
-			\end{itemize}
+			\end{itemize} \quad
+		\end{enumerate}
 
-
-	\section*{2.:}
-
-		\subsection*{a)}
+	\item[\textbf{2.:}]
+	\begin{enumerate}
+		\item[(a)]
 			\begin{itemize}
 				\item Ein Student besitzt eine eindeutige Matrikelnummer und einen Namen.
 				\item Ein Studiengang besitzt einen eindeutigen Namen.
 				\item Ein Student ist in genau einem Studiengang immatrikuliert.
 				\item In einem Studiengang können n Studenten immatrikuliert sein.
-			\end{itemize}
+			\end{itemize} \quad
 
-		\subsection*{b)}
+		\item[(b)]
 			\begin{itemize}
 				\item Eine Universität besitzt einen eindeutigen Namen.
 				\item Ein Hörsaal besitzt einen eindeutigen Namen und eine Platzzahl.
 				\item Eine Universität hat beliebig viele, aber mindestens einen Hörsaal.
 				\item Ein Hörsaal existiert nur als Teil der Universität und gehört auch nur zu einer Universität.
-			\end{itemize}
+			\end{itemize} \quad
 
-		\subsection*{c)}
+		\item[(c)]
 			\begin{itemize}
 				\item Ein Auftrag besitzt eine eindeutige ANR und ein Datum.
 				\item Ein Ersatzteil ist eindeutig identifiziert über seinen Namen und das Automodell, zudem hat es einen Preis.
@@ -101,19 +103,19 @@
 				\item Eine Reparatur kann beliebig viele Aufträge umfassen.
 				\item Für eine Reparatur können beliebig viele Ersatzteile benötigt werden.
 				\item Eine Reparatur kann zu beliebig vielen Reparaturtypen gehören.
-			\end{itemize}
+			\end{itemize} \quad
 
-		\subsection*{d)}
+		\item[(d)]
 			\begin{itemize}
 				\item In einem Stadion finden beliebig viele Fußballspiele statt.
 				\item Ein Schiedsrichter leitet beliebig viele Fußballspiele.
 				\item Eine Mannschaft spielt beliebig viele Fußballspiele gegen eine andere Mannschaft.
-			\end{itemize}
+			\end{itemize} \quad 
+	\end{enumerate}
 
-
-	\section*{3.:}
-
-		\subsection*{a)}
+	\item[\textbf{3.:}]
+	\begin{enumerate}
+		\item[(a)]
 			\begin{itemize}
 				\item Eindeutigkeit: Es darf keine zwei Datensätze mit dem gleichen Schlüssel geben.
 				\item Minimalität: Der Schlüssel der Tabelle besteht aus so wenigen Attributen wie möglich. Wenn es in einer 
@@ -121,18 +123,20 @@
 				Schlüssel zu bieten, ist diese nicht minimal.
 				\item Beispiele in diesem Kontext:
 				\begin{enumerate}
-					\item PLZ
+					\item Telefonnummer
 					\item (Nachname, Geburtsdatum)
 				\end{enumerate}
 			\end{itemize}
 			Die Attributkombination (Vorname, Haus-Nr.) ist kein Schlüsselkandidat, denn sie ist nicht eindeutig. Es würde 2 
-			Datensätze einem identischen Schlüssel geben.
+			Datensätze einem identischen Schlüssel geben. \\ 
 
-		\subsection*{b)}
+		\item[(b)]
 			Bei größeren Datenmengen wird es immer schwieriger einen eindeutigen Schlüsselkandidaten zu finden der möglichst 
 			minimal ist. Je mehr Datensätze vorhanden sind, desto größer ist die Wahrscheinlichkeit, dass viele Attribute zur 
 			eindeutigen Identifizierung eines einzelnen Datensatz benötigt werden. Und je mehr Attribute nötig sind, desto mehr 
 			Rechenaufwand wird für die Schlüsselverwaltung gebraucht. Damit wird es ineffizient. Zur Lösung bietet sich die 
 			Einführung eines ID-Feldes an, das nie null gesetzt werden darf und in dem einfach ein Integerwert hochgezählt wird 
 			für jeden neuen Datensatz. 	
+		\end{enumerate}	
+	\end{enumerate}
 \end{document}
