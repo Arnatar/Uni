@@ -1,0 +1,155 @@
+% Commands
+\newcommand{\authorinfo}{Arne Struck, Tronje Krabbe}
+\newcommand{\titleinfo}{FGI 2 [HA], 18. 11. 2013}
+\newcommand{\qed}{\ \square}
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO}}}
+
+% ------------------------------------------------------
+
+% Packages & Stuff
+
+\documentclass[a4paper,11pt,fleqn]{scrartcl}
+\usepackage[german,ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{pgfplots}
+\usepackage{multicol}
+\usepackage{pst-node}
+\usetikzlibrary{calc}
+\usetikzlibrary{patterns}
+\usetikzlibrary{arrows,automata}
+
+% ------------------------------------------------------
+
+% Title & Pages
+
+\title{\titleinfo}
+\author{\authorinfo}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\authorinfo}
+\fancyhead[R]{\titleinfo}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+%		ALTER, 1 sind mal eben 11 Aufgaben, wie wollen die denn da 6 Punkte verstecken?
+%		1/4 pro teilaufgabe oder was?!
+		\item[\textbf{5.3}]
+		\begin{enumerate}
+			\item[1.]\quad \\
+			\begin{tikzpicture}[>=stealth',shorten >=1pt,
+									every node/.style={draw,circle,inner sep=2pt},
+                	    			level 1/.style={sibling distance=50mm},
+                	    			level 2/.style={sibling distance=40mm},
+                	    			level 3/.style={sibling distance=30mm},
+                	    			level 4/.style={sibling distance=20mm},
+                				    every path/.style={->}]
+                				    
+				%Tree:
+				\node[label=above : {$s_0$}]{$\{b\}$}
+					child{node[label=left : {$s_0$}]{$\{b\}$}
+						child{node[label=left : {$s_0$}]{$\{b\}$}
+							child{node[label=left : {$s_0$}]{$\{b\}$}
+								child{node[label=left : {$s_0$}]{$\{b\}$}
+									child{node[draw=none]{}}
+								}
+							child{node[label=right : {$s_1$}]{$\emptyset$}
+								child{node[draw=none]{}}
+								}	
+							}
+							child{node[label=right : {$s_1$}]{$\emptyset$}
+								child{node[label=right : {$s_2$}]{$\{g\}$}
+									child{node[draw=none]{}}
+								}
+							}
+						}
+						child{node[label=right : {$s_1$}]{$\emptyset$}
+							child{node[label=right : {$s_2$}]{$\{g\}$}
+								child{node[label=right : {$s_2$}]{$\{g\}$}
+									child{node[draw=none]{}}
+								}
+							}
+						}
+					}
+					child{node[label=right : {$s_1$}]{$\emptyset$}
+						child{node[label=right : {$s_2$}]{$\{g\}$}
+							child{node[label=right : {$s_2$}]{$\{g\}$}
+								child{node[label=right : {$s_2$}]{$\{g\}$}
+										child{node[draw=none]{}}
+								}
+							}
+						}
+					}
+				;           				
+			\end{tikzpicture}
+			\item[2.]
+			\begin{enumerate}
+				\item[a)]\quad \\ 
+					\(Sat(\alpha_1) = \{s_0\} \quad | \alpha_1 = \textbf{EX}b\) 
+				\item[b)]\quad \\ 
+					\(Sat(\textbf{AG}\alpha_1) = \emptyset\)
+				\item[c)]\quad \\
+					\(Sat(\alpha_2) = \{s_1,s_2\}\quad | \alpha_2 = \textbf{AG}\lnot b\)
+				\item[d)]\quad \\
+					\(Sat(\textbf{EX}\alpha_2) = \{s_0,s_1,s_2\}\)
+			\end{enumerate}
+			\newpage
+			\item[3.]
+			\begin{enumerate}
+				\item[a)]\quad \\
+					\(\beta_1 = \textbf{AGEX}b\) gilt nicht, da das Ergebnis von 2b) $\emptyset$ ist.
+				\item[b)]\quad \\
+					\(\beta_2 = \textbf{EXAG}\lnot b\) gilt, da \(s_0\) Element der Ergebnismenge von 2d) 
+					ist.
+			\end{enumerate}
+			\item[4.]
+			\begin{enumerate}
+				\item[a)]\quad \\
+					\(\textbf{AXAG}a\) bedeutet, dass für alle Pfade im nächsten Zustand gelten muss, dass
+					für alle folgenden Pfade der Folge $a$ gilt, also in allen Zuständen (außer dem Root)
+					gilt $a$. \\
+					\(\textbf{AGAX}a\) bedeutet, dass für alle folgenden Pfade der Folge in allen nächsten
+					Zuständen $a$ gelten muss. Also gilt $a$ auch hier immer, außer im Root. \\
+					Die beiden Ausdrücke sind also äquivalent.
+				\item[b)]\quad \\
+					\((\lnot b\land \lnot g)\) beschreibt den Zustand $s_1$ aus dem ersten Teil.
+					$\textbf{EXEG}(\lnot b\land \lnot g)$ heißt, dass in einem der nächsten Zustände ein Pfad 
+					existiert auf dem $(\lnot b\land \lnot g)$ gilt. Dies ist im $M_{AKW}$ kein einziges mal 
+					der Fall, da nach $s_1$ zwangsläufig $s_2$ gilt. \\
+					$\textbf{EGEX}(\lnot b\land \lnot g)$ heißt, dass ein Pfad existiert auf dem im folgenden
+					Element $(\lnot b\land \lnot g)$ der Fall ist, also ein Pfad der als 2. Zustand $s_1$
+					eintrifft, dies ist möglich (siehe 1). \\
+					Damit sind die Ausdrücke nicht äquivalent.					
+			\end{enumerate}
+			\item[5.]
+			\begin{enumerate}
+				\item[a)]\quad \\
+					\(\textbf{AGAX}b\) siehe 4a). \\
+					\(\textbf{GX}b\) bedeutet, dass für allgemein im nächsten Zustand $b$ gelten mussdamit 
+					gilt für alle Zustände außerhalb des Roots (rekursiver Aufbau). \\
+					Also gilt für beide Ausdrücke, dass in jedem Zustand $b$ gilt (außer im Root).
+					Damit sind sie äquivalent. 
+				\item[b)]\quad \\
+					$\textbf{EG}b$ gilt in $M_{AKW}$, da vom Root ein Pfad aus existiert in dem $b$ gilt 
+					(siehe 1). $\textbf{G}b$ gilt allerdings nicht, da auch Pfade existieren, auf denen nicht 
+					immer b gilt.
+			\end{enumerate}
+		\end{enumerate}
+		
+		\item[\textbf{5.4}]
+		\begin{enumerate}
+			\item[1.]\quad \\ \todo
+			\item[2.]\quad \\ \todo
+			\item[3.]\quad \\ \todo
+			\item[4.]\quad \\ \todo
+		\end{enumerate}
+	\end{enumerate}
+\end{document}
