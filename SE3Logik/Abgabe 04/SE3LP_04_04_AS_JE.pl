@@ -2,16 +2,16 @@
 %:- multifile   % ermoeglicht verteilte Definition in mehreren Files
 
 %Abgabe 03 Arne Struck, Jan Esdonk
-%Präsentationbereitschaft:
+%Prï¿½sentationbereitschaft:
 
 
 %---------Aufgabe 1-----------
 /*
-!!!!Funtional hinzufügen!!!!!!!!!!!
+!!!!Funtional hinzufï¿½gen!!!!!!!!!!!
 
 Keine der Relationen hat eine Eigenschaft ohne
 Definition/Implementierung, wir gehen daher davon aus,
-dass wünschenswerte, realitätsnahe Eigenschaften
+dass wï¿½nschenswerte, realitï¿½tsnahe Eigenschaften
 gemeint sind.
 
 A ist mutter von B:
@@ -24,7 +24,7 @@ funktional: ?
 A ist nachbarland von B:
 Symmetrisch, da wenn A das Nachbarland von B ist, auch B das Nachbarland
 von A sein muss.
-Nicht reflexiv, da man nicht in Nachbarschaft zur Identität steht.
+Nicht reflexiv, da man nicht in Nachbarschaft zur Identitï¿½t steht.
 NIcht Transitiv, da Deutschland kein Nachbarstaat von Spanien ist.
 funktional:
 
@@ -53,7 +53,7 @@ funktional:
 
 A ist gleich B:
 Symmetrisch, da aus A gleich B B gleich A folgt.
-Die Identität ist immer gleich sich selber.
+Reflexiv, die Identitï¿½t ist immer gleich sich selber.
 Transitiv, da gilt: aus A = B B = C folgt A = C.
 funktional:
 
@@ -64,15 +64,15 @@ funktional:
 
 %---------Aufgabe 2----------
 %
-%[medien2].
+%[medien2].ue
 %
 %1.:
 %Da sowohl die direkten parents, als auch die derer parents ausgegeben
 %werden sollen, muessen alle berechnet werden.
 %ueberkat(?UId,?Kategorie,?Total)
 ueberkat(UId,Kategorie,Ergebnis):-
-	kategorie(_,Kategorie,UId),
-	kategorie(UId,Ergebnis,_).
+	kategorie(UId,Kategorie,Id),
+	kategorie(Id,Ergebnis,_).
 
 %2.:
 %
@@ -88,23 +88,98 @@ path(ID,Kategorie,Total):-
 
 %3.:
 %
-find_prod(Id,Ergebnis):-
-	kategorie(UId,_,Id),
-	find_prodH(UId,Sup),
-	Ergebnis = Sup.
 
-find_prodH(Id,Ergebnis):-
-	.
+% Workaround
+find_unterkategorie_pfade(21, []).
+find_unterkategorie_pfade(20, []).
+find_unterkategorie_pfade(19, []).	
+find_unterkategorie_pfade(18, []).	
+find_unterkategorie_pfade(17, []).	
+find_unterkategorie_pfade(16, []).	
+find_unterkategorie_pfade(15, []).	
+find_unterkategorie_pfade(14, []).
+find_unterkategorie_pfade(12, []).	
+find_unterkategorie_pfade(11, []).	
+find_unterkategorie_pfade(10, []).	
+find_unterkategorie_pfade(9, []).	
+find_unterkategorie_pfade(8, []).
+find_unterkategorie_pfade(7, []).	
+find_unterkategorie_pfade(6, []).	
+find_unterkategorie_pfade(5, []).			
 
-%
+
+find_unterkategorie_pfade(KId, Total):-
+	kategorie(UId,_,KId),
+	find_unterkategorie_pfade(UId, List),
+	Total = [UId|List].	
+
+	
+find_unter_produkte(KId, PId):-
+	find_unterkategorie_pfade(KId, KIdListe),
+	member(UId, KIdListe),
+	produkt(PId,UId,_,_,_,_,_).	
+
 %4.:
 %
+
+produktanzahl(KId, Anzahl):-
+	findall(PId, find_unter_produkte(KId, PId), Liste),
+	length(Liste, Anzahl).
+	
+	
 %5.:
 %
+
+verkaufsanzahl(KId, Jahr, Anzahl):-
+	findall(Verkauf,verkaufsanzahl_helper(KId,Jahr,Verkauf),Liste),
+	sum_list(Liste, Anzahl).
+
+verkaufsanzahl_helper(KId, Jahr, Anzahl):-
+	find_unter_produkte(KId, PId),
+	verkauft(PId,Jahr,_,Anzahl).
+	
 %6.:
 %
+
+zyklenfrei:-
+	\+ (
+	kategorie(KId,_,UId),
+	kategorie(UId,_,KId)
+	).
+	
 %---------Aufgabe 3-----------
 %
+unmittelbar_rechts_von(punkt1,punkt2).
+unmittelbar_rechts_von(punkt2,punkt3).
+unmittelbar_unterhalb_von(punkt2,punkt4).
+
+
+liegt_rechts_von(Rechts,Links):-
+	unmittelbar_rechts_von(Rechts,Links);
+	unmittelbar_rechts_von(Ebene,Links),
+	liegt_rechts_von(Rechts,Ebene).
+	
+liegt_links_von(A,B):-
+	unmittelbar_rechts_von(B,A);
+	unmittelbar_rechts_von(Ebene,A),
+	liegt_links_von(A,Ebene).
+	
+liegt_unterhalb_von(A,B):-
+	unmittelbar_unterhalb_von(A,B);
+	unmittelbar_unnterhalb_von(Ebene,B),
+	liegt_unterhalb_von(A,Ebene).
+	
+liegt_oberhalb_von(A,B):-
+	unmittelbar_unterhalb_von(B,A);
+	unmittelbar_unnterhalb_von(Ebene,A),
+	liegt_oberhalb_von(A,Ebene).
+	
+ist_unmittelbar_benachbart_mit(A,B):-
+	unmittelbar_rechts_von(A,B);
+	unmittelbar_unterhalb_von(A,B);
+	unmittelbar_rechts_von(B,A);
+	unmittelbar_unterhalb_von(A,B).
+
 %
 %---------Aufgabe 4-----------
 
