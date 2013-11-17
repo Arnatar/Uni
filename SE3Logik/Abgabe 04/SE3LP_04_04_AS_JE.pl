@@ -7,8 +7,6 @@
 
 %---------Aufgabe 1-----------
 /*
-!!!!Funtional hinzufuegen!!!!!!!!!!!
-
 Keine der Relationen hat eine Eigenschaft ohne
 Definition/Implementierung, wir gehen daher davon aus,
 dass wuenschenswerte, realitaetsnahe Eigenschaften
@@ -31,7 +29,7 @@ Funktional, da es eine 1:1-Beziehung ist (Spezialfall von 1:n).
 A ist Vorfahre von B:
 Nicht symmetrisch, da man nicht der Vorfahre des eigenen Nachfahren
 sein kann.
-Nicht reflexiv, da man ncih/t sein eigener Vorfahre ist.
+Nicht reflexiv, da man nicht sein eigener Vorfahre ist.
 Transitiv, da der Vorfahre C von A auch der Vorfahre von B ist, wenn
 das Praedikat funktioniert.
 Nicht funktional, da es sich um eine m:1 beziehung handelt.
@@ -76,9 +74,12 @@ ueberkat(UId,Kategorie,Ergebnis):-
 
 %2.:
 %
+%Abbruch
 path(1,buch,[buch]).
 path(2,ebuch,[ebuch]).
 path(3,hoerbuch,[hoerbuch]).
+
+%
 path(ID,Kategorie,Total):-
 	kategorie(ID,Kategorie,UId),
 	kategorie(UId,Kategorie2,_),
@@ -88,26 +89,6 @@ path(ID,Kategorie,Total):-
 
 %3.:
 %
-
-% Workaround
-/*
-find_unterkategorie_pfade(21, []).
-find_unterkategorie_pfade(20, []).
-find_unterkategorie_pfade(19, []).
-find_unterkategorie_pfade(18, []).
-find_unterkategorie_pfade(17, []).
-find_unterkategorie_pfade(16, []).
-find_unterkategorie_pfade(15, []).
-find_unterkategorie_pfade(14, []).
-find_unterkategorie_pfade(12, []).
-find_unterkategorie_pfade(11, []).
-find_unterkategorie_pfade(10, []).
-find_unterkategorie_pfade(9, []).
-find_unterkategorie_pfade(8, []).
-find_unterkategorie_pfade(7, []).
-find_unterkategorie_pfade(6, []).
-find_unterkategorie_pfade(5, []).*/
-
 %Sollte das gleiche tun, wie workaround
 find_unterkategorie_pfade(Id,List):-
 	\+ (kategorie(_,_,Id)),
@@ -126,7 +107,8 @@ find_unter_produkte(KId, PId):-
 	produkt(PId,UId,_,_,_,_,_).
 
 find_produkte(KId, Ergebnis):-
-	findall(PIds,find_unter_produkte(KId,PIds),List),
+	findall(PIds,find_unter_produkte(KId,PIds),SubList),
+	sort(SubList,List),
 	(\+ \+ produkt(PId,KId,_,_,_,_,_) ->
 	Ergebnis = [PId|List]; Ergebnis = List).
 
@@ -222,7 +204,8 @@ relation(d,f).
 % A->B & B->C gilt. (Bestehende transistive Abhängigkeit)
 
 % transistiv(?A,C)
-% Gibt alle Elemente A zurück die transistiv auf C zeigen. (inkl. relation(A,C))
+% Gibt alle Elemente A zurueck die transistiv auf C zeigen. (inkl.
+% relation(A,C))
 
 % transistiv(A,?C)
 % Gibt alle Elemente C auf die A transistiv zeigt. (inkl. relation(A,C))
@@ -233,11 +216,12 @@ transistiv(A,C):-
 	relation(A,C).
 
 % add_transistiv(?A,?C)
-% Gibt alle noch hinzuzufügenden Relationen A->C an um die Relationsmengen
-% transistiv zu machen
+% Gibt alle noch hinzuzufuegenden Relationen A->C an um die
+% Relationsmengen transistiv zu machen
 
 % add_transistiv(?A,C)
-% Gibt alle Elemente A zurück die transistiv auf C zeigen. (exkl. relation(A,C))
+% Gibt alle Elemente A zurueck die transistiv auf C zeigen. (exkl.
+% relation(A,C))
 
 % add_transistiv(A,?C)
 % Gibt alle Elemente C auf die A transistiv zeigt. (exkl. relation(A,C))
