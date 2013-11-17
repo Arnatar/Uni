@@ -72,10 +72,6 @@ ueberkat(UId,Kategorie,Ergebnis):-
 	kategorie(UId,Kategorie,Id),
 	kategorie(Id,Ergebnis,_).
 
-%ueberkat(15,Kategorie,Ergebnis).
-%Kategorie = bilderbuch,
-%Ergebnis = kinder.
-
 %2.:
 %
 %Abbruchbedingungen:
@@ -96,16 +92,34 @@ path(ID,Kategorie,Total):-
 %Total = [bilderbuch, kinder, buch] ;
 
 %3.:
+%
+%Sollte das gleiche tun, wie workaround
+find_unterkategorie_pfade(Id,List):-
+	\+ (kategorie(_,_,Id)),
+	List = [].
 
-find_all_unterprodukte(KId, PId) :-
-    produkt(PId, KId, _, _, _, _, _);
-    kategorie(UKId, _, KId),
-    find_all_unterprodukte(UKId, PId).
+
+find_unterkategorie_pfade(KId, Total):-
+	kategorie(UId,_,KId),
+	find_unterkategorie_pfade(UId, List),
+	Total = [UId|List].
+
+
+find_unter_produkte(KId, PId):-
+	find_unterkategorie_pfade(KId, KIdListe),
+	member(UId, KIdListe),
+	produkt(PId,UId,_,_,_,_,_).
+
+find_produkte(KId, Ergebnis):-
+	findall(PIds,find_unter_produkte(KId,PIds),SubList),
+	sort(SubList,List),
+	(\+ \+ produkt(PId,KId,_,_,_,_,_) ->
+	Ergebnis = [PId|List]; Ergebnis = List).
 
 %4.:
 %
 produktanzahl(KId, Anzahl):-
-	findall(PId,find_all_unterprodukte(KId,PId),List),
+	find_produkte(KId,List),
 	length(List, Anzahl).
 
 
@@ -114,10 +128,13 @@ produktanzahl(KId, Anzahl):-
 
 verkaufsanzahl(KId, Jahr, Anzahl):-
 	findall(Verkauf,verkaufsanzahl_helper(KId,Jahr,Verkauf),Liste),
-	sum_list(Liste, Anzahl).
+	produkt(PIdn,KId,_,_,_,_,_),
+	verkauft(PIdn,Jahr,_,Anzahl2),
+	sum_list(Liste, Anzahl3),
+	Anzahl is Anzahl2 + Anzahl3.
 
 verkaufsanzahl_helper(KId, Jahr, Anzahl):-
-	find_all_unterprodukte(KId, PId),
+	find_unter_produkte(KId, PId),
 	verkauft(PId,Jahr,_,Anzahl).
 
 %6.:

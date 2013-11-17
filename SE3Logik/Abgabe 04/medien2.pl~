@@ -36,6 +36,16 @@ produkt(23457,11,spuren_im_schnee,wolf_michael,meister,2009,1).
 produkt(23458,8,blutrache,wolf_michael,meister,2010,1).
 
 produkt(34567,19,hoffnung,sand_molly,audio,2008,51).
+produkt(34568,9,winterzeit,wolf_michael,audio,2006,16).
+produkt(34599,17,winterzeit,wolf_michael,audio,2006,16).
+produkt(34593,17,winterzeit,wolf_michael,audio,2006,16).
+produkt(34598,13,winterzeit,wolf_michael,audio,2006,16).
+produkt(34592,13,winterzeit,wolf_michael,audio,2006,16).
+produkt(34597,16,winterzeit,wolf_michael,audio,2006,16).
+produkt(34594,16,winterzeit,wolf_michael,audio,2006,16).
+produkt(34596,21,winterzeit,wolf_michael,audio,2006,16).
+produkt(34595,21,winterzeit,wolf_michael,audio,2006,16).
+
 
 % verkauft(PId,Jahr,Preis,Anzahl).
 verkauft(12345,2006,39,71).
