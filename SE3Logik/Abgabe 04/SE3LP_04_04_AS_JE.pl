@@ -165,7 +165,11 @@ zyklenfrei:-
 %
 unmittelbar_rechts_von(punkt1,punkt2).
 unmittelbar_rechts_von(punkt2,punkt3).
+unmittelbar_rechts_von(punkt5,punkt1).
 unmittelbar_unterhalb_von(punkt2,punkt4).
+unmittelbar_unterhalb_von(punkt1,punkt6).
+unmittelbar_rechts_von(punkt7,punkt6).
+
 
 
 liegt_rechts_von(Rechts,Links):-
@@ -180,12 +184,12 @@ liegt_links_von(A,B):-
 
 liegt_unterhalb_von(A,B):-
 	unmittelbar_unterhalb_von(A,B);
-	unmittelbar_unnterhalb_von(Ebene,B),
+	unmittelbar_unterhalb_von(Ebene,B),
 	liegt_unterhalb_von(A,Ebene).
 
 liegt_oberhalb_von(A,B):-
 	unmittelbar_unterhalb_von(B,A);
-	unmittelbar_unnterhalb_von(Ebene,A),
+	unmittelbar_unterhalb_von(Ebene,A),
 	liegt_oberhalb_von(A,Ebene).
 
 ist_unmittelbar_benachbart_mit(A,B):-
@@ -197,6 +201,50 @@ ist_unmittelbar_benachbart_mit(A,B):-
 %
 %---------Aufgabe 4-----------
 
+% Da es unserer Meinung nach mindestens 2 Interpretationsmöglichkeiten gibt,
+% haben wir 2 Implementationen geschrieben.
+
+% Definition der Relationsmenge:
+% A steht in Relation zu B
+% relation(A,B)
+relation(a,b).
+relation(b,c).
+relation(a,c).
+relation(b,d).
+relation(a,d).
+relation(c,e).
+relation(e,f).
+relation(d,e).
+relation(d,f).
+
+% transistiv(?A,?C)
+% Gibt alle vorhanden Relationen A->C aus der Relationsmenge zurück für die
+% A->B & B->C gilt. (Bestehende transistive Abhängigkeit)
+
+% transistiv(?A,C)
+% Gibt alle Elemente A zurück die transistiv auf C zeigen. (inkl. relation(A,C))
+
+% transistiv(A,?C)
+% Gibt alle Elemente C auf die A transistiv zeigt. (inkl. relation(A,C))
+
+transistiv(A,C):-
+	relation(A,B),
+	relation(B,C),
+	relation(A,C).
+
+% add_transistiv(?A,?C)
+% Gibt alle noch hinzuzufügenden Relationen A->C an um die Relationsmengen
+% transistiv zu machen
+
+% add_transistiv(?A,C)
+% Gibt alle Elemente A zurück die transistiv auf C zeigen. (exkl. relation(A,C))
+
+% add_transistiv(A,?C)
+% Gibt alle Elemente C auf die A transistiv zeigt. (exkl. relation(A,C))
+
+add_transistiv(A,C):-
+	relation(A,B),
+	relation(B,C).
 
 
 
