@@ -2,7 +2,7 @@
 %:- multifile   % ermoeglicht verteilte Definition in mehreren Files
 
 %Abgabe 03 Arne Struck, Jan Esdonk
-%Praesentationbereitschaft:
+%Praesentationbereitschaft: 1, 2, 4
 
 
 %---------Aufgabe 1-----------
@@ -96,70 +96,114 @@ path(ID,Kategorie,Total):-
 %Total = [bilderbuch, kinder, buch] ;
 
 %3.:
+%
 
+%find_all_unterprodukte(?KId,?PId)
 find_all_unterprodukte(KId, PId) :-
     produkt(PId, KId, _, _, _, _, _);
     kategorie(UKId, _, KId),
     find_all_unterprodukte(UKId, PId).
 
+%find_all_unterprodukte(2, PId).
+%PId = 23458 ;
+%PId = 23456 ;
+%PId = 23457 ;
+
 %4.:
 %
+
+%produktanzahl(?KId,?Anzahl)
 produktanzahl(KId, Anzahl):-
 	findall(PId,find_all_unterprodukte(KId,PId),List),
 	length(List, Anzahl).
 
+%produktanzahl(7, Anzahl).
+%Anzahl = 3.
 
 %5.:
 %
 
+%verkaufsanzahl(?KId,?Jahr,?Anzahl)
 verkaufsanzahl(KId, Jahr, Anzahl):-
 	findall(Verkauf,verkaufsanzahl_helper(KId,Jahr,Verkauf),Liste),
 	sum_list(Liste, Anzahl).
 
+%Gibt die Verkaufsanzahl eines Produktes in einem bestimmten Jahr zurück
+%verkaufsanzahl(?KId,?Jahr,?Anzahl)
 verkaufsanzahl_helper(KId, Jahr, Anzahl):-
 	find_all_unterprodukte(KId, PId),
 	verkauft(PId,Jahr,_,Anzahl).
 
+%verkaufsanzahl(7,2012,Anzahl).
+%Anzahl = 95.
+
 %6.:
 %
 
+%zyklenfrei
 zyklenfrei:-
 	\+ (
 	kategorie(KId,_,UId),
 	kategorie(UId,_,KId)
 	).
+	
+%zyklenfrei.
+%true.
+% nach hinzufügen vom Zyklus
+%kategorie(22,kreis,23).
+%kategorie(23,kreis,22).
+%zyklenfrei.
+%false.
 
 %---------Aufgabe 3-----------
 %
+
+% Definition des Raumes: A ist [Praedikat] B
 unmittelbar_rechts_von(punkt1,punkt2).
 unmittelbar_rechts_von(punkt2,punkt3).
 unmittelbar_rechts_von(punkt7,punkt6).
 unmittelbar_rechts_von(punkt5,punkt1).
 unmittelbar_unterhalb_von(punkt2,punkt4).
-unmittelbar_unterhalb_von(punkt1,punkt6).
+unmittelbar_unterhalb_von(punkt7,punkt2).
+unmittelbar_unterhalb_von(punkt8,punkt7).
 
+%unmittelbar_unterhalb_von(A,B):-
+%	unmittelbar_rechts_von(C,A),
+%	unmittelbar_unterhalb_von(C,D),
+%	unmittelbar_rechts_von(D,B).
+%	unmittelbar_rechts_von(A,C),
+%	unmittelbar_unterhalb_von(C,D),
+%	unmittelbar_rechts_von(B,D).
 
+%liegt_rechts_von(?A,?B)
+liegt_rechts_von(A,B):-
+	unmittelbar_rechts_von(A,B);
+	(unmittelbar_rechts_von(Ebene,B),
+	\+ Ebene = A),
+	liegt_rechts_von(A,Ebene).
 
-liegt_rechts_von(Rechts,Links):-
-	unmittelbar_rechts_von(Rechts,Links);
-	unmittelbar_rechts_von(Ebene,Links),
-	liegt_rechts_von(Rechts,Ebene).
-
+%liegt_links_von(?A,?B)
 liegt_links_von(A,B):-
 	unmittelbar_rechts_von(B,A);
-	unmittelbar_rechts_von(Ebene,A),
+	(unmittelbar_rechts_von(Ebene,A),
+	\+ Ebene = B),
 	liegt_links_von(A,Ebene).
 
+%liegt_unterhalb_von(?A,?B)
 liegt_unterhalb_von(A,B):-
 	unmittelbar_unterhalb_von(A,B);
-	unmittelbar_unterhalb_von(Ebene,B),
+	(unmittelbar_unterhalb_von(Ebene,B),
+	\+ Ebene = A),
 	liegt_unterhalb_von(A,Ebene).
 
+%liegt_oberhalb_von(?A,?B)
 liegt_oberhalb_von(A,B):-
 	unmittelbar_unterhalb_von(B,A);
-	unmittelbar_unterhalb_von(Ebene,A),
+	(unmittelbar_unterhalb_von(Ebene,A),
+	\+ Ebene = B),
 	liegt_oberhalb_von(A,Ebene).
 
+%ist_unmittelbar_benachbart_mit(?A,?B)
 ist_unmittelbar_benachbart_mit(A,B):-
 	unmittelbar_rechts_von(A,B);
 	unmittelbar_unterhalb_von(A,B);
@@ -189,12 +233,30 @@ relation(d,f).
 % Gibt alle vorhanden Relationen A->C aus der Relationsmenge zurueck
 % fuer die A->B & B->C gilt. (Bestehende transistive Abhaengigkeit)
 
+%Beispiel:
+%transistiv(A,C).
+%A = a,
+%C = c ;
+%A = a,
+%C = d ;
+%A = d,
+%C = f ;
+
 % transistiv(?A,C)
 % Gibt alle Elemente A zurueck die transistiv auf C zeigen. (inkl.
 % relation(A,C))
 
+%Beispiel:
+%transistiv(A,c).
+%A = a ;
+
 % transistiv(A,?C)
 % Gibt alle Elemente C auf die A transistiv zeigt. (inkl. relation(A,C))
+
+%Beispiel:
+%transistiv(a,C).
+%C = c ;
+%C = d ;
 
 transistiv(A,C):-
 	relation(A,B),
@@ -202,15 +264,34 @@ transistiv(A,C):-
 	relation(A,C).
 
 % add_transistiv(?A,?C)
-% Gibt alle noch hinzuzufuegenden Relationen A->C an um die
+% Gibt alle noch hinzuzufuegenden und bestehende Relationen A->C an um die
 % Relationsmengen transistiv zu machen
+
+%Beispiel:
+%A = a,
+%C = c ;
+%A = a,
+%C = d ;
+%...
 
 % add_transistiv(?A,C)
 % Gibt alle Elemente A zurueck die transistiv auf C zeigen. (exkl.
 % relation(A,C))
 
+%Beispiel:
+%add_transistiv(A,c).
+%A = a ;
+
 % add_transistiv(A,?C)
 % Gibt alle Elemente C auf die A transistiv zeigt. (exkl. relation(A,C))
+
+%Beispiel:
+%add_transistiv(a,C).
+%C = c ;
+%C = d ;
+%C = e ;
+%C = e ;
+%C = f.
 
 add_transistiv(A,C):-
 	relation(A,B),
