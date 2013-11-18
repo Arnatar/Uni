@@ -167,14 +167,6 @@ unmittelbar_unterhalb_von(punkt2,punkt4).
 unmittelbar_unterhalb_von(punkt7,punkt2).
 unmittelbar_unterhalb_von(punkt8,punkt7).
 
-%unmittelbar_unterhalb_von(A,B):-
-%	unmittelbar_rechts_von(C,A),
-%	unmittelbar_unterhalb_von(C,D),
-%	unmittelbar_rechts_von(D,B).
-%	unmittelbar_rechts_von(A,C),
-%	unmittelbar_unterhalb_von(C,D),
-%	unmittelbar_rechts_von(B,D).
-
 %liegt_rechts_von(?A,?B)
 liegt_rechts_von(A,B):-
 	unmittelbar_rechts_von(A,B);
