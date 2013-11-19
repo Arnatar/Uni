@@ -3,7 +3,9 @@
 \newcommand{\authorinfo}{Arne Struck, Lars Thoms}
 \newcommand{\titleinfo}{AD [HA] zum 20. 11. 2013}
 \newcommand{\qed}{\ \square}
+\newcommand{\limn}{\lim\limits_{n\to\infty}}
 \newcommand{\todo}{\textcolor{red}{\textbf{TODO}}}
+\newcommand{\Forall}{\textbf{for each}}
 
 % ------------------------------------------------------
 
@@ -25,8 +27,7 @@
 \usepackage{algpseudocode}
 \usepackage{multicol}
 \usepackage[parfill]{parskip}
-\usetikzlibrary{calc}
-\usetikzlibrary{patterns}
+\usetikzlibrary{automata,calc,patterns,shapes}
 
 
 % ------------------------------------------------------
@@ -48,18 +49,19 @@
 		\item[\textbf{1.}]
 		\begin{enumerate}
 			\item[(a)]\quad \\
-				\(11 \cdot \mathbb{N} + 10\). Da für jeden Elferzyklus die 11. Stelle gesucht ist müssen nach dem Zyklus noch 10 
-				addiert werden.
+				\(11 \cdot \mathbb{N} + 10\). Da für jeden Elferzyklus die 11. Stelle gesucht ist müssen nach dem
+				Zyklus noch 10 addiert werden.
 			\item[(b)]\quad \\
-				\(11 \cdot \mathbb{N} + 5\). Das Ergebnis entsteht aus der Tatsache, dass nun \(2k \mod 11\) gilt, daher muss
-				der Ausdruck aus (a) auch durch 2 geteilt werden, leider führt das dazu, dass jedes 2. Element aus der 
-				Ergebnismenge gestrichen wird (\(\frac{11}{2}\) ist kein ganzes Vielfaches von 11). Somit muss \(\frac{11}{2}\) 
-				durch \(11\) ersetzt werden.
+				\(11 \cdot \mathbb{N} + 5\). Das Ergebnis entsteht aus der Tatsache, dass nun \(2k \mod 11\)
+				gilt, daher muss der Ausdruck aus (a) auch durch 2 geteilt werden, leider führt das dazu, dass
+				jedes 2. Element aus der Ergebnismenge gestrichen wird (\(\frac{11}{2}\) ist kein ganzes
+				Vielfaches von 11). Somit muss \(\frac{11}{2}\) durch \(11\) ersetzt werden.
 			\item[(c)]\quad \\
-				\(11 \cdot \mathbb{N}\). Da die Operation 10 zu addieren (um an die 11. Stelle des Zyklus zu gelangen) schon 
-				erfolgt ist, muss nur noch ein Vielfaches von 11 übergeben werden.
+				\(11 \cdot \mathbb{N}\). Da die Operation 10 zu addieren (um an die 11. Stelle des Zyklus zu
+				gelangen) schon erfolgt ist, muss nur noch ein Vielfaches von 11 übergeben werden.
 			\item[(d)]\quad \\
-				Wenn Elemente existieren für die \(3^k - 1 \mod 11 \equiv 10\) gilt, müssen Elemente existieren für die gilt: 
+				Wenn Elemente existieren für die \(3^k - 1 \mod 11 \equiv 10\) gilt, müssen Elemente existieren
+				für die gilt: 
 				\(3^k \mod 11 \equiv 0\). \\
 				\(
 				\begin{array}{rclclcl}
@@ -71,37 +73,149 @@
 					3^5 &\equiv & 3 \cdot 4 &=& 12 \mod 11 &\equiv & 1 \\
 				\end{array}
 				\) \\
-				Hiermit kommt man in einen Zyklus, das bedeutet es existiert kein Element auf der 11. Stelle mit der Funktion
-				\(3^k - 1 \mod 11\). Um etwas der leeren Menge gleichbedeutendes zu formulieren folgt \(\frac{\mathbb{N}}{0}\).
+				Hiermit kommt man in einen Zyklus, das bedeutet es existiert kein Element auf der 11. Stelle mit
+				der Funktion \(3^k - 1 \mod 11\). Daher ist das Ergebnis \(\emptyset\).
 		\end{enumerate}
 		\item[\textbf{2.}]\quad \\
-		\todo
+			\(
+			\begin{array}{rcl}
+				\limn(\frac{n^n}{n!})&>& 1 \Rightarrow \text{ n! liegt in $\mathcal{O}(n^n)$} \\
+				\limn(\frac{\frac{n}{2}^\frac{n}{2}}{n!}) &=& \limn ( \frac{\frac{n}{2}\cdot\frac{n}
+				{2}\cdot\frac{n}{2}\cdot ...}{n\cdot (n-1 )\cdot (n-2 )\cdot ...}
+				\cdot \frac{\frac{n}{2}}{n- \lceil\frac{n}{2}\rceil}
+				\cdot \frac{1}{(n - \lceil\frac{n}{2}\rceil -1) \cdot (n - \lceil\frac{n}{2}\rceil -2 )\cdot ...
+				\cdot 1}) < 1 \Rightarrow \text{ n! liegt in $\Omega(\frac{n}{2}^\frac{n}{2})$} \\
+			\end{array}
+			\) \\
+			Daraus folgen die Grenzen: \\
+			\(
+				\frac{1}{2}=\limn(\frac{1}{2}\frac{\log\frac{n}{2}}{\log n}) =\limn(\frac{\frac{n}{2}\log\frac{n}
+				{2}}{n\log n}) = \limn(\frac{\log(\frac{n}{2}^\frac{n}{2})}{n\log n})<\limn(\frac{\log(n!)}{n\log 
+				n})<\limn(\frac{\log n^n}{n \log n}) = 1 \\
+			\)
+			Damit liegt ein konstanter Grenzwert von $\log n!$ vor. Da in der Landau-Notation konstante Faktoren 
+			wegfallen gilt die Behauptung.
+			\newpage
 		\item[\textbf{3.}]
 		\begin{enumerate}
 			\item[(a)]\quad \\
-			\todo
+				Um den Median als Pivot zu verwenden, muss dieser erst einmal gefunden werden. Dies ist in O(n) 
+				möglich (Median of Medians). Ist das Pivot-Element immer der Median folgt daraus, dass immer der
+				Best-case von Quicksort eintritt \(\Theta(n \cdot \log(n))\). Damit ergibt sich:
+				\begin{center}
+					\(T(n) = 2 \cdot T(\frac{n}{2}) + a \cdot n\)
+				\end{center}
+				\(a \cdot n\) ist die Zeit zum auffinden des Medians. Aus dem Master-Theorem folgt: 
+				\(\Theta(n \cdot \log(n))\)
 			\item[(b)]\quad \\
-			\todo
-			\item[(c)]\quad \\		
-			\todo
+				Diese Variante findet in der Praxis vermutlich wenig Anwendung, da die Konstante $a$ beim 
+				Auffinden des Medians sehr groß sein kann, was eine größere Laufzeit als den average Case des
+				Random-Pivots zur Folge haben könnte. Außerdem könnte die Berechnung des Medians den Speicher
+				weitaus stärker belasten, als ein randomisierter Pivot.
 		\end{enumerate}
 		\item[\textbf{4.}]
 		\begin{enumerate}
 			\item[(a)]\quad \\
-			\todo
+				\begin{algorithmic}
+					\Function{chooseRandomElement}{A}
+						\State{n = length(A)}
+						\If{n == 1} \State
+							\Return{A[0]}
+						\EndIf
+						\If{random() == 0} \State
+							\Return{\Call{chooseRandomElement}{slice(A, 0, n/2)}}
+						\Else \State
+							\Return{\Call{chooseRandomElement}{slice(A, n/2, n)}}
+						\EndIf
+					\EndFunction
+				\end{algorithmic}
+            	A sei ein input der Länge \(2^k\). Damit wird rekursiv ein Blatt in einem vollständigen Binärbaum 
+            	gefunden. Die Binärbaumsuche hat einen Zeitaufwand von O(log n). Da alle Blätter die gleiche
+            	Anzahl an Kanten brauchen um erreicht zu werden, besitzen auch alle die gleiche
+            	Wahrscheinlichkeit.
+            
 			\item[(b)]\quad \\
-			\todo
+			 	Die Lösung von a) funktioniert auch für b). Der Baum ist nicht mehr vollständig, was dazu führt,
+			 	dass einige Blätter schneller als andere zu erreichen sind. Damit sind die Wahrscheinlichkeiten
+			 	nicht ganz die selben, was die Aufgabe erlaubt.
 			\item[(c)]\quad \\		
-			\todo
+				Wir bilden einen vollständigen binären Baum mit m Elementen, wobei m sich durch
+				aufrunden von n auf die nächste Zweierpotenz \((2^k)\) ergibt. Blätter für die keine Elemente
+				mehr in A vorhanden sind (Überschuss) werden markiert. Es folgt der Algorithmus aus a), ist das 
+				gefundene Blatt markiert, wird das ganze wiederholt. \\
+				Im worst-case (n ist eine Zweierpotenz plus	eins) sind \(\frac{n}{2}-1\) Blätter markiert.  Bis 
+				zum ersten	Auffinden eines	Elementes von A werden deswegen 2 Versuche erwartet. Die worst-case
+				Laufzeit liegt also im	Erwartungswert bei \(\mathcal{O}2\log(2n)\in\mathcal{O}(\log(n))\).
+				Die best-case Laufzeit (n ist eine Zweierpotenz) beträgt \(\mathcal{O}(\log(n))\) (siehe a)).
+				Somit muss auch die average-case Laufzeit in \(\mathcal{O}(\log(n))\) liegen.
 		\end{enumerate}
+		\newpage
 		\item[\textbf{5.}]
 		\begin{enumerate}
 			\item[(a)]\quad \\
-			\todo
+			
+				\begin{tikzpicture}[every state/.style={draw,circle,inner sep=1.5pt},
+                	    			level 1/.style={sibling distance=8cm, level distance=2.5cm},
+			        	            level 2/.style={sibling distance=4cm, level distance=2cm},
+            				        level 3/.style={sibling distance=2cm, level distance=1.75cm}]
+					\node[state]{$b \leq c$}
+				        child{ node[state]{$a \leq b$}				        
+					        child{ node[state]{$abc$}
+				            edge from parent node[above left] {true}
+					        }
+					        child{ node[state]{$a \leq c$}
+					        	child{ node[state]{$bac$}
+					        	edge from parent node[above left] {true}
+					        	}
+					        	child{ node[state]{$bca$}
+					        	edge from parent node[above right] {false}
+					        	}
+				            edge from parent node[above right] {false}
+					        }
+					    edge from parent node[above left] {true}
+					    }
+					    child{ node[state]{$a \leq c$}
+					    	child{ node[state]{$acb$}
+					    	edge from parent node[above left] {true}
+					    	}
+					    	child{ node[state]{$a \leq b$}
+					    		child{ node[state]{$cab$}
+					    		edge from parent node[above left] {true}
+					    		}
+					    		child{ node[state]{$cba$}
+					    		edge from parent node[above right] {false}
+					    		}
+					    	edge from parent node[above right] {false}
+					    	}
+					    edge from parent node[above right] {false}
+					    }
+					;
+				\end{tikzpicture}
+
 			\item[(b)]\quad \\
-			\todo
+			Bei einer Eingabe von 4 Elementen erhielte der Baum \(4!\) Blätter, bei einer Eingabe von 26 erhielte
+			er \(26!\) Blätter.
 		\end{enumerate}
 		\item[\textbf{6.}]\quad \\
-		\todo
+			Im ersten Schritt wird ein Bucketsort mit 2 Buckets durchgeführt. Der erste Bucket geht bis exklusiv
+			k und der zweite geht bis n. Nach dem Auftrennen wird ein einfacher Mergesort aufgerufen, welches
+			eine sortierte Liste ab k zurückgibt. Dadurch kommt eine Laufzeit von \(\mathcal{O}(n\log k)\)
+			zustande.
+\begin{verbatim}
+GetSortedMins(A, k)
+{
+    var new_A;
+
+    foreach(A as item)
+    {
+        if(item >= k)
+        {
+            new_A.insert(item);
+        }
+    }
+
+    return quicksort(new_A);
+}
+\end{verbatim}
 	\end{enumerate}
 \end{document}
