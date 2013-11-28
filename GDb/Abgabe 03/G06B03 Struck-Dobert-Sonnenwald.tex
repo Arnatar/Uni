@@ -1,0 +1,186 @@
+% Commands
+
+\newcommand{\authorinfo}{Tim Dobert, Kai Sonnenwald, Arne Struck}
+\newcommand{\titleinfo}{GDB [HA] zum 14. 11. 2013}
+\newcommand{\qed}{\ \square}
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO}}}
+
+% ------------------------------------------------------
+
+% Packages & Stuff
+\documentclass[a4paper,11pt,fleqn]{scrartcl}
+\usepackage[german,ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[top=1.3in, bottom=1.2in, left=0.9in, right=0.9in]{geometry}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{fancyhdr}
+\usepackage{pgfplots}
+\usepackage{multicol}
+\usepackage{vsis-gdb}
+\usepackage[parfill]{parskip}
+\usetikzlibrary{calc,patterns,arrows,positioning,calc,fit,shapes}
+
+
+% ------------------------------------------------------
+
+% Title & Pages
+
+\title{\titleinfo}
+\author{\authorinfo}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\authorinfo}
+\fancyhead[R]{\titleinfo}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+    \maketitle
+	\begin{enumerate}
+		\item[\textbf{1.:}]\quad \\
+		\begin{tikzpicture}
+			%Biomolekül
+			\node[entity] (bm) {Biomolekül};
+			\node[attribut] (bmID) [above =0.6cm of bm] {ID} edge(bm);
+			\node[attribut] (bmBesch) [above right =0.6cm of bm] {Beschreibung} edge(bm);
+			
+			%besteht aus
+			\node[relationship] (besteht) [right =3cm of bm] {besteht aus};
+			
+			%Organismus
+			\node[entity] (org) [right =3cm of besteht] {Organismus};
+			\node[attribut] (tID) [above left=0.6cm of org] {Taxonomie-ID} edge(org);			
+			\node[attribut] (oName) [above =0.6cm of org] {Name} edge(org);
+			\node[attribut] (oTName) [above right=0.6cm of org] {Trivialname} edge(org);
+			
+			%veröffentlicht in
+			\node[relationship] (publ) [below =1.cm of besteht] {veröffentlicht in};
+			
+			%Artikel
+			\node[entity] (arti) [below left =2cm and 0.25cm of publ] {Artikel};
+			\node[attribut] (titel) [above left= 0.6cm of arti] {Titel} edge(arti);
+			\node[attribut] (vdate) [below right =0.8cm and 0.4 of arti] {Veröffentlichungsdatum} edge(arti);
+
+			%schrieb[]
+			\node[relationship] (wby) [right =1.5cm of arti] {geschrieben};
+			
+			%Wissenschaftler
+			\node[entity] (scien) [right =1.5cm of wby] {Wissenschaftler};
+			\node[attribut] (sname) [below =0.6cm of scien] {Name} edge(scien);
+			\node[multivalentattribut] (kinfo) [above =0.6cm of scien] {Kontaktinformationen} edge(scien);
+			\node[attribut] (phone) [above left =0.6cm and 0.2cm of kinfo] {Telefonnummer} edge(kinfo);
+			\node[attribut] (mail) [above right =0.6cm and 0.2cm of kinfo] {Mail-Adresse} edge(kinfo);
+			
+			%isa
+			\node[relationship] (isa) [below =9cm of bm] {ist ein};
+			
+			%DNA
+			\node[entity] (dna) [right =3cm of isa] {DNA-Molekül};
+			\node[attribut] (dnseq) [above left =0.6cm of dna] {Nukleotidsequenz} edge(dna);
+			\node[attribut] (sori) [above =1cm of dna] {Strang-Orientierung} edge(dna);
+			\node[attribut] (cnum) [above right =0.6cm of dna] {Chromosomennummer} edge(dna);
+			
+			%RNA
+			\node[entity] (mrna) [below = 3cm of isa] {mRNA-Molekül};
+			\node[attribut] (rnseq) [below  =1cm of mrna] {Nukleotidsequenz} edge(mrna);
+			\node[attribut] (vstri) [below right =0.6cm of mrna] {Vienna-String} edge(mrna);
+			
+			%transscript
+			\node[relationship] (tran) [below right =1cm of isa] {Transskribiert};
+			
+			%gehört zu
+			\node[relationship] (joins) [below right =1cm of tran] {gehört zu};
+			
+			%synth
+			\node[relationship] (synth) [right =3cm of mrna] {Synthetisiert zu};
+			
+			%Protein
+			\node[entity] (prot) [right = 2cm of synth] {Protein};
+			\node[attribut] (as) [below left= 0.6cm of prot] {AS-Sequenz} edge(prot);
+			\node[attribut] (cath) [below =1cm of prot] {CATH-Klassifikation} edge(prot);
+			\node[attribut] (mweight) [below right =0.6cm of prot] {Molekulargewicht} edge(prot);
+			
+			%enthält
+			\node[relationship] (cont) [above = 1cm of prot] {enthält};
+			
+			%Domäne
+			\node[entity] (dom) [above =1cm of cont] {Domäne};	
+			\node[attribut] (dID) [right =0.6cm of dom] {ID} edge(dom);
+			\node[attribut] (hmm) [below right =0.6cm of dom] {HMM} edge(dom);
+			\node[attribut] (func) [below left =0.6cm of dom] {Funktion} edge(dom);
+
+			
+			%-------paths-------
+			%besteht
+			\path (bm) edge node[midway, above] {$[1,*]$} (besteht);
+			\path (besteht) edge node[midway, above] {$1$} (org);
+			%veröffentlicht
+			\path (bm) edge node[midway, above right] {$[1,*]$} (publ);
+			\path (publ) edge node[midway, below right] {$1$} (arti);
+			%geschrieben
+			\path (wby) edge node[midway, above] {$[1,*]$} (scien);
+			\path (wby) edge node[midway, below] {$1$} (arti);
+			%isa
+			\path (isa) edge[erbt] (bm);
+			\path (dna) edge[erbt] (isa);
+			\path (mrna) edge[erbt] (isa);
+			%trans
+			\path (tran) edge node[midway, right] {$[0,*]$} (mrna);
+			\path (tran) edge node[midway, below] {$1$} (dna);
+			%joins
+			\path (joins) edge node[midway, above] {$1$} (mrna);
+			\path (joins) edge node[midway, right] {$1$} (dna);
+			%synth
+			\path (synth) edge node[midway, above] {$1$} (mrna);
+			\path (synth) edge node[midway, above] {$1$} (prot);
+			%cont
+			\path (cont) edge node[midway, right] {$[1,*]$} (dom);
+			\path (prot) edge node[midway, right] {$1$} (cont);
+		\end{tikzpicture}
+		\newpage
+		\item[\textbf{2.:}]\quad \\
+		\todo \\
+		\item[\textbf{3.:}]
+		\begin{enumerate}
+			\item[a)]\quad \\
+			\begin{enumerate}
+				\item[i)]\quad \\
+				\todo
+				\item[ii)]\quad \\
+				\todo
+				\item[iii)]\quad \\
+				\todo
+			\end{enumerate}
+			\item[b)]\quad \\
+			\begin{enumerate}
+				\item[i)]\quad \\
+				\todo
+				\item[ii)]\quad \\
+				\todo
+				\item[iii)]\quad \\
+				\todo
+				\item[iv)]\quad \\
+				\todo
+			\end{enumerate}
+			\item[c)]\quad \\
+			\begin{enumerate}
+				\item[i)]\quad \\
+				\todo
+				\item[ii)]\quad \\
+				\todo
+			\end{enumerate}
+		\end{enumerate}
+		\item[\textbf{4.:}]
+		\begin{enumerate}
+			\item[a)]\quad \\
+			\todo
+			\item[b)]\quad \\
+			\todo
+		\end{enumerate}
+	\end{enumerate}
+\end{document}
