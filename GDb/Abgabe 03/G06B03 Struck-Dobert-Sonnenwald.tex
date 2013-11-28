@@ -144,24 +144,39 @@
 		\end{tikzpicture}
 		\newpage
 		\item[\textbf{2.:}]\quad \\
-		\todo \\
+			Für die Generalisierung wurde das Hausklassenmodell verwendet.
+    		\paragraph{Person}(\underline{Name}, DOB, Geschlecht)
+    		\paragraph{Regisseur}(\underline{Name}, DOB, Geschlecht)
+		    \paragraph{Schauspieler}(\underline{Name}, DOB, Geschlecht, Markenzeichen)
+		    \paragraph{Charakter}(\underline{CID}, Name, Charakterbeschreibung)
+		    \paragraph{Film}(\underline{Titel}, Zusammenfassung, 1. Drehtag, letzter Drehtag, Regisseur $\rightarrow$ 	
+		    Regisseur.Name,\\
+		    \phantom{Film(00} G1 $\rightarrow$ Genre.Name, G2 $\rightarrow$ Genre.Name, G3 $\rightarrow$ Genre.Name, G4 
+		    $\rightarrow$ Genre.Name)
+		    \paragraph{Genre}(\underline{Name})
+		    \paragraph{spielt}(\dashuline{CID $\rightarrow$ Charakter.CID, Titel $\rightarrow$ Film.Titel}, Drehbeginn, 
+		    Drehende, Gage)\\
 		\item[\textbf{3.:}]
 		\begin{enumerate}
 			\item[a)]\quad \\
 			\begin{enumerate}
 				\item[i)]\quad \\
-				\todo
+					Gib die Nachnamen aller Rennfahrer, die auf dem Malaysia GP den 1. Platz erreicht haben.\\
+                  	Ergebnis: $\emptyset$
 				\item[ii)]\quad \\
-				\todo
+					Gib Vor- und Nachnamen aller Rennfahrer deren Rennstall ein Budget < 350 hat.\\
+	                Ergebnis: \{Louis Hamilton, Jensen Button, Kimi Räikkönen\}
 				\item[iii)]\quad \\
-				\todo
+					Gib die Namen aller Rennställe, deren Fahrer auf dem Australien GP eine Platzierung geholt haben.\\
+                    Ergebnis: \{Sebastian Vettel, Fernando Alonso, Marc Webber, Lewis Hamilton, Jenson Button, Felipe Massa\}
 			\end{enumerate}
 			\item[b)]\quad \\
 			\begin{enumerate}
 				\item[i)]\quad \\
-				\todo
+					$\pi_{\text{Name}}(\sigma_{\text{Geburt} > 1985-01-01}(\text{Rennfahrer} \bowtie_{\text{RSID = Rennstall 
+					}}\text{Rennstall}))$\\
 				\item[ii)]\quad \\
-				\todo
+					Ergebnis: \{Sebastian Vettel, Louis Hamilton\}
 				\item[iii)]\quad \\
 				\todo
 				\item[iv)]\quad \\
