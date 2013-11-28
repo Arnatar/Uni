@@ -182,16 +182,25 @@
                   Ergebnis: \{Lewis Hamilton\} \\
         \end{enumerate}    
     \item %c
-        \begin{enumerate}
-        \item
-            SELECT Vorname, Nachname, Geburt\\
-            FROM Rennfahrer, Platzierung, Rennort\\
-            WHERE Rennstall = 31 AND OID = 4\\
-        \item
-            SELECT Vorname, Nachname\\
-            FROM Rennfahrer\\
-            WHERE Rennstall = 31\\
-        \end{enumerate}
+    \begin{enumerate}
+    \item
+    \begin{verbatim}
+    SELECT Rennfahrer.Vorname, Rennfahrer.Nachname, Rennfahrer.Geburt
+    FROM Rennfahrer, Platzierung
+    WHERE Rennfahrer.Rennstall = '31'
+    AND Platzierung.RID = Rennfahrer.RID
+    AND Platzierung.OID = '4';
+    \end{verbatim}
+    \item
+    \begin{verbatim}
+    SELECT Rennfahrer.Vorname, Rennfahrer.Nachname
+    FROM Rennfahrer
+    WHERE Rennfahrer.Rennstall IN(    SELECT Rennstall
+    FROM Rennfahrer
+    WHERE Nachname = 'Button');
+    \end{verbatim}
+    \end{enumerate}
+    
     \end{enumerate}
 		\newpage
 		\item[\textbf{4.:}]
