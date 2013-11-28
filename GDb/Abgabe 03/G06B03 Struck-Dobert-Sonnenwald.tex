@@ -144,42 +144,55 @@
 			\path (prot) edge node[midway, right] {$1$} (cont);
 		\end{tikzpicture}
 		\newpage
-		\item[\textbf{2.:}]\quad \\
-			Für die Generalisierung wurde das Hausklassenmodell verwendet.
-    		\paragraph{Person}(\underline{Name}, DOB, Geschlecht)
-    		\paragraph{Regisseur}(\underline{Name}, DOB, Geschlecht)
-		    \paragraph{Schauspieler}(\underline{Name}, DOB, Geschlecht, Markenzeichen)
-		    \paragraph{Charakter}(\underline{CID}, Name, Charakterbeschreibung)
-		    \paragraph{Film}(\underline{Titel}, Zusammenfassung, 1. Drehtag, letzter Drehtag, Regisseur $\rightarrow$ 	
-		    Regisseur.Name,\\
-		    \phantom{Film(00} G1 $\rightarrow$ Genre.Name, G2 $\rightarrow$ Genre.Name, G3 $\rightarrow$ Genre.Name, G4 
-		    $\rightarrow$ Genre.Name)
-		    \paragraph{Genre}(\underline{Name})
-		    \paragraph{spielt}(\dashuline{CID $\rightarrow$ Charakter.CID, Titel $\rightarrow$ Film.Titel}, Drehbeginn, 
-		    Drehende, Gage)\\
-		\item[\textbf{3.:}]
-		\begin{enumerate}
-			\item[a)]\quad \\
-			\begin{enumerate}
-				\item[i)]\quad \\
-					Gib die Nachnamen aller Rennfahrer, die auf dem Malaysia GP den 1. Platz erreicht haben.\\
-                  	Ergebnis: \{Vettel\}
-				\item[ii)]\quad \\
-					Gib Vor- und Nachnamen aller Rennfahrer deren Rennstall ein Budget < 350 hat.\\
-	                Ergebnis: \{Louis Hamilton, Jensen Button, Kimi Räikkönen\}
-				\item[iii)]\quad \\
-					Gib die Namen aller Rennställe, deren Fahrer auf dem Australien GP eine Platzierung geholt haben.\\
-                    Ergebnis: \{Red Bull, Ferrari, McLAren)\}
-			\end{enumerate}
-			\item[b)]\quad \\
-			\begin{enumerate}
-				\item[i)]\quad \\
-                                        $\pi_{\text{Name}}(\sigma_{\text{Geburt} > 1985-01-01}(\text{Rennfahrer} \bowtie_{\text{RSID = Rennstall
-                                        }}\text{Rennstall}))$\\
-                                \item[ii)]\quad \\
-                                        Ergebnis: \{Sebastian Vettel, Louis Hamilton\}
-			\end{enumerate}
-		\end{enumerate}
+		%Aufgabe 2
+\item
+    Für die Generalisierung wurde das Hausklassenmodell verwendet.
+    \paragraph{Person}(\underline{Name}, DOB, Geschlecht)
+    \paragraph{Regisseur}(\underline{Name}, DOB, Geschlecht)
+    \paragraph{Schauspieler}(\underline{Name}, DOB, Geschlecht, Markenzeichen)
+    \paragraph{Charakter}(\underline{CID}, Name, Charakterbeschreibung)
+    \paragraph{Film}(\underline{Titel}, Zusammenfassung, 1. Drehtag, letzter Drehtag, Regisseur $\rightarrow$ Regisseur.Name,\\
+    \phantom{Film(00} G1 $\rightarrow$ Genre.Name, G2 $\rightarrow$ Genre.Name, G3 $\rightarrow$ Genre.Name, G4 $\rightarrow$ Genre.Name)
+    \paragraph{Genre}(\underline{Name})
+    \paragraph{spielt}(\dashuline{CID $\rightarrow$ Charakter.CID, Titel $\rightarrow$ Film.Titel}, Drehbeginn, Drehende, Gage)\\
+    
+%----------
+%Aufgabe 3
+\item
+    \begin{enumerate}
+    \item %a
+        \begin{enumerate}
+            \item Gib die Nachnamen aller Rennfahrer, die auf dem Malaysia GP den 1. Platz erreicht haben.\\
+                  Ergebnis: $\emptyset$
+            \item Gib Vor- und Nachnamen aller Rennfahrer deren Rennstall ein Budget < 350 hat.\\
+                  Ergebnis: \{Louis Hamilton, Jensen Button, Kimi Raikönen\}
+            \item Gib die Namen aller Rennställe, deren Fahrer auf dem Australien GP eine Platzierung geholt haben.\\
+                  Ergebnis: \{Sebastian Vettel, Fernando Alonso, Marc Webber, Lewis Hamilton, Jenson Button, Felipe Massa\} 
+        \end{enumerate}
+    \item %b
+        \begin{enumerate}
+            \item Ausdruck: $\pi_{\text{Name}}(\sigma_{\text{Geburt} > 1985-01-01}(\text{Rennfahrer} \bowtie_{\text{RSID = Rennstall }}\text{Rennstall}))$\\
+                  Ergebnis: \{Sebastian Vettel, Louis Hamilton\}\\
+            \item Ausdruck: $\pi_{\text{Vorname, Nachname, Geburt}}((\sigma_{\text{Name = Australien GP}}(Rennort)\\ 
+            \phantom{Ausdruck:} \bowtie $ Platzierung$) \bowtie_{\text{RSID = Rennstall}}(\sigma_{\text{RSID = 31}} $ Rennfahrer$))$ \\
+                  Ergebnis: \{Lewis Hamilton, Jenson Button\}\\
+            \item Ausdruck: Rennfahrer $ - \pi_{\text{Vorname, Nachname, Geburt, Wohnort, Rennstall}}($Rennfahrer$ \bowtie $Platzierung$)) $\\
+                  Ergebnis: \{Kimi Raikkönen \}\\
+            \item Ausdruck: $\pi_{\text{Vorname, Nachname}}(\sigma_{\text{Rennstall = 31}}\text{Rennfahrer})$\\
+                  Ergebnis: \{Lewis Hamilton\} \\
+        \end{enumerate}    
+    \item %c
+        \begin{enumerate}
+        \item
+            SELECT Vorname, Nachname, Geburt\\
+            FROM Rennfahrer, Platzierung, Rennort\\
+            WHERE Rennstall = 31 AND OID = 4\\
+        \item
+            SELECT Vorname, Nachname\\
+            FROM Rennfahrer\\
+            WHERE Rennstall = 31\\
+        \end{enumerate}
+    \end{enumerate}
 		\newpage
 		\item[\textbf{4.:}]
 		\begin{enumerate}
