@@ -175,12 +175,50 @@
 				\todo
 			\end{enumerate}
 		\end{enumerate}
+		\newpage
 		\item[\textbf{4.:}]
 		\begin{enumerate}
 			\item[a)]\quad \\
-			\todo
+			\begin{tikzpicture}[style={sibling distance=4cm}]
+            	\node{\(\pi_{\text{Wohnort}}(\sigma_{\text{Name=''ChinaGP''}}(\sigma_{\text{Platz}<11}
+            				((\text{Rennfahrer $\bowtie$ Platzierung})\bowtie \text{Rennort})))\)}
+            		child{node{\(\pi_{\text{Wohnort}}\)}
+            			child{node{\(\sigma_{\text{Name = ''ChinaGP''}}\)}
+            				child{node{\(\sigma_{\text{Platz}< 11}\)}
+            					child{node{\(\text{Rennfahrer $\bowtie$ Platzierung}\)}
+            						child{node{Rennfahrer}}
+            						child{node{Platzierung}}
+            					}
+            					child{node{Rennort}
+            					}
+            				}
+            			}
+            		}
+            	;
+				
+			\end{tikzpicture} \\
 			\item[b)]\quad \\
-			\todo
+			\begin{tikzpicture}[style = {level distance=1.5cm},
+           				        level 3/.style={sibling distance=4cm, level distance=2cm},
+           				        level 4/.style={level distance=1.5cm}]
+            				        
+				\node{\(\pi_{\text{Wohnort}}(\text{Rennfahrer}\bowtie(\sigma_\text{Platz<11}\text{Platzierung})\bowtie
+				(\sigma_\text{Name = ''ChinaGP''}\text{Rennort}))\)}
+            		child{node{\(\pi_{\text{Wohnort}}\)}
+            			child{node{\(\text{Rennfahrer}\bowtie(\sigma_\text{Platz<11}\text{Platzierung})\bowtie
+							(\sigma_\text{Name = ''ChinaGP''}\text{Rennort})\)}
+							child{node{Rennfahrer}}
+							child{node{\(\sigma_\text{Platz<11}\)}
+								child{node{Platzierung}}
+							}
+							child{node{\(\sigma_\text{Name = ''ChinaGP''}\)}
+								child{node{Rennort}}
+							}
+            			}
+            		}
+            	;
+			\end{tikzpicture} \\ \\
+			b) hat höheren Optimierungsgrad, da es in mehr Heuristiken umsetzt (I,III,VII) als a).
 		\end{enumerate}
 	\end{enumerate}
 \end{document}
