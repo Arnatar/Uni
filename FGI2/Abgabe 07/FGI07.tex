@@ -1,4 +1,4 @@
-% Commands
+ % Commands
 \newcommand{\authorinfo}{Arne Struck, Tronje Krabbe}
 \newcommand{\titleinfo}{FGI 2 [HA], 02. 12. 2013}
 \newcommand{\qed}{\ \square}
@@ -40,45 +40,98 @@
 \begin{document}
 	\maketitle
 	\begin{enumerate}
-		\item[\textbf{7.3.:}] \quad \\
-		Siehe zip. \\
 		\item[\textbf{7.4}]
 		\begin{enumerate}
 			\item[1.:]\quad \\
-			\begin{tabular}{ccc}
-				\begin{tikzpicture}[>=stealth',shorten >=1pt, every path/.style={->}]
+			\begin{tikzpicture}[>=stealth',shorten >=1pt, every path/.style={->}]
 					%nodes
 					\node (A1) {$\{20010\}^T$};
  					\node (A2) [below = 1cm of A1] {$\{11001\}^T$};
  					\node (A3) [below = 1cm of A2] {$\{01110\}^T$};
-					\node (A6) [below = 0.3cm of A3] {$N_{z.4a}$};
+					\node (A6) [below = 0.3cm of A3] {$N_{7.4a}$};
 					%paths
 					\path (A1) edge node[left] {$t_1$} (A2);
 					\path (A2) edge node[left] {$t_2$} (A3);
 					\path (A3) edge[bend left = 60] node[left] {$t_3$} (A1);
-				\end{tikzpicture} &\quad\quad\quad &
-				\begin{tikzpicture}[>=stealth',shorten >=1pt, every path/.style={->}]
-					%nodes
-					\node (A1) {$\{30010\}^T$};
- 					\node (A2) [below = 1cm of A1] {$\{21001\}^T$};
- 					\node (A3) [below = 1cm of A2] {$\{01120\}^T$};
- 					\node (A4) [below = 1cm of A3] {$\{20020\}^T$};
- 					\node (A5) [below = 1cm of A4] {$\{11011\}^T$};
- 					\node (A6) [below = 0.3cm of A5] {$N_{z.4b}$};
-					%paths
-					\path (A1) edge node[right] {$t_1$} (A2);
-					\path (A2) edge node[right] {$t_2$} (A3);
-					\path (A3) edge node[right] {$t_3$} (A4);
-					\path (A4) edge node[right] {$t_1$} (A5);
 				\end{tikzpicture}
-			\end{tabular}
+				\begin{tikzpicture}[>=stealth',shorten >=1pt, every path/.style={->},
+									level 1/.style={sibling distance=4cm, level distance=1.5cm},
+			        	            level 2/.style={sibling distance=4cm},
+            				        level 3/.style={sibling distance=3cm}]
+					%nodes
+					\node (A1) {$\{30010\}^T$}
+						child{node{$\{21001\}^T$}
+							child{node{$\{11120\}^T$}
+								child{node (B1) {$\{02111\}^T$}
+								edge from parent node[above left] {$t_1$}
+								}
+								child{node{$\{30020\}^T$}
+									child{node (B2) {$\{21011\}^T$}
+										child{node (C1) {$\{12002\}^T$}
+										edge from parent node[above left] {$t_1$}
+										}
+										child{node{$\{11130\}^T$}
+											child{node (C2) {$\{02121\}^T$}
+											edge from parent node[above left] {$t_1$}
+											}
+											child{node{$\{30030\}^T$}
+												child{node (C3) {$\{21021\}^T$}
+													child{node (D1) {$\{12012\}^T$}
+														child{node {$\{03003\}^T$}
+														edge from parent node[left] {$t_1$}
+														}
+													edge from parent node[above left] {$t_1$}
+													}
+													child{node{$\{11140\}^T$}
+														child{node (D2) {$\{02131\}^T$}
+														edge from parent node[above left] {$t_1$}
+														}
+														child{node{$\{30040\}^T$}
+														edge from parent node[above right] {$t_3$}
+														}
+													edge from parent node[right] {$t_2$}
+													}
+												edge from parent node[right] {$t_1$}
+												}
+											edge from parent node[above right] {$t_3$}
+											}
+										edge from parent node[above right] {$t_2$}
+										}
+									edge from parent node[right] {$t_1$}
+									}
+								edge from parent node[above right] {$t_3$}
+								}
+							edge from parent node[left] {$t_2$}
+							}
+						edge from parent node[left] {$t_1$}
+						}
+					;
+					\path (B1) edge node[above right] {$t_3$} (B2);
+					\path (C1) edge node[above right] {$t_2$} (C2);
+					\path (C2) edge node[above right] {$t_3$} (C3);
+					\path (D1) edge node[above right] {$t_2$} (D2);
+					\node (AX) [below = 0.3cm of D2] {$N_{7.4b}$}; 
+				\end{tikzpicture}
 			\item[2.:]\quad \\
+            	Das Netz $N_{7.4a}$ ist $k$-beschränkt  für $k=3$ (siehe Graph) und demzufolge beschränkt. 
+			Es ist außerdem verklemmungsfrei (ablesbar), reversibel (es wird in den Anfangszustand zurückgesetzt)
+			und strukturell lebendig.\\
+			Das Netz $N_{7.4b}$ ist nicht beschränkt (p4 wird inkrementiert), daher auch nicht strukturell
+			beschränkt oder $k$-beschränkt für irgendein $k$. Es ist nicht reversibel, da der Ausgangszustand 
+			nicht wiederhergestellt werden kann (Inkrementor).
 			\item[3.:]
 			\begin{enumerate}
 				\item[a)]\quad \\
+                Wenn $t_0$ lebendig ist, muss \(\forall m \in \textbf{R}(N)\exists \sigma \in \textbf{T}^*:
+					m\overset{\sigma t}{\rightarrow}m'\) gelten. Da $m_0$ in der Menge aller $m$ enthalten ist 
+					und \(\sigma t\) durch die Wörter substituiert werden kann, gilt die Behauptung. \\
+                    Man bedenke allerdings, dass Tronje lebendig ist, jedoch nicht fleißig. Welche Bedeutung dies für Formale Informatik hat, sei dahingestellt.
 				\item[b)]\quad \\
+                Da sich fleißig nur über die Startmarkierung definiert und eine Voraussetzung für lebendig 	
+					ist, dass es für alle Markierungen schaltbar ist. Somit ist eine fleißige Transition nicht 
+					lebendig.
 			\end{enumerate}
-			\item[4.:]\quad \\
 		\end{enumerate}
 	\end{enumerate}
+\end{document}
 \end{document}
