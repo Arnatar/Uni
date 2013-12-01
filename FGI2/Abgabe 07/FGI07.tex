@@ -1,0 +1,84 @@
+% Commands
+\newcommand{\authorinfo}{Arne Struck, Tronje Krabbe}
+\newcommand{\titleinfo}{FGI 2 [HA], 02. 12. 2013}
+\newcommand{\qed}{\ \square}
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO}}}
+
+% ------------------------------------------------------
+
+% Packages & Stuff
+
+\documentclass[a4paper,11pt,fleqn]{scrartcl}
+\usepackage[german,ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{pgfplots}
+\usepackage{multicol}
+\usepackage{pst-node}
+\usetikzlibrary{calc}
+\usetikzlibrary{patterns}
+\usetikzlibrary{arrows,automata,positioning}
+
+% ------------------------------------------------------
+
+% Title & Pages
+
+\title{\titleinfo}
+\author{\authorinfo}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\authorinfo}
+\fancyhead[R]{\titleinfo}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+		\item[\textbf{7.3.:}] \quad \\
+		Siehe zip. \\
+		\item[\textbf{7.4}]
+		\begin{enumerate}
+			\item[1.:]\quad \\
+			\begin{tabular}{ccc}
+				\begin{tikzpicture}[>=stealth',shorten >=1pt, every path/.style={->}]
+					%nodes
+					\node (A1) {$\{20010\}^T$};
+ 					\node (A2) [below = 1cm of A1] {$\{11001\}^T$};
+ 					\node (A3) [below = 1cm of A2] {$\{01110\}^T$};
+					\node (A6) [below = 0.3cm of A3] {$N_{z.4a}$};
+					%paths
+					\path (A1) edge node[left] {$t_1$} (A2);
+					\path (A2) edge node[left] {$t_2$} (A3);
+					\path (A3) edge[bend left = 60] node[left] {$t_3$} (A1);
+				\end{tikzpicture} &\quad\quad\quad &
+				\begin{tikzpicture}[>=stealth',shorten >=1pt, every path/.style={->}]
+					%nodes
+					\node (A1) {$\{30010\}^T$};
+ 					\node (A2) [below = 1cm of A1] {$\{21001\}^T$};
+ 					\node (A3) [below = 1cm of A2] {$\{01120\}^T$};
+ 					\node (A4) [below = 1cm of A3] {$\{20020\}^T$};
+ 					\node (A5) [below = 1cm of A4] {$\{11011\}^T$};
+ 					\node (A6) [below = 0.3cm of A5] {$N_{z.4b}$};
+					%paths
+					\path (A1) edge node[right] {$t_1$} (A2);
+					\path (A2) edge node[right] {$t_2$} (A3);
+					\path (A3) edge node[right] {$t_3$} (A4);
+					\path (A4) edge node[right] {$t_1$} (A5);
+				\end{tikzpicture}
+			\end{tabular}
+			\item[2.:]\quad \\
+			\item[3.:]
+			\begin{enumerate}
+				\item[a)]\quad \\
+				\item[b)]\quad \\
+			\end{enumerate}
+			\item[4.:]\quad \\
+		\end{enumerate}
+	\end{enumerate}
+\end{document}
