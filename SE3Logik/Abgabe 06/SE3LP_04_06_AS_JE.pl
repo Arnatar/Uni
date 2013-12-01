@@ -60,6 +60,16 @@ pi(Steps, Result) :-
 % Result ist das entsprechende Level der Reihe zu dem Rest addiert
     Result is NResult + (4 * (-1 ** (Steps+1))/((2*Steps) - 1)).
 
+/*
+?- pi(20,Result).
+Result = 3.09162380666784.
+
+?- pi(0,Result).
+ERROR: Out of local stack
+?- pi(1,Result).
+Result = 4.
+*/
+
 %Endrekursiv:
 % wrapper-praedikat
 endRekPi(Steps,Result):-
@@ -70,30 +80,58 @@ endRekPi(0,PriorResult,PriorResult):-!.
 
 % Rekursion
 endRekPi(Steps,Prior,Result):-
-% NResult ist die
+% NResult ist die bisherige Reihe.
 	NResult is Prior + (4 * (-1 ** (Steps + 1))/((2 * Steps)-1)),
-% Steps um 1 reduzieren
+% Steps um 1 reduzieren.
 	NSteps is Steps -1,
 	endRekPi(NSteps,NResult,Result).
 
+/*
+?- endRekPi(139001,R).
+R = 3.141599847782641.
+
+?- endRekPi(139000,R).
+R = 3.141585459345189.
+*/
+
 %2.:
+/*
+Die Nicht endrekursive Loesung ist verstaendlicher, da es eine eifache
+Abarbeitung von Schritten ist und ohne Zwischenspeicher auskommt.
+Die Endrekursive Loesung ist bei der Berechnungszeit deutlich schneller
+(bei 500000 und 1000000 Schritten braucht pi/2 eine gewisse
+Berechnungszeit, endRekPi/2 dagegen berechnet dies in deutlich weniger
+Zeit)
+*/
 
 %3.:
+%
+/*
+?- endRekPi(139001,R).
+R = 3.141599847782641.
+
+?- endRekPi(139000,R).
+R = 3.141585459345189.
+
+Damit ist gezeigt, dass bei 139000 Schritten die 5 nicht mehr hin und
+her springt.
+*/
+
 
 
 %-----------Aufgabe 3------------
 
 %1.:
-%nat_zahl(-Resultat)
+%natN(-Resultat)
 natN(Resultat):-
-    natZahlHelper(Resultat, 0).
+    natNH(Resultat, 0).
 
 natNH(Result, Max):-
     Result is Max + 1;
     NewMax is Max + 1,
     natNH(Result, NewMax).
 
-% ?- natZahl(R).
+% ?- natN(R).
 % R = 1 ;
 % R = 2 ;
 % R = 3 ;
@@ -107,16 +145,16 @@ natNH(Result, Max):-
 
 
 %2.:
-% nat_zahl(-Resultat, +Limit)
-natN2(Resultat, Limit):-
-    natN2H(Resultat, 0, Limit).
-natN2H(Resultat, Max, Limit):-
-    Resultat is Max + 1, Resultat =< Limit;
+% natN2(-Resultat, +Limit)
+natN2(Result, Limit):-
+    natN2H(Result, 0, Limit).
+natN2H(Result, Max, Limit):-
+    Result is Max + 1, Result =< Limit; %<- OR
     NewMax is Max + 1,
     NewMax =< Limit,
-    natN2H(Resultat, NewMax, Limit).
+    natN2H(Result, NewMax, Limit).
 
-% ?- natZahl(R, 6).
+% ?- natN2(R, 6).
 % R = 1 ;
 % R = 2 ;
 % R = 3 ;
