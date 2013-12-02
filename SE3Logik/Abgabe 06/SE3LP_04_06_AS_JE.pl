@@ -16,7 +16,11 @@ zins_rek(Anlagebetrag,Zinsfaktor,Anlagedauer,Endguthaben):-
 	Guthaben is (1 + Zinsfaktor) * Anlagebetrag,
 	Restdauer is Anlagedauer - 1,
 	%Rekursiver Aufruf
-	zins(Guthaben,Zinsfaktor,Restdauer,Endguthaben).
+	zins_rek(Guthaben,Zinsfaktor,Restdauer,Endguthaben).
+
+%Beispiel
+%?- zins_rek(100,0.05,3,Guthaben).
+%Guthaben = 115.7625
 
 %2.:
 zins_iter(Anlagebetrag,Zinsfaktor,Anlagedauer,Endguthaben):-
@@ -24,11 +28,17 @@ zins_iter(Anlagebetrag,Zinsfaktor,Anlagedauer,Endguthaben):-
 	Zinsen is Zinssatz ** Anlagedauer,
 	%Abschluss der Zinsformel K * 1 + z^t
 	Endguthaben is Anlagebetrag * Zinsen.
+	
+%Beispiel
+%?- zins_iter(100,0.05,3,Guthaben).
+%Guthaben = 115.76250000000002.
 
 %3.:
-% noch nicht fertig
+
 
 %4.:
+% muss mit einem Zinsfaktor und einem Bonuszinzfaktor initialisiert werden
+% im Beispiel der Aufgabe sind die Werte 0.01 und 0.02
 zins_steigend(Anlagebetrag,Zinsfaktor,Bonuszins,Anlagedauer,Endguthaben):-
 	Anlagedauer == 0,
 	Endguthaben = Anlagebetrag;
@@ -42,9 +52,17 @@ zins_steigend(Anlagebetrag,Zinsfaktor,Bonuszins,Anlagedauer,Endguthaben):-
 	%Rekursiver Aufruf
 	zins_steigend(Guthaben,NeuerZins,NeuerBonus,Restdauer,Endguthaben).
 
+%Beispiel
+%?- zins_steigend(100,0.01,0.02,2,Guthaben).
+%Guthaben = 107.12
 
 %5.:
+% Das Anlegen mit steigendem Zinssatz lohnt sich ab einer Dauer von 4 Jahren.
 
+%?- zins_rek(100,0.04,4,Guthaben).
+%Guthaben = 116.98585600000001 ;
+%?- zins_steigend(100,0.01,0.02,4,Guthaben).
+%Guthaben = 117.257569 ;
 
 %-----------Aufgabe 2------------
 
@@ -166,7 +184,7 @@ natN2H(Result, Max, Limit):-
 %3.:
 pi_incr(Steps,Pi):-
 % Fuer alle Zahlen aus den Natuerlichen Zahlen wird eine Piberechnung
-% ausgef�hrt mit den Zahlen als Schritte.
+% ausgef�hrt mit den Zahlen als Schritte.
 	natN2(PiSteps,Steps),
 	endRekPi(PiSteps,Pi).
 /*
@@ -189,4 +207,28 @@ false.
 %-----------Aufgabe 4------------
 
 %1.:
+% In den ersten 3 Klauseln werden die Rechenregeln
+% zur Koeffizienzberechnung definiert. Die 4. Klausel
+% führt die Rekursion aus und addiert die jeweiligen
+% Ergebnisse zum finalen Ergebnis.
+% Abbruch für n = 0
+ binomial(0,_,0):- !.
+% Abbruch für k = 1
+ binomial(N,1,N):- !.
+% Wenn k = n, dann ist R = 1
+ binomial(X,X,1):- !.
+% Hauptklausel: 
+ binomial(N,K,Result):-
+	 % Dekrementierung
+	 N1 is N-1,
+	 K1 is K-1,
+	 % Erster Teil der Binomialkoeffizients Gleichung
+	 binomial(P1,K,R1),
+	 % Zweiter Teil der Binomialkoeffizients Gleichung
+	 binomial(P1,K1,R2),
+	 % Addition der Teilergebnisse zum Abschluss der Berechnung
+	 Result is R1 + R2.
 
+% Beispiel:	 
+%?- binomial(8,2,Result).
+%Result = 28.
