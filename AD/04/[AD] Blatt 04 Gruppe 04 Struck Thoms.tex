@@ -231,11 +231,79 @@
 		\item[\textbf{4.}]
 		\begin{enumerate}
 			\item[a)]\quad \\
-			\todo
+				Zuerst müssen wir alle starken Zusammhangskomponenten in den Graphen finden. Dafür benutzen wir den Algorithmus von Tarjan. Nachdem wir alle Komponenten gefunden haben, finden wir das Wurzelelement jeder Komponente. Duplikate werden mit Sicherheit entstehen, aber die können wir ohne Probleme eleminieren.\\
+				Danach müssen wir nur noch die restlichen Wurzelelemente infiltrieren und dann wird das komplette MCP lahmgelegt.
+
+				\begin{verbatim}
+					include "Tarjan's Algorithm";
+
+					List l, r;
+
+					while(nodes.flags > 0)
+					{
+					    l.append(tarjan.find());
+					}
+
+					foreach(l as elem)
+					{
+					    r.append(find_rootnode(elem));
+					}
+
+					r.remove_duplicates();
+
+					infiltrate(r);
+				\end{verbatim}
+
+				\begin{tikzpicture}[scale=0.7]
+					\draw [->] (258bp,215.83bp) .. controls (258bp,208.13bp) and (258bp,198.97bp) .. (258bp,180.41bp);
+					\draw [->] (229.59bp,71.831bp) .. controls (233.83bp,63.792bp) and (238.91bp,54.167bp) .. (248.28bp,36.413bp);
+					\draw [->] (248.41bp,143.83bp) .. controls (244.17bp,135.79bp) and (239.09bp,126.17bp) .. (229.72bp,108.41bp);
+					\draw [->] (286.41bp,71.831bp) .. controls (282.17bp,63.792bp) and (277.09bp,54.167bp) .. (267.72bp,36.413bp);
+					\draw [->] (70.411bp,215.83bp) .. controls (66.168bp,207.79bp) and (61.088bp,198.17bp) .. (51.718bp,180.41bp);
+					\draw [->] (267.59bp,143.83bp) .. controls (271.83bp,135.79bp) and (276.91bp,126.17bp) .. (286.28bp,108.41bp);
+					\draw [->] (89.589bp,215.83bp) .. controls (93.832bp,207.79bp) and (98.912bp,198.17bp) .. (108.28bp,180.41bp);
+					\draw [->] (42bp,143.83bp) .. controls (42bp,136.13bp) and (42bp,126.97bp) .. (42bp,108.41bp);
+					\begin{scope}
+						\draw (80bp,234bp) ellipse (80bp and 18bp);
+						\draw (80bp,234bp) node {Wurzelknoten};
+					\end{scope}
+					\begin{scope}
+						\draw (147bp,180bp) -- (89bp,180bp) -- (89bp,144bp) -- (147bp,144bp) -- cycle;
+						\draw (118bp,162bp) node {SZK 2};
+					\end{scope}
+					\begin{scope}
+						\draw (71bp,180bp) -- (13bp,180bp) -- (13bp,144bp) -- (71bp,144bp) -- cycle;
+						\draw (42bp,162bp) node {SZK 1};
+					\end{scope}
+					\begin{scope}
+						\draw (258bp,234bp) ellipse (80bp and 18bp);
+						\draw (258bp,234bp) node {Wurzelknoten};
+					\end{scope}
+					\begin{scope}
+						\draw (71bp,108bp) -- (13bp,108bp) -- (13bp,72bp) -- (71bp,72bp) -- cycle;
+						\draw (42bp,90bp) node {SZK 3};
+					\end{scope}
+					\begin{scope}
+						\draw (249bp,108bp) -- (191bp,108bp) -- (191bp,72bp) -- (249bp,72bp) -- cycle;
+						\draw (220bp,90bp) node {SZK 5};
+					\end{scope}
+					\begin{scope}
+						\draw (287bp,180bp) -- (229bp,180bp) -- (229bp,144bp) -- (287bp,144bp) -- cycle;
+						\draw (258bp,162bp) node {SZK 4};
+					\end{scope}
+					\begin{scope}
+						\draw (287bp,36bp) -- (229bp,36bp) -- (229bp,0bp) -- (287bp,0bp) -- cycle;
+						\draw (258bp,18bp) node {SZK 7};
+					\end{scope}
+					\begin{scope}
+						\draw (325bp,108bp) -- (267bp,108bp) -- (267bp,72bp) -- (325bp,72bp) -- cycle;
+						\draw (296bp,90bp) node {SZK 6};
+					\end{scope}
+				\end{tikzpicture}
 			\item[b)]\quad \\
-			\todo
+				Dadurch, dass alle Wurzelelemente eines gerichteten Graphen infiltriert werden, muss das komplette MCP eleminiert werden. Denn sobald Wurzelelement infiltriert ist, fallen alle Module aus, die davon anhängig sind. Da es sich hier um die Wurzel handelt, fallen alle Module unter diesem Modul aus.
 			\item[c)]\quad \\
-			\todo
+				Durch die Bildung von stark zusammhängenden Modulkomponenten wurde der Graph maximal abstrahiert. Und durch die Infiltration von Wurzelknoten ist es möglich, einen kompletten Graphen zu eleminieren. Eine weitere Minimierung ist nicht mehr möglich.
 		\end{enumerate}
 	\end{enumerate}
 \end{document}

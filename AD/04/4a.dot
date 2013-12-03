@@ -1,0 +1,20 @@
+digraph algo
+{
+    a [label="Wurzelknoten"];
+    b [label="SZK 1", shape="box"];
+    c [label="SZK 2", shape="box"];
+    d [label="SZK 3", shape="box"];
+
+    a -> b -> d;
+    a -> c;
+
+
+    e [label="Wurzelknoten"];
+    f [label="SZK 4", shape="box"];
+    g [label="SZK 5", shape="box"];
+    h [label="SZK 6", shape="box"];
+    i [label="SZK 7", shape="box"];
+
+    e -> f -> g -> i;
+    f -> h -> i;
+}
