@@ -26,8 +26,7 @@
 \usepackage{algpseudocode}
 \usepackage{multicol}
 \usepackage[parfill]{parskip}
-\usepackage{dot2texi}
-\usetikzlibrary{automata,calc,patterns,shapes}
+\usetikzlibrary{arrows,positioning,automata,calc,patterns,shapes}
 
 
 % ------------------------------------------------------
@@ -168,16 +167,83 @@
 					der Zusammenhangskomponenten. Jede Färbung würde dann einem Blatt entsprechen. \(2^n\) Wäre 
 					damit die Anzahl der Blätter in der n-ten Ebene, also bei n Zusammenhangskomponenten.
 			\end{enumerate}
-			\item[c)]
+			\item[c)]\quad \\
+				Es sind laut dem Vier-Farben-Satz 4 Farben vonnöten, um eine Karte komplett einzufärben.
 			\begin{enumerate}
 				\item[(i)]\quad \\
-				\todo
+					\begin{tikzpicture}[>=stealth',every path/.style={-,thick}]
+						%nodes
+						\node (A) [circle, draw]{\textbf{A}};
+						\node (E) [circle, draw, right = 1.5cm of A] {\textbf{E}};
+						\node (N) [circle, draw, right = 1.5cm of E] {\textbf{N}};
+						\node (W) [circle, draw, right = 1.5cm of N] {\textbf{W}};
+						
+						\node (M) [circle, draw, below right = 1.5cm and 0.5cm of E] {\textbf{M}};
+						
+						\node (H) [circle, draw, below = 3cm of E] {\textbf{H}};
+						\node (B) [circle, draw, below = 3cm of N] {\textbf{B}};
+						
+						%paths
+						\path (A) edge (E);
+						\path (E) edge (N);
+						\path (N) edge (W);
+						\path (A) edge (M);
+						\path (E) edge (M);
+						\path (N) edge (M);
+						\path (W) edge (M);
+						\path (M) edge (H);
+						\path (M) edge (B);
+					\end{tikzpicture}
 				\item[(ii)]\quad \\
-				\todo
+					\begin{tikzpicture}[>=stealth',every path/.style={-,thick}]
+						%nodes
+						\node (A) [circle, draw, fill = blue!50]{\textbf{A}};
+						\node (E) [circle, draw, fill = red!60, right = 1.5cm of A] {\textbf{E}};
+						\node (N) [circle, draw, fill = blue!50, right = 1.5cm of E] {\textbf{N}};
+						\node (W) [circle, draw, fill = red!60,right = 1.5cm of N] {\textbf{W}};
+						
+						\node (M) [circle, draw, fill = green!80,below right = 1.5cm and 0.5cm of E] {\textbf{M}};
+						
+						\node (H) [circle, draw, fill = red!60,below = 3cm of E] {\textbf{H}};
+						\node (B) [circle, draw, fill = red!60,below = 3cm of N] {\textbf{B}};
+						
+						%paths
+						\path (A) edge (E);
+						\path (E) edge (N);
+						\path (N) edge (W);
+						\path (A) edge (M);
+						\path (E) edge (M);
+						\path (N) edge (M);
+						\path (W) edge (M);
+						\path (M) edge (H);
+						\path (M) edge (B);
+					\end{tikzpicture} \\ \\
+					Farbe1 = \{A,N\} \\
+					Farbe2 = \{E, W, H, B\} \\
+					Farbe3 = \{M\} \\
 				\item[(iii)]\quad \\
-				\todo
+					Der Vier-Farben-Satz sagt aus, dass 4 Farben minimal vorhanden sein müssen, um
+					\underline{jede} Karte vollständig zu färben (worst-case). Der Satz macht keine Aussage
+					darüber, dass nicht Karten existieren, welche mit weniger auskommen.
 				\item[(iv)]\quad \\
-				\todo
+					\begin{tikzpicture}[>=stealth',every path/.style={-,thick}]
+						%nodes
+						\node (A) [circle, draw]{\textbf{A}};
+						\node (B) [circle, draw, below left = 3cm of A] {\textbf{B}};
+						\node (C) [circle, draw, below right = 3cm of A] {\textbf{C}};
+						\node (D) [circle, draw, below = 0.75cm of A] {\textbf{D}};
+						
+						%paths
+						\path (A) edge (B);
+						\path (A) edge (C);
+						\path (A) edge (D);
+						\path (B) edge (C);
+						\path (B) edge (D);
+						\path (C) edge (D);
+					\end{tikzpicture} \\ \\
+					Ein Land ist von 3 anderen Ländern umgeben. Wenn man hier das Einfärben beginnt kann man 3 
+					Ländern je eine Farbe zuordnen. Das letzte Land kann nicht eine der 3 Farben erhalten,
+					da seine Nachbarländer schon je eine der 3 Farben innehaben.					
 			\end{enumerate}
 		\end{enumerate}
 		\item[\textbf{3.}]
