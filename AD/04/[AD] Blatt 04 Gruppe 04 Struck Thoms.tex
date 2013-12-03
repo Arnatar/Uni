@@ -26,6 +26,7 @@
 \usepackage{algpseudocode}
 \usepackage{multicol}
 \usepackage[parfill]{parskip}
+\usepackage{dot2texi}
 \usetikzlibrary{automata,calc,patterns,shapes}
 
 
@@ -207,7 +208,24 @@
 				\begin{multicols}{2}
 					Der Graph ''$G_2$'' besitzt keine starken Zusammenhangskomponenten, da er keinerlei Zyklen aufweist. \\
 					Nur der Graph ''$G_1$'' besitzt eine starke Zusammenhangskomponente, die Knoten ''3'' oder ''4'' bilden keine starke Zusammenhangskomponente. \\
-					\includegraphics[scale=0.6]{g1.pdf}					
+					\begin{tikzpicture}[scale=0.7]
+						\draw [->] (93.674bp,72.202bp) .. controls (96.748bp,64.006bp) and (100.46bp,54.102bp)  .. (107.4bp,35.593bp);
+						\draw [->] (117.84bp,143.6bp) .. controls (119.82bp,133.2bp) and (122.01bp,119.93bp)  .. (123bp,108bp) .. controls (124.32bp,92.055bp) and (124.32bp,87.945bp)  .. (123bp,72bp) .. controls (122.29bp,63.475bp) and (120.97bp,54.27bp)  .. (117.75bp,35.907bp);
+						\draw [->] (107.19bp,143.83bp) .. controls (104.19bp,135.84bp) and (100.61bp,126.28bp)  .. (93.718bp,107.91bp);
+						\begin{scope}
+							\draw (114bp,162bp) ellipse (114bp and 18bp);
+							\draw (114bp,162bp) node {\{ 1 , 2 , 5 , 6 , 7 , 8 \}};
+						\end{scope}
+
+						\begin{scope}
+							\draw (87bp,90bp) ellipse (27bp and 18bp);
+							\draw (87bp,90bp) node {3};
+						\end{scope}
+						\begin{scope}
+							\draw (114bp,18bp) ellipse (27bp and 18bp);
+							\draw (114bp,18bp) node {4};
+						\end{scope}
+					\end{tikzpicture}
 				\end{multicols}
 		\end{enumerate}
 		\item[\textbf{4.}]
