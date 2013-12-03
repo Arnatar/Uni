@@ -1,17 +1,16 @@
 % Commands
 
 \newcommand{\authorinfo}{Arne Struck, Lars Thoms}
-\newcommand{\titleinfo}{AD [HA] zum 20. 11. 2013}
+\newcommand{\titleinfo}{AD [HA] zum 4. 12. 2013}
 \newcommand{\qed}{\ \square}
 \newcommand{\limn}{\lim\limits_{n\to\infty}}
 \newcommand{\todo}{\textcolor{red}{\textbf{TODO}}}
-\newcommand{\Forall}{\textbf{for each}}
 
 % ------------------------------------------------------
 
 % Packages & Stuff
 
-\documentclass[a4paper,11pt,fleqn]{scrartcl}
+\documentclass[a4paper,11pt,ngerman]{scrartcl}
 \usepackage[german,ngerman]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -49,31 +48,117 @@
 		\item[\textbf{1.}]
 		\begin{enumerate}
 			\item[a)]\quad \\
-			\todo
+				Der Algorithmus funktioniert nicht mehr. Dies wird an folgendem Gegenbeispiel deutlich 
+				(gesucht wird 5, die Zeile ist abgeändert):
+				\begin{verbatim}
+					in: A[int] = [1,2,3,4,5]
+					low = 0, high = 4, mid = 2
+					A[mid] < 5
+					
+					low = 2 + 1, high = 4, mid = 3
+					A[mid] < 5
+					
+					low = 3 + 1, high = 4, mid = 4
+					
+					return not_found
+				\end{verbatim}
+				Die 5 wird nicht gefunden, da die Bedingung (while low < high) nicht mehr gilt.
 			\item[b)]\quad \\
-			\todo
+				Die Verarbeitung einer absteigend sortierten Liste lässt sich durch das Invertieren der 
+				Vergleichszeichen innerhalb der while-Schleife erreichen, wodurch die Verarbeitung des 
+				Algorithmus ''umgedreht'' wird.
+				\begin{verbatim}
+					BinarySearch(A[0..N-1],value){
+					    low = 0;
+					    high = N - 1;
+					    while(low <= high){
+					        mid = (low + high) / 2;
+					        if(A[mid] < value){
+					            high = mid - 1;
+					        }
+					        else if (A[mid] > value){
+				    	        low = mid + 1;
+					        }
+					        else{
+					            return mid;
+					        }
+					    }
+					    return not_found;
+					}
+				\end{verbatim}
 			\item[c)]\quad \\
-			\todo
+				Korrekte Eingaben vorausgesetzt, ist es unumgänglich die while-Schleife zu betreten,
+				hier gilt low <= mid <= high. Nun wird die Differenz von low und high pro Iteration um mindestens
+				1 verringert, wenn der Algorithmus noch nicht terminiert hat. Die Verringerung der Differenz 
+				resultiert aus den beiden Vergleichen. Daraus resultiert, dass nach spätestens n (n  = Array-
+				Länge) Iterationen low = mid = high gilt, womit der Wert A[mid] ausgegeben wird. Damit ist bei
+				korrekter Eingabe Terminierung garantiert.
 			\item[d)]\quad \\
-			\todo
+				
 		\end{enumerate}
 		\item[\textbf{2.}]
 		\begin{enumerate}
 			\item[a)]
 			\begin{enumerate}
 				\item[(i)]\quad \\
-				\todo
+					Zu zeigen wären 2 Behauptungen:
+					\begin{multicols}{2}
+						\[E = \emptyset \Rightarrow 1-\text{färbbar}\] \\
+						Da keine Kante existiert, besitzt kein Knoten einen Nachbarknoten.
+						Also kann auch jeder Knoten in der gleichen Farbe gefärbt werden \\ \\
+
+						\[E = \emptyset \Leftarrow 1-\text{färbbar}\] \\
+						Wenn alle Knoten in der gleichen Farbe gefärbt sind, können auch keine Nachbarknoten
+						existieren, da diese nicht gleich eingefärbt werden dürfen. Damit ist gezeigt, dass
+						im Fall der 1-Färbung keine Kanten existieren können.
+					\end{multicols}
 				\item[(ii)]\quad \\
-				\todo
+					Zu zeigen ist also, wenn eine Abbildung $c_k:V\rightarrow\{1,..,k\}$ existiert muss
+					auch eine Abbildung $c_k:V\rightarrow\{1,..,k,k+1\}$ existieren.
+					Da $c_k$ nicht surjektiv sein muss, kann jeder Graph trivialer Weise als (k+1)-färbbar 
+					angesehen werden (es müssen ja nicht alle Färbungen Anwendung finden).
+					Wäre dem nicht so, dann wären injektive Abbildungen ein Problem bei der (k+1)-Färbung.
 				\item[(iii)]\quad \\
-				\todo
+					Annahme: \(n = |V|\) ($n$ wird nicht genauer spezifiziert) \\
+					Für jedes \(n \in V\) wird eine Farbe in \(c_k\) reserviert (wenn $k < n$ gilt, werden neue 
+					Farben hinzugefügt). Nun wird eine injektive Abbildung erstellt (bijektiv, wenn zuvor $k < n$ 
+					und jetzt $k = n$). Damit ist jedes $n$ einer eigenen Farbe zugeordnet und somit eine 
+					$n$-Färbung erreicht.
 			\end{enumerate}
 			\item[b)]
 			\begin{enumerate}
 				\item[(i)]\quad \\
-				\todo
+					Zu zeigen: \(2-\text{färbbar} \Rightarrow\) bipartit. \\
+					Die 2-Färbung bedeutet, dass 2 ''Gruppen'' von Knoten keine direkten Nachbarknoten in der 
+					gleichen ''Gruppe'' haben (ansonsten könnten sie nicht gleich gefärbt sein).
+					Diese ''Gruppen'' kann man auch als Mengen auffassen. Damit ist die Definition von bipartiten 
+					Graphen hergestellt, da diese einen Graphen in 2 Mengen unterteilen, wobei die Elemente der 
+					Teilmengen dieser 2 Mengen nicht miteinander durch Kanten verbunden sind.
+				\newpage
 				\item[(ii)]\quad \\
-				\todo
+					\begin{verbatim}
+						2colored(V){
+						    Set1 = Set;
+						    Set2 = Set;
+						    color1 = randomElement(V).getcolor();
+						    color2 = color1;
+						    while(color1 = color2){
+						        color2 = randomElement(V).getcolor();
+						    }
+						    forAll(v in V){
+						        if(v.getcolor() = color1){
+						            Set1.add(v);
+						        }
+						        else if (v.getcolor() = color1){
+						            Set2.add(v);
+						        }
+						        else{
+						            return no_2color;
+						        }
+						    }
+						    return Set1,Set2;
+						}
+					\end{verbatim}
 				\item[(iii)]\quad \\
 				\todo
 			\end{enumerate}
