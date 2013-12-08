@@ -152,38 +152,87 @@ false.
 %------------------------------------------
 
 % sub_atom(+Atom, ?Before, ?Length, ?After, ?Sub)
+% wrapper
 mysub_atom(Atom,Before,Length,After,Sub):-
-		atom_chars(Atom,AtomList),
-		X is Before + Length,
-		mysub_atomH(AtomList,Before,Length,After,Sub,List,X),
-		Sub = List.
-		%atom_chars(Sub,List).
+                atom_chars(Atom,AtomList),
+% Abbruchwert errechnen
+                X is Before + Length,
+% Helper aufrufen.
+                mysub_atomH(AtomList,Before,Length,After,Sub,X).
 
+% Abbruchbedingung fuer Rekursion, wenn alle angeforderten Elemente erreicht sind.
+mysub_atomH(_,X,_,_,_,X).
 
-mysub_atomH(_,X,_,_,_,_,X).
-mysub_atomH(AtomList,Before,Length,After,Sub,List,X):-
-		mynth1N(Before,AtomList,E),
-		append(List,[E]),
-		NBefore is Before + 1,
-		mysub_atomH(AtomList,NBefore,Length,After,Sub,List,X).
-		
+mysub_atomH(AtomList,Before,Length,After,List,X):-
+% Element auf das Before zeigt aus der Liste lesen.
+                mynth1N(Before,AtomList,E),
+% Before wird um 1 inkrementiert.
+                NBefore is Before + 1,
+% Rekursionsaufruf mit der Liste und Rest.
+                mysub_atomH(AtomList,NBefore,Length,After,NList,X),
+% Element zu NList hinzugefuegt.
+                append(List,[E],NList).
+                
+/*
+?- mysub_atom(abc,1,1,A,S).
+S = [] ;
+S = [_G929] ;
+S = [_G929, _G935] ;
+S = [_G929, _G935, _G941] ;
+S = [_G929, _G935, _G941, _G947] ;
+S = [_G929, _G935, _G941, _G947, _G953] ;
+S = [_G929, _G935, _G941, _G947, _G953, _G959] ;
+S = [_G929, _G935, _G941, _G947, _G953, _G959, _G965] ;
+S = [_G929, _G935, _G941, _G947, _G953, _G959, _G965, _G971] ;
+S = [_G929, _G935, _G941, _G947, _G953, _G959, _G965, _G971, _G977] ;
+S = [_G929, _G935, _G941, _G947, _G953, _G959, _G965, _G971, _G977|...] . <- Manuell abgebrochen da anscheinend
+Endlosrekursion.
+
+Wir wissen nicht, warum die Abbruchbedingung nie erreicht wird.
+*/
+                
 
 %------------------------------------------
 % intersection(+Set1, +Set2, -Set3)
-myintersection([],_,_):- !.
-myintersection([H|T],Set,Out):-
-		\+(H = []), 
-		(member(H, Set) -> 
-		append(Out, [H], NOut), 
-		myintersection(T,Set,NOut); %<- OR
-		myintersection(T,Set,NOut)).
+                
+% Abbruch
+myintersection([],_,[]).
+% Wenn X ein Element von Set2 ist, wird X an T3 als Header gehaengt und dann Set1 um den Header verkuerzt.
+myintersection([X|T1],Set2,[X|T3]):- member(X,Set2), myintersection(T1,Set2,T3).
+% Wenn X kein Element von Set2 ist, dann wird Set1 um einen verringert.
+myintersection([_|T1],Set2,Set3):- myintersection(T1,Set2,Set3).
 
+/*
+?- intersection([a,b,c],[a,b,c],I).
+I = [a, b, c].
+?- myintersection([a,b,c],[a,b,c],I).
+I = [a, b, c] ;
+I = [a, b] ;
+I = [a, c] ;
+I = [a] ;
+I = [b, c] ;
+I = [b] ;
+I = [c] ;
+I = [].
 
-%intersection/3
+Es wird das richtige Ergebnis gefunden, allerdings werden durch die Rekursion
+auch die restlichen Teilergebnisse Zurueckgegeben. 
+*/
+
 %============== Aufgabe 3 ==============
 
 %------------------------------------------
+?- [medien2].
 %1.:
+kUmsatz(KID, Jahr, Umsatz):-
+    produkt(PID, KID, _, _, _, _, _),
+    aggregate_all(sum(X), (verkauft(PID, Jahr, Preis, Anzahl), X is Preis * Anzahl), Umsatz).
+    
+/*
+?- kUmsatz(10,2012,I).
+I = 184.
+*/
+    
 
 %------------------------------------------
 %2.:
