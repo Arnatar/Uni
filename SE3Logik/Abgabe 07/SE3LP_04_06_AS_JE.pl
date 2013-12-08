@@ -40,21 +40,21 @@ Unifizierbar, da fuer den Tail eindeutige belegungen gefunden werden koennen.
 % last(?List,?Last)
 
 % Abbruch mit dem letzten Element
-last([Last|[]],Last).
+mylast([Last|[]],Last).
 
 % Header rekursiv abtrennen und mit dem Rest der Liste ein rekursiver Aufruf.
-last([_|Rest],Last) :- 
-		last(Rest,Last).
+mylast([_|Rest],Last) :- 
+		mylast(Rest,Last).
 		
 /*
-?- last([a,b,c],L).
+?- mylast([a,b,c],L).
 L = c ;
 false.
 
-?- last([c],L).
+?- mylast([c],L).
 L = c .
 
-?- last([],L).
+?- mylast([],L).
 false.
 */
 % Stellt die gleichen Funktionalitäten bereit.
@@ -66,37 +66,39 @@ false.
 % nextto(?Element,?Follower,?List)
 
 % Abbruch, der Follower ist in der Liste gefunden.
-nextto(Element,Follower,[Element,Follower|_]).
+mynextto(Element,Follower,[Element,Follower|_]).
 
 % Liste immer um den Header verkleinert
-nextto(Element,Follower,[_|Rest]):-
-		nextto(Element,Follower,Rest).
+mynextto(Element,Follower,[_|Rest]):-
+		mynextto(Element,Follower,Rest).
 		
 /*
-?- nextto(a,F,[a,b,c]).
+?- mynextto(a,F,[a,b,c]).
 F = b ;
 false.
 
-?- nextto(a,F,[a,b,a]).
+?- mynextto(a,F,[a,b,a]).
 F = b ;
 false.
 
-?- nextto(a,F,[c,b,a]).
+?- mynextto(a,F,[c,b,a]).
 false.
 
-?- nextto(a,F,[c,a,a]).
+?- mynextto(a,F,[c,a,a]).
 F = a ;
 false.
 
-?- nextto(a,F,[a,a,a,b]).
+?- mynextto(a,F,[a,a,a,b]).
 F = a ;
 F = a ;
 F = b ;
 false.
 
-?- nextto(a,F,[]).
+?- mynextto(a,F,[]).
 false.
 */
+
+% Stellt die gleichen Funktionalitäten bereit.
 
 %------------------------------------------
 
@@ -104,16 +106,16 @@ false.
 % nth1(+Index,?List,?Element)
 
 % Abbruch bei Index = 1 und Element erstes in der Liste
-nth1(1,[Element|_],Element).
+mynth1(1,[Element|_],Element).
 % 
-nth1(Index,[_|Rest],Element):-
+mynth1(Index,[_|Rest],Element):-
 % Index abbauend bis 1 gezaehlt, gleichzeitig immer der Header abgetrennt.
 		IndexN is Index - 1,
-		nth1(IndexN,Rest,Element).
+		mynth1(IndexN,Rest,Element).
 /*
-?- nth1(I,[a,b,c],b).
-ERROR: [Thread pdt_console_client_0_Default Process] nth1/3: Arguments are not sufficiently instantiated
-?- nth1(2,[a,b,c],b).
+?- mynth1(I,[a,b,c],b).
+ERROR: [Thread pdt_console_client_0_Default Process] mynth1/3: Arguments are not sufficiently instantiated
+?- mynth1(2,[a,b,c],b).
 true .
 */
 % Verhaelt sich nicht identisch zu dem Vorbild, da der Index instanziiert sein muss
@@ -121,35 +123,64 @@ true .
 
 % nth1N(?Index,?List,?Element)
 % Wrapper, Start mit 1.
-nth1N(Index,List,Element):-
-		nth1N(Index,List,Element,1).
+mynth1N(Index,List,Element):-
+		mynth1N(Index,List,Element,1).
 
 % Abbruch, Index = Run und Element = Head
-nth1N(X,[Element|_],Element,X).
+mynth1N(X,[Element|_],Element,X).
 % 
-nth1N(Index,[_|Rest],Element,Run):-
+mynth1N(Index,[_|Rest],Element,Run):-
 % Aufbauende Funktionalitaet, ansonsten wie oben.
 		RunN is Run + 1,
-		nth1N(Index,Rest,Element,RunN).
+		mynth1N(Index,Rest,Element,RunN).
 
 /*
-?- nth1N(2,[a,b,c],b).
+?- mynth1N(2,[a,b,c],b).
 true .
 
-?- nth1N(I,[a,b,c],b).
+?- mynth1N(I,[a,b,c],b).
 I = 2 ;
+false.
+
+?- mynth1N(2,[a,b,c],A).
+A = b ;
 false.
 */
 % Funktioniert so wie das Vorbild, allerdings wird ein Hilfspraedikat benoetigt
 
-%------------------------------------------
-
-% sub_atomN(+Atom, ?Before, ?Length, ?After, ?Sub)
 
 %------------------------------------------
+
+% sub_atom(+Atom, ?Before, ?Length, ?After, ?Sub)
+mysub_atom(Atom,Before,Length,After,Sub):-
+		atom_chars(Atom,AtomList),
+		X is Before + Length,
+		mysub_atomH(AtomList,Before,Length,After,Sub,List,X),
+		Sub = List.
+		%atom_chars(Sub,List).
+
+
+mysub_atomH(_,X,_,_,_,_,X).
+mysub_atomH(AtomList,Before,Length,After,Sub,List,X):-
+		mynth1N(Before,AtomList,E),
+		append(List,[E]),
+		NBefore is Before + 1,
+		mysub_atomH(AtomList,NBefore,Length,After,Sub,List,X).
+		
+
+%------------------------------------------
+% intersection(+Set1, +Set2, -Set3)
+myintersection([],_,_):- !.
+myintersection([H|T],Set,Out):-
+		\+(H = []), 
+		(member(H, Set) -> 
+		append(Out, [H], NOut), 
+		myintersection(T,Set,NOut); %<- OR
+		myintersection(T,Set,NOut)).
+
 
 %intersection/3
-%============== Aufgabe 2 ==============
+%============== Aufgabe 3 ==============
 
 %------------------------------------------
 %1.:
