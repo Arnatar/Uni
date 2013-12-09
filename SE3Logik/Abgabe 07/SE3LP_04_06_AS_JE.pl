@@ -237,5 +237,78 @@ I = 184.
 %------------------------------------------
 %2.:
 
+% Summiert die Umsätze für ein bestimmtes Jahr aller Produkte auf
+kUmsatzSummiert(KID, Jahr, Gesamt):-
+	aggregate_all(sum(Umsatz), kUmsatz(KID, Jahr, Umsatz), Gesamt).
+
+%?- kUmsatzSummiert(7, 2012, Gesamt).
+%Gesamt = 1510.
+
+% Wrapper Funktion um den Umsatz mehrerer Jahre zu bestimmen
+kUmsatzMehrereJahre(KID, Jahr, Jahre, Ergebnis):-
+	kUmsatzMehrereJahre(KID, Jahr, Jahre, 0, Ergebnis).
+	
+%?- kUmsatzMehrereJahre(7, 2012, 5, Ergebnis).
+%Ergebnis = 27990 ;
+
+kUmsatzMehrereJahre(KID, Jahr, Jahre, Summe, Ergebnis):-
+	% Counter über 0 -> Es müssen noch Jahre verarbeitet werden
+	Jahre > 0,
+	% Berechnung des Jahressumsatzes
+	kUmsatzSummiert(KID, Jahr, Umsatz),
+	% Ein Jahr früher wird als nächstes betrachtet, die Anzahl der noch zu
+	% betrachtenden Jahre sinkt.
+	Jahr2 is Jahr - 1,
+	Jahre2 is Jahre - 1,
+	% Aufsummierung des Zwischenergebnis
+	Summe2 is Umsatz + Summe,
+	kUmsatzMehrereJahre(KID, Jahr2, Jahre2, Summe2, Ergebnis);
+	% Wenn alle Jahre abgelaufen sind steht das Ergebnis fest
+	Jahre == 0,
+	Ergebnis is Summe.
+
+% Prüft ob der Umsatz in einer bestimmten Kategorie im Vergleich zu den
+% 5 vorherigen Jahren gestiegen ist.
+% Dies ist der Fall, falls der aktuelle Umsatz höher ist als der Durchschnitt
+% des Umsatzes der letzten 5 Jahre.
+umsatzAngestiegen(KID, Jahr):-
+	% Berechnung des Umsatzes der vorherigen 5 Jahre (inkl. Jahr)
+	kUmsatzMehrereJahre(KID, Jahr, 5, Umsatz),
+	% Berechnung des Umsatzdurchschnitts
+	Avg is Umsatz / 5,
+	% Aktueller Umsatz
+	kUmsatz(KID, Jahr, Umsatz2),
+	% Vergleich des aktuellen Umsatzes mit dem Durchschnitt.
+	Umsatz2 > Avg.
+	
+%?- umsatzAngestiegen(7, 2012).
+%false.
+
 %------------------------------------------
 %3.:
+% Lösungsstrategie:
+% 1. Berechnung des Gesamtumsatzes
+% 2. Berechnung des zu erreichenden Anteils
+% 3. Aufstellung einer Liste der umsatzstärksten Produkte
+% 4. Aufsummierung der Umsätze der stärksten Produkte bis der Anteil erreicht ist
+% 5. Ausgabe der benötigten PIDs in einer Liste
+
+% Aufgabenlösung nicht funktionsfähig:
+
+% Hilfsfunktion zum Bestimmen des Maximums einer Liste
+max([X],X).
+max([X|Xs],X):- max(Xs,Y), X >=Y.
+max([X|Xs],N):- max(Xs,N), N > X.
+
+% Funktion um den Umsatz eines Produktes in einem bestimmten Jahr zu berechnen.
+pUmsatz(PID, Jahr, Umsatz):-
+	aggregate_all(sum(X), (verkauft(PID, Jahr, Preis, Anzahl), X is Preis * Anzahl), Umsatz).
+
+% Funktion zur Ausgabe der Produkte die einem bestimmten Anteil des Umsatzes
+% einer Kategorie ausgeben.	
+umsatzAnteil(KID, Jahr, Anteil, Liste):-
+	kUmsatz(KID, Jahr, Gesamtumsatz),
+	Umsatzziel is Gesamtumsatz * Anteil,
+	produkt(PID, KID, _, _, _, _, _),
+	pUmsatz(PID, Jahr, Umsatz).
+	
