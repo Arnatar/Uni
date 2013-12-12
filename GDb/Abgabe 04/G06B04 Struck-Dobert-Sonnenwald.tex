@@ -274,6 +274,30 @@ WHERE	p.PNR NOT IN	(SELECT p2.PNR
 			\(\projektion{PNR,Vorname,Nachname}\bra{\selektion{Sorte=\wert{K\%}}(Obst)\verbund{ONR=Lieblingsobst}
 			Personen}\) \\ \\ \\
 			
+			Naiver Operatorbaum:\\
+			\begin{tikzpicture}[style = {level distance=2cm},
+         				        level 3/.style={sibling distance=4cm, level distance=2cm},
+          				        level 4/.style={level distance=2cm}]
+				\node{}
+           			child{node{\(\pi_{PNR,Vorname,Nachname}\)}
+           				child{node{\(\sigma_{Sorte = ''K\%''}\)}
+           					child{node{\(\underset{ONR=Lieblingsobst}{\bowtie}\)}
+           						child{node{Personen}
+           							edge from parent node[midway, left] {2000 Tupel, 5 Attribute}
+           						}
+           						child{node{Obst}
+           							edge from parent node[midway, right] {25 Tupel, 3 Attribute}
+           						}
+           						edge from parent node[midway, above left] {2000 Tupel, 8 Attribute}
+           					}
+           					edge from parent node[midway, right] {400 Tupel, 8 Attribute}
+           				}
+           				edge from parent node[midway, right] {400 Tupel, 3 Attribute}
+           			}
+           		;					
+			\end{tikzpicture}\\
+			
+			Optimierter Operatorbaum:\\
 			\begin{tikzpicture}[style = {level distance=2cm},
          				        level 3/.style={sibling distance=4cm, level distance=2cm},
           				        level 4/.style={level distance=2cm}]
