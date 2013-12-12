@@ -1,0 +1,272 @@
+% Commands
+
+\newcommand{\authorinfo}{Tim Dobert, Kai Sonnenwald, Arne Struck}
+\newcommand{\titleinfo}{GDB [HA] zum 12. 12. 2013}
+\newcommand{\qed}{\ \square}
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO}}}
+\newcommand{\bra}[1]{(#1)}
+\newcommand{\projektion}[1]{\pi #1}
+\newcommand{\verbund}[1]{\underset{#1}{\bowtie}}
+\newcommand{\natverbund}{\bowtie}
+\newcommand{\selektion}[1]{\sigma_{#1}}
+\newcommand{\wert}[1]{''#1''}
+
+% ------------------------------------------------------
+
+% Packages & Stuff
+\documentclass[a4paper,11pt,fleqn]{scrartcl}
+\usepackage[german,ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[top=1.3in, bottom=1.2in, left=0.9in, right=0.9in]{geometry}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{fancyhdr}
+\usepackage{pgfplots}
+\usepackage{multicol}
+%\usepackage{vsis-gdb}
+\usepackage{listings}
+\usepackage[parfill]{parskip}
+\usetikzlibrary{calc,patterns,arrows,positioning,calc,fit,shapes}
+
+
+% ------------------------------------------------------
+
+% Title & Pages
+
+\title{\titleinfo}
+\author{\authorinfo}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\authorinfo}
+\fancyhead[R]{\titleinfo}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+    \maketitle
+	\begin{enumerate}
+		\item[\textbf{1.:}]
+		\begin{enumerate}
+			\item[a)]\quad \\
+			\todo
+			\item[b)]\quad \\
+			\todo
+			\item[c)]\quad \\
+			\todo
+		\end{enumerate}
+		
+		\item[\textbf{2.:}]
+		\begin{enumerate}
+			\item[a)]\quad \\
+			\textbf{Erstellen der Rennort-Tabelle:}
+			\begin{lstlisting}
+CREATE TABLE Rennort (
+	OID		int,
+	Name		varchar(30) NOT NULL,
+	Strecke		varchar(50) NOT NULL,
+	CONSTRAINT 	pk_rennort PRIMARY KEY (OID));
+			\end{lstlisting}
+
+			\textbf{Erstellen der Rennstall-Tabelle:}
+			\begin{lstlisting}
+CREATE TABLE Rennstall (
+	RSID		int,
+	Name		varchar(15) NOT NULL,
+	Teamchef	varchar(50),
+	Budget		int NOT NULL UNIQUE,
+	CONSTRAINT pk_rennstall PRIMARY KEY (RSID),
+	CONSTRAINT ck_budget CHECK(500>Budget>0));
+			\end{lstlisting}
+
+			\textbf{Erstellen der Rennfahrer-Tabelle:}
+			\begin{lstlisting}
+CREATE TABLE Rennfahrer (
+	RID		int,
+	Vorname		varchar(20) NOT NULL,
+	Nachname	varchar(30) NOT NULL,
+	Geburt		date NOT NULL,
+	Wohnort		varchar(50),
+	Rennstall	int NOT NULL,
+	CONSTRAINT pk_rennfahrer PRIMARY KEY (RID),
+	CONSTRAINT fk_rennstall FOREIGN KEY (Rennstall) REFERENCES Rennstall (RSID));
+			\end{lstlisting}
+
+			\textbf{Erstellen der Platzierung-Tabelle:}
+			\begin{lstlisting}
+CREATE TABLE Platzierung (
+	RID		int NOT NULL,
+	OID		int NOT NULL,
+	Platz		int NOT NULL,
+	CONSTRAINT pk_platzierung PRIMARY KEY (RID, OID),
+	CONSTRAINT fk_rid FOREIGN KEY (RID) REFERENCES Rennfahrer (RID),
+	CONSTRAINT fk_oid FOREIGN KEY (OID) REFERENCES Rennort (OID));
+			\end{lstlisting}
+			\item[b)]\quad \\
+				Die sofortige Prüfung der referentiellen Integrität bedeutet, dass zwingend die richtige
+				Reihenfolge eingehalten werden muss um Fehler bei Verweisen auf Fremdschlüsseln zu vermeiden. Mit
+				dem zusätzlichen Attribut Star refrenzieren sich die Tabellen Rennfahrer und Rennstall
+				gegenseitig. Damit muss man beim Anlegen der Tabellen schrittweise vorgehen und einen der
+				Fremdschlüssel nachträglich hinzufügen. Bei der Manipulation der Daten per DML kann es dazukommen,
+				dass sich Zeilen aufgrund gegenseitiger Verweise nicht entfernen lassen, es sei denn man setzt 
+				erst Star auf null.
+			
+			
+			\item[c)]\quad \\
+			\textbf{Füllen der Rennort-Tabelle:}
+\begin{lstlisting}
+INSERT INTO Rennort
+VALUES (4, "Australien GP", "Albert Park Circuit");
+INSERT INTO Rennort
+VALUES (15, "Malaysia GP", "Sepang International Circuit");
+INSERT INTO Rennort
+VALUES (21, "China GP", "Shanghai International Circuit");
+\end{lstlisting}
+
+\textbf{Füllen der Rennstall-Tabelle:}
+\begin{lstlisting}
+INSERT INTO Rennstall
+VALUES (2,"Red Bull","Christian Horner",370);
+INSERT INTO Rennstall
+VALUES (5,"Ferrari","Stefano Domenicali",350);
+INSERT INTO Rennstall
+VALUES (31,"McLaren","Martin Whitmarsh",220);
+INSERT INTO Rennstall
+VALUES (34,"Lotus F1","Eric Boullier",100);
+\end{lstlisting}
+
+\textbf{Füllen der Rennfahrer-Tabelle:}
+\begin{lstlisting}
+INSERT INTO Rennfahrer
+VALUES (4,"Sebastian","Vettel","1987-07-03","Kemmental(Schweiz)",2);
+INSERT INTO Rennfahrer
+VALUES (6,"Fernando","Alonso","1981-07-29","Lugano(Schweiz)",5);
+INSERT INTO Rennfahrer
+VALUES (8,"Marc","Webber","1976-08-27","Aston Clinton(UK)",2);
+INSERT INTO Rennfahrer
+VALUES (9,"Lewis","Hamilton","1985-01-07","Genf(Schweiz)",31);
+INSERT INTO Rennfahrer
+VALUES (20,"Jenson","Button","1980-01-19","Monte Carlo(Monaco)",31);
+INSERT INTO Rennfahrer
+VALUES (21,"Felipe","Massa","1982-04-25","Sao Paulo(Brasilien)",5);
+INSERT INTO Rennfahrer
+VALUES (44,"Kimi",,"1979-10-17","Espoo(Finnland)",34);
+\end{lstlisting}
+
+\textbf{Füllen der Platzierung-Tabelle:}
+\begin{lstlisting}
+INSERT INTO Platzierung
+VALUES (8,4,6);
+INSERT INTO Platzierung
+VALUES (4,15,1);
+INSERT INTO Platzierung
+VALUES (20,15,17);
+INSERT INTO Platzierung
+VALUES (4,4,3);
+INSERT INTO Platzierung
+VALUES (6,4,2);
+INSERT INTO Platzierung
+VALUES (8,15,2);
+INSERT INTO Platzierung
+VALUES (6,21,1);
+INSERT INTO Platzierung
+VALUES (9,4,5);
+INSERT INTO Platzierung
+VALUES (21,15,5);
+INSERT INTO Platzierung
+VALUES (20,4,9);
+INSERT INTO Platzierung
+VALUES (21,4,4);
+\end{lstlisting}
+			
+			
+			\item[d)]\quad \\
+\textbf{Rennfahrer löschen die mit "F" beginnen:} \\
+Erster Ansatz:
+\begin{lstlisting}
+DELETE FROM Rennfahrer WHERE Vorname LIKE "F%";
+\end{lstlisting}
+Funktioniert allerdings nicht einfach so, da es Foreign Key Verweise aus der Platzierungstabelle auf diese Rennfahrer gibt. Diese müssen zuerst gelöscht werden.
+
+\begin{lstlisting}
+DELETE FROM Platzierung
+WHERE RID IN	(SELECT RID
+		FROM Rennfahrer
+		WHERE Vorname LIKE "F%");
+
+DELETE FROM Rennfahrer WHERE Vorname LIKE "F%";
+\end{lstlisting}
+
+\textbf{Alle Tabellen löschen:} \\
+Dabei muss besonders auf die korrekte Reihenfolge geachtet werden, da es sonst zu Verletzungen der referentiellen Integrität kommt.
+\begin{lstlisting}
+DROP TABLE Platzierung;
+DROP TABLE Rennfahrer;
+DROP TABLE Rennstall;
+DROP TABLE Rennort;
+\end{lstlisting}
+		\end{enumerate}
+		\item[\textbf{3.:}]
+		Annahme, dass die Tabellen entsprechend des Relationenschemas aus Aufgabe 1 vorliegen.
+		\begin{enumerate}
+			\item[a)]\quad \\
+			Alle Obstsorten, gegen die ein Peter Meyer allergisch ist, ohne Duplikate in absteigender Sortierung:
+\begin{lstlisting}
+SELECT	DISTINCT o.Sorte
+FROM	Obst o, Person p, Allergie a
+WHERE 	a.Obst = o.ONR
+AND 	a.Person = p.PNR
+AND 	p.Vorname = "Peter"
+AND 	p.Nachname = "Meyer"
+ORDER BY o.Sorte DESC;
+\end{lstlisting}
+
+			\item[b)]\quad \\
+			Die PNR, den Nachnamen und die Anzahl der Allergien jedes Allergikers:
+\begin{lstlisting}
+SELECT	p.PNR, p.Nachname, COUNT(a.PNR)
+FROM	Person p, Allergie a
+WHERE	p.PNR = a.PNR;
+\end{lstlisting}			
+
+			\item[c)]\quad \\
+			Die PNR aller Personen, die mehr als 6 Obstsorten entdeckt haben:
+\begin{lstlisting}
+SELECT	p.PNR
+FROM	Person p, Obst o
+WHERE	p.PNR = o.PNR AND (COUNT(o.Entdecker)>6);
+\end{lstlisting}
+
+
+			\item[d)]\quad \\
+			Vorname und Nachname aller Personen, deren Lieblingsobst von einer Person gleichen Vornamens entdeckt wurde:
+\begin{lstlisting}
+SELECT	p.Vorname, p.Nachname
+FROM	Person p, Obst o
+WHERE	p.Lieblingsobst = o.ONR
+AND 	p.Vorname IN	(SELECT p2.Vorname 
+			 FROM Person p2, Obst o2
+			 WHERE o2.Entdecker = p2.PNR
+			 AND p.Lieblingsobst = o2.ONR);
+\end{lstlisting}
+
+
+			\item[e)]\quad \\
+			Die PNR, Vorname und Nachname aller Personen, die noch keine Obstsorte entdeckt haben:
+\begin{lstlisting}
+SELECT	p.PNR, p.Vorname, p.Nachname
+FROM	Person p, Obst o
+WHERE	p.PNR NOT IN	(SELECT p2.PNR
+			 FROM Person p2, Obst o2
+			 WHERE p2.PNR = o.Entdecker);
+\end{lstlisting}
+		\end{enumerate}
+		
+		
+		\item[\textbf{4.:}]\quad \\	
+			\todo
+	\end{enumerate}
+\end{document}
