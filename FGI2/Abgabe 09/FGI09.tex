@@ -1,0 +1,186 @@
+ % Commands
+\newcommand{\authorinfo}{Arne Struck, Tronje Krabbe}
+\newcommand{\titleinfo}{FGI 2 [HA], 02. 12. 2013}
+\newcommand{\qed}{\ \square}
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO}}}
+
+% ------------------------------------------------------
+
+% Packages & Stuff
+
+\documentclass[a4paper,11pt,fleqn]{scrartcl}
+\usepackage[german,ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{pgfplots}
+\usepackage{multicol}
+\usepackage{pst-node}
+\usetikzlibrary{calc}
+\usetikzlibrary{patterns}
+\usetikzlibrary{arrows,automata,positioning}
+
+% ------------------------------------------------------
+
+% Title & Pages
+
+\title{\titleinfo}
+\author{\authorinfo}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\authorinfo}
+\fancyhead[R]{\titleinfo}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+		\item[\textbf{9.3.}]
+		\begin{enumerate}
+			\item[1.:]\quad \\
+			\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=1cm,every path/.style={->}]
+				%nodes
+				\node (A) {\((001)^T\)};
+				\node (B) [below left = of A] {\((100)^T\)};
+				\node (C) [below = of B] {\((010)^T\)};
+				
+				\node (D) [below right = of A] {\((2\omega 0)^T\)};
+				\node (E) [below = of D] {\((1\omega 0)^T\)};
+				\node (F) [below = of E] {\((0\omega 0)^T\)};
+				
+				\node (G) [right = of E] {\((0\omega 1)^T\)};
+				
+				%paths
+				\path (A) edge [midway, above left] node{c} (B);
+				\path (B) edge [midway, left] node{a} (C);
+				\path (A) edge [midway, above right] node{d} (D);
+				\path (D) edge [midway, left] node{a} (E);
+				\path (E) edge [midway, left] node{a} (F);
+				\path (D) edge [midway, above right] node{a'} (G);
+				\path (G) edge [midway, above right] node{c} (E);
+				\path (G) edge [midway, below right] node{b} (F);
+				\path (G) edge [midway, above right, bend right=50] node{d} (D);
+			\end{tikzpicture} \\ \\
+			\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=1cm,every path/.style={->}]
+				%nodes
+				\node (A) {\((001)^T\)};
+				\node (B) [below left = of A] {\((100)^T\)};
+				\node (C) [below = of B] {\((010)^T\)};
+				
+				\node (D) [below right = of A] {\((200)^T\)};
+				\node (E) [below = of D] {\((110)^T\)};
+				\node (F) [below = of E] {\((020)^T\)};
+				
+				\node (G) [right = of E] {\((011)^T\)};
+				
+				\node (H) [below = of G] {\((000)^T\)};
+				
+				%paths
+				\path (A) edge [midway, above left] node{c} (B);
+				\path (B) edge [midway, left] node{a} (C);
+				\path (A) edge [midway, above right] node{d} (D);
+				\path (D) edge [midway, left] node{a} (E);
+				\path (E) edge [midway, left] node{a} (F);
+				\path (D) edge [midway, above right] node{a'} (G);
+				\path (G) edge [midway, above right] node{c} (E);
+				\path (G) edge [midway, right] node{b} (H);
+			\end{tikzpicture} \\ \\
+			
+			\item[2.:]\quad \\
+			\begin{enumerate}
+				\item[a)] \(\{p_2\}\)
+				\item[b)] \(\{\}\)
+			\end{enumerate}
+			\item[3.:]\quad \\ %Das ist doch der von 9.3.1.:N9.3b
+			\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=1cm,every path/.style={->}]
+				%nodes
+				\node (A) {\((001)^T\)};
+				\node (B) [below left = of A] {\((100)^T\)};
+				\node (C) [below = of B] {\((010)^T\)};
+				
+				\node (D) [below right = of A] {\((200)^T\)};
+				\node (E) [below = of D] {\((110)^T\)};
+				\node (F) [below = of E] {\((020)^T\)};
+				
+				\node (G) [right = of E] {\((011)^T\)};
+				
+				\node (H) [below = of G] {\((000)^T\)};
+				
+				%paths
+				\path (A) edge [midway, above left] node{c} (B);
+				\path (B) edge [midway, left] node{a} (C);
+				\path (A) edge [midway, above right] node{d} (D);
+				\path (D) edge [midway, left] node{a} (E);
+				\path (E) edge [midway, left] node{a} (F);
+				\path (D) edge [midway, above right] node{a'} (G);
+				\path (G) edge [midway, above right] node{c} (E);
+				\path (G) edge [midway, right] node{b} (H);
+			\end{tikzpicture} \\ \\
+			\item[4.:]\quad \\
+				Da Inhibitornetze bei passend gewählten Inhibitoren dem Überdeckungsgraph zum
+				Erreichbarkeitsgraphen umformen, besitzen sie die selben Eigenschaften.
+		\end{enumerate}
+		\item[\textbf{9.4.}]
+		\begin{enumerate}
+			\item[1.:]\quad \\
+			\( \Delta_{N9.4a} =
+			\begin{pmatrix}
+				1 & -1 & 0 & 0 \\
+				-1 & 1 & 0 & 0 \\
+				0 & 1 & -1 & 0 \\
+				0 & 0 & -1 & 1 \\
+				0 & 0 & 1 & -1 \\
+			\end{pmatrix}
+			\)
+			\item[2.:]\quad \\
+			\(\begin{array}{rclcl}
+				i_1 &=& i_2 \\
+				i_1 &=& i_2 + i_3 &\Leftrightarrow & i_3 = 0 \\
+				i_3 &=& -i_4 + i_5 \\
+				i_4 &=& i_5
+			\end{array}
+			\) \\
+			P-Invariantenvektoren: \(\Big\{(a\,a\,0\,b\,b)^T\Big\}\ a,b\in\mathbb{N}/\{0\}\)
+			\item[3.:]\quad \\
+				Nach Theorem 7.35 dass kein Element der P-Invariantenvektoren gleich 0 sein darf, damit ein Netz
+				strukturell beschränkt ist. \\
+				Somit ist \(N_{9.4a}\) nicht strukturell beschränkt.
+			\item[4.:]\quad \\
+			\begin{itemize}
+				\item \quad \\
+				\( \Delta_{N9.4b} =
+			\begin{pmatrix}
+				1 & -1 & 0 & 0 \\
+				-1 & 1 & 0 & 0 \\
+				0 & 1 & -1 & 0 \\
+				0 & 0 & -1 & 1 \\
+				0 & 0 & 1 & -1 \\
+				0 & -1 & 1 & 0 \\
+			\end{pmatrix}
+			\) \\
+			\item \quad \\
+			\(\begin{array}{rclcl}
+				i_1 &=& i_2 \\
+				i_1 &=& i_2 + i_3 - i_6 &\Leftrightarrow & i_3 = i_6 \\
+				i_3 &=& -i_4 + i_5 + i_6 \\
+				i_4 &=& i_5
+			\end{array}
+			\) \\
+			P-Invariantenvektoren: \(\Big\{(a\,a\,c\,b\,b\,c)^T\Big\}\ a,b,c\in\mathbb{N}/\{0\}\) \\ \\
+			\item \(N_{9.4b}\) ist nach Theorem 7.3 strukturell beschränkt, da kein \(i(p_k) = 0\) existiert. \\
+			
+			\end{itemize}
+			\item[5.:]\quad \\
+			Die Firma erhält in \(N_{9.4a}\) keinen Ausgleich für Produktion, in \(N_{9.4b}\) ist dies der Fall.
+			Da \(p_3\) das Lager und der Rechte Teil des Netzes den Konsum darstellt, könnte \(c\) dem Verkauf 
+			darstellen, womit \(p_6\) die Bezahlung repräsentiert.
+			\item[6.:]\quad \\
+			\todo
+		\end{enumerate}
+	\end{enumerate}
+\end{document}
