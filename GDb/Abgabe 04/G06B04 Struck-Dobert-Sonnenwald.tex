@@ -5,11 +5,12 @@
 \newcommand{\qed}{\ \square}
 \newcommand{\todo}{\textcolor{red}{\textbf{TODO}}}
 \newcommand{\bra}[1]{(#1)}
-\newcommand{\projektion}[1]{\pi #1}
+\newcommand{\projektion}[1]{\pi_{#1}}
 \newcommand{\verbund}[1]{\underset{#1}{\bowtie}}
 \newcommand{\natverbund}{\bowtie}
 \newcommand{\selektion}[1]{\sigma_{#1}}
 \newcommand{\wert}[1]{''#1''}
+\newcommand{\soliduline}[1]{\underline{#1}}
 
 % ------------------------------------------------------
 
@@ -27,6 +28,7 @@
 \usepackage{fancyhdr}
 \usepackage{pgfplots}
 \usepackage{multicol}
+\usepackage{ulem}
 %\usepackage{vsis-gdb}
 \usepackage{listings}
 \usepackage[parfill]{parskip}
@@ -52,11 +54,13 @@
 		\item[\textbf{1.:}]
 		\begin{enumerate}
 			\item[a)]\quad \\
-			\todo
+				\(\projektion{Sorte}\bra{\selektion{Vorname=''Horst''}(Person) \verbund{PNR = Entdecker} Obst} \) \\
 			\item[b)]\quad \\
-			\todo
+				\(\projektion{Vorname,Nachname}\bra{\selektion{Symptom = ''Halskratzen''}(Allergie)
+				\verbund{Person = PNR}Person}\)
 			\item[c)]\quad \\
-			\todo
+				\(\projektion{Sorte,Nachname}\bra{\selektion{Symptom = ''Würgereiz''}(Allergie)
+				\verbund{Person = PNR}Person \verbund{PNR = Entdecker} Obst}\)
 		\end{enumerate}
 		
 		\item[\textbf{2.:}]
@@ -267,6 +271,29 @@ WHERE	p.PNR NOT IN	(SELECT p2.PNR
 		
 		
 		\item[\textbf{4.:}]\quad \\	
-			\todo
-	\end{enumerate}
+			\(\projektion{PNR,Vorname,Nachname}\bra{\selektion{Sorte=\wert{K\%}}(Obst)\verbund{ONR=Lieblingsobst}
+			Personen}\) \\ \\ \\
+			
+			\begin{tikzpicture}[style = {level distance=2cm},
+         				        level 3/.style={sibling distance=4cm, level distance=2cm},
+          				        level 4/.style={level distance=2cm}]
+				\node{}
+           			child{node{\(\pi_{PNR,Vorname,Nachname}\)}
+           				child{node{\(\underset{ONR=Lieblingsobst}{\bowtie}\)}
+           					child{node{\(\sigma_{Sorte = ''K\%''}\)}
+           						child{node{Obst}
+	           						edge from parent node[midway, left] {25 Tupel, 3 Attribute}
+           						}
+           						edge from parent node[midway, above left] {5 Tupel, 3 Attribute}
+           					}
+           					child{node{Personen}
+	           					edge from parent node[midway, above right] {2000 Tupel, 5 Attribute}
+           					}
+           					edge from parent node[midway, right] {400 Tupel, 8 Attribute}
+           				}
+           				edge from parent node[midway, right] {400 Tupel, 3 Attribute}
+           			}
+           		;					
+			\end{tikzpicture}
+		\end{enumerate}
 \end{document}
