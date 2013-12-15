@@ -49,22 +49,29 @@
 				\node (B) [below left = of A] {\((100)^T\)};
 				\node (C) [below = of B] {\((010)^T\)};
 				
-				\node (D) [below right = of A] {\((2\omega 0)^T\)};
+				\node (H) [below right = of A] {\((200)^T\)};
+				\node (I) [below = of H] {\((110)^T\)};
+				\node (J) [below = of I] {\((020)^T\)};
+				
+				\node (D) [right =3cm of H] {\((2\omega 0)^T\)};
 				\node (E) [below = of D] {\((1\omega 0)^T\)};
 				\node (F) [below = of E] {\((0\omega 0)^T\)};
 				
-				\node (G) [right = of E] {\((0\omega 1)^T\)};
+				\node (G) [left = of E] {\((0\omega 1)^T\)};
 				
 				%paths
 				\path (A) edge [midway, above left] node{c} (B);
 				\path (B) edge [midway, left] node{a} (C);
-				\path (A) edge [midway, above right] node{d} (D);
+				\path (A) edge [midway, above right] node{d} (H);
 				\path (D) edge [midway, left] node{a} (E);
 				\path (E) edge [midway, left] node{a} (F);
-				\path (D) edge [midway, above right] node{a'} (G);
-				\path (G) edge [midway, above right] node{c} (E);
-				\path (G) edge [midway, below right] node{b} (F);
-				\path (G) edge [midway, above right, bend right=50] node{d} (D);
+				\path (D) edge [midway, above left] node{a'} (G);
+				\path (G) edge [midway, above] node{c} (E);
+				\path (G) edge [midway, below left] node{b} (F);
+				\path (G) edge [midway, above left, bend left=50] node{d} (D);
+				\path (H) edge [midway, left] node{a} (I);
+				\path (I) edge [midway, left] node{a} (J);
+				\path (H) edge [midway, above right] node{a'} (G);
 			\end{tikzpicture} \\ \\
 			\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=1cm,every path/.style={->}]
 				%nodes
