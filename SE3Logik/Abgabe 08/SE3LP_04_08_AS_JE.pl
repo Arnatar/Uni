@@ -131,6 +131,69 @@ wordToIndiceH([H|T],Index,X,Result):-
  %============== Aufgabe 4 ==============
  
  %----------------- 1. ------------------
+ /*
+ Der Baum besteht aus 2 verschiedenen Elementen.
+ 
+ IndexBaum(Wurzel, LinkesBlatt, RechtesBlatt)
+ [Wort|Index] - Liste
+ 
+ Jedes Blatt ist ein weiterer IndexBaum und die Wurzel ist jeweils eine
+ Wort|Index Liste
+ 
+ Beim Einfügen in dem Baum werden die Index Elemente Alphabetisch sortiert
+ nach dem Wort Element (Listenanfang). Für eine effiziente Sortierung sollte 
+ das zuerst eingefügte Element sich in der Mitte des Alphabets befinden.
+ Durch diese Sortierung lassen sich Wörter und der passende Index schneller
+ im Baum finden.
+ */
  %----------------- 2. ------------------
+ %intree(+Element, +BaumAlt, ?BaumNeu)
+ %Das Element E wurde durch eine Liste ersetzt, in der das erste Element das
+ %einzufügende Wort ist, der Restlistenkörper besteht auch nur aus einem
+ %Element, dem Index. Hierdurch ist eine Sortierung nach dem Wort möglich
+%Abbruch wenn ein freies Blatt entdeckt wurde
+intree([Wort|Index],end,t([Wort|Index],end,end)).
+intree([Wort|Index],t([AWort|AIndex],VB,HB),t([AWort|AIndex],VBN,HB)) :-
+	%Vergleich des einzufügendenden Wortes mit dem Wurzelblättern
+	Wort @=< AWort,
+	%füge links ein
+	intree([Wort|Index],VB,VBN).
+	intree([Wort|Index],t([AWort|AIndex],VB,HB),t([AWort|AIndex],VB,HBN)) :-
+	%Vergleich des einzufügendenden Wortes mit dem Wurzelblättern
+	[Wort|Index] @> AWort,
+	%füge rechts ein
+	intree([Wort|Index],HB,HBN).
  %----------------- 3. ------------------
+ %findword(+Wort, ?Index, +Suchbaum)
+ findword(Wort,Index,t([Wurzel|Wert],Links,Rechts)) :-
+	 % Zuweisung des Indexes zum Wort, falls das Wort gefunden wurde
+	 Wort = Wurzel,
+	 Index is Wert.
+ findword(Wort,Index,t([Wurzel|Wert],Links,Rechts)) :-
+	 Wort \= Wurzel,
+	 Wort @=< Wurzel,
+	 % Im rechten Teilbaum weitersuchen.
+	 findword(Wort,Index,t(Links,NLinks,NRechts)).
+ findword(Wort,Index,t([Wurzel|Wert],Links,Rechts)) :-
+	 Wort \= Wurzel,
+	 Wort @> Wurzel,
+	 % Im linken Teilbaum weitersuchen.
+	 findword(Wort,Index,t(Rechts,NLinks,NRechts)).
+	
  %----------------- 4. ------------------
+%Wrapper
+% wordToIndiceTree(+Text,+Indexbaum,?Result)
+wordToIndiceTree(Text,Indexbaum,Result):-
+	wordToIndiceTreeR(Text,Indexbaum,[],Result).
+	
+%Abbruchbedingung
+wordToIndiceTreeR([],_,X,X):-!.
+
+%Rekursionsaufruf
+% wordToIndiceTreeR(+Text,+Indexbaum,+WorkingList,?Result)		
+wordToIndiceTreeR([Wort|Text],Indexbaum,X,Result) :-
+	findword(Wort,Index,Indexbaum)->			% Wenn Wort gefunden im Baum
+		append(X,Index,NX),						% hänge den gefunden Index an
+		wordToIndiceTreeR(Text,Indexbaum,NX,Result); % Prüfe weitere Wörter
+		wordToIndiceTreeR(Text,Indexbaum,X,Result). % Prüfe weitere Wörter ohne
+												% anhängen des nicht gefunden
