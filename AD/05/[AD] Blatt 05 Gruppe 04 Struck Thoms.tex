@@ -69,7 +69,14 @@
 		Zyklen) obsolet geworden sind. Der endgültige return kann auch weggelassen werden, da ein anderer return 
 		auf jeden Fall erreicht wird.
 		\item[\textbf{2.:}] \quad \\
-			\todo
+			\begin{verbatim}
+			DAG-Shortest-Path(G,s):
+			    sort G.V topologically
+			    InitializeSingleSource(G,s)
+			    for each u in G.V % now in topological order
+			        for each v in Adj(u)
+			            Relax(u,v)
+		\end{verbatim}
 		\item[\textbf{3.:}] \quad \\
 			\todo
 		\item[\textbf{4.:}]
