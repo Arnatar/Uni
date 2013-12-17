@@ -77,14 +77,23 @@
 			        for each v in Adj(u)
 			            Relax(u,v)
 			\end{verbatim}				
-			Die innere Schleife wird \(|E|\) mal durchlaufen, da jede Kante adressiert wird. \\
-			Die äußere Schleife wird \(|V|\) mal durchlaufen (jeder Knoten ein mal). \\
-			Durch die vorherige topologische Sortierung ist garantiert, dass der Algorithmus nicht mehrmals
-			durchlaufen werden muss (da die Knoten jetzt in einer linearen Richtung vorliegen). \\
-			Damit ist gezeigt, dass die Laufzeit \(\mathcal{O}(|E|+|V|)\) beträgt.
+		% Bin mir bei der Begründung nicht sicher
+		%	Die innere Schleife wird \(|E|\) mal durchlaufen, da jede Kante adressiert wird. \\
+		%	Die äußere Schleife wird \(|V|\) mal durchlaufen (jeder Knoten ein mal). \\
+		%	Durch die vorherige topologische Sortierung ist garantiert, dass der Algorithmus nicht mehrmals
+		%	durchlaufen werden muss (da die Knoten jetzt in einer linearen Richtung vorliegen). \\
+		%	Damit ist gezeigt, dass die Laufzeit \(\mathcal{O}(|E|+|V|)\) beträgt.
 			
 		\item[\textbf{3.:}] \quad \\
-			\todo
+			Das Problem mit dem Dijkstra-Algorithmus mit negativem Kantengewicht ist, dass sie eventuell nicht
+			berücksichtigt werden, da der Algorithmus nicht ''in die Zukunft sehen'' kann. \\
+			Da wenn einer der Nachfolgeknoten von S auf dem kürzesten Pfad liegt, muss nur noch gezeigt werden, 
+			dass Dijkstra den Knoten korrekt findet. \\
+			Angefangen wird immer mit der kleinsten Kantengewichtung zu einem der Nachfolgeknoten von S (im 
+			folgenden A). Sollte kein Pfad von A zu einem der anderen Nachfolger von B existieren, wird auch hier
+			die negative Kante genommen. Sollte nun ein Pfad von A zu einem der anderen Nachfolger existieren, 
+			wird Dijkstra korrekt vergleichen, welcher der beiden Pfade kürzer ist. \\
+			Damit ist gezeigt, dass der Algorithmus funktioniert.
 		\item[\textbf{4.:}]
 		\begin{enumerate}
 			\item[a)] \quad \\
