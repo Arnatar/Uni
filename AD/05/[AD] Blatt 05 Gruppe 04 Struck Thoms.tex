@@ -1,0 +1,72 @@
+% Commands
+
+\newcommand{\authorinfo}{Arne Struck, Lars Thoms}
+\newcommand{\titleinfo}{AD [HA] zum 18. 12. 2013}
+\newcommand{\qed}{\ \square}
+\newcommand{\limn}{\lim\limits_{n\to\infty}}
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO}}}
+\newcommand{\Forall}{\textbf{for each}}
+
+% ------------------------------------------------------
+
+% Packages & Stuff
+
+\documentclass[a4paper,11pt,fleqn]{scrartcl}
+\usepackage[german,ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[top=1.3in, bottom=1.2in, left=0.9in, right=0.9in]{geometry}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{pgfplots}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{multicol}
+\usepackage[parfill]{parskip}
+\usetikzlibrary{automata,calc,patterns,shapes}
+
+
+% ------------------------------------------------------
+
+% Title & Pages
+
+\title{\titleinfo}
+\author{\authorinfo}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\authorinfo}
+\fancyhead[R]{\titleinfo}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+		\item[\textbf{1.:}] \quad \\
+			\todo
+		\item[\textbf{2.:}] \quad \\
+			\todo
+		\item[\textbf{3.:}] \quad \\
+			\todo
+		\item[\textbf{4.:}]
+		\begin{enumerate}
+			\item[a)] \quad \\
+				\todo
+			\item[b)] \quad \\
+				\todo
+		\end{enumerate}
+		\item[\textbf{5.:}]
+		\begin{enumerate}
+			\item[a)] \quad \\
+				\todo
+			\item[b)] \quad \\
+				\todo
+		\end{enumerate}
+		\item[\textbf{6.:}] \quad \\
+			\todo
+	\end{enumerate}
+\end{document}
