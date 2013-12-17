@@ -104,7 +104,35 @@
 				Zwischenergebnis und dem Reversen des anderen bekannt. Da die zusätzlichen Operationen 
 				als Konstanten sind, bleibt die Laufzeit \(\mathcal{O}(|V|)\). \\
 			\item[b)] \quad \\
-				\todo
+				\begin{verbatim}
+				newRelax(u,v)
+				    if(v.dist < d(u) + w(u,v))
+				        v.dist = u.dist + w(u,v)
+				        v.pi
+				
+				newInit(G,s)
+				    for all v in V
+				        v.dist = 0
+				        v.pi = null
+				    s.dist = 0
+				    
+				newBellmanFord(G,s)
+				    newInit(G,s)
+				    for i = 1,...,|V| - 1
+				        for all edges (u,v) of E
+				            newRelax(u,v)
+				    for all edges (u,v) of E
+				        if v.dist < u.dist + w(u,v)
+				            return false
+				    return true
+				\end{verbatim}
+				Durch die Neudefinierung von Bellman-Ford, welcher den längsten Pfad in einem Graph und somit 
+				den Durchmesser findet. Dies funktioniert durch das Umkehren des Vergleichs in Relax und der 
+				Anpassung der Initialisierung an den neuen Vergleich erreicht. \\
+				Der Input (ein ungerichteter Graph) wird aufgrund der Darstellung der Kanten in den Algorithmen
+				in einen gerichteten umgewandelt (symmetrische Hin-und Rückkanten werden eingefügt). \\
+				Dies führt dazu, dass die Laufzeit vom Bellman-Ford-Algorithmus genommen wird, wobei die 
+				Kantenanzahl verdoppelt wird.
 		\end{enumerate}
 		\item[\textbf{5.:}]
 		\begin{enumerate}
