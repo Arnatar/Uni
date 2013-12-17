@@ -97,7 +97,12 @@
 		\item[\textbf{4.:}]
 		\begin{enumerate}
 			\item[a)] \quad \\
-				\todo
+				Genutzt wird die DFS (worst-case-Laufzeit \(\mathcal{O}(|V|)\)). Mit dieser wird der am weitest 
+				entfernte Knoten vom Root gefunden und der Pfad zwischengespeichert. Dies wird wiederholt mit der 
+				Bedingung, dass die beiden Endknoten nicht gleich sein dürfen. \\
+				Damit ist der Längste Pfad zwischen 2 Knoten in einem Baum durch aneinanderhängen des einen 
+				Zwischenergebnis und dem Reversen des anderen bekannt. Da die zusätzlichen Operationen 
+				als Konstanten sind, bleibt die Laufzeit \(\mathcal{O}(|V|)\). \\
 			\item[b)] \quad \\
 				\todo
 		\end{enumerate}
