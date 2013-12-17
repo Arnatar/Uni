@@ -1,0 +1,39 @@
+digraph G {
+
+    Start [shape=record, label="{Start}"];
+
+    A [shape=record, label="{A|9-13}"];
+    B [shape=record, label="{B|9-11}"];
+    C [shape=record, label="{C|12-15}"];
+    D [shape=record, label="{D|12-17}"];
+    E [shape=record, label="{E|14-17}"];
+    F [shape=record, label="{F|13-16}"];
+    G [shape=record, label="{G|16-17}"];
+
+    Start -> A [label="30"];
+    Start -> B [label="18"];
+    A -> B [label="18"];
+    B -> A [label="30"];
+    A -> C [label="21"];
+    C -> A [label="30"];
+    A -> F [label="22"];
+    F -> A [label="30"];
+    A -> D [label="38"];
+    D -> A [label="30"];
+    C -> D [label="38"];
+    D -> C [label="21"];
+    F -> D [label="38"];
+    D -> F [label="22"];
+    C -> F [label="22"];
+    F -> C [label="21"];
+    C -> E [label="20"];
+    E -> C [label="21"];
+    D -> E [label="20"];
+    E -> D [label="38"];
+    D -> G [label="9"];
+    G -> D [label="38"];
+    E -> G [label="9"];
+    G -> E [label="20"];
+    F -> G [label="9"];
+    G -> F [label="22"];
+}
