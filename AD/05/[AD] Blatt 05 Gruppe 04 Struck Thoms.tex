@@ -47,27 +47,27 @@
 	\maketitle
 	\begin{enumerate}
 		\item[\textbf{1.:}] \quad \\
-		\begin{verbatim}
-			BellmanFord_modified(G,s):
-			    InitializeSingleSource(G,s)
-			    for i = 1, ..., |V| - 1
-			        nochanges = false
-			        for all edges(u, v) in E
-			            distTmp = v.dist
-			            Relax(u,v)
-			            if v.dist < distTmp
-			                nochanges = true
-			        if nochanges = true
-			            return true
-		\end{verbatim}
+			\begin{verbatim}
+				BellmanFord_modified(G,s):
+				    InitializeSingleSource(G,s)
+				    for i = 1, ..., |V| - 1
+				        nochanges = false
+				        for all edges(u, v) in E
+				            distTmp = v.dist
+				            Relax(u,v)
+				            if v.dist < distTmp
+				                nochanges = true
+				        if nochanges = true
+				            return true
+			\end{verbatim}
 		
-		Die Anpassung durch nochanges bewirkt eine Terminierung einen Durchlauf nachdem alle kürzesten
-		Kantenpfade gefunden sind. Dies geschieht, da nach m Durchläufen alle kürzesten Kantenpfade entdeckt sind.
-		Die Schleife wird noch einmal durchlaufen und hier wird festgestellt, dass insgesamt keine Änderungen
-		an einem der Pfadgewichte vorgenommen wurde. Also wird der Algorithmus darauf Terminieren.
-		Weitere Terminierungen sollten nicht sinnvoll sein, da sie durch den spezifizierten Input (kein negativen 	
-		Zyklen) obsolet geworden sind. Der endgültige return kann auch weggelassen werden, da ein anderer return 
-		auf jeden Fall erreicht wird.
+			Die Anpassung durch nochanges bewirkt eine Terminierung einen Durchlauf nachdem alle kürzesten
+			Kantenpfade gefunden sind. Dies geschieht, da nach m Durchläufen alle kürzesten Kantenpfade entdeckt
+			sind. Die Schleife wird noch einmal durchlaufen und hier wird festgestellt, dass insgesamt keine
+			Änderungen an einem der Pfadgewichte vorgenommen wurde. Also wird der Algorithmus darauf Terminieren.
+			Weitere Terminierungen sollten nicht sinnvoll sein, da sie durch den spezifizierten Input (kein
+			negativen Zyklen) obsolet geworden sind. Der endgültige return kann auch weggelassen werden, da ein 	
+			anderer return auf jeden Fall erreicht wird.
 		\item[\textbf{2.:}] \quad \\
 			\begin{verbatim}
 			DAG-Shortest-Path(G,s):
@@ -76,7 +76,13 @@
 			    for each u in G.V % now in topological order
 			        for each v in Adj(u)
 			            Relax(u,v)
-		\end{verbatim}
+			\end{verbatim}				
+			Die innere Schleife wird \(|E|\) mal durchlaufen, da jede Kante adressiert wird. \\
+			Die äußere Schleife wird \(|V|\) mal durchlaufen (jeder Knoten ein mal). \\
+			Durch die vorherige topologische Sortierung ist garantiert, dass der Algorithmus nicht mehrmals
+			durchlaufen werden muss (da die Knoten jetzt in einer linearen Richtung vorliegen). \\
+			Damit ist gezeigt, dass die Laufzeit \(\mathcal{O}(|E|+|V|)\) beträgt.
+			
 		\item[\textbf{3.:}] \quad \\
 			\todo
 		\item[\textbf{4.:}]
