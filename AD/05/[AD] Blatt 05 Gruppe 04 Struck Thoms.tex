@@ -95,9 +95,15 @@
 		\item[\textbf{5.:}]
 		\begin{enumerate}
 			\item[a)] \quad \\
-				\todo
+			    Die $n \times n$-Matrix enthält die Wechselkurse der Währungen zueinander. Dies kann man mehr oder weniger direkt in eine Adjazenzmatrix umwandeln und es als vollständigen, gerichteten Graphen darstellen.
+			    
+			    Dabei entstehen natürlich auch negativ-gewichtete Kanten, wenn eine Währung einen niedrigeren Wert gegenüber einer anderen hat.
+			    
+			    Der Algorithmus zur Erkennung von Währungsarbitrage ist im Grunde ein BellmanFord-Algorithmus. Er beginnt mit irgendeinem Knoten (Währung) und terminiert mit einem false, wenn er negative Zyklen findet. Dabei muss die Reflexivität der Währungen ignoriert werden.
 			\item[b)] \quad \\
-				\todo
+				Ja, da der Algorithmus mit einem false terminiert, wenn er einen negativen Zyklus findet. Dadurch kann man ableiten, dass es einen Pfad gibt, der unendlich viel Geld beschert.
+				
+                Angenommen man würde Euros in Dollars, dann in Yen und wieder in Euros umtauschen und die Wechselkurse Euro-Yen > Euro-Dollar-Yen wären, dann entstünde ein negativer Zyklus.
 		\end{enumerate}
 		\item[\textbf{6.:}] \quad \\
 			\todo
