@@ -95,13 +95,29 @@
 		\item[\textbf{10.4.}]
 		\begin{enumerate}
 			\item[1] \quad \\
-			\todo
+    			Da für eine Falle gilt, dass alle Transitionen, die Marken aus ihr entfernen, auch wieder Marken in ihr generieren,
+                wird es immer mindestens eine Marke in einer Stelle der Falle geben, sobald es irgendwann mal eine gab.
+                Das bedeutet, dass eine Falle immer markiert ist, wenn sie in $m_0$ markiert war.
 			\item[2] \quad \\
-			\todo
+                Eine Transition innerhalb von A ist nur aktiviert bzw. aktivierbar, wenn eine Marke in A liegt. Da der Falle von außen keine Marken gefüttert werden können, muss sie in $m_0$ bereits markiert sein, damit alle Transitionen aktivierbar sind.
 			\item[3] \quad \\
-			\todo
+                $\{p_5\}$ \\
+                $\{p_3,p_4\}$ \\
+                $\{p_1,p_2,p_4\}$ \\
+                $\{p_1,p_3,p_4\}$ \\
+                $\{p_2,p_4,p_5\}$ \\
+                $\{p_1,p_2,p_3,p_4\}$ \\
+                $\{p_1,p_2,p_4,p_5\}$ \\
+                $\{p_1,p_3,p_4,p_5\}$ \\
+                $\{p_2,p_3,p_4,p_5\}$ \\
+                $\{p_1,p_2,p_3,p_4,p_5\}$
 			\item[4] \quad \\
-			\todo
+                    $m_0 := \{10011\}^T$ \\
+                    a ist bereits aktiviert \\
+                    a' ist bereits aktiviert \\
+                    $b: m_0 \overset{a}{\rightarrow}$ \\
+                    $c: m_0 \overset{a}{\rightarrow}$ \\
+                    $c': m_0 \overset{ab}{\rightarrow}$
 		\end{enumerate}
 		\item[\textbf{10.5.}] \quad \\
 		\todo
