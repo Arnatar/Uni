@@ -1,6 +1,8 @@
 :- dynamic(rule/2).
 :- multifile(rule/2).
 
+%Ein Pattern ist eine Liste von Wörter, in der auch Variablen vorkommen dürfen
+
 %rule(+pattern, -answer)
 
 rule([Hi|Restfilled],[hallo|Restunfilled]):-
@@ -8,20 +10,51 @@ rule([Hi|Restfilled],[hallo|Restunfilled]):-
 	stop(S),
 	delstop(Restfilled,S,Restunfilled),!.
 
-rule([Reason|_],[gut]):-
+% Pattern ohne Variablenbindung für einfache Antworten
+rule([Reason|_],[aha,wirklich,?]):-
 	member(Reason,[weil,da]),!.
 
-rule([Reason|_],[gut]):-
-	member(Reason,[weil,da]),!.
-
-rule([Q|Rest],[deine,unterhaltung,ein,chatbot]):-
+rule([Ja|Rest],[bist,du,dir,da,wirklich,sicher,?]):-
+	member(Ja,[ja]),!.
+	
+rule([Q|Rest],[ein,chatbot]):-
 	 member(Q,[wer,was]),
 	 member('?',Rest),
 	 member(bist,Rest),!.
 
+rule([Q|Rest],[mir,geht,es,gut,und,dir]):-
+	member(Q,[wie]),
+	member('geht',Rest),
+	member('?',Rest),!.
+	
+rule(Answer,[bitteschoen]):-
+	member('danke',Answer);
+	member('dankeschoen',Answer),!.
+	
+rule([A|Rest],[das,ist,schoen]):-
+	member('mir',Rest),
+	member('geht',Rest),
+	member('gut',Rest),!.
+	
+rule(Rest,[das,ist,schade,warum,geht,es,dir,nicht,gut,'?']):-
+	member('mir',Rest),
+	member('geht',Rest),
+	member('schlecht',Rest),!.
+	
+rule([Q|Rest],[ich,bin,ein,paar,tage,alt,und,du,'?']):-
+	member('wie',Q),
+	member('alt',Rest),
+	member('bist',Rest),
+	member('?',Rest),!.
+
+% Pattern mit Variablenbindung
+rule([ich,habe,Food,gegessen],[warum,hast,du,Food,gegessen,'?']).
+
+rule([ich,bin,Jahre,jahre,alt,_],[Jahre,'?',das,ist,alt,'!']).
 
 
-rule([_|_],[dazu,wei�,ich,nichts]).
+% Antwort wenn keine passende Antwort vorhanden ist
+rule([_|_],[dazu,weiss,ich,nichts]).
 
 
 delstop([],_,[]).
