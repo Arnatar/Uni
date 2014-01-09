@@ -75,6 +75,9 @@
 			\item[d)] \quad \\
 			Das \texttt{ON DELETE RESTRICT} der Rubrik Zurodnung sollte durch \texttt{ON DELETE CASCADE} 
 			ersetzt werden. \\
+			Das \texttt{ON DELETE CASCADE} der Rubrik Zuordnung sollte durch \texttt{ON DELETE RESTRICT},
+			während das \texttt{ON DELETE CASCADE} von ZugeordnetVon \(\rightarrow\) Benutzer durch 
+			\texttt{ON DELETE RESTRICT} ersetzt werden.
 		\end{enumerate}
 	
 		\newpage
@@ -123,9 +126,9 @@
 			Definierte Sichten:
 			\begin{verbatim}
 				CREATE VIEW Förderationsschiffe
-				  AS SELECT ? FROM Raumschiffe
-					WHERE Fraktion = ?Förderation?
-					WITH CASCADED CHECK OPTION;
+				AS SELECT ? FROM Raumschiffe
+				WHERE Fraktion = ?Förderation?
+				WITH CASCADED CHECK OPTION;
 
 				CREATE VIEW Forschungsschiffe
 				AS SELECT ? FROM Förderationsschiffe
@@ -226,12 +229,12 @@
 				\item[b)]\quad \\
 				Abhängigkeiten zwischen den Transaktionen während des Schedules?\\
 				\\
-				$S_1$: \\
-				$S_2$: \\
-				$S_3$: \\
-				$S_4$: \\
-				$S_5$: \\
-				$S_6$: 
+				$S_1$: T2 arbeitet mit dem Ergebnis von T1. \\
+				$S_2$: Der Effekt von T2 auf A geht verloren. \\
+				$S_3$: T1 arbeitet mit den Ergebnissen von T2. \\
+				$S_4$: T1 arbeitet mit einem Teil des Ergebnisses (B) von T2. \\
+				$S_5$: T1 hat praktisch keinen Effekt da das Ergebnis sofort von T2 überschrieben wird. \\
+				$S_6$: T1 arbeitet mit den Ergebnissen von T2. \\
 
 				\item[c)]\quad \\
 				Schedule seriell/serialisierbar/nicht serialisierbar?\\
