@@ -1,7 +1,7 @@
 % Commands
 
 \newcommand{\authorinfo}{Tim Dobert, Kai Sonnenwald, Arne Struck}
-\newcommand{\titleinfo}{GDB [HA] zum 14. 11. 2013}
+\newcommand{\titleinfo}{GDB [HA] zum 9. 1. 2014}
 \newcommand{\qed}{\ \square}
 \newcommand{\todo}{\textcolor{red}{\textbf{TODO}}}
 \newcommand{\bra}[1]{(#1)}
@@ -73,10 +73,11 @@
 			bezüglich referentiellen Aktionen gegeben. 
 
 			\item[d)] \quad \\
-			Mögliche Änderungen um das Schema sicher zu machen:
+			Das \texttt{ON DELETE RESTRICT} der Rubrik Zurodnung sollte durch \texttt{ON DELETE CASCADE} 
+			ersetzt werden. \\
 		\end{enumerate}
 	
-			
+		\newpage
 		\item[\textbf{2}.]
 		\begin{enumerate}
 			\item[a)] \quad \\
@@ -87,7 +88,7 @@
 			\end{RMSchma}
 			
 			\begin{enumerate}
-				\item[i)] \quad \\
+				\item[i)]
 				\begin{verbatim}
 					CREATE VIEW EnterpriseCrew AS
 					SELECT B.BNr, B.Name, B.Rang
@@ -98,7 +99,7 @@
 				\end{verbatim}
 				CHECK OPTION, da für die Sicht mehrere Tabellen Verknüpft wurden.
 
-				\item[ii)] \quad \\
+				\item[ii)]
 				\begin{verbatim}
 					CREATE VIEW Captains AS
 					SELECT Name
@@ -108,7 +109,7 @@
 				\end{verbatim}
 				CHECK OPTION, da der Primärschlüssel nicht in der Sicht ist.
 
-				\item[iii)] \quad \\
+				\item[iii)]
 				\begin{verbatim}
 					CREATE VIEW WarpFed AS
 					SELECT RNr, Fraktion, Baujahr
@@ -140,8 +141,9 @@
 				WITH CASCADED CHECK OPTION;
 			\end{verbatim}
 			
+			\newpage
 			\begin{enumerate}
-				\item[i))] \quad \\
+				\item[i)]
 				\begin{verbatim}
 					UPDATE Förderationsschiff
 					  SET Geschwindigkeit = 9.8
@@ -152,7 +154,7 @@
 				Die SQL-Anweisung ist zulässig, da die Änderungen nicht mit der Definition der Sicht 'Förderationsschiffe' kollidiert.\\
 				Die geänderten Daten sind in der Sicht 'Förderationschiffe' sichtbar.
 
-				\item[ii)] \quad \\
+				\item[ii)]
 				\begin{verbatim}
 					INSERT INTO GalaxyKlasse
 					  VALUES (7, ?Sonnensegel?, ?Bajoraner?, ?Forschungsschiff?, 1, 1623);
@@ -160,7 +162,7 @@
 				Die SQL-Anweisung ist zulässig, da die eingefügten Daten zwar nicht mit der Definition der Sicht 'GalaxyKlasse' konform sind, aber keine Check-Option aktiviert ist.\\
 				Die eingefügten Daten sind in der Sicht 'GalaxyKlasse' sichtbar.
 
-				\item[iii)] \quad \\
+				\item[iii)]
 				\begin{verbatim}
 					UPDATE Forschungsschiffe
 					  SET Baujahr = 2360
@@ -170,7 +172,7 @@
 				Die SQL-Anweisung ist zulässig, da in der Sicht 'Forschungschiffe' keine Check-Option aktiviert ist.\\
 				Die geänderten Daten sind in der Sicht 'Forschungsschiffe' und 'GalaxyKlasse' sichtbar.
 
-				\item[iv)] \quad \\
+				\item[iv)]
 				\begin{verbatim}
 					UPDATE NebulaKlasse
 					  SET Baujahr = 2360
@@ -178,7 +180,7 @@
 				\end{verbatim}
 				Die SQL-Anweisung ist unzulässig, da die Änderungen mit der Definition der Sicht 'NebulaKlasse' kollidieren und die Check-Option aktiviert ist.
 
-				\item[v)] \quad \\
+				\item[v)]
 				\begin{verbatim}
 					INSERT INTO Ga l a x yKl a s s e
 					  VALUES (88, ?DeltaFlyer?, ?Förderation?, ?Forschungsschiff?, 9.81, 2375);
@@ -188,6 +190,7 @@
 			\end{enumerate}
 		\end{enumerate}
 
+		\newpage
 		\item[\textbf{3}] \quad \\
 			Gegebene Transaktionen:\\
 			$T_1$ liest B, liest A, schreibt (A+180+B) nach A.\\
@@ -241,6 +244,7 @@
 				$S_6$: seriell
 			\end{enumerate}
 
+			\newpage
 			\item[\textbf{4}]\quad \\
 				3 Transaktionen: $T_1 T_2 T_3$ \\
 				Schedule: $S = w_1(x) r_2(y) r_3(z) w_3(y) r_2(z) w_3(z) w_1(z) r_2(y) c_3 c_1 c_2$\\
