@@ -81,7 +81,8 @@ R = 0.0.
 %============== Aufgabe 2 ==============
 
 %----------------- 1 -------------------
-% TODO
+% Wenn die Setzungsdichte größer als n/2 ist,
+% wobei n der Anzahl der Listenelemente entspricht. 
 
 %----------------- 2 -------------------
 
@@ -118,19 +119,24 @@ false.
 
 %----------------- 3 -------------------
 
-% skalarproduk2(+Vektor1,+Vektor2,-R)
-skalarprodukt2(Vektor1,Vektor2,R):-
-	skalarprodukt2H(Vektor1,Vektor2,0,R).
-
-% skalarprodukt2H (+Vektor1,+Vektor2,?Temp,-R)
-skalarprodukt2H([],[],X,X).
-skalarprodukt2H([Key1,_|T1],[Key2,_|T2],X,R):-
-	not(Key1 = Key2),
-	skalarprodukt2H(T1,T2,X,R).
-skalarprodukt2H([Key,Worth1|T1],[Key,Worth2|T2],X,R):-
-	NX is X + Worth1 * Worth2,
-	skalarprodukt2H(T1,T2,NX,R).
-
+skalarprodukt2(Vektor1, Vektor2, Result) :-
+    skalarprodukt2H(Vektor1, Vektor2, 1, Result).
+    
+skalarprodukt2H([Key1, Worth1 | T1], [Key2, Worth2 | T2], X, Result) :-
+    (Key1 = X ->
+        (NWorth1 = Worth1,
+            NT1 = T1);
+        (NWorth1 = 0,
+            NT1 = [Key1, Worth1 | T1])),
+    (Key2 = X ->
+        (NWorth2 = Worth2,
+            NT2 = T2);
+        (NWorth2 = 0,
+            NT2 = [Key2, Worth2 | T2])),
+    NX is X + 1,
+    skalarprodukt2H(NT1, NT2, NX, temp),
+    Result is temp + NWorth1 * NWorth2.
+    
 /*
 ?- skalarprodukt2([1,3,4,5],[1,3,4,5],R).
 R = 34.
