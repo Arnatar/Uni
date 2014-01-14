@@ -134,8 +134,8 @@ skalarprodukt2H([Key1, Worth1 | T1], [Key2, Worth2 | T2], X, Result) :-
         (NWorth2 = 0,
             NT2 = [Key2, Worth2 | T2])),
     NX is X + 1,
-    skalarprodukt2H(NT1, NT2, NX, temp),
-    Result is temp + NWorth1 * NWorth2.
+    skalarprodukt2H(NT1, NT2, NX, Temp),
+    Result is Temp + NWorth1 * NWorth2.
     
 /*
 ?- skalarprodukt2([1,3,4,5],[1,3,4,5],R).
@@ -180,3 +180,45 @@ vektorcos2(Vektor1,Vektor2,R):-
 	vektorbetrag2(Vektor1,Betrag1),
 	vektorbetrag2(Vektor2,Betrag2),
 	R is SP / (Betrag1 * Betrag2).
+
+%----------------- 4 -------------------
+
+% Consulting Blatt 8 für die Textverarbeitung
+?- ['SE3LP_04_08_AS_JE.pl'].
+
+% Hilfsfunktion zum flatten von Listen
+% remove_depth(+Liste, -Result).
+remove_depth([],[]):- !.
+remove_depth([H|T],[H|R]):- \+ is_list(H), !, remove_depth(T,R).
+remove_depth([H|T],L):- remove_depth(H,L1), remove_depth(T,L2),
+append(L1,L2,L).
+
+% Erstellung des Indexes zur Textsammlung
+% index_textsammlung(-Index).
+index_textsammlung(Index):-
+	findall(Text,text(Number, Text),Textliste),	% finde alle Texte
+	remove_depth(Textliste,New),				% Vereinigung zu einer Liste
+	stop(Stop),
+	delstop(New, Stop, Result),					% Entfernung der Stopwörter
+	wordIndex(Result,[],Index).					% Erzeugung des Index
+
+%----------------- 5 -------------------
+
+% Erstellung eines komprimierten Termvektors
+% termvektor(+Text,-Vektor)
+termvektor(Text,Vektor):-
+	stop(Stop),									
+	delstop(Text,Stop,DText),					% Entfernung der Stopwörter
+	index_textsammlung(Index),					% Erzeugen des Text Index
+	wordToIndice(Text,Index,Result),			% Ersetzen der Wörter
+	amount(Result,Liste),						% Index Zählung
+	sort(Liste,VektorListe),					% Sortierung nach Index
+	remove_depth(VektorListe,Vektor).			% Erstellung des Vektors
+
+%----------------- 6 -------------------
+
+% Das Speicherplatzmaximum ist festgelegt durch die Anzahl der
+% unterschiedlichen Wörter in den Texten. Bei einer geringen Anzahl
+% von unterschiedlichen Wörtern in einem Text, spart man besonders
+% viel Speicherplatz durch Kompression, da man alle Wörter ignorieren kann
+% die im Index sind, aber nicht im gegebenen Text vorkommen.
