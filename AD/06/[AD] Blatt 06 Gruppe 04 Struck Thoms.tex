@@ -99,9 +99,36 @@
 		\item[\textbf{3.:}]
 		\begin{enumerate}
 			\item[a)] \quad \\
-			\todo
+			\underline{Induktionsannahme:} \\
+			\(\forall k \in \mathbb{N}_{\geq}\) gilt: \( A^k[i,j]\) entspricht der Anzahl der Pfade der Länge
+			\(k\), die von \(i\) nach \(j\) führen. \\ \\
+			\underline{Induktionsanfang:} \\
+			\(A^0\) ist die Einheitsmatrix, es existieren keine Kanten. Jeder Knoten ist mit sich selbst 
+			verbunden. \\ \\
+			\underline{Induktionsschritt:} \\
+			
 			\item[b)] \quad \\
-			\todo
+			\begin{verbatim}
+			existPaths?(matrix A, length k)
+			{
+			    A = A^k
+			    a = heighth(A)
+			    b = width(A)
+			    returnMatrix = new matrix[a,b]
+			    for(i to a, j to b)
+			    {
+			        if(A[i,j] > 0)
+			        {
+			            returnMatrix[i,j] = true;
+			        }
+			        else
+			        {
+			            returnMatrix[i,j] = false;
+			        }
+			    }
+			    return returnMatrix
+			}
+			\end{verbatim}
 			\item[c)] \quad \\
 			\todo
 		\end{enumerate}
