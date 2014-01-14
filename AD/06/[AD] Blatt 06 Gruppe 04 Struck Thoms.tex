@@ -49,12 +49,53 @@
 		\item[\textbf{1.:}]
 		\begin{enumerate}
 			\item[a)] \quad \\
-			\todo
+			\begin{tabular}{c||c|c|c|c|c|c|c|c}
+                Extract & 1 & 2 & 3 & 4 & 5 & 6 & 7 & \\ \hline\hline
+                & 0 & $\infty$ & $\infty$ & $\infty$& $\infty$& $\infty$& $\infty$& $v.dist$ \\ \hline
+                & - & - & - & - & - & - & - & v.$\pi$ \\ \hline
+                1 & 0& 4& $\infty$& $\infty$& $\infty$& 5 & $\infty$ & v.dist \\ \hline
+                & -& 1 & -& -& - & 1& - & v.$\pi$ \\ \hline
+                2 & 0& 4& 14& $\infty$& $\infty$& 5 & 7 & v.dist \\ \hline
+                & -& 1& 2& -& -& 1 & 2 & v.$\pi$ \\ \hline
+                6 & 0& 4& 14& $\infty$& 14 & 5 & 7 & v.dist \\ \hline
+                & -& 1& 2& -& 6 & 1 & 2 & v.$\pi$ \\ \hline
+                7 & 0& 4& 13& $\infty$& 10 & 5 & 7 & v.dist \\ \hline
+                & -& 1& 7& -& 7 & 1 & 2 & v.$\pi$ \\ \hline
+                5 &0 &4 &12 & 15& 10 & 5 & 7 & v.dist \\ \hline
+                & -& 1& 5& 5& 7 & 1 & 2 & v.$\pi$ \\ \hline
+                3 &0 &4 &12 & 14& 10 & 5 & 7 & v.dist \\ \hline
+                & -& 1& 5& 3& 7 & 1 & 2 & v.$\pi$ \\
+			\end{tabular} \\ \\
+			Der kürzeste Pfad von 1 nach 4 ist \(1 \to 2 \to 7 \to 5 \to 3 \to 4\), der Pfad kostet 14 Einheiten. \\ \\ \\
+			\begin{tabular}{c||c|c|c|c|c|c|c|c}
+                Ext & 3 & 1 & 2 & 4 & 5 & \\ \hline \hline
+				& 0 & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $v.dist$ \\ \hline
+                & - & - & - & - & - & $v.\pi$ \\ \hline
+				3 & 0 & $\infty$ & 9 & 4 & $\infty$ & $v.dist$ \\ \hline
+				& - & - & 3 & 3 & - & $v.\pi$ \\ \hline
+				4 & 0 & 5 & 8 & 4 & 6 & $v.dist$ \\ \hline
+				& - & 4 & 4 & 3 & 4 & $v.\pi$ \\ \hline
+				1 & 0 & 5 & 8 & 4 & 6 & $v.dist$ \\ \hline
+				& - & 4 & 4 & 3 & 4 & $v.\pi$ \\ \hline
+				5 & 0 & 1 & 8 & 4 & 6 & $v.dist$ \\ \hline
+				& - & 5 & 4 & 3 & 4 & $v.\pi$ \\
+			\end{tabular} \\ \\
+			Augenscheinlich lässt sich kein kürzester Pfad von 1 nach 4 ablesen.
 			\item[b)] \quad \\
-			\todo
+			Wenn man versucht den kosteneffizienteste Weg von 3 nach 2 finden will, wird Dijkstra den Pfad 
+			\(3 \to 4 \to 2\) mit den Kosten 8 finden. Allerdings ist der kosteneffizienteste Weg durch
+			\(G_2\) \(3 \to 4 \to 5 \to 1 \to 2\) mit den Kosten 7. Damit ist die Behauptung bewiesen.
 		\end{enumerate}
 		\item[\textbf{2.:}] \quad \\
-		\todo
+		Es wird anstatt der gesamten Distanz in der Relax-Funktion nun ausschließlich die kleinste längste
+		Kante als Berechnungsgrundlage genommen, aus dieser Veränderung resultiert beim Dijkstra (Skript) 
+		das gewünschte Verhalten.
+		\begin{verbatim}
+			Relax(u,v)
+			    if v.dist > max(u.dist, w (u, v ))
+			        v.dist = max(u.dist, w (u, v ))
+			        v.pi = u
+		\end{verbatim}
 		\item[\textbf{3.:}]
 		\begin{enumerate}
 			\item[a)] \quad \\
