@@ -130,27 +130,38 @@
 			\item[3.] \quad \\
 				Da alle Knoten eine Entsprechung aufweisen sind die Graphen bisimilar.
 			
-			\item[4.] \quad \\
-			\todo
 		\end{enumerate}
 		\item[\textbf{12.4.}] \quad \\
-		\todo
+		Siehe ungetexter Part. \\
 		\item[\textbf{12.5.}]
 		\begin{enumerate}
 			\item[1.] \quad \\
 			\(
-			\begin{array}{crcl}
-				& (x + y) + z &=& x + (y + z) \\
-				\overset{A3}{\Rightarrow} & (x + y) + (z + z) &=& x + ((y + y) + z) \\
-				\overset{A1}{\Rightarrow} & (x + y) + (z + z) &=& x + (z + (y + y)) \\
-				\overset{A2}{\Rightarrow} & (x + y) + (z + z) &=& (x + z) + (y + y) \\
-				\overset{A1}{\Rightarrow} & (x + y) + (z + z) &=& (y + y) + (x + z) \\
+			\begin{array}{cl}
+				& (x + y) + (z + z) \\
+				\overset{A3}{=} & (x + y) + z \\
+				\overset{A1}{=} & z + (x + y) \\
+				\overset{A1}{=} & z + (y + x) \\
+				\overset{A2}{=} & (z + y) + x \\
+				\overset{A1}{=} & (y + z) + x \\
+				\overset{A2}{=} & y + (z + x) \\				
+				\overset{A3}{=} & (y + y) + (z + x)
 			\end{array}
 			\)
-			\item[2.] \quad \\
-			\todo
+			
 			\item[3.] \quad \\
-			\todo
+			Unter der Voraussetzung, dass 12.5.2 gelöst wurde. \\
+			\(
+			\begin{array}{cl}
+				& (x + y) + z  \\
+				\overset{A3}{=} & (x + x) + (y + y) + (z + z) \\
+				\overset{A1}{=} & (x + x) + (z + z) + (y + y) \\
+				\overset{A6}{=} & (x + x) + (z + z) + (y + z) \\
+				\overset{A1}{=} & (x + x) + (y + z) + (z + z) \\
+				\overset{A3}{=} & x + (y + z) \\
+			\end{array}
+			\)
+
 		\end{enumerate}
 	\end{enumerate}
 \end{document}
