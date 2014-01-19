@@ -43,11 +43,93 @@
 		\item[\textbf{12.3.}]
 		\begin{enumerate}
 			\item[1.] \quad \\
-			\todo
+			\begin{tabular}{ccc}
+				\begin{tikzpicture}[>=stealth',
+									shorten >=1pt,
+									auto,
+									node distance=2.5cm,
+									every path/.style={->},
+									every state/.style={circle, draw, minimum size = 0.75cm}]
+				
+					%nodes
+					\node[state] (1) {1};
+					\node[state] (2) [below left of =1] {2};
+					\node[state] (3) [below right of = 1] {3};
+					\node[state] (4) [below of = 1] {4};
+					\node[state] (5) [below left of = 4] {5};
+					\node[state] (6) [below of = 5] {6};
+					\node[state] (7) [right =3cm of 6] {7};
+					
+					%paths
+					\path (1) edge [midway, above left]  node{abb} (2);
+					\path (1) edge [midway, above right]  node{b} (3);
+					\path (1) edge [midway, left]  node{b} (4);
+					\path (4) edge [bend left = 10, midway, right]  node{b} (7);
+					\path (5) edge [bend left, midway, above left]  node{b} (4);
+					\path (4) edge [bend left, midway, below right]  node{b} (5);
+					\path (5) edge [midway, left]  node{b} (6);
+				\end{tikzpicture} &\quad\quad\quad&
+				\begin{tikzpicture}[>=stealth',
+									shorten >=1pt,
+									auto,
+									node distance=2.5cm,
+									every path/.style={->},
+									every state/.style={circle, draw, minimum size = 0.75cm}]
+				
+					%nodes
+					\node[state] (d) {d};
+					\node[state] (g) [below right of = d] {g};
+					\node[state] (h) [right of = g] {h};
+					\node[state] (e) [below left of = d] {e};
+					\node[state] (f) [below of = d] {f};
+					\node[state] (i) [below of = f] {i};
+					\node[state] (j) [below of = h] {j};
+					\node[state] (k) [below of = i] {k};
+					
+					%paths
+					\path (d) edge [midway, above left]  node{b} (e);
+					\path (d) edge [bend right = 20, midway, left]  node{a} (f);
+					\path (d) edge [bend left = 20, midway, right]  node{b} (f);
+					\path (d) edge [midway, above right]  node{b} (g);
+					\path (d) edge [bend left = 20, midway, above right]  node{b} (h);
+					\path (h) edge [bend right = 20, midway, left]  node{b} (j);
+					\path (h) edge [bend left = 20, midway, right]  node{bb} (j);
+					\path (g) edge [bend left = 20, midway, right] node{b} (k);
+					\path (f) edge [midway, right] node{b} (i);
+					\path (i) edge [midway, right] node{b} (k);
+					\path (f) edge [bend right = 30, midway, left] node{b} (k);
+					
+				\end{tikzpicture}				
+			\end{tabular} \\ \\
 			\item[2.] \quad \\
-			\todo
+			\begin{tabular}{ccccc}
+				\(
+				\begin{array}{ccc}
+					\text{d} & \overset{\wedge}{=} & 1 \\
+					\text{e} & \overset{\wedge}{=} & 3 \\
+					\text{f} & \overset{\wedge}{=} & 4
+				\end{array}
+				\)
+				&\quad \quad \quad &
+				\(
+				\begin{array}{ccc}
+					\text{g} & \overset{\wedge}{=} & 5 \\
+					\text{h} & \overset{\wedge}{=} & 4 \\
+					\text{i} & \overset{\wedge}{=} & 5 
+				\end{array}
+				\)
+				&\quad \quad \quad &
+				\(
+				\begin{array}{ccc}
+					\text{j} & \overset{\wedge}{=} & 7 \\
+					\text{k} & \overset{\wedge}{=} & 6 \\
+					\text{k} & \overset{\wedge}{=} & 2 
+				\end{array}
+				\)
+			\end{tabular}
 			\item[3.] \quad \\
-			\todo
+				Da alle Knoten eine Entsprechung aufweisen sind die Graphen bisimilar.
+			
 			\item[4.] \quad \\
 			\todo
 		\end{enumerate}
