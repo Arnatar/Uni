@@ -1,6 +1,6 @@
  % Commands
 \newcommand{\authorinfo}{Arne Struck, Tronje Krabbe}
-\newcommand{\titleinfo}{FGI 2 [HA], 20. 1. 2014}
+\newcommand{\titleinfo}{FGI 2 [HA], 27. 1. 2014}
 \newcommand{\qed}{\ \square}
 \newcommand{\todo}{\textcolor{red}{\textbf{TODO}}}
 
@@ -43,7 +43,53 @@
 		\item[\textbf{13.4.}]
 		\begin{enumerate}
 			\item[1.] \quad \\
-			
+			\begin{tabular}{ccc}
+				\begin{tikzpicture}[>=stealth',
+									shorten >=1pt,
+									auto,
+									node distance=1cm,
+									every path/.style={->}]
+									
+					%nodes
+					\node (1) {\(\partial_H(((c||d)+p)q \cdot r)\)};
+					\node (2) [below =of 1] {\(\partial_H(q \cdot r)\)};	
+					\node (3) [below =of 2] {\(\partial_H(r)\)};	
+					\node (4) [below =of 3] {\(\surd\)};				
+				
+					%paths
+					\path (1) edge [bend left, midway, right] node{m} (2);
+					\path (1) edge [bend right, midway, left] node{p} (2);
+					\path (2) edge [midway, left] node{q} (3);
+					\path (3) edge [midway, left] node{r} (4);
+				\end{tikzpicture}
+				& $\quad \quad \quad $&
+				\begin{tikzpicture}[>=stealth',
+									shorten >=1pt,
+									auto,
+									node distance=1cm,
+									every path/.style={->}]
+									
+					%nodes
+					\node (1) {\(p \cdot q \cdot (r + r) + m\ \mathbb{L}\ q \cdot r \)};
+					\node (2) [below =of 1] {\(q \cdot (r + r) + q \cdot r\)};	
+					\node (3) [below =of 2] {\(r\)};	
+					\node (4) [below =of 3] {\(\surd\)};				
+				
+					%paths
+					\path (1) edge [bend left, midway, right] node{m} (2);
+					\path (1) edge [bend right, midway, left] node{p} (2);
+					\path (2) edge [midway, left] node{q} (3);
+					\path (3) edge [midway, left] node{r} (4);
+				\end{tikzpicture}
+			\end{tabular} \\ \\
+			Bisimulationsrelation: \\ \\
+			\(
+			\begin{array}{rcl}
+				\partial_H(((c||d)+p)q \cdot r) &=& p \cdot q \cdot (r + r) + m\ \mathbb{L}\ q \cdot r \\
+				\partial_H(q \cdot r) &=& q \cdot (r + r) + q \cdot r \\
+				\partial_H(r) &=& r
+			\end{array}
+			\)
 			\item[2.] \quad \\
 			\item[3.] \quad \\
 		\end{enumerate}
