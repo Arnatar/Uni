@@ -1,0 +1,107 @@
+% -*- coding: utf-8 -*-
+%UTF-8: äöüß
+% !TEX root = ./main.tex
+%preface.tex
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english,ngerman]{babel}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{xspace} 
+\usepackage{epstopdf}
+\usepackage{hyperref}
+
+
+\usetheme{Warsaw}
+\usecolortheme{orchid}
+\setbeamercovered{dynamic}
+\beamertemplatenavigationsymbolsempty
+
+\newcommand{\Renew}{\textsc{Renew}}
+
+
+%Eigene Befehle
+%Alles was zwischen den Klammern kommt, das wird nicht angezeigt:
+%\commentout{DAS HIER WIRD NICHT SICHTBAR}
+\newcommand{\commentout}[1]{}
+
+\newcommand{\longpage}{\enlargethispage{\baselineskip}}
+\newcommand{\Longpage}{\enlargethispage{2\baselineskip}}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\source}[1]{\code{#1}}
+
+\usetheme{Warsaw}
+\usecolortheme{orchid}
+\setbeamercovered{dynamic}
+\beamertemplatenavigationsymbolsempty
+
+\newcommand\plainEPS[2][0.5]{%
+  \centerline{%
+    \includegraphics[scale=#1]{#2.eps}%
+    }%
+  }%
+
+\newcommand\mydoubleEPS[3][0.5]{
+  \begin{figure}[htbp]
+    \begin{minipage}{0,5\textwidth}
+      \centerline{
+        \includegraphics[scale=#1]{#2.eps}
+      }
+    \end{minipage}%
+    \begin{minipage}{0,5\textwidth}
+      \centerline{
+        \includegraphics[scale=#1]{#3.eps}
+      }
+    \end{minipage}
+  \end{figure}%
+}     
+
+
+
+%%%Einige Einstellungen
+%ende Standart Layout
+%Beispiel für \commentout{}
+
+%Alternatives Layout
+%Das Benutze ich
+
+\mode<presentation>
+%Ende alternative Layout
+
+
+
+% Der Pfeil ist fuer Aufzaehlungen gedacht, die eine Folgerung
+% aus vorigen Punkten sind.
+\newcommand{\pfeil}{$\rhd$}
+
+% Logo
+%\pgfdeclareimage[height=0.5cm]{uni-logo}{images/UHH_Logo_only}
+%\logo{\pgfuseimage{uni-logo}}
+\logo{\includegraphics[height=0.5cm]{images/UHH_Logo_only.pdf}}
+
+\selectlanguage{ngerman}
+
+\date{\today}
+
+\institute{Universität Hamburg\\ 
+  Fakultät für Mathematik, Informatik und Naturwissenschaften\\
+  Fachbereich Informatik, Arbeitsbereich TGI\\
+  Proseminar Nebenläufigkeit SS 14}
+
+
+% PDF Dokumentinformationen vorab
+\hypersetup {
+    breaklinks = {true},
+	pdfauthor={Autorennamen},
+%	pdftitle={Vortragstitel},
+%	pdfstartpage = {1}
+	pdfsubject = {Universität Hamburg / MIN / FB18 / TGI / Proseminar Nebenläufigkeit / SS 14},
+	pdfkeywords = {Nebenläufigkeit, Concurrency},
+	plainpages = false, 
+	pdfstartpage = {1},
+	pdfpagelabels
+}
+
+

@@ -1,0 +1,30 @@
+% !TEX root = ./soziale-netzwerke-gesamtband-version-01.tex
+%UTF-8: äöüß
+% soziale-netzwerke-index-handling.tex
+%
+% Ersteller: Moldt, Daniel
+%
+% Datum: 06.05.2012
+% Datum: 08.04.2013
+%
+% Infos unter: http://de.wikibooks.org/wiki/LaTeX-Kompendium:_Index_und_Glossar:_Standard-Index
+%
+% Um unterschiedliche Verzeichnisse zu erstellen (etwa für Personen und Stichwörter), verwendet man das Paket multind statt makeidx. Hier muss man den Befehl mit Attribut verwenden, etwa \makeindex{personen} und \makeindex{stichwoerter}. Entsprechend muss \index entweder als \index{personen}{} oder als \index{stichwoerter}{} verwendet und \printindex doppelt aufgerufen werden, als \printindex{personen}{Index Personen} und \printindex{stichwoerter}{Index Stichw\"orter}. In diesem Fall muss auch der Befehl makeindex zweimal aufgerufen werden:
+%
+%    makeindex personen
+%    makeindex stichwoerter
+%
+% Beachten Sie die unterschiedlichen Pakete!
+%
+%\usepackage{makeidx}  % allows for indexgeneration
+\usepackage{multind}  % allows for multiple indexgeneration
+\makeindex{personen}
+\makeindex{stichwoerter}
+
+%Index Verwaltung beachten:
+%siehe Datei soziale-netzwerke-index-handling.tex
+
+%Aufruf geht nur mit 
+%makeindex personen Dateiname
+%makeindex stichwoerter Dateiname
+%und dann hinreichend viele Aufrufe von Latex
