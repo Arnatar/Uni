@@ -1,0 +1,100 @@
+% Packages & Stuff
+ 
+\documentclass[a4paper,11pt]{scrartcl}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[top=1.3in, bottom=1.2in, left=0.8in, right=0.8in]{geometry}
+\usepackage{amsmath}
+\usepackage{lmodern}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{pgfplots}
+
+% ------------------------------------------------------
+ 
+% Commands
+ 
+\newcommand{\authorinfo}{A. Struck, S. Haase, E. Böhmecke}
+\newcommand{\titleinfo}{GSS-Übungsblatt 3 zum 14.05.2014}
+\newcommand{\qed}{\ \square}
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO}}}
+\newcommand{\opt}{\textcolor{blue}{\textbf{Optional}}}
+ 
+% ------------------------------------------------------
+ 
+% Title & Pages
+ 
+\title{\titleinfo}
+\author{\authorinfo}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\authorinfo}
+\fancyhead[R]{\titleinfo}
+\fancyfoot[C]{\thepage}
+ 
+\begin{document}
+\maketitle
+\section{\textbf{Rechnersicherheit}}
+\subsection{Zugangs- und Zugriffskontrolle}
+\subsubsection*{a)} 
+\textbf{Zugangskontrolle:} \\
+Beschränkung (durch spezielle Eigenschaften, Biometrie, Wissen, Besitz) wer Zugang zu einem System
+bekommt. \\
+\textbf{Zugriffskontrolle:} \\
+Beschränkung auf welchen Inhalt/Funktionalitäten im System ein User Zugriff hat.
+\subsubsection*{b)} 
+Dies kommt auf das System an. Keine Zugriffskontrolle impliziert dass jeder Nutzer auf der selben Vertrauensebene operiert, dies kann bei Systemen mit einer größeren Zahl von Anwendern zu großen Vertrauensproblemen führen. Allerdings ist nicht auszuschließen, dass Systeme gewünscht werden in denen jeder Nutzer die selben Rechte besitzt.
+\subsubsection*{c)} 
+Die Rechte eines unidentifizierten Nutzers (Zugangskontrolle) können nicht durchgesetzt werden, in so fern 
+ist eine Zugangskontrolle vor Zugriffskontrolle von Nöten.
+\subsubsection*{d)} 
+Die Zugangskontrolle besteht hier durch die Kenntnis des Links, dies ist zwar schwächer, als eine Kombination aus Nutzerkonto und Passwort, erfüllt aber den selben Zweck. 
+
+\subsection{Biometrische Techniken: EasyPASS}
+\subsection*{a)} \opt
+\subsection*{b)} \opt
+
+\subsection{Biometrische Techniken: Tippverhalten}
+\subsection*{a)} \opt
+\subsection*{b)} \opt
+
+\subsection{Realisierung eines Online-Tickets}
+\subsubsection*{a)} \opt
+\subsubsection*{b)} \opt
+
+\section{\textbf{Timing-Attack}}
+\subsection*{1.} 
+\begin{verbatim}
+public void isTimingAttackPossible(){
+  char[] password1 = "123456789".toCharArray;
+  char[] password2 = "qwert".toCharArray;
+
+  long pwTimeTemp = System.nanoTime();
+  passwordCompare(password1, password1);
+  
+  long result = System.nanoTime() - pwTimeTemp;
+  System.out.println("Gleiche Passwörter in ns: " + result);
+
+  pwTimeTemp = System.nanoTime();
+  passwordCompare(password1, password2);
+  
+  result = System.nanoTime() - pwTimeTemp
+  System.out.println("Unterschiedliche Passwörter in ns: " + result);
+}
+
+boolean passwordCompare(char[] a, char[] b){
+  int i;
+  if(a.length != b.length) return false;
+  for(i=0; i<a.length && a[i]==b[i]; i++);
+  return i == a.length;
+}
+\end{verbatim}
+\subsection*{2.} \opt
+\subsection*{3.} \todo
+\subsection*{4.} \opt
+
+\section{\textbf{Real-World Bruteforce}}
+\opt
+\end{document} 
