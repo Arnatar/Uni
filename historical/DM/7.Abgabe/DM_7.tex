@@ -1,0 +1,121 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{pgfplots}
+\usepackage{scrpage2}\pagestyle{scrheadings}
+\usepackage{tikz}
+\usepackage{listings}
+\usetikzlibrary{patterns}
+
+\newcommand{\titleinfo}{Hausaufgaben zum 7. 12. 2012}
+\title{\titleinfo}
+\author{Arne Struck 6326505}
+\date{\today}
+\chead{\titleinfo}
+\ohead{\today}
+\setheadsepline{1pt}
+\setcounter{secnumdepth}{0}
+\lstset{language=Java}
+\newcommand{\qed}{\ \square}
+
+\begin{document}
+\maketitle
+\notag
+\section{1.}
+	\subsection{a)}		
+		Die Invertierbarkeit von 473 in \(\mathbb{Z}_{2413}\) lässt sich mit dem \(ggt(2413,473)\) 
+		bestimmen:
+		\begin{align}
+			2413&=5\cdot 473+48 \\
+			473&=9\cdot 48 +41 \\
+			48&=41+7 \\
+			41&=5\cdot 7+6 \\
+			7&= 6 +1
+		\end{align}
+		\(\Rightarrow ggt(2413,473)=1\Leftrightarrow 473\) ist in \(\mathbb{Z}_{2413}\) invertierbar.
+		\begin{align}
+			x=1&=7-6 \\
+			&=7-1(41-5\cdot 7) \\
+			&=6\cdot 7 -41 \\
+			&=-41+6(48-41) \\
+			&=-7\cdot 41+6\cdot 48 \\
+			&=6\cdot 48 -7(473-9\cdot 48) \\
+			&=69\cdot 48-7\cdot 473 \\
+			&=-7\cdot 473+69(2413-5\cdot 473) \\
+			&=-352\cdot 473+ 69\cdot 2413
+		\end{align}
+		\(\Rightarrow -352\equiv \underline{2061} \mod 2413\) ist das Inverse von 473 in 
+		\(\mathbb{Z}_{2413}\)
+	
+	\subsection{b)}
+		Die Invertierbarkeit von 473 in \(\mathbb{Z}_{1672}\) lässt sich mit dem \(ggt(1672,473)\) 
+		bestimmen:
+		\begin{align}
+			1672&=3\cdot 473+253 \\
+			473&=253+220 \\
+			253&=220+33 \\
+			220&=6\cdot 33+22 \\
+			33&=22+11 \\
+			22&=2\cdot 11 \\
+		\end{align}
+		\(\Rightarrow ggt(1673,473)=11\Leftrightarrow 473\) ist in \(\mathbb{Z}_{1673}\) nicht 
+		invertierbar.
+
+	\subsection{c)}
+		In \(\mathbb{Z}_{2413}\) entspricht 2413 der 0. Aus diesem Grund muss 2412 der -1 
+		entsprechen. -1 ist zu sich selbst invers, das heißt, dass in \(\mathbb{Z}_{2413}\) 2412 das 
+		Inverse von 2412 ist.
+
+\section{2.}
+	\textbf{In \(\mathbb{Z}_{19}\):}
+	\begin{align}
+		3^1&=3 \\
+		3^2&=9 \\
+		3^4&=9^2=5 \\
+		3^8&=5^2=25=6 \\
+		3^{16}&=6^2=36=17 \\
+		3^{32}&=17^2=289=4 \\
+		3^{64}&=4^2=16 \\
+		3^{128}&=16^2=256=9 \\
+		3^{256}&=9^2=81=5 \\
+		3^{512}&=5^2=25=6		
+	\end{align}
+	\begin{align}
+		3^{1000}&= 3^{512}\cdot 3^{256} \cdot (3\cdot 3^{64})\cdot 3^32\cdot 3^8 \\
+		&=6\cdot 9\cdot 3\cdot 16\cdot 4\cdot 6 \\
+		&= 62208 \equiv 2 \mod 19
+	\end{align}
+	
+\section{3.}
+	\subsection{a)}
+		\[\pi = (1,7,6)\circ (2,10,8,5,11,13)\circ (3,4)\circ(9,12)\]
+		
+	\subsection{b)}
+		\[\pi= (1,6)\circ(1,7)\circ(2,13)\circ(2,11)\circ(2,5)\circ(2,8)\circ(2,10)
+		\circ(3,4)\circ(9,12)\]
+	
+	\subsection{c)}
+		\(\pi\) hat 9  Transpositionen, also ist \(\pi\) eine ungerade Permutation, das bedeutet sign 
+		\(\pi = -1\)
+
+	
+\section{4.}	
+	\subsection{a)}
+		Da alle Einzelelemente für \(\text{A}\times\text{B}\times\text{C}\) kombiniert werden müssen, 
+		ist die Anzahl der Elemente von \(\text{A}\times\text{B}\times\text{C}\) \(3\cdot 5 \cdot 
+		2=30\).
+
+	\subsection{b)}
+		Die Anzahl aller Relationen auf \(\text{A}\times\text{B}\times\text{C}\) entspricht der 
+		Anzahl aller Teilmengen (wobei ich nicht sicher bin, ob man die leere Menge extra zählen 
+		muss). Diese berechnet sich aus \(\sum\limits_{i=0}^{n=30}\begin{pmatrix}
+		30\\i
+		\end{pmatrix}= 2^n |n=30\).
+	
+	
+\end{document}

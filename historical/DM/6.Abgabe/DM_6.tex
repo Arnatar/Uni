@@ -1,0 +1,167 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{pgfplots}
+\usepackage{scrpage2}\pagestyle{scrheadings}
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+
+\newcommand{\titleinfo}{Hausaufgaben zum 30. 11. 2012}
+\title{\titleinfo}
+\author{Arne Struck 6326505}
+\date{28. November 2012}
+\chead{\titleinfo}
+\ohead{28. November 2012}
+\setheadsepline{1pt}
+\setcounter{secnumdepth}{0}
+\newcommand{\qed}{\ \square}
+
+\begin{document}
+\maketitle
+\notag
+\section{1.}
+	\subsection{a)}
+		BA, AC und AA existieren nicht. \\ \\		
+		\(
+		\begin{array}{lllll}
+			\text{AB}&=\begin{pmatrix}
+				7&5&-2 \\2&1&-1 \\ 30&17&5 \\ 3&2&5 
+			\end{pmatrix} \quad
+			\text{AD}&=\begin{pmatrix}
+				2 \\4 \\26 \\ -4
+			\end{pmatrix}\quad
+			\text{BB}&=\begin{pmatrix}
+				10&5&1 \\ 5&4&-1 \\ 4&2&1
+			\end{pmatrix}\quad
+			\text{CD}&=\begin{pmatrix}
+				12
+			\end{pmatrix} \\  \\ \\
+			\text{DC}&=\begin{pmatrix}
+				2&4&-4 \\ 3&6&-6 \\ -2&-4&4
+			\end{pmatrix} \\
+		\end{array} \\ \\
+		\)
+		
+		
+	\subsection{b)}
+		\(\text{(AB)}_{i=3,\ j=2}=15\) \\ \\
+		\(\text{(AB)}_{i=4,\ j=1\dots 4}=\begin{pmatrix}
+			...&13 \\
+			...&8 \\
+			...&3 \\
+			...&23
+		\end{pmatrix}\)
+	
+	
+\section{2.}
+	\subsection{a)}
+		\begin{align}
+			\text{A}(\text{B}_1+\text{B}_2)&=\begin{pmatrix}
+				5&7 \\ 9&-1 \\ 8&2
+			\end{pmatrix}\Bigg(\begin{pmatrix}
+				1&2 \\ 3&6
+			\end{pmatrix}+\begin{pmatrix}
+				1&-2 \\ 3&2
+			\end{pmatrix}\Bigg) \\
+			&=\begin{pmatrix}
+				5&7 \\ 9&-1 \\ 8&2
+			\end{pmatrix}\begin{pmatrix}
+				2&0 \\ 6&8
+			\end{pmatrix}\\
+			&= \begin{pmatrix}
+				52&56 \\ 12&-8 \\ 28&16
+			\end{pmatrix}
+		\end{align}
+		\begin{align}
+			\text{AB}_1 &= \begin{pmatrix}
+				5&7 \\ 9&-1 \\ 8&2
+			\end{pmatrix}\begin{pmatrix}
+				1&2 \\ 3&6
+			\end{pmatrix} 
+			=\begin{pmatrix}
+				26&52 \\ 6&12 \\ 14&28
+			\end{pmatrix} \\
+			\text{AB}_2 &= \begin{pmatrix}
+				5&7 \\ 9&-1 \\ 8&2
+			\end{pmatrix} 
+			\begin{pmatrix}
+				1&-2 \\ 3&2
+			\end{pmatrix}
+			=\begin{pmatrix}
+				26&4 \\ 6&-20 \\ 14&-12
+			\end{pmatrix} \\
+		\end{align}
+		\[\text{AB}_1+\text{AB}_2=\begin{pmatrix}
+			52&56 \\ 12&-8 \\ 24&16
+		\end{pmatrix}=\text{A}(\text{B}_1+\text{B}_2)\]
+
+
+	\subsection{b)}
+		\begin{align}
+			(\text{AB})^\text{T}&=\begin{pmatrix}
+				11&5&17 \\
+				22&10&34
+			\end{pmatrix}^\text{T}
+			=\begin{pmatrix}
+				11&22\\5&10\\17&34
+			\end{pmatrix}\\
+			\text{B}^\text{T}\text{A}^\text{T}&=\begin{pmatrix}
+				2&3\\-1&2\\5&4
+			\end{pmatrix}\begin{pmatrix}
+				1&2\\3&6
+			\end{pmatrix}=\begin{pmatrix}
+				11&22\\5&10\\17&34
+			\end{pmatrix}
+		\end{align}
+		
+	\subsection{c)}
+		\(\text{A}^\text{T}\text{B}^\text{T}\) ist nicht definiert, da hier eine \(2\times 2\)-Matrix mit 
+		einer \(3\times 2\)-Matrix multipliziert wird.
+		
+		
+\section{3.}
+	Beh.: Das Distributivgesetz gilt für Matrizen. \\
+	Bew.: \\
+	\begin{align}
+		\text{Sei \ \,}A &= (a_{ij}) \quad |\ i= 1...m,\ j=1...n \\
+		\text{Sei }B_1 &= (b_{jk}) \quad |\ j=1...n,\ k=1...p \\
+		\text{Sei }B_2 &= (c_{jk}) \quad |\ j=1...n,\ k=1...p
+	\end{align}
+	\begin{align}
+		B_1+B_2 &= (b_{jk}+c_{jk}) \\
+		A\cdot(B_1+B_2) &= \Big(a_{ij}(b_{jk}+c_{jk})\Big)
+	\end{align}
+	\begin{align}
+		A\cdot B_1 &= (a_{ij}\cdot b_{jk}) \\
+		A\cdot B_2 &= (a_{ij}\cdot c_{jk}) \\
+		A\cdot B_1+A\cdot B_2 &= (a_{ij}\cdot b_{jk} + a_{ij}\cdot c_{jk}) \\
+		&\overset{*}{=} \Big(a_{ij}(b_{jk}+c_{jk})\Big) = A\cdot(B_1+B_2) \qed
+	\end{align}
+	\begin{small}
+		 * Hier ist das Distribution erlaubt, da es sich um zwei normale Zahlen handelt und das 
+		 Distributivgesetz für diese definiert ist.
+	\end{small}	
+	
+\section{4.}	
+	\subsection{a)}
+		Beh.: für \(f:A\rightarrow B \land B'\subseteq B \text{ gilt } f(f^{-1}(B'))\subseteq B'\)\\
+		Bew.: \\
+		Sei \(b\in f(f^{-1}(B'))\) \\
+		\(\Rightarrow \exists\ a\in f^{-1}(B')\ |\ f(a)=b\) Da das Bild ein Urbild braucht. \\ \\
+		Da \(a\in f^{-1}(B')\), muss \(f(a)\) auf ein Element in \(B'\) verweisen. Dieses Element 
+		ist \(b\), weil \(f(a)=b\) gilt. \\
+		Die Behauptung gilt also unter den gegebenen Bedingungen, da das Element \(b\) beliebig aus 
+		\(f(f^{-1}(B'))\) gewählt werden kann. \(\qed\)
+
+	\subsection{b)}
+		\(f:A\rightarrow B\quad\quad A=\{1\}\ B=\{v\}=B'\) \\
+		\(f(1)\) sei nicht definiert \\
+		\(f(f^{-1}(B'))=\{\}\) \\
+		
+	
+\end{document}

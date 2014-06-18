@@ -1,0 +1,318 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{pgfplots}
+\usepackage{scrpage2}\pagestyle{scrheadings}
+\usepackage{tikz}
+\usepackage{listings}
+\usetikzlibrary{patterns}
+
+\newcommand{\titleinfo}{Hausaufgaben zum 21. 12. 2012}
+\title{\titleinfo}
+\author{Arne Struck 6326505}
+\date{\today}
+\chead{\titleinfo}
+\ohead{\today}
+\setheadsepline{1pt}
+\setcounter{secnumdepth}{0}
+\lstset{language=Java}
+\newcommand{\qed}{\ \square}
+
+\begin{document}
+\maketitle
+\notag
+\section{1.}
+	\subsection{a)}		
+		Die Ordnung von \(M\) wird ist äquivalent zu \(|M|\). Da \(a\) und \(b\) sämtliche Werte in 
+		\(\mathbb{Z}_7\) annehmen können, wobei \(a\neq 0\) gilt, muss \(|M|\) sämtliche 
+		Kombinationen von \(a\) und \(b\) enthalten. Also ist \(|M| = 5\cdot 6= 30\). 
+		
+	\subsection{b)}
+		Zur Bestimmung von \(A'\) gilt: \(AA'=\begin{pmatrix}1&0\\0&1\end{pmatrix}\) wir die Gauss-
+		Jordan-Formel angewandt: \\
+		\begin{align}
+			\left(\begin{array}{cc|cc}
+			2&1 & 1& 0 \\
+			0&1 & 0& 1
+			\end{array}\right)&=
+			\left(\begin{array}{cc|cc}
+			1&\frac{1}{2}&\frac{1}{2}&0 \\
+			0&1&0&1
+			\end{array}\right) \\
+			&= \left(\begin{array}{cc|cc}
+			1&0&\frac{1}{2}&-\frac{1}{2} \\
+			0&1&0&1
+			\end{array}\right)
+		\end{align}
+		Nun kann man das Inverse von \(A\) direkt aus der Formel ablesen, allerdings sind Einträge 
+		von \(A'\notin\mathbb{Z}\), also ist \(\left(\begin{array}{cc} \frac{1}{2}&-\frac{1}{2}\\
+		0&1\end{array}\right)\) zwar das Inverse von \(A\), allerdings nicht in \(\mathbb{Z}_7\).
+		
+	\subsection{c)}
+		Die Berechneten Werte folgen aus dem im Skript vorgestellten Prinzip: \(Z^n = ZZ^{n-1}\).
+		\begin{align}
+			B&= \begin{pmatrix}
+				4&1\\0&1
+			\end{pmatrix} \\
+			B^2&=\begin{pmatrix}
+				2&5\\0&1
+			\end{pmatrix} \\
+			B^3&=\begin{pmatrix}
+				8&21\\0&1
+			\end{pmatrix}=\begin{pmatrix}
+				1&0\\0&1
+			\end{pmatrix} \Rightarrow \text{B hat die Ordnung 3.}
+		\end{align}
+		\begin{align}
+			C^1 &=\begin{pmatrix}
+				3&3 \\ 0&1
+			\end{pmatrix} \\
+			C^2 &=\begin{pmatrix}
+				2&5\\ 0&1
+			\end{pmatrix} \\
+			C^3 &=\begin{pmatrix}
+				6&4\\ 0&1
+			\end{pmatrix} \\
+			C^4 &=\begin{pmatrix}
+				4&1\\ 0&1
+			\end{pmatrix} \\
+			C^5 &=\begin{pmatrix}
+				5&6\\ 0&1
+			\end{pmatrix} \\
+			C^6 &=\begin{pmatrix}
+				15&21\\ 0&1
+			\end{pmatrix} =\begin{pmatrix}
+				1&0\\0&1
+			\end{pmatrix} \Rightarrow \text{C ist 6. Ordnung.}
+		\end{align}
+		\begin{align}
+			D^1&=\begin{pmatrix}
+				1&4\\ 0&1
+			\end{pmatrix} \\
+			D^2&=\begin{pmatrix}
+				1&1\\ 0&1
+			\end{pmatrix} \\
+			D^3&=\begin{pmatrix}
+				1&5\\ 0&1
+			\end{pmatrix} \\
+			D^4&=\begin{pmatrix}
+				1&2\\ 0&1
+			\end{pmatrix} \\
+			D^5&=\begin{pmatrix}
+				1&6\\ 0&1
+			\end{pmatrix} \\
+			D^6&=\begin{pmatrix}
+				1&3\\ 0&1
+			\end{pmatrix} \\
+			D^7&=\begin{pmatrix}
+				1&7\\ 0&1
+			\end{pmatrix} =\begin{pmatrix}
+				1&0 \\ 0&1
+			\end{pmatrix} \Rightarrow \text{D ist 7. Ordnung.} 
+		\end{align}
+	\newpage
+	\subsection{d)}
+		Gesucht ist ein Element für das gilt: \(G^2=GG=\begin{pmatrix}1&0\\0&1\end{pmatrix}\). Wenn
+		man aus \(GG\) ein LGS für die Einzelnen Elemente erstellt, dann erhält man folgendes:
+		\[\begin{pmatrix}
+			a&b\\0&1
+		\end{pmatrix}
+		\begin{pmatrix}
+			a&b\\0&1
+		\end{pmatrix}=\begin{pmatrix}1&0\\0&1\end{pmatrix}\]
+		\[
+		\begin{array}{lrclcl}
+			I:&a^2+b\cdot 0 &=& 1 &\Leftrightarrow & a^2 = 1 \\
+			II:&ab+b &=& 0 &\Leftrightarrow & b=0\\
+			III:& 0\cdot a+0\cdot 1 &=& 0 \\
+			IV:& 0b+1\cdot 1 &=&1		
+		\end{array}
+		\]
+		Aus \(I\) ist ersichtlich, dass \(a^2=1\) und \(b=0\) gelten muss, um ein Element der Ordnung 
+		2 zu finden. Dies erfüllen 2 Matrizen, die Einheitsmatrix (welche aber die Ordnung 1 besitzt) 
+		und \(\begin{pmatrix}6&0\\0&1\end{pmatrix}\), da hier \(a=-1=6\Leftrightarrow a^2 = 1\) gilt.
+		Also ist die gesuchte Matrix (die einzige der 2. Ordnung)
+		\(\begin{pmatrix}6&0\\0&1\end{pmatrix}\).
+			
+\section{2.}
+	\subsection{a)}
+		Die Quadrate sind hier nur durch ihre Eckpunkte angedeutet:
+		\begin{align}
+			s*y&=\begin{matrix}
+				C&B \\
+				D&A
+			\end{matrix} \\
+			x*r&=\begin{matrix}
+				C&B\\
+				D&A
+			\end{matrix} \\
+			x*y&=\begin{matrix}
+				B&C \\
+				A&D
+			\end{matrix}
+		\end{align}
+		\begin{tabular}{c|c|c|c|c|c|c|c|c}
+				Element&i&r&s&t&w&x&y&z \\ \hline
+				Inverses&i&t&s&r&w&x&y&z
+		\end{tabular}
+		\newpage
+	\subsection{b)}
+		\underline{Ordnung der einzelnen Elemente:} \\
+		\(i\) ist das neutrale Element, hat also die Ordnung 1. \\
+		\(r\) hat die Ordnung 4, da es sich um die \(90^{\circ}\) Drehung im Uhrzeigersinn handelt 
+		und \(90\cdot 4\) eine volle Drehung ergibt. \\
+		\(t\) hat ebenfalls die Ordnung 4, es handelt sich ebenfalls um eine \(90^{\circ}\) Drehung, 
+		allerdings gegen den Uhrzeigersinn. \\
+		Da die restlichen Elemente zu sich selbst invers sind, haben sie alle die Ordnung 2 inne. 
+		\\\\
+		\underline{Zyklisch? :} \\
+		\(G\) kann nicht zyklisch sein, da (wie man aus dem vorherigen Teil entnehmen kann) kein 
+		mögliches Erzeugerelement (Ein Element der Ordnung 8) existiert. \\ \\
+		\underline{Kommutativ?:} \\ \\
+		\begin{center}
+			\begin{tabular}{c||c|c|c|c|c|c|c|c}
+				 &i&r&s&t&w&x&y&z \\ \hline\hline
+				i&i&r&s&t&w&x&y&z \\ \hline
+				r&r&s&t&i&z&y&w&x \\ \hline
+				s&s&t&i&r&x&w&z&y \\ \hline
+				t&t&i&r&s&y&z&x&w \\ \hline
+				w&w&z&x&y&i&s&r&t \\ \hline
+				x&x&y&w&z&s&i&t&r \\ \hline
+				y&y&w&z&x&r&t&i&s \\ \hline
+				z&z&x&y&w&t&r&s&i \\ 
+			\end{tabular} 
+		\end{center}
+		Wie man eindeutig an der Gruppentafel erkennen kann, ist die Gruppe kommutativ.
+	\subsection{c)}
+		\(H_1=\{i,r,s,t\}\): \\
+		\(H_1\) ist zyklisch, da es das Element \(r\) der Ordnung 4 enthält, für welches gilt: \\
+		\begin{align}
+			r^0&= i \\
+			r^1&= r \\
+			r^2&= s \\
+			r^3&= t \\
+			r^4&= r^0 \\
+		\end{align}
+		\begin{center}
+			\begin{tabular}{c||c|c|c|c}
+				\(H_1\)&i&r&s&t \\ \hline\hline
+				i &i&r&s&t\\ \hline
+				r &r&s&t&i\\ \hline	
+				s &s&t&i&r\\ \hline
+				t &t&i&r&s\\ 
+			\end{tabular} 
+		\end{center}
+		Wie man eindeutig erkennen kann ist \(H_1\) nicht isomorph zur Rechtecksgruppe 
+		(beispielsweise sind die Hauptdiagonalen unterschiedlich). \\ \\
+		\(H_2=\{i,w,x,s\}\):\\
+		\(H_2\) ist nicht zyklisch, da ein mögliches Erzeugerelement fehlt.
+		\begin{center}
+			\begin{tabular}{c||c|c|c|c}
+				\(H_2\)&i&w&x&s \\ \hline\hline
+				i &i&w&x&s \\ \hline
+				w &w&i&s&x \\ \hline	
+				x &x&s&i&w  \\ \hline
+				s &s&x&w&i \\ 
+			\end{tabular} 
+		\end{center}
+		Diese Untergruppe ist isomorph zur Rechtecksgruppe. Der entsprechende Isomorphismus wäre:
+		\begin{tabular}{c||c|c|c|c}
+			Rechtecksgruppe &i&r&x&y\\ \hline
+			\(H_2\) & i	& w & x & s
+		\end{tabular}
+	
+\section{3.}
+	\subsection{a)}
+		\begin{align}
+			a^{-1}(bd^{-1})^{-1}bc(b^{-1}cdc)^{-1}ab^{-1}&= 
+			a^{-1}db^{-1} bcc^{-1}d^{-1}c^{-1}bab^{-1} \\
+			&=a^{-1}db^{-1} bd^{-1}c^{-1}bab^{-1} \\
+			&=a^{-1}dd^{-1}c^{-1}bab^{-1} \\
+			&=a^{-1}c^{-1}bab^{-1} \\
+			&=c^{-1}a^{-1}bb^{-1}a \\
+			&=c^{-1}a^{-1}a \\
+			&=c^{-1} \\
+		\end{align}
+		
+	\subsection{b)}
+		In zyklischen Gruppen lässt sich jedes Element durch den Erzeuger darstellen. Um 
+		Kommutativität zu zeigen muss bei der beliebigen Gruppe \(G\) gezeigt werden, dass für 
+		\(a,b\in G\) \(ab=ba\) gilt. \\
+		\(r\) sei nun der Erzeuger von \(G\), \(a\) das \(n\)-te und \(b\) das \(m\)-te Element von 
+		\(G\), wobei die Zählung mit dem 0. Element (Identität/neutrales Element) beginnt und mit dem 
+		\(|G|-1\)-tem Element endet. \\
+		Daraus folgt, dass \(a=r^n\) und \(b=r^m\) gilt. \\
+		\begin{align}
+			ab&= r^nr^m \\
+			&= r^{n+m} \\
+			&= r^{m+n} \\
+			&= r^mr^n \\
+			&= ba
+		\end{align}
+		Womit gezeigt wäre, dass die Annahme jede zyklische Gruppe sei abelsch gilt.
+	
+	\subsection{c)}
+		\subsubsection{(i)}
+			Da die unendliche zyklische Gruppe schon im Skript definiert wurde, brauchen nur noch die 
+			Elemente der unendlichen zyklischen Gruppe \(\{1..a^{n-1}\}\) gewählt werden und mit
+			ihnen die neue zyklische Gruppe der Ordnung \(n\) gebildet werden, wobei für das Element 
+			\(a^n = 1\) gilt.
+		\subsubsection{(ii)}
+			Der Argumentation von (i) folgend dürfte es nur isomorphe zyklische Gruppen der Ordnung 
+			\(n\) geben, da sich zwar der Erzeuger, aber nicht die gegenseitigen Beziehungen in der 
+			Gruppentafel ändern.
+			
+\section{4.}
+	Eine der beiden Gruppen der Ordnung 4 ist die zyklische Gruppe \(G=<a> =\{1,a,a^2,a^3\}\).
+	Da isomorphe Gruppen als gleich angesehen werden, muss gezeigt werden, dass der Aufbau der 
+	Gruppentafel für die nichtzyklische Gruppe \(H=\{1,a,b,c\}\) schon festgelegt ist. 
+	Das neutrale Element hat die natürlich die Ordnung 1, die anderen Elemente müssen (aufgrund der 	
+	Folgerung 1, Abschnitt 6.8) die Ordnung 2 aufweisen.\\ 
+	Dies kommt zustande, indem die Ordnung der Elemente ein Teiler der Ordnung der Menge sein muss, 
+	3 kommt also schon mal nicht in Frage (\(3\nmid 4\)). \(1|4\) gilt zwar, allerdings ist die 
+	Ordnung 1 dem neutralen Element vorbehalten. Bleibt noch 2, welches natürlich ein Teiler von 4 
+	ist. Höhere Ordnungen sind nicht zu betrachten, da diese durch \(mod\ 4\) (aufgrund der 
+	Endlichkeit der Gruppe) auf die genannten Fälle abgebildet werden können. \\\newpage
+	Daraus folgt folgende Gruppentafel für den Start: \\ \\
+
+	\(
+	\begin{array}{ccccc}	
+		\begin{tabular}{c||c|c|c|c}
+			\(H\) & 1 & a & b & c \\ \hline \hline
+				1 & 1 & a & b & c \\ \hline
+				a & a & 1 &   &   \\ \hline
+				b & b &   & 1 &   \\ \hline
+				c & c &   &   & 1
+		\end{tabular}&\overset{*}{\Rightarrow}&
+		\begin{tabular}{c||c|c|c|c}
+			\(H\) & 1 & a & b & c \\ \hline \hline
+				1 & 1 & a & b & c \\ \hline
+				a & a & 1 & \(\overline{1}\land\overline{b}\land\overline{a}\)  &  \(\overline{1}\land\overline{c}\land\overline{a}\) \\ \hline
+				b & b & \(\overline{1}\land\overline{b}\land\overline{a}\)  & 1 & \(\overline{1}\land\overline{c}\land\overline{b}\)  \\ \hline
+				c & c & \(\overline{1}\land\overline{c}\land\overline{a}\) & \(\overline{1}\land\overline{c}\land\overline{b}\)  & 1
+		\end{tabular}
+	\end{array} 
+	\)\\ \\
+	\begin{small}
+		* \(\overline{x}\) stehe hier für \(nicht\ x\)  \\
+	\end{small}
+	
+	Daraus folgt die vollständige Tabelle: \\ \\
+	\begin{tabular}{c||c|c|c|c}
+			\(H\) & 1 & a & b & c \\ \hline \hline
+				1 & 1 & a & b & c \\ \hline
+				a & a & 1 & c & b \\ \hline
+				b & b & c & 1 & a \\ \hline
+				c & c & b & a & 1
+		\end{tabular} \\ \\ \\
+	In den Tabellen ist deutlich zu sehen, dass für jedes noch unbesetzte Feld nur eine Wahl bleibt, 
+	also ist die Tabelle vorbestimmt und die Annahme bewiesen\(\qed\)\\
+	Eine solche Gruppe wäre beispielsweise die Rechtecksgruppe aus den Präsenzaufgaben.
+	
+	
+\end{document}

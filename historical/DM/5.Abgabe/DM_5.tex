@@ -1,0 +1,435 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{pgfplots}
+\usepackage{scrpage2}\pagestyle{scrheadings}
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+
+\newcommand{\titleinfo}{Hausaufgaben zum 23. 11. 2012}
+\title{\titleinfo}
+\author{Arne Struck 6326505}
+\date{\today}
+\chead{\titleinfo}
+\ohead{\today}
+\setheadsepline{1pt}
+\setcounter{secnumdepth}{0}
+\setlength{\textheight}{22cm}
+\newcommand{\qed}{\ \square}
+
+\begin{document}
+\maketitle
+\notag
+\section{1.}
+	\subsection{a)}
+		\makebox(0,10)
+		
+		\begin{center}
+			\begin{tikzpicture}[overlay,
+				every node/.style={fill, circle, inner sep=2pt}]
+	
+				\node[label=below:$a$] (A) at (-5,0) {};
+				\node[label=below:$b$] (B) at (-3,0) {};
+				\node[label=below:$c$] (C) at (-1,0) {};
+				\node[label=below:$d$] (D) at (1,0) {};
+				\node[label=below:$e$] (E) at (3,0) {};
+				\node[label=below:$f$] (F) at (5,0) {};
+				
+				\draw[-latex] (A) to (B);
+				\draw[-latex] (B) to (C);
+				\draw[-latex] (C) to (D);
+				\draw[-latex] (B) to[bend left=40] (E);
+				\draw[-latex] (E) to (F);
+				
+			\end{tikzpicture}\\ 
+		\end{center}
+		
+		\makebox(0,5)
+		
+		\begin{center}				
+			\begin{tabular}[t]{c|cccccc}
+				& a & b & c & d & e & f \\
+				\hline
+				a & 0 & 1 & 0 & 0 & 0 & 0 \\
+				b & 0 & 0 & 1 & 0 & 1 & 0 \\
+				c & 0 & 0 & 0 & 1 & 0 & 0 \\
+				d & 0 & 0 & 0 & 0 & 0 & 0 \\
+				e & 0 & 0 & 0 & 0 & 0 & 1 \\
+				f & 0 & 0 & 0 & 0 & 0 & 0
+			\end{tabular}\\
+		\end{center}
+		
+		
+	\subsection{b)}
+	Hinzugefügte Kanten sind gestrichelt dargestellt. \\ \\ \\
+		\begin{center}
+			\begin{tikzpicture}[overlay,
+				every node/.style={fill, circle, inner sep=2pt}]
+	
+				\node[label=below:$a$] (A) at (-5,0) {};
+				\node[label=below:$b$] (B) at (-3,0) {};
+				\node[label=below:$c$] (C) at (-1,0) {};
+				\node[label=below:$d$] (D) at (1,0) {};
+				\node[label=below:$e$] (E) at (3,0) {};
+				\node[label=below:$f$] (F) at (5,0) {};
+				
+				\draw[-latex] (A) to (B);
+				\draw[-latex] (B) to (C);
+				\draw[-latex] (C) to (D);
+				\draw[-latex] (B) to[bend left=40] (E);
+				\draw[-latex] (E) to (F);
+				
+				\draw[dashed][-latex] (A) to[loop] (A);
+				\draw[dashed][-latex] (B) to[loop] (B);
+				\draw[dashed][-latex] (C) to[loop] (C);
+				\draw[dashed][-latex] (D) to[loop] (D);
+				\draw[dashed][-latex] (E) to[loop] (E);
+				\draw[dashed][-latex] (F) to[loop] (F);
+				
+				\draw[dashed][-latex] (A) to[bend right = 30] (C);
+				\draw[dashed][-latex] (A) to[bend right = 30] (D);
+				\draw[dashed][-latex] (B) to[bend right = 30] (D);
+				\draw[dashed][-latex] (A) to[bend left = 30] (E);
+				\draw[dashed][-latex] (B) to[bend left = 30] (F);
+				\draw[dashed][-latex] (A) to[bend right = 30] (F);
+			\end{tikzpicture}\\ 
+		\end{center}
+
+	\newpage
+	\subsection{c)}
+		\begin{center}
+			\begin{tikzpicture}[overlay,
+				every node/.style={fill, circle, inner sep=2pt}]
+				\node[label=left:$f$] (F) at (0,0) {};
+				\node[label=right:$d$] (D) at (2,0) {};
+				\node[label=left:$e$] (E) at (0,-1) {};
+				\node[label=right:$c$] (C) at (2,-1) {};
+				\node[label=left:$b$] (B) at (1,-2) {};
+				\node[label=left:$a$] (A) at (1,-3) {};
+				
+				\draw [-] (A) to (B);
+				\draw [-] (B) to (E);
+				\draw [-] (B) to (C);
+				\draw [-] (E) to (F);
+				\draw [-] (C) to (D);
+			\end{tikzpicture}
+		\end{center}
+		\makebox(0,80)
+		
+
+	\subsection{d)}
+		\begin{align}
+			S=\Big\{&R,(a,a),(b,b),(c,c),(d,d),(e,e),(f,f),(a,c),(b,d),(a,d),(b,f),(a,e),(a,f),
+			(b,a),(c,b),\\&(e,b),(f,e),(c,a),(d,b),(d,a),(f,b),(e,a),(f,a)\Big\}
+		\end{align}
+		\(S\) umfasst eine komplette Relation \(A\rightarrow A\). \\
+		\(K_1 = (a,b,c,d,e,f)\)
+
+\section{2.}
+	\subsection{a)}
+		\begin{center}
+			\begin{tikzpicture}[overlay, 
+				every node/.style={fill, circle, inner sep=2pt}]
+
+				\node[label=below:$a$] (A) at (-5,0) {};
+				\node[label=below:$b$] (B) at (-3,0) {};
+				\node[label=below:$c$] (C) at (-1,0) {};
+				\node[label=below:$d$] (D) at (1,0) {};
+				\node[label=below:$e$] (E) at (3,0) {};
+				\node[label=below:$f$] (F) at (5,0) {};
+				
+				\draw[-latex] (A) to (B);
+				\draw[-latex] (B) to[bend right=40] (D);
+				\draw[-latex] (E) to (F);
+				\end{tikzpicture}\\
+		\end{center}
+		
+		\makebox(0,5)
+		
+		\begin{center}
+			\begin{tabular}[t]{c|cccccc}
+				& a & b & c & d & e & f\\
+				\hline
+				a & 0 & 1 & 0 & 0 & 0 & 0\\
+				b & 0 & 0 & 0 & 1 & 0 & 0\\
+				c & 0 & 0 & 0 & 0 & 0 & 0\\
+				d & 0 & 0 & 0 & 0 & 0 & 0\\
+				e & 0 & 0 & 0 & 0 & 0 & 1\\
+				f & 0 & 0 & 0 & 0 & 0 & 0
+			\end{tabular}\\			
+		\end{center}
+		\makebox(0,10)
+	
+	\subsection{b)}
+		\makebox(0,10)
+		
+		\begin{center}
+			\begin{tikzpicture}[overlay,
+					every node/.style={fill, circle, inner sep=2pt}]
+		
+					\node[label=below:$a$] (A) at (-5,0) {};
+					\node[label=below:$b$] (B) at (-3,0) {};
+					\node[label=below:$c$] (C) at (-1,0) {};
+					\node[label=below:$d$] (D) at (1,0) {};
+					\node[label=below:$e$] (E) at (3,0) {};
+					\node[label=below:$f$] (F) at (5,0) {};
+					
+					\draw[-latex] (A) to (B);
+					\draw[-latex] (B) to[bend right=40] (D);
+					\draw[-latex] (E) to (F);
+					
+					\draw[dashed][-latex] (A) to[bend left=40] (D);
+										
+					\draw[dashed][-latex] (A) to[loop] (A);
+					\draw[dashed][-latex] (B) to[loop] (B);
+					\draw[dashed][-latex] (C) to[loop] (C);
+					\draw[dashed][-latex] (D) to[loop] (D);
+					\draw[dashed][-latex] (E) to[loop] (E);
+					\draw[dashed][-latex] (F) to[loop] (F);
+			\end{tikzpicture}		
+		\end{center}
+		
+	\newpage
+	\subsection{c)}
+		\begin{center}
+			\begin{tikzpicture}[overlay, 
+				every node/.style={fill, circle, inner sep=2pt}]
+				\node[label=left:$d$] (D) at (0,0) {};
+				\node[label=left:$b$] (B) at (0,-1) {};
+				\node[label=right:$f$] (F) at (2,-1) {};
+				\node[label=left:$a$] (A) at (0,-2) {};
+				\node[label=right:$e$] (E) at (2,-2) {};
+				\node[label=left:$c$] (C) at (1,-2) {};
+				
+				\draw[-] (A) to (B);
+				\draw[-] (B) to (D);
+				\draw[-] (E) to (F);
+			\end{tikzpicture}\\
+		\end{center}
+		\makebox(0,80)
+
+	\subsection{d)}
+		\begin{align}
+			S&=\Big\{(a,a),(b,b),(c,c),(d,d),(e,e),(f,f),(a,d),(b,a),(d,b),(f,e),(d,a)\Big\} \\
+			K_1&=(a,b,d) \\
+			K_2&=(c) \\
+			K_3&=(e,f)
+		\end{align}
+		
+
+\section{3.}
+	\subsection{a)}
+		\begin{center}
+			\begin{tikzpicture}[overlay, 
+				every node/.style={fill, circle, inner sep=2pt}]
+				
+				\node[label=below:$a$] (A) at (-3,0) {};
+				\node[label=below:$b$] (B) at (-1,0) {};
+				\node[label=below:$c$] (C) at (1,0) {};
+				\node[label=below:$d$] (D) at (3,0) {};
+				
+				\draw[-latex] (A) to[loop] (A);
+				\draw[-latex] (B) to[loop] (B);
+				\draw[-latex] (C) to[loop] (C);
+				\draw[-latex] (D) to[loop] (D);
+				
+				\draw[-latex] (A) to[bend left=30] (B);
+				\draw[-latex] (B) to[bend left=30] (A);
+
+				\draw[-latex] (B) to[bend left=30] (C);
+				\draw[-latex] (C) to[bend left=30] (B);
+			\end{tikzpicture}\\
+		\end{center}
+		\makebox(0,5)
+	
+	\subsection{b)}
+		\begin{center}
+			\begin{tikzpicture}[overlay, 
+				every node/.style={fill, circle, inner sep=2pt}]
+				
+				\node[label=below:$a$] (A) at (-3,0) {};
+				\node[label=below:$b$] (B) at (-1,0) {};
+				\node[label=below:$c$] (C) at (1,0) {};
+				\node[label=below:$d$] (D) at (3,0) {};
+				
+				\draw[-latex] (A) to[loop] (A);
+				\draw[-latex] (B) to[loop] (B);
+				\draw[-latex] (C) to[loop] (C);
+				\draw[-latex] (D) to[loop] (D);
+				
+				\draw[-latex] (A) to (B);
+				\draw[-latex] (B) to (C);
+				\draw[-latex] (C) to[bend right = 50] (A);
+			\end{tikzpicture}\\
+		\end{center}	
+		\makebox(0,5)
+
+	\subsection{c)}
+		\begin{center}
+			\begin{tikzpicture}[overlay, 
+				every node/.style={fill, circle, inner sep=2pt}]
+				
+				\node[label=below:$a$] (A) at (-3,0) {};
+				\node[label=below:$b$] (B) at (-1,0) {};
+				\node[label=below:$c$] (C) at (1,0) {};
+				\node[label=below:$d$] (D) at (3,0) {};
+				
+				\draw[-latex] (A) to[bend right = 30] (B);
+				\draw[-latex] (B) to[bend right = 30] (C);
+				\draw[-latex] (C) to[bend right = 50] (A);
+	
+				\draw[-latex] (B) to[bend right = 30] (A);
+				\draw[-latex] (C) to[bend right = 30] (B);
+				\draw[-latex] (A) to[bend right = 50] (C);			
+				
+			\end{tikzpicture}\\
+		\end{center}	
+		
+\newpage
+\section{4.}
+	\subsection{a)}
+		\(R=\Big\{(1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(2,2),(2,4),(2,6),(3,3),(3,6),
+		(4,4),(5,5),(6,6)\Big\}\) \\	
+		\makebox(0,50)
+		
+		\begin{center}
+			\begin{tikzpicture}[overlay, 
+				every node/.style={fill, circle, inner sep=2pt}]
+				
+				\node[label=below:$1$] (1) at (-5,0) {};
+				\node[label=below:$2$] (2) at (-3,0) {};
+				\node[label=below:$3$] (3) at (-1,0) {};
+				\node[label=below:$4$] (4) at (1,0) {};
+				\node[label=below:$5$] (5) at (3,0) {};
+				\node[label=below:$6$] (6) at (5,0) {};
+				
+				\draw[-latex] (1) to[loop] (1);
+				\draw[-latex] (1) to (2);
+				\draw[-latex] (1) to[bend right = 30] (3);
+				\draw[-latex] (1) to[bend right = 30] (4);
+				\draw[-latex] (1) to[bend right = 30] (5);
+				\draw[-latex] (1) to[bend right = 30] (6);
+				
+				\draw[-latex] (2) to[loop] (2);
+				\draw[-latex] (2) to[bend left = 40] (4);
+				\draw[-latex] (2) to[bend left = 40] (6);
+				
+				\draw[-latex] (3) to[loop] (3);
+				\draw[-latex] (3) to[bend left = 40] (6);
+				
+				\draw[-latex] (4) to[loop] (4);
+				
+				\draw[-latex] (5) to[loop] (5);
+				
+				\draw[-latex] (6) to[loop] (6);		
+			\end{tikzpicture}\\
+		\end{center}	
+		\makebox(0,40)
+		
+		\begin{center}
+			\begin{tikzpicture}[overlay, 
+				every node/.style={fill, circle, inner sep=2pt}]
+				\node[label=right:$6$] (6) at (1,-1) {};
+				\node[label=left:$4$] (4) at (0,-1) {};
+				\node[label=left:$5$] (5) at (-1,-2) {};
+				\node[label=left:$2$] (2) at (0,-2) {};
+				\node[label=right:$3$] (3) at (1,-2) {};
+				\node[label=below:$1$] (1) at (0,-3) {};
+				
+				\draw (1) -- (2);
+				\draw (1) -- (5);
+				\draw (1) -- (3);
+				\draw (2) -- (4);
+				\draw (3) -- (6);
+				\draw (2) -- (6);
+			\end{tikzpicture}\\		
+		\end{center}
+		\makebox(0,90)
+	
+	\subsection{b)}
+		\makebox(0,10)
+		
+		\begin{center}
+			\begin{tikzpicture}[overlay, 
+				every node/.style={fill, circle, inner sep=2pt}]
+				
+				\node[label=below:$ \emptyset $] (0) at (-3,0) {};
+				\node[label=below:$ \{1\} $] (1) at (-1,0) {};
+				\node[label=below:$ \{2\} $] (2) at (1,0) {};
+				\node[label=below:$ \{1{,}2\} $] (12) at (3,0) {};
+				
+				\draw[-latex](0) to (1);
+				\draw[-latex](0) to[bend left = 30] (2);
+				\draw[-latex](0) to[bend left = 30] (12);
+				
+				\draw[-latex](0) to[loop] (0);
+				\draw[-latex](1) to[loop] (1);
+				\draw[-latex](2) to[loop] (2);
+				\draw[-latex](12) to[loop] (12);
+			\end{tikzpicture}\\		
+		\end{center}
+		\makebox(0,70)
+	
+		\begin{center}
+			\begin{tikzpicture}[overlay, 
+				every node/.style={fill, circle, inner sep=2pt}]
+
+				\node[label=below:$ \emptyset $] (0) at (0,-1) {};
+				\node[label=left:$ \{1\} $] (1) at (-1,0) {};
+				\node[label=right:$ \{2\} $] (2) at (1,0) {};
+				\node[label=above:$ \{1{,}2\} $] (12) at (0,1) {};
+				
+				\draw[-](0) to (1);
+				\draw[-](0) to (2);
+				\draw[-](1) to (12);
+				\draw[-](2) to (12);
+				
+			\end{tikzpicture}\\		
+		\end{center}
+	
+	\newpage
+	\subsection{c)}
+		\begin{align}
+			A&= \Big\{\emptyset,\{1\},\{2\},\{3\},\{1,2\},\{1,3\},\{2,3\},\{1,2,3\}\Big\}
+		\end{align}
+		\makebox(0,200)		
+		
+		\begin{center}
+			\begin{tikzpicture}[overlay, 
+				every node/.style={fill, circle, inner sep=2pt}]
+
+				\node[label=below:$ \emptyset $] (0) at (0,0) {};
+				\node[label=left:$ \{1\} $] (1) at (-2,2) {};
+				\node[label=right:$ \{2\} $] (2) at (0,2) {};
+				\node[label=right:$ \{3\} $] (3) at (2,2) {};				
+				\node[label=left:$ \{1{,}2\} $] (12) at (-2,4) {};
+				\node[label=right:$ \{1{,}3\} $] (13) at (0,4) {};
+				\node[label=right:$ \{2{,}3\} $] (23) at (2,4) {};	
+				\node[label=above:$ \{1{,}2{,}3\} $] (123) at (0,6) {};		
+				
+				\draw[-] (0) to (1);
+				\draw[-] (0) to (2);
+				\draw[-] (0) to (3);
+				
+				\draw[-] (1) to (12);
+				\draw[-] (1) to (13);
+				
+				\draw[-] (2) to (12);
+				\draw[-] (2) to (23);
+				
+				\draw[-] (3) to (13);
+				\draw[-] (3) to (23);
+				
+				\draw[-] (12) to (123);
+				\draw[-] (13) to (123);
+				\draw[-] (23) to (123);
+				
+			\end{tikzpicture}\\		
+		\end{center}
+	
+\end{document}

@@ -1,0 +1,293 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{pgfplots}
+\usepackage{scrpage2}\pagestyle{scrheadings}
+\usepackage{tikz}
+\usepackage{fullpage}
+\usepackage{subfigure}
+\usetikzlibrary{patterns}
+
+\newcommand{\titleinfo}{Hausaufgaben zum 2. 11. 2012}
+\title{\titleinfo}
+\author{Arne Struck 6326505}
+\date{\today}
+\chead{\titleinfo}
+\ohead{\today}
+\setheadsepline{1pt}
+\setcounter{secnumdepth}{0}
+\setlength{\textheight}{22cm}
+\newcommand{\qed}{\ \square}
+
+\begin{document}
+\maketitle
+\notag
+\section{1.}
+	\subsection{a)}
+	\begin{enumerate}[(i)]
+		\item 
+		\(
+			177\equiv 18 (\text{ mod} 5) 
+			\text{ ist falsch, } 5\nmid 159 \\
+		\)
+		\item
+		\(
+			177\equiv -18 (\text{ mod} 5)
+			\text{ ist wahr, } 5\mid 195 \\
+		\)
+		\item
+		\(
+			-89\equiv -12 (\text{ mod} 6)
+			\text{ ist falsch, } 6\nmid -77 \\
+		\)
+		\item
+		\(
+			-123\equiv 33 (\text{ mod} 13)
+			\text{ ist wahr, } 13\mid -156 \\
+		\)
+		\item
+		\(
+			39\equiv -1 (\text{ mod} 40)
+			\text{ ist wahr, } 40\mid 40 \\
+		\)
+		\item
+		\(
+			77\equiv 0 (\text{ mod} 11)
+			\text{ ist wahr, } 11\mid 77 \\
+		\)
+		\item
+		\(
+			2^{51}\equiv 51 (\text{ mod} 2)
+			\text{ ist falsch, } (2\nmid 2^{51}-51) \\
+		\)
+	\end{enumerate}
+	
+	\subsection{b)}
+		\[ggt(7293,378):\]
+		\begin{align}
+			7293 &= 19\cdot 378+111 \\
+			 378 &= 3\cdot 111+45 \\
+			 111 &= 2\cdot 45 +21 \\
+			  45 &=2\cdot 21 + 3 \\
+			  21 &=7\cdot 3+0 \\
+			\Rightarrow &ggt(7293,378)=3		
+		\end{align}
+	
+	\subsection{c)}		
+	    \(
+		\begin{array}{rcl}
+			\lceil\sqrt{7}\rceil &=& 3 \\
+			\lfloor\sqrt{7}\rfloor &=& 2 \\
+			\lceil 7,1 \rceil &=& 8 \\
+			\lfloor 7,1\rfloor &=& 7\\
+		\end{array}
+		\)
+		\quad\quad
+	    \(
+		\begin{array}{rcl}
+			\lceil -7,1 \rceil &=& -7 \\
+			\lfloor -7,1\rfloor &=& -8 \\
+			\lceil -7\rceil &=& -7 \\
+			\lfloor -7\rfloor &=& -7\\
+		\end{array}
+		\)		
+
+\section{2.}
+	\subsection{(1)}
+		\(c\mid b\land b\mid a \Rightarrow c\mid a\) \\ \\
+		\(
+		\begin{array}{rrcll}
+			&z\cdot c&=&b &,z\in\mathbb{Z} \\
+			&y\cdot b&=&a &,y\in\mathbb{Z} \\
+			\Leftrightarrow &b&=&\frac{a}{y} \\
+			\Rightarrow & z\cdot c &=&\frac{a}{y} \\
+			\Leftrightarrow & z\cdot y\cdot c &=& a &\Rightarrow c\mid a\qed\\
+		\end{array}
+		\)
+
+	\subsection{(2)}
+		\(b_1\mid a_1\land b_2\mid a_2\Rightarrow b_1\cdot b_2\mid a_1 \cdot a_2\) \\ \\
+		\(
+		\begin{array}{rrcll}
+			&y\cdot b_1 &=& a_1&,y\in\mathbb{Z}\\
+			&z\cdot b_2 &=& a_2&,z\in\mathbb{Z}\\
+			\Rightarrow &a_1\cdot a_2 &=&(y\cdot b_1)(z\cdot b_2)\\
+			\Leftrightarrow &a_1\cdot a_2 &=&(b_1\cdot b_2) (z\cdot y) \\
+			\Rightarrow &b_1\cdot b_2 \mid a_1\cdot a_2 \qed 
+		\end{array}
+		\)
+		
+	\subsection{(3)}
+		\(c\cdot b\mid c\cdot a :c\neq 0 \Rightarrow b\mid a\) \\ \\
+		\(
+		\begin{array}{rrcll}
+			&y\cdot c\cdot b &=& c\cdot a &,y\in\mathbb{Z} \\
+			\Leftrightarrow &y\cdot b &=& a \\
+			\Rightarrow & b\mid a \qed
+		\end{array}
+		\)
+
+	\subsection{(4)}
+	\(b\mid a_1\land b\mid a_2 \Rightarrow b\mid (c_1\cdot a_1+c_2\cdot a_2)\ : c_1,c_2\in\mathbb{Z}\)\\ 
+	\\
+	\(
+	\begin{array}{rrrcll}
+		&\text{I}&y\cdot b &=&a_1 &,y\in\mathbb{Z} \\
+		&\text{II}& z\cdot b &=&a_2,z\in\mathbb{Z} \\
+		\\
+		&\text{I}&c_1\cdot y\cdot b &=&c_1\cdot a_1 \\
+		&\text{II}&c_2\cdot z\cdot b &=&c_2\cdot a_2 \\
+		\Rightarrow && c_1\cdot a_1+c_2\cdot a_2 &=&c_2\cdot z\cdot b+c_1\cdot y\cdot b\\
+		\Leftrightarrow &&c_1\cdot a_1+c_2\cdot a_2 &=& b\cdot(c_2\cdot z+c_1\cdot y) \\
+	\end{array}
+	\)
+
+
+\section{3.}
+	\subsection{a)}
+		\underline{Beh.:}\\
+		\(
+		\begin{array}{rll}
+			&\forall n\geq 0 : 3\mid (n^3+2n) \\
+			\Leftrightarrow & \forall n\geq 0: \\
+			&n^3+2n = 3a :a\in\mathbb{Z}\\
+		\end{array}
+		\) \\ \\
+		\underline{Induktionsanfang:} \\
+		\(		
+		\begin{array}{rrcl}
+			&0^3+2\cdot 0 &=& 3a \\
+			\Leftrightarrow &0&=&a
+		\end{array}
+		\) \\ \\
+		\underline{Induktionsschritt: }\\
+		\(
+		\begin{array}{rrcll}
+			\text{zu zeigen: } & (n+1)^3+2(n+1) &=& 3b&,b\in\mathbb{Z} \\
+		\end{array}
+		\)\\ \\
+		\(
+		\begin{array}{rrcll}
+			&(n+1)^3+2(n+1)&=&3b \\
+			\Leftrightarrow & n^3+3n^2+3n+1+2n+2 &=&3b \\
+			\Leftrightarrow & n^3+2n+3n^2+3n+3 &=& 3b \\
+			\overset{\text{IA}}{\Leftrightarrow} & 3a+3n^2+3n+3 &=& 3b \\
+			\Leftrightarrow & a+n^2+n+1 &=& b\Rightarrow  3\mid ((n+1)^3+2(n+1))\qed
+		\end{array}
+		\)
+		
+	\subsection{b)}
+		Ein L-Stück entsteht in einem \(2^n\times 2^n\) Schachbrett, wie in \subref{fig:4b1} zu sehen.
+		Um ein Schachbrett zu erhalten, braucht	man noch ein weiteres Stück in der rechten oberen Ecke 
+		(schraffiert).
+       	In \subref{fig:4b2} sieht man, wie aus 4 L-Stücken ein weiteres, größeres L-Stück mit doppelter 
+       	Kantenlänge entsteht. Nun fehlt, um ein \(2^{n+1}\times 2^{n+1}\) Schachbrett zu erstellen, noch 
+       	die obere rechter Ecke, welche sich durch ein \(2^n\times 2^n\) Schachbrett, wie in 
+       	\subref{fig:4b3} zu sehen, ausfüllen lässt. Da dieser Schritt sich beliebig oft wiederholen 
+       	lässt und analog auch für ein \(2\times 2\) Schachbrett gilt, gilt dieses Muster allgemein.
+        
+        
+        \begin{figure}[!hb]
+	        \centering
+				\subfigure[]{
+               	\label{fig:4b1}
+                \begin{tikzpicture}[scale=1]
+                	\draw[fill=gray,pattern=north west lines] (1, 1) rectangle (2, 2);
+                    \draw (0, 0) -- (0, 2) -- (2, 2) -- (2, 0) -- (0, 0);
+                \end{tikzpicture}
+                }\subfigure[]{     	    
+        	   	\label{fig:4b2}
+          	  	\begin{tikzpicture}[scale=0.5]
+        		    \draw (0, 0) -- (0, 4) -- (2, 4) -- (2, 2) -- (4, 2) -- (4, 0) -- (0, 0);
+                    \draw (2, 4) -- (2, 2) -- (4, 2);
+                    \draw (2, 3) -- (1, 3) -- (1, 1) -- (3, 1) -- (3, 2);
+                    \draw (0, 2) -- (1, 2);
+                    \draw (2, 0) -- (2, 1);
+               \end{tikzpicture}
+               }\subfigure[]{
+                \label{fig:4b3}
+                \begin{tikzpicture}[scale=0.5]
+                    \draw[fill=gray,pattern=north west lines] (3, 3) rectangle (4, 4);
+                    \draw (0, 0) -- (0, 4) -- (4, 4) -- (4, 0) -- (0, 0);
+                    \node[label=center:$L_{n}$] at (3, 2.5) {};
+                    \draw[fill=lightgray,draw=none] (0, 0) rectangle (4, 2);
+                    \draw[fill=lightgray,draw=none] (0, 0) rectangle (2, 4);
+                    \draw (0, 0) -- (0, 4) -- (2, 4) -- (2, 2) -- (4, 2) -- (4, 0) -- (0, 0);
+                    \draw[style=dashed] (2, 4) -- (2, 2) -- (4, 2);
+                    \draw[style=dashed] (2, 3) -- (1, 3) -- (1, 1) -- (3, 1) -- (3, 2);
+                    \draw[style=dashed] (0, 2) -- (1, 2);
+                    \draw[style=dashed] (2, 0) -- (2, 1);
+                    \node[label=center:$L_{n+1}$] at (2, 1.8) {};
+                \end{tikzpicture}
+                }
+    	\end{figure}
+	
+\newpage
+\section{4.}
+	\subsection{a)}
+		\(g: \mathbb{Q}\times\mathbb{Q}\rightarrow\mathbb{Q}\times\mathbb{Q}\times\mathbb{Q}\) \\
+		\(g(x,y) = (xy^2,xy^2-3x,(x^2-2)y)\) \\ \\
+		\underline{Beh.:} \(g\) ist injektiv. 
+		\begin{flushleft}
+		\text{\underline{Annahme:}} \\
+		\(
+		\begin{array}{ll}
+			g \text{ ist nicht injektiv.} \\
+			\forall (x,y),(m,n)\in (\mathbb{Q},\mathbb{Q}): (x,y) = (m,n)\ \exists\ g(x,y)\neq 
+			(m,n)\\
+		\end{array}
+		\)
+		\end{flushleft}		
+		\underline{Beweis:} \\
+		\(
+		\begin{array}{lrcll}
+			&g(x,y)&=&(xy^2,xy^2-3x,(x^2-2)y) \\
+			&g(x,y)&=&(m,n^2,mn^2-3m,(m^2-2)n) \\
+			\text{I}&xy^2&=&mn^2 \\
+			\text{II}&xy^2-3x&=&mn^2-3m \\
+			\text{III}&x^2y-2y&=&m^2n-2n \\ 
+		\end{array}
+		\)\\ \\
+		\(
+		\begin{array}{rrcll}
+		\text{I-II:}&\\
+		&xy^2-xy^2+3x&=&mn^2-mn^2+3m \\
+		\Leftrightarrow &3x&=&3m \\
+		\Leftrightarrow & x&=&m \\
+		\end{array}			
+		\) \\
+		\newline
+		Rückeinsetzen in III: \\
+		\(
+		\begin{array}{crcll}
+			&x^2y-2y&=&x^2n-2n \\
+			\Leftrightarrow & x^2(y-n)-2y&=&-2n &\mid \text{für }x=0:y=n \\
+			\overset{x\neq 0}{\Leftrightarrow}& x^2y-2y&=&x^2n-2n \\
+			\overset{x\neq 0}{\Leftrightarrow}& (x^2-2)y &=& (x^2-2)n \\
+			\Leftrightarrow & y&=&n &\mid \text{Widerspruch} \\ \\
+		\end{array} \\ \\ \)
+		\[
+		\Rightarrow g \text{ ist injektiv.} \\
+		\]
+		
+	\subsection{b)}
+		\underline{Beh.:} \(h\) ist nicht surjektiv. \\ \\
+		\underline{Annahme:} \(h\) ist surjektiv. \\ \\
+		\underline{Beweis:} \\
+		\(
+		\begin{array}{lrcll}
+			&h(2)&=&(1,1) \\ \\
+			\text{I}&1&=&z+2 \\
+			\text{II}1&=&z-1 \\
+			\text{I}&z&=&-1 \\
+			\text{II}&z&=&2 &\mid \text{Widerspruch}
+		\end{array}
+		\)\\ \\
+		\(\Rightarrow h \text{ ist nicht surjektiv.}\qed\)
+
+\end{document}
