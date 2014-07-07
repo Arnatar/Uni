@@ -2,7 +2,7 @@
 % Encoding: Cp1252
 
 
-@Book{ESDes,
+@Book{,
   Title                    = {Embedded System Design},
   Author                   = {Marwedel, Peter},
   Publisher                = {Springer US},
@@ -11,7 +11,7 @@
   Series                   = {Embedded Systems}
 }
 
-@Book{ScheThAlgSys,
+@Book{,
   Title                    = {Scheduling - Theory, Algorithms, and Systems},
   Author                   = {Pinedo, Michael L.},
   Publisher                = {Springer US},
