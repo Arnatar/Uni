@@ -2,7 +2,20 @@
 % Encoding: Cp1252
 
 
-@Book{,
+@Misc{jamaicaPic,
+  Title                    = {JamaicaVM 3.4 — User Documentation: The Virtual Machine for Realtime and Embedded Systems},
+
+  Author                   = {aicas GmbH},
+  HowPublished             = {"\url{http://www.aicas.com/jamaica/3.4/doc/html/x4057.html}"}
+}
+
+@Conference{gss,
+  Title                    = {Grundlagen der Systemsoftware},
+  Author                   = {Prof. Dr. W. Lamersdorf},
+  Year                     = {2014}
+}
+
+@Book{ESDes,
   Title                    = {Embedded System Design},
   Author                   = {Marwedel, Peter},
   Publisher                = {Springer US},
@@ -11,7 +24,7 @@
   Series                   = {Embedded Systems}
 }
 
-@Book{,
+@Book{ScheThAlgSys,
   Title                    = {Scheduling - Theory, Algorithms, and Systems},
   Author                   = {Pinedo, Michael L.},
   Publisher                = {Springer US},
@@ -26,6 +39,17 @@
   Year                     = {2014},
 
   Url                      = {http://www.ostep.org}
+}
+
+@Misc{sureshPic,
+  Title                    = {What are the different types of Operating systems?},
+
+  Author                   = {Suresh},
+  HowPublished             = {"\url{http://thelinuxdesk.com/2012/09/13/what-are-the-different-types-of-operating-systems/}"},
+  Month                    = {09},
+  Year                     = {2012},
+
+  Url                      = {http://thelinuxdesk.com/2012/09/13/what-are-the-different-types-of-operating-systems/}
 }
 
 @Book{tanenb2009,

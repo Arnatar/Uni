@@ -1,0 +1,201 @@
+\begin{frame}{Beispiel: Round Robin}
+	\begin{tabular}{l||c|c|c|c}
+		Auftrag               & \(A_1\)  & \(A_2\)  & \(A_3\) & \(A_4\) \\ \hline \hline
+		Ankunftszeit		  & 0        &  4		& 5       & 8       \\ \hline
+		Bedienzeitanforderung & 6        &  4       & 2       & 6       \\
+	\end{tabular}\quad \\ \quad \\
+	Zeitscheibengröße: \(\Delta t = 2\) \\
+	Queue\(_{t0}\):[\(A_1\)] \\
+	Queue\(_{t2}\):[] \\
+	\begin{center}
+	\begin{blockgraph}{25}{1}{0.4}
+	    \bglabelxx{0}
+	    \bglabelxx{5}
+	    \bglabelxx{10}
+	    \bglabelxx{15}
+	    \bglabelxx{20}
+   	 	\bglabelxx{25}
+    \end{blockgraph}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Beispiel: Round Robin}
+	\begin{tabular}{l||c|c|c|c}
+		Auftrag               & \(A_1\)  & \(A_2\)  & \(A_3\) & \(A_4\) \\ \hline \hline
+		Ankunftszeit		  & 1        &  4		& 5       & 8       \\ \hline
+		Bedienzeitanforderung & 6        &  4       & 2       & 6       \\
+	\end{tabular}\quad \\ \quad \\
+	Zeitscheibengröße: \(\Delta t = 2\) \\
+	Queue\(_{t4}\):[\(A_2\)] \\
+	\quad \\
+	\begin{center}
+	\begin{blockgraph}{25}{1}{0.4}
+	    \bglabelxx{0}
+	    \bglabelxx{5}
+	    \bglabelxx{10}
+	    \bglabelxx{15}
+	    \bglabelxx{20}
+   	 	\bglabelxx{25}
+    
+    	\bgblock{0}{2}{$A_1$}
+    	\bgblock{2}{4}{$A_1$}
+    	\bgemptyblock{4}{5}
+    \end{blockgraph}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Beispiel: Round Robin}
+	\begin{tabular}{l||c|c|c|c}
+		Auftrag               & \(A_1\)  & \(A_2\)  & \(A_3\) & \(A_4\) \\ \hline \hline
+		Ankunftszeit		  & 1        &  4		& 5       & 8       \\ \hline
+		Bedienzeitanforderung & 6        &  4       & 2       & 6       \\
+	\end{tabular}\quad \\ \quad \\
+	Zeitscheibengröße: \(\Delta t = 2\) \\
+	Queue\(_{t7}\):[\(A_1, A_3\)] \\
+	\quad \\
+	\begin{center}
+	\begin{blockgraph}{25}{1}{0.4}
+	    \bglabelxx{0}
+	    \bglabelxx{5}
+	    \bglabelxx{10}
+	    \bglabelxx{15}
+	    \bglabelxx{20}
+   	 	\bglabelxx{25}
+    
+    	\bgblock{0}{2}{$A_1$}
+    	\bgblock{2}{4}{$A_1$}
+    	\bgemptyblock{4}{5}
+    	\bgblock{5}{7}{$A_2$}
+    	\bgemptyblock{7}{8}
+    \end{blockgraph}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Beispiel: Round Robin}
+	\begin{tabular}{l||c|c|c|c}
+		Auftrag               & \(A_1\)  & \(A_2\)  & \(A_3\) & \(A_4\) \\ \hline \hline
+		Ankunftszeit		  & 1        &  4		& 5       & 8       \\ \hline
+		Bedienzeitanforderung & 6        &  4       & 2       & 6       \\
+	\end{tabular}\quad \\ \quad \\
+	Zeitscheibengröße: \(\Delta t = 2\) \\
+	Queue\(_{t10}\):[\(A_3, A_2,A_4\)] \\
+	\quad \\
+	\begin{center}
+	\begin{blockgraph}{25}{1}{0.4}
+	    \bglabelxx{0}
+	    \bglabelxx{5}
+	    \bglabelxx{10}
+	    \bglabelxx{15}
+	    \bglabelxx{20}
+   	 	\bglabelxx{25}
+    
+    	\bgblock{0}{2}{$A_1$}
+    	\bgblock{2}{4}{$A_1$}
+    	\bgemptyblock{4}{5}
+    	\bgblock{5}{7}{$A_2$}
+    	\bgemptyblock{7}{8}
+    	\bgblock{8}{10}{$A_1$}
+    	\bgemptyblock{10}{11}
+    \end{blockgraph}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Beispiel: Round Robin}
+	\begin{tabular}{l||c|c|c|c}
+		Auftrag               & \(A_1\)  & \(A_2\)  & \(A_3\) & \(A_4\) \\ \hline \hline
+		Ankunftszeit		  & 1        &  4		& 5       & 8       \\ \hline
+		Bedienzeitanforderung & 6        &  4       & 2       & 6       \\
+	\end{tabular}\quad \\ \quad \\
+	Zeitscheibengröße: \(\Delta t = 2\) \\
+	Queue\(_{t13}\):[\(A_2,A_4\)] \\
+	\quad \\
+	\begin{center}
+	\begin{blockgraph}{25}{1}{0.4}
+	    \bglabelxx{0}
+	    \bglabelxx{5}
+	    \bglabelxx{10}
+	    \bglabelxx{15}
+	    \bglabelxx{20}
+   	 	\bglabelxx{25}
+    
+    	\bgblock{0}{2}{$A_1$}
+    	\bgblock{2}{4}{$A_1$}
+    	\bgemptyblock{4}{5}
+    	\bgblock{5}{7}{$A_2$}
+    	\bgemptyblock{7}{8}
+    	\bgblock{8}{10}{$A_1$}
+    	\bgemptyblock{10}{11}
+    	\bgblock{11}{13}{$A_3$}
+    	\bgemptyblock{13}{14}
+    \end{blockgraph}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Beispiel: Round Robin}
+	\begin{tabular}{l||c|c|c|c}
+		Auftrag               & \(A_1\)  & \(A_2\)  & \(A_3\) & \(A_4\) \\ \hline \hline
+		Ankunftszeit		  & 1        &  4		& 5       & 8       \\ \hline
+		Bedienzeitanforderung & 6        &  4       & 2       & 6       \\
+	\end{tabular}\quad \\ \quad \\
+	Zeitscheibengröße: \(\Delta t = 2\) \\
+	Queue\(_{t16}\):[\(A_4\)] \\
+	\quad \\
+	\begin{center}
+	\begin{blockgraph}{25}{1}{0.4}
+	    \bglabelxx{0}
+	    \bglabelxx{5}
+	    \bglabelxx{10}
+	    \bglabelxx{15}
+	    \bglabelxx{20}
+   	 	\bglabelxx{25}
+    
+    	\bgblock{0}{2}{$A_1$}
+    	\bgblock{2}{4}{$A_1$}
+    	\bgemptyblock{4}{5}
+    	\bgblock{5}{7}{$A_2$}
+    	\bgemptyblock{7}{8}
+    	\bgblock{8}{10}{$A_1$}
+    	\bgemptyblock{10}{11}
+    	\bgblock{11}{13}{$A_3$}
+    	\bgemptyblock{13}{14}
+    	\bgblock{14}{16}{$A_2$}
+    	\bgemptyblock{16}{17}
+    \end{blockgraph}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Beispiel: Round Robin}
+	\begin{tabular}{l||c|c|c|c}
+		Auftrag               & \(A_1\)  & \(A_2\)  & \(A_3\) & \(A_4\) \\ \hline \hline
+		Ankunftszeit		  & 1        &  4		& 5       & 8       \\ \hline
+		Bedienzeitanforderung & 6        &  4       & 2       & 6       \\
+	\end{tabular}\quad \\ \quad \\
+	Zeitscheibengröße: \(\Delta t = 2\) \\
+	Queue\(_{t19}\):[\(\)] \\
+	Queue\(_{t21}\):[\(\)] \\
+	\begin{center}
+	\begin{blockgraph}{25}{1}{0.4}
+	    \bglabelxx{0}
+	    \bglabelxx{5}
+	    \bglabelxx{10}
+	    \bglabelxx{15}
+	    \bglabelxx{20}
+   	 	\bglabelxx{25}
+    
+    	\bgblock{0}{2}{$A_1$}
+    	\bgblock{2}{4}{$A_1$}
+    	\bgemptyblock{4}{5}
+    	\bgblock{5}{7}{$A_2$}
+    	\bgemptyblock{7}{8}
+    	\bgblock{8}{10}{$A_1$}
+    	\bgemptyblock{10}{11}
+    	\bgblock{11}{13}{$A_3$}
+    	\bgemptyblock{13}{14}
+    	\bgblock{14}{16}{$A_2$}
+    	\bgemptyblock{16}{17}
+    	\bgblock{17}{19}{$A_4$}
+    	\bgblock{19}{21}{$A_4$}
+    	\bgblock{21}{23}{$A_4$}
+    \end{blockgraph}
+	\end{center}
+\end{frame}

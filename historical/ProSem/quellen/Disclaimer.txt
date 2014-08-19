@@ -1,0 +1,4 @@
+Die hier in PDF-Form gesammelten Werke sind nicht für eine breite Veröffentlichung, sondern nur in Zusammenhang in dem Modul Proseminar: Nebenläufigkeit zur Überprüfung zu nutzen.
+Die weiteren Quellen lagen mir leider nicht als PDF oder konvertierbares Dateiformat, sondern als Hardcover vor. Leider sehe ich mich momentan nicht in der Lage das Buch 
+Scheduling - Theory, Algorithms, and Systems zur Verfügung stellen zu können, da die Person, von der ich es geliehen hatte sich momentan nicht in Europa aufhält.
+Dies halte ich jedoch für ein Tragbares Problem, da ich nicht direkt aus dem Buch zitiere, sondern nur Wissen aus selbigem bezog.

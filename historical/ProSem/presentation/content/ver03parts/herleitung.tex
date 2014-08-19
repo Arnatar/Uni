@@ -1,0 +1,35 @@
+\begin{frame}{Schedularisierbarkeit}
+	\textbf{Annahmen:}	
+	\begin{itemize}
+		\item Unendlicher Zeitraum
+		\item verschiedene, periodische Tasks
+		\item (implizit) Periodenlänge = Deadline
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Schedularisierbarkeit}
+	\uncover<1->{
+	\textbf{Schritt 1:} \\
+	Unterteilung der Unendlichkeit in einzelne, den Periodenlängen angepasste Zeitschritte \(\Rightarrow\   	
+	Ch = kgv(P_i)\) \\
+	}
+	\uncover<2->{
+	\textbf{Schritt 2:} \\
+	Berechnung von \(a(i) = C_i \cdot \frac{Ch}{P_i}\) für alle Aufgaben \\
+	}
+	\uncover<3->{
+	\textbf{Schritt 3:} \\
+	Überprüfen: \(\sum\limits_{i=1}^{n}a(i) \leq Ch |n = \text{Anzahl der Prozesse}\) \\
+	}
+	\uncover<4->{
+	\textbf{Schritt 4 (Überführung):} \\
+	\(
+	\begin{array}{llcl}
+		&\sum\limits_{i=1}^{n}a(i) \leq Ch &\Leftrightarrow & 
+		\sum\limits_{i=1}^{n}\frac{a(i)}{Ch} \leq 1 \\
+		\Leftrightarrow & \sum\limits_{i=1}^{n}\frac{C_i \cdot \frac{Ch}{P_i}}{Ch} \leq 1 & \Leftrightarrow & 
+		\sum\limits_{i=1}^{n}\frac{C_i}{P_i} \leq 1
+	\end{array}
+	\)
+	}
+\end{frame}
