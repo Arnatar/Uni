@@ -1,0 +1,9 @@
+# Aufgabe 1:
+
+2.:
+cd ist ein 'built-in', also ein in die shell integrierte Funktionalität, keine eigenes Programm. Da Handbücher (manuals) nur für Programme und nicht für Programm-Teile geschrieben werden existiert für cd keine man-page.
+
+3.:
+f) Es ist größer, als die Originaldatei. Dies resultiert daraus, dass tar die Datei "nur" archiviert wurde, also die Dateien in ein Archiv versetzt und einige Metainformationen hinzufügt wurden.
+
+h) Ja, der Aufruf um testarchiv.tar.gz zu erzeugen lautet: tar -czf testarchiv.tar.gz testarchiv
