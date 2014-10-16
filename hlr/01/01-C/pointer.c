@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-// Nach Korrektur der Funktion call_by_reference löschen
+// wir hoffen wir haben alle Stellen zur Bearbeitung gefunden :)
 
 void basic_pointer (int x)
 {
@@ -35,7 +35,7 @@ void basic_pointer_changeValue (int x)
 
 	// Ändern Sie den Wert von x zu 10
 	x = 10;
-	printf("x = %d\n", 0 /* TODO */);
+	printf("x = %d\n", x);
 
 	// Ändern Sie den Wert von x über seine ADRESSE
 	*adresse_von_x = 20;

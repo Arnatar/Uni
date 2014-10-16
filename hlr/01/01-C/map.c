@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-// Definieren Sie ein enum cardd
+// ein enum cardd
 typedef enum cardd {
 	N = 1,
 	E = 1 << 1,
@@ -8,25 +8,41 @@ typedef enum cardd {
 	W = 1 << 3,
 } cardd;
 
-// Definieren Sie ein 3x3-Array namens map, das Werte vom Typ cardd enthält
+// ein 3x3-Array namens map, das Werte vom Typ cardd enthält
 cardd map[3][3] = {};
 
-// Die Funktion set_dir soll an Position x, y den Wert dir in das Array map eintragen
-// Überprüfen Sie x und y um mögliche Arrayüberläufe zu verhindern
-// Überprüfen Sie außerdem dir auf Gültigkeit
+int val_dir (cardd dir);
+
+// Die Funktion set_dir setzt an Position x, y den Wert dir in das Array map
+// x und y werden überprüft um mögliche Arrayüberläufe zu verhindern
+// das vorgeschlagene dir wird in val_dir auf seine Gründlichkeit geprüft
 void set_dir (int x, int y, cardd dir)
-{
-	map[x][y] = dir;
+{	
+	if (x >= 0 && x <= 2 && y >= 0 && y <= 2 && val_dir(dir)) {
+		map[x][y] = dir;
+	}
 }
 
-// Die Funktion show_map soll das Array in Form einer 3x3-Matrix ausgeben
+// Wir gehen davon aus, dass die Himmelsrichtungen nicht durch dir Prädeterminiert werden. 
+// Ansonsten wäre es witzlos die dir's einzeln setzen zu können. 
+// Allerdings lässt diese Methode aber noch falsch gesetzte, valide Himmelsrichtungen zu.
+int val_dir (cardd dir) {
+	cardd dirs[8] = {N, E, S, W, N|E, N|W, S|E, S|W};
+	for (int n = 0; n < 8; n++) {
+		if (dirs[n] == dir){
+			return 1;
+		}
+	}
+	return 0;
+}
+
+// show_map gibt das Array in Form einer 3x3-Matrix aus
 void show_map (void)
 {
 	char* repr;
 	for (int x = 0; x < 3; x++) {
 		for (int y = 0; y < 3; y++) {
-			// hardcoding ist zwar eigentlich blöd, aber naja
-			// bug somewhere here:
+			// hardcoding ist zwar eigentlich ein bischen blöd, aber naja
 			switch (map[x][y]) {
 				case N|W: repr = "NW"; break;
 				case N  : repr = "N" ; break;
@@ -68,3 +84,5 @@ int main (void)
 
 	return 0;
 }
+
+// wurde es auch nicht
