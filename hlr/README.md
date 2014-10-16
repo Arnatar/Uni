@@ -13,6 +13,5 @@ hr-1415@wr.informatik.uni-hamburg.de
 2x fehlen, 2x nicht abgeben
 
 
-email schicken wg verlaengerung
 
 

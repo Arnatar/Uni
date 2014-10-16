@@ -32,26 +32,13 @@ void show_map (void)
   for (int x=0; x<3; x++) {
     for (int y=0; y<3; y++) {
       switch(map[x][y]) {
-        case N:
-          repr = "N";
-          break;
-        case E:
-          repr = "E";
-          break;
-        case S:
-          repr = "S";
-          break;
-        case W:
-          repr = "W";
-          break;
-        default:
-          repr = "0";
+        case N: repr = "N"; break;
+        case E: repr = "E"; break;
+        case S: repr = "S"; break;
+        case W: repr = "W"; break;
+        default: repr = "0";
       }
-      if (y < 2) {
-        printf("%s   ",repr);
-      } else {
-        printf("%s\n",repr);
-      }
+      printf(y<2 ? "%s   " : "%s\n", repr);
     }
   }
 
