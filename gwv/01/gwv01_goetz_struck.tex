@@ -10,11 +10,14 @@
 \usepackage{amsmath}
 \usepackage{enumerate}
 \usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{url}
 
 % ------------------------------------------------------
 
 % Commands
 
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO}}}
 \newcommand{\authorinfo}{Arne Struck, Knut Götz}
 \newcommand{\titleinfo}{GWV-Abgabe zum 17.10.2014}
 \newcommand{\qed}{\ \square}
@@ -35,5 +38,57 @@
 
 \begin{document}
 \maketitle
+\section*{1.1}
+\subsection*{Spiele-KI}
+\begin{enumerate}
+	\item Aufgabe der KI \\
+	Die Aufgabe einer solchen KI ist es in einem beliebigen für das Verhalten natürlich bestimmenden Spiel dem Menschen einen künstlichen Mit- oder Gegenspieler zu bieten.
+	\item Existiert eine solche KI bereits? \\
+	Ja und nein, beispielsweise existiert(e) Deep Blue (ein Schachcomputer, welcher den Schach-Weltmeister Garry Kasparov schlug. Allerdings lässt sich hier, wie bei jeder KI die Intelligenz anzweifeln, da sie zwar ihr Ziel gut zu spielen verfolgen, aus Erfahrung lernen (Deep Blue setzte die Parameter zur Bewertung einzelner Positionen fest) und angemessene Entscheidungen treffen, sich allerdings nicht an neue Umgebungen (bspw. ein anderes Spiel) anpassen können.
+	\url{http://en.wikipedia.org/wiki/Deep_Blue_%28chess_computer%29}
+	\item Warum eine KI und welche Schwierigkeiten bringt dies mit sich? \\
+	Da schon bei einem 8x8 Schachfeld die Anzahl an Möglichen Situationen die Berechenbarkeit in angemessenen Zeitrahmen übersteigt (und dies mit der Komplexität der Spiele zunehmen dürfte) stellt eine KI eine vernünftige Alternative mit einer Kombination aus ''intelligentem'' und nicht deterministischen, sich wiederholendem Verhalten dar. Natürlich existieren die üblichen Probleme von lernender Software, wie beispielsweise lokale Minima. Des weiteren ist die KI natürlich durch ihre Welt (ihr Spiel) in der Fähigkeit Intelligenz zu zeigen beschränkt. Auch die Bereitstellung von genügend Beispielen, aus denen gelernt werden kann, kann in einigen Fällen problematisch werden. 
+\end{enumerate}
+
+\subsection*{App 2}
+\begin{enumerate}
+	\item Aufgabe der KI \\
+	\todo
+	\item Existiert eine solche KI bereits? \\
+	\todo
+	\item Warum eine KI und welche Schwierigkeiten bringt dies mit sich? \\
+	\todo 
+\end{enumerate}
+
+\subsection*{App 3}
+\begin{enumerate}
+	\item Aufgabe der KI \\
+	\todo
+	\item Existiert eine solche KI bereits? \\
+	\todo
+	\item Warum eine KI und welche Schwierigkeiten bringt dies mit sich? \\
+	\todo 
+\end{enumerate}
+
+\section*{1.2}
+\subsection*{Wissen}
+\begin{enumerate}
+	\item Information \\
+	\todo Beispiele
+	\item Explizites Wissen \\
+	\todo Beispiele
+	\item Implizites Wissen\\
+	\todo Beispiele
+\end{enumerate}
+
+\subsection*{Umgebungen}
+\begin{enumerate}
+	\item vollkommen wahrnehmbar \& partiell wahrnehmbar \\
+	\todo
+	\item diskret \& kontinuierlich \\
+	\todo
+	\item deterministisch \& stochastisch \\
+	\todo
+\end{enumerate}
 
 \end{document}
