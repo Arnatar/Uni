@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 from=$user@informatik.uni-hamburg.de
-to=jwe@posteo.de
+to='hr-abgabe@wr.informatik.uni-hamburg.de'
 subject='WernerStruck'
 message="Im Anhang die Abgabe. Mit freundlichen Grüßen, $name."
 
@@ -17,6 +17,7 @@ mailsend \
 -sub $subject \
 +cc \
 +bc \
+-v \
 -auth-plain \
 -user $user -pass "$pass" \
 -name "$name" \
