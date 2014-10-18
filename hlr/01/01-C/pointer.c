@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-// wir hoffen wir haben alle Stellen zur Bearbeitung gefunden :)
+// wir hoffen, wir haben alle Stellen zur Bearbeitung gefunden :)
 
 void basic_pointer (int x)
 {
