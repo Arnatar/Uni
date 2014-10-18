@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+if [ "$#" -ne 1 ]; then
+  echo '  Usage: deploy <folder>'
+  exit 0
+fi
+
+archive=WernerStruck.tar.gz
+./prepare $1
+./mail $archive
+
+rm $archive
+

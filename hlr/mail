@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+from=$user@informatik.uni-hamburg.de
+to=jwe@posteo.de
+subject='WernerStruck'
+message="Im Anhang die Abgabe. Mit freundlichen Grüßen, $name."
+
+if [ "$#" -ne 1 ]; then
+  echo '  Usage: mail <archive>'
+fi
+
+mailsend \
+-to $to \
+-from $from \
+-starttls \
+-smtp mailhost.informatik.uni-hamburg.de \
+-port 587 \
+-sub $subject \
++cc \
++bc \
+-auth-plain \
+-user $user -pass "$pass" \
+-name "$name" \
+-M "$message" \
+-attach "./$1"
+
