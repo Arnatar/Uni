@@ -33,5 +33,5 @@ Archiv: WernerStruck.tar.gz , enthaelt Verzeichnis, Name: WernerStruck
 dependency:
 https://github.com/muquit/mailsend
 
-usage:
-name='<name>' user=<irz-kennung,zb 3werner> pass=<pass> ./deploy <folder>
+**usage:**
+name=`'<name>' user=<irz-kennung,zb 3werner> pass=<pass> ./deploy <folder>`
