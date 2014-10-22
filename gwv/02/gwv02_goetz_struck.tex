@@ -1,0 +1,50 @@
+\documentclass[a4paper,11pt,fleqn]{scrartcl}
+\usepackage[german,ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[top=1.3in, bottom=1.2in, left=0.9in, right=0.9in]{geometry}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{url}
+
+% ------------------------------------------------------
+
+% Commands
+
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO}}}
+\newcommand{\authorinfo}{Arne Struck, Knut Götz}
+\newcommand{\titleinfo}{GWV-Abgabe zum 17.10.2014}
+\newcommand{\qed}{\ \square}
+
+
+% ------------------------------------------------------
+
+% Title & Pages
+
+\title{\titleinfo}
+\author{\authorinfo}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\authorinfo}
+\fancyhead[R]{\titleinfo}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+\maketitle
+
+\section*{1.1}
+\subsection*{1.}
+In dem Fall einer Anwendung wäre der State-Space eines zu erstellenden Graphens, die Menge aller Haltstellen (Busse, Bahnen etc.) des öffentlichen Nahverkehrs. Jeder Knoten repräsentiert eine Haltestellen und jede Kante zwischen zwei Knoten repräsentiert eine Verbindung zwischen zwei Haltestellen. Gibt es beispielsweise zwei Haltestellen A und B und eine Buslinie verkehrt zwischen diesen müsste dies im Graphen durch eine Kante repräsentiert werden.  
+\section*{1.2}
+Eines unserer Beispiele für künstliche Intelligenz bei dem mit Sicherheit eine Art von Suche vorkommt ist der Schachcomputer. Der Suchraum ist in diesem Fall die Menge aller möglichen Stellungen (eine Stellungen beschreibt eine zulässige Positionierung von Spielfiguren auf dem Schachbrett und welche Parei am Zug ist), die sich aus der aktuellen Stellung, der Stellung in der die Suche gestartet wird, ergeben können. 
+Bei einem neu beginnenden Spiel wäre die Startstellung beim Schachspiel (alle Bauern auf der 2. bzw. 7. Reihe, Weiß am Zug etc.) und der die Stellungen repräsentierende Zustand, der Startzustand. Die Menge der Zielzustände entspricht dann der Menge der Stellungen bei denen der Schachcomputer seinen Gegner schachmatt setzen kann und das Spiel gewinnnt. 0
+Die Menge der Kanten entspricht, dann der Menge der möglichen Züge. Zwei Zustände, die jeweils eine Stellung repräsentieren, sind genau dann mit einer Kante im Suchgraphen verbunden, wenn es einen zulässigen Zug in der ersten Stellung gibt aus der sich die zweite Stellung ergibt. So würde sich dann ein Baum ergeben, dessen Wurzel der Startzustand ist und dessem Blätter alle Stellungen sind in der eine Paretie schachmatt ist. Der Baum ist endlich, da es sich nicht unendlich viele mögliche Stellungen gibt.\\
+Schwierigkeiten ergeben sich dadurch, dass zum einen der Schachcomputer, sollte er nicht gegen sich selbst spielen, nur eine Verzwigung der Suche steuern kann. Das größere Problem bei einer solchen Suche ist jedoch, dass es in der Regel nicht möglich ist, aus einer gegeben Stellungen zuerst den kompletten Baum aufzubauen, da der Baum meist sehr groß ist. Es müsste also eine Heuristik geben mithilfe derer die einzelnen Zustände bewertet werden. Der Schachcomupter könnte sich mithilfe der Suche dan so entscheiden, dass er den Zug wählt, der in den besten Teilbaum führt. Der beste Teilbaum wird so bestimmt, dass er auf jeden Zug des Gegners reagieren kann, so dass ein Pfad gewählt werden kann dessen Endknoten von der Heuristik besser bewertet wird, als der Endknoten enstprechender Pfade in anderen Teilbäumen.
+
+
+\end{document}
