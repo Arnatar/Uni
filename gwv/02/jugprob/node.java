@@ -1,33 +1,39 @@
-public class node {
-	private int								_fourLitre;
-	private int								_threeLitre;
-	private static final int	_threeMax	= 3;
-	private static final int	_fourMax	= 4;
+package jugprob;
 
-	public node(int fourLitre, int threeLitre) {
-		_fourLitre = fourLitre;
-		_threeLitre = threeLitre;
+class node {
+	private int								_bigger_jug;
+	private int								_smaller_jug;
+	private static final int	_smaller_max	= 3;
+	private static final int	_bigger_max		= 4;
+
+	node(int fourLitre, int threeLitre) {
+		_bigger_jug = fourLitre;
+		_smaller_jug = threeLitre;
 	}
 
-	public int get_fourLitre() {
-		return _fourLitre;
+	static int get_smaller_max() {
+		return _smaller_max;
 	}
 
-	public int get_threeLitre() {
-		return _threeLitre;
+	static int get_bigger_max() {
+		return _bigger_max;
 	}
 
-	public void change_val(int fourLitre, int threeLitre) {
-		_fourLitre = fourLitre;
-		_threeLitre = threeLitre;
+	int get_bigger_jug() {
+		return _bigger_jug;
 	}
 
-	public static int get_threeMax() {
-		return _threeMax;
+	int get_smaller_jug() {
+		return _smaller_jug;
 	}
 
-	public static int get_fourMax() {
-		return _fourMax;
+	void change_val(int biggerVal, int smallerVal) {
+		_bigger_jug = biggerVal;
+		_smaller_jug = smallerVal;
+	}
+
+	void print_node() {
+		System.out.print("(" + _bigger_jug + " " + _smaller_jug + ") ");
 	}
 
 	public boolean equals(Object o) {
@@ -37,8 +43,8 @@ public class node {
 		if (!(o instanceof node))
 			test = false;
 		node other = (node) o;
-		if (this.get_fourLitre() == other.get_fourLitre()
-				&& this.get_threeLitre() == other.get_threeLitre()) {
+		if (this.get_bigger_jug() == other.get_bigger_jug()
+				&& this.get_smaller_jug() == other.get_smaller_jug()) {
 			test = true;
 		}
 		return test;
