@@ -32,17 +32,7 @@ public class graph {
 	}
 
 	/**
-	 * adds bidirectional connection
-	 */
-	public void add_connection_bid(node node1, node node2) {
-		int node1_ind = find_index(node1);
-		int node2_ind = find_index(node2);
-		_adj_list[node1_ind][node2_ind] = true;
-		_adj_list[node2_ind][node1_ind] = true;
-	}
-
-	/**
-	 * gives connection
+	 * gives information about connection-status
 	 */
 	public boolean get_connection(node source, node target) {
 		int source_ind = find_index(source);
@@ -51,9 +41,9 @@ public class graph {
 	}
 
 	/**
-	 * prints adjacent martix
+	 * prints adjacent matrix
 	 */
-	public void print_adj_list() {
+	public void print_adj_matrix() {
 		int graphsize = _nodes.size();
 		System.out.print("     ");
 		for (int n = 0; n < graphsize; n++) {
@@ -79,5 +69,63 @@ public class graph {
 
 	public boolean contains(node testnode) {
 		return _nodes.contains(testnode);
+	}
+
+	public void run_bfs(node source, node target) {
+		// needed vars & stuff
+		int dist = 0;
+		int current_index = -1;
+		boolean target_found = false;
+		int graphsize = _nodes.size();
+		LinkedList<node> queue = new LinkedList<node>();
+		queue.add(source);
+		triple[] states = new triple[graphsize];
+		for (int i = 0; i < graphsize; i++) {
+			states[i] = new triple(_nodes.get(i), false, Integer.MAX_VALUE);
+		}
+		states[_nodes.indexOf(source)].set_dist(dist);
+		states[_nodes.indexOf(source)].set_visited();
+		// bfs
+		outerloop: while (!queue.isEmpty()) {
+			dist++;
+			for (int i = 0; i < graphsize; i++) {
+				if (get_connection(queue.element(), states[i].get_node())
+						&& !states[i].get_visited()) {
+					queue.add(states[i].get_node());
+					states[i].set_visited();
+					states[i].set_dist(dist);
+					if (states[i].get_node().equals(target)) {
+						target_found = true;
+						current_index = i;
+						break outerloop;
+					}
+				}
+			}
+			queue.remove();
+		}
+		
+		// buildt return statement
+		if (target_found) {
+			node current = target;
+			ArrayList<node> state_sequenz = new ArrayList<node>();
+			state_sequenz.add(current);
+			while (!current.equals(source)) {
+				for (int i = 0; i < graphsize; i++) {
+					if (states[i].get_visited()
+							&& get_connection(states[i].get_node(), current)
+							&& states[i].get_dist() < states[current_index].get_dist()) {
+						current = states[i].get_node();
+						current_index = i;
+						state_sequenz.add(current);
+					}
+				}
+			}
+			System.out.print("\n\n" + "Ergebnisreihenfolge: ");
+			for (int i = state_sequenz.size() - 1; i >= 0; i--) {
+				System.out.print("(" + state_sequenz.get(i).get_fourLitre() + " "
+						+ state_sequenz.get(i).get_threeLitre() + ") ");
+			}
+		} else
+			System.out.println("\n" + "Konnte das Ziel keiner Verbindung zuordnen");
 	}
 }

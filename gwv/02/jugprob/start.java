@@ -52,8 +52,8 @@ public class start {
 			ret = true;
 		// four to three jug
 		int three_capacity = node.get_threeMax() - t1;
-		if(three_capacity <= f1) {
-			if(t2 == node.get_threeMax() && f2 == f1 - three_capacity)
+		if (three_capacity <= f1) {
+			if (t2 == node.get_threeMax() && f2 == f1 - three_capacity)
 				ret = true;
 		} else if ((t2 == t1 + f1) && f2 == 0)
 			ret = true;
@@ -87,7 +87,9 @@ public class start {
 		buildt_nodes();
 		_search_graph = new graph(_nodes);
 		buildt_connections();
-		_search_graph.print_adj_list();
-
+		_search_graph.print_adj_matrix();
+		node source = new node(0, 0);
+		node target = new node(2, 0);
+		_search_graph.run_bfs(source, target);
 	}
 }
