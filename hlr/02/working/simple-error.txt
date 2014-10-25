@@ -1,23 +1,23 @@
-Fehler 1, mistake1():
+Fehler 1, mistake1(), 15-18:
 Es soll ein Pointer returnt werden, leider wird im Anfangsstadium ein Array returnt. 
 Also muss ein pointer (bufpointer) geschaffen werden, da in diesem später Verweise auf die Werte von buf stehen sollen muss er die gleiche größe aufweisen.
 schlussendlich werden die gespeicherten Werte von buf per memcpy nach buf_pointer kopiert.
 
-Fehler 2, mistake2():
+Fehler 2, mistake2(), 14, 15:
 Es wird die Falsche Speichergröße für ein int-Array allokiert (char). Dies muss man verändern. 
 Außerdem wird der für die spätere Funktion der main Funktion interessante Wert 2 an die Falsche Stelle geschrieben, diese muss auch verändert werden und et voila, fixed.
 
-Fehler 3, mistake3():
+Fehler 3, mistake3(), 32, 33:
 mistake3() besteht aus einer schlecht benannten int Variable (aber wir sollen ja nicht so viel ändern), welche augenscheinlich eine spätere Größe für die Speicherallokierung im nächsten Schritt enthalten soll. 
 Eine alternative wäre die Variable nicht zu nutzen und den Speicher gleich ohne diesen Umweg zu allokieren.
 
-Fehler 4, mistake4():
+Fehler 4, mistake4(), 41, 42, 43:
 Wieder tritt eine Typ-"verwechslung" wie bei Fehler 2.
 Des weiteren wird an die Stelle 4 von buf ein Wert geschrieben, da aber nur 4 Stellen (beginnend bei 0) existieren ist dies unmöglich. 
 Die korrekte Stelle ist 0.
 Außerdem sollte man dem Array, welches man für das return-statement noch benötigt nicht vorher von seinem Speicher befreien. 
 
-Fehler 5, main():
+Fehler 5, main(), 60, 62, 63:
 Man hat grobfahrlässig die free-Befehle versäumt. 
 Wenn man inkrementell vorgeht benötigen die ersten beiden Elemente von p noch eine - 1 flag gesetzt werden, da wir ja das 2. Element "befreien" wollen, bei den beiden anderen ist dies dank defaults nicht nötig.
 
