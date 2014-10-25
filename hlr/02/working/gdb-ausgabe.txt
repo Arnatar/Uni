@@ -1,0 +1,90 @@
+File setzen (wenn nicht im gdb-Aufruf geschehen):
+(gdb) file ./simple
+Reading symbols from ./simple...done.
+
+Breakpoint für die Funktion mistake1
+(gdb) break mistake1
+Breakpoint 1 at 0x4005c1: file simple.c, line 12.
+
+Programm bis zum breakpoint laufen lassen:
+(gdb) run
+Breakpoint 1, mistake1 () at simple.c:12
+12	  int buf[] = { 1, 1, 2, 3, 4, 5 };
+
+Ausgabe von buf:
+(gdb) print buf
+$1 = {-134225464, 32767, 0, 0, 1, 0}
+
+Ausgabe von buf[2]:
+(gdb) print buf[2]
+$2 = 0
+
+nächster Schritt:
+(gdb) next
+13	  return buf;
+
+Ausgabe von buf:
+(gdb) print buf
+$3 = {1, 1, 2, 3, 4, 5}
+
+Ausgabe von buf[2]:	
+(gdb) print buf[2]
+$4 = 2
+
+typ von buf:
+(gdb) whatis buf
+type = int [6]
+
+neuer breakpoint:
+(gdb) break mistake2
+Breakpoint 2 at 0x4005f9: file simple.c, line 19.
+
+continue:
+Breakpoint 2, mistake2 () at simple.c:19
+19	  int *buf = malloc (sizeof (char) * 4);
+
+typ von buf:
+(gdb) whatis buf
+type = int *
+
+continue:
+(gdb) continue
+Continuing.
+
+Program received signal SIGSEGV, Segmentation fault.
+0x0000000000400632 in mistake3 () at simple.c:29
+29	  buf[0] = 3;
+
+Code um die Stelle:
+(gdb) list
+24	int *
+25	mistake3 ()
+26	{
+27	  int mistake2_ = 0;
+28	  int *buf = (int *) &mistake2;
+29	  buf[0] = 3;
+30	  return buf;
+31	}
+32	
+33	int *
+
+stack (nicht sicher ob danach gefragt oder nach was anderem):
+(gdb) bt
+#0  0x0000000000400632 in mistake3 () at simple.c:29
+#1  0x00000000004006aa in main () at simple.c:46
+
+
+wechsel auf frame 1:
+(gdb) frame 1
+#1  0x00000000004006aa in main () at simple.c:46
+46	  int *p[4] = { &mistake1 ()[1], &mistake2 ()[1], mistake3 (), mistake4 () };
+
+was ist in p:
+print p
+$5 = {0x7fffffffdcf4, 0x602014, 0x7fffffffde20, 0x0}
+
+funktionsaufrufe:
+(gdb) call mistake4()
+$9 = (int *) 0x602030
+(gdb) print mistake4()
+$10 = (int *) 0x602030
