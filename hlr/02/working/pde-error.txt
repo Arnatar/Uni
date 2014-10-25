@@ -11,6 +11,8 @@ Fehler 3, askparams.c: 197
 muss lauten:
   sscanf (argV[3], "%d", interlines);
 
+Begründung: Wir haben ja nicht 33 Kommandozeilen-Argumente.
+
 Fehler 4:
 In freeMatrices müssen erst die Zeilen der Matrix freigegeben werden, dann erst kann
 free (Matrix) erfolgen.
