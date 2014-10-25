@@ -1,3 +1,7 @@
-Fehler 2, 230:
+Fehler 1, 230:
 In dieser Zeile wurden die Indizes der Matrix vertauscht. 
 Ursprünglich sieht es so aus: Matrix[j - 1][m2][i]. Nimmt man die anderen Aufrufe und die Grenzen der for-schleifen als Referenz, muss der Aufruf wie folgt lauten, damit die Iteratoren nicht aus dem Bereich der Matrix laufen: Matrix[m2][i][j - 1]. 
+
+Fehler 2, 96:
+malloc (sizeof (double) * (N + 1) * (N - 1) * 2); kann nicht sein, da Beim star-Algorithmus um Zeile 230 bis zu N iteriert wird und einmal zu j + 1 referenziert wird. 
+Folgerichtig muss es malloc (sizeof (double) * (N + 1) * (N + 1) * 2); sein.
