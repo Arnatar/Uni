@@ -125,20 +125,20 @@ initMatrices (void)
     }				/* **************************** */
 
   for (g = 0; g <= 1; g++)	/* **************************** */
+  {
+    for (i = 0; i <= N; i++)	/*  initiliaze matrix/matrices  */
     {
-      for (i = 0; i <= N; i++)	/*  initiliaze matrix/matrices  */
-	{
-	  for (j = 0; j <= N; j++)	/*  with zeros                  */
+      for (j = 0; j <= N; j++)	/*  with zeros                  */
 	    {
 	      Matrix[g][i][j] = 0;
 	    }
-	}
-    }				/* **************************** */
+    }
+  }				/* **************************** */
 
   if (inf_func == FUNC_1)	/* ******************************* */
+  {
+    for (i = 0; i <= N; i++)	/*  initialize borders, depending  */
     {
-      for (i = 0; i <= N; i++)	/*  initialize borders, depending  */
-	{
 	  Matrix[0][i][0] = 1 - (h * i);	/*  on function                    */
 	  Matrix[0][i][N] = h * i;	/*  (function 2: nothing to do)    */
 	  Matrix[0][0][i] = 1 - (h * i);	/* ******************************* */
@@ -147,12 +147,13 @@ initMatrices (void)
 	  Matrix[1][i][N] = h * i;
 	  Matrix[1][0][i] = 1 - (h * i);
 	  Matrix[1][N][i] = h * i;
-	}
-      Matrix[0][N][0] = 0;
-      Matrix[0][0][N] = 0;
-      Matrix[1][N][0] = 0;
-      Matrix[1][0][N] = 0;
     }
+
+    Matrix[0][N][0] = 0;
+    Matrix[0][0][N] = 0;
+    Matrix[1][N][0] = 0;
+    Matrix[1][0][N] = 0;
+  }
 }
 
 
@@ -162,11 +163,11 @@ initMatrices (void)
 void
 freeMatrices (void)
 {
-  free (Matrix);
   if (Matrix[1] != 0)
     free (Matrix[1]);
   if (Matrix[0] != 0)
     free (Matrix[0]);
+  free (Matrix);
 }
 
 

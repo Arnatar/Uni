@@ -168,44 +168,46 @@ AskParams (int *method,
 	}
     }
   else
-    {
-      if (strcmp ("help", (char *) argV[1]) == 0
+  {
+    if (strcmp ("help", (char *) argV[1]) == 0
 	  || strcmp ("-h", (char *) argV[1]) == 0
 	  || strcmp ("-?", (char *) argV[1]) == 0
 	  || strcmp ("?", (char *) argV[1]) == 0 || argC < 6)
-	{
-	  printf ("\nUsage:\n");
-	  printf
-	    ("partdiff [num] [method] [lines] [func] [term] [prec/iter]\n");
-	  printf ("  - num:    number of process/threads ot use\n");
-	  printf ("  - method: %1d: Gauss-Seidel.\n", GAUSS_SEIDEL);
-	  printf ("            %1d: Jacobi.\n", JACOBI);
-	  printf
-	    ("  - lines:  (lines=interlines) matrixsize = interlines*8+9\n");
-	  printf ("  - func:   %1d: f(x,y)=0.\n", FUNC_1);
-	  printf ("            %1d: f(x,y)=2pi^2*sin(pi*x)sin(pi*y).\n",
-		  FUNC_2);
-	  printf ("  - term:   %1d: sufficient precision.\n", TERM_1);
-	  printf ("            %1d: number of iterationes.\n", TERM_2);
-	  printf ("  - prec/iter: depending on term:\n");
-	  printf ("            precision:  Range: 1e-4 .. 1e-20.\n");
-	  printf ("            iterations: Range: 1 .. %d.\n", MAX_ITERATION);
-	  printf ("\n");
-	  exit (0);
-	}
-      sscanf (argV[2], "%d", method);
-      sscanf (argV[33], "%d", interlines);
-      sscanf (argV[4], "%d", func);
-      sscanf (argV[5], "%d", termination);
-      if (*termination == 1)
-	{
-	  sscanf (argV[6], "%lf", term_precision);
-	  *term_iteration = MAX_ITERATION;
-	}
-      else
-	{
-	  sscanf (argV[6], "%d", term_iteration);
-	  *term_precision = 0;
-	}
+    {
+      printf ("\nUsage:\n");
+      printf
+        ("partdiff [num] [method] [lines] [func] [term] [prec/iter]\n");
+      printf ("  - num:    number of process/threads ot use\n");
+      printf ("  - method: %1d: Gauss-Seidel.\n", GAUSS_SEIDEL);
+      printf ("            %1d: Jacobi.\n", JACOBI);
+      printf
+        ("  - lines:  (lines=interlines) matrixsize = interlines*8+9\n");
+      printf ("  - func:   %1d: f(x,y)=0.\n", FUNC_1);
+      printf ("            %1d: f(x,y)=2pi^2*sin(pi*x)sin(pi*y).\n",
+        FUNC_2);
+      printf ("  - term:   %1d: sufficient precision.\n", TERM_1);
+      printf ("            %1d: number of iterationes.\n", TERM_2);
+      printf ("  - prec/iter: depending on term:\n");
+      printf ("            precision:  Range: 1e-4 .. 1e-20.\n");
+      printf ("            iterations: Range: 1 .. %d.\n", MAX_ITERATION);
+      printf ("\n");
+      exit (0);
+    }
+
+    sscanf (argV[2], "%d", method);
+    sscanf (argV[3], "%d", interlines);
+    sscanf (argV[4], "%d", func);
+    sscanf (argV[5], "%d", termination);
+
+    if (*termination == 1)
+    {
+      sscanf (argV[6], "%lf", term_precision);
+      *term_iteration = MAX_ITERATION;
+    }
+    else
+    {
+      sscanf (argV[6], "%d", term_iteration);
+      *term_precision = 0;
+    }
     }
 }

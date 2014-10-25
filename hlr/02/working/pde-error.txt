@@ -5,3 +5,23 @@ Ursprünglich sieht es so aus: Matrix[j - 1][m2][i]. Nimmt man die anderen Aufru
 Fehler 2, 96:
 malloc (sizeof (double) * (N + 1) * (N - 1) * 2); kann nicht sein, da Beim star-Algorithmus um Zeile 230 bis zu N iteriert wird und einmal zu j + 1 referenziert wird. 
 Folgerichtig muss es malloc (sizeof (double) * (N + 1) * (N + 1) * 2); sein.
+
+Fehler 3, askparams.c: 197
+  sscanf (argV[33], "%d", interlines);
+muss lauten:
+  sscanf (argV[3], "%d", interlines);
+
+Fehler 4:
+In freeMatrices müssen erst die Zeilen der Matrix freigegeben werden, dann erst kann
+free (Matrix) erfolgen.
+
+  void
+  freeMatrices (void)
+  {
+    if (Matrix[1] != 0)
+      free (Matrix[1]);
+    if (Matrix[0] != 0)
+      free (Matrix[0]);
+    free (Matrix);
+  }
+
