@@ -30,4 +30,10 @@
 *.vrb
 *.xdy
 *.tdo
+#eclipse
+*.classpath
+*.project
+*.settings
+metadata/
+bin/
 deploy-jona
