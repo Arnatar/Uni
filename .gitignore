@@ -34,6 +34,6 @@
 *.classpath
 *.project
 *.settings
-metadata/
+.metadata/
 bin/
 deploy-jona
