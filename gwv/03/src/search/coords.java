@@ -27,4 +27,26 @@ public class coords {
 	int get_y_position() {
 		return _y_position;
 	}
+	
+	void print_coords() {
+		System.out.print("(" + _x_position + " " + _y_position + ")");
+	}
+	
+	public coords clone() {
+		return new coords(this._x_position, this._y_position);
+	}
+	
+	public boolean equals(Object o) {
+		boolean test = false;
+		if (o == null)
+			return test;
+		if (!(o instanceof coords))
+			return test;
+		coords other = (coords) o;
+		if (this.get_x_position() == other.get_x_position() 
+			&& this.get_y_position() == other.get_y_position()) {
+			test = true;
+		}
+		return test;
+	}
 }
