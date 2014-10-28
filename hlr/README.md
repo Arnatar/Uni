@@ -35,3 +35,7 @@ https://github.com/muquit/mailsend
 
 **usage:**
 name=`'<name>' user=<irz-kennung,zb 3werner> pass=<pass> ./deploy <folder>`
+
+### Punkte
+1: 200/170
+2: 310/300
