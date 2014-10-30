@@ -37,3 +37,4 @@
 .metadata/
 bin/
 deploy-jona
+.local.vimrc
