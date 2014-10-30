@@ -2,11 +2,12 @@ package search;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.LinkedList;
 
-class field {
+class Field {
 	private boolean[][] _game_field;
 
-	field(String file_path) throws IOException {
+	Field(String file_path) throws IOException {
 		_game_field = buildt_field_from_file(file_path);
 	}
 
@@ -59,12 +60,12 @@ class field {
 					x = 0;
 				} else {
 					if (c == (int) 'g') {
-						robot.get_goal().set_x_position(x);
-						robot.get_goal().set_y_position(y);
+						Robot.get_goal().set_x_position(x);
+						Robot.get_goal().set_y_position(y);
 					}
 					if (c == (int) 's') {
-						robot.get_start().set_x_position(x);
-						robot.get_start().set_y_position(y);
+						Robot.get_start().set_x_position(x);
+						Robot.get_start().set_y_position(y);
 					}
 					result[y][x] = true;
 					x++;
@@ -81,7 +82,7 @@ class field {
 	/**
 	 * analyzes if the entry corresponting to the coords is passable
 	 */
-	boolean passable(coords coords) {
+	boolean passable(State coords) {
 		boolean result = false;
 		if (coords.get_x_position() < _game_field[0].length
 				&& 0 <= coords.get_x_position()
@@ -90,6 +91,42 @@ class field {
 			result = _game_field[coords.get_y_position()][coords.get_x_position()];
 		}
 		return result;
+	}
+
+	/**
+	 * prints the field with the path to console
+	 */
+	void print_path(LinkedList<State> path) {
+		if (_game_field == null) {
+			System.out.println("Schade");
+		} else {
+			for (int y = 0; y < _game_field.length; y++) {
+				for (int x = 0; x < _game_field[y].length; x++) {
+					if (_game_field[y][x]) {
+						for (State e : path) {
+							if (e.get_x_position() == x && e.get_y_position() == y) {
+								if (e.equals(path.peekFirst())) {
+									System.out.print("s");
+									break;
+								} else if (e.equals(path.peekLast())) {
+									System.out.print("g");
+									break;
+								} else {
+									System.out.print("p");
+									break;
+								}
+							} else if (e.equals(path.peekLast())) {
+								System.out.print(" ");
+							}
+						}
+
+					} else {
+						System.out.print("x");
+					}
+				}
+				System.out.println("");
+			}
+		}
 	}
 
 	/**
