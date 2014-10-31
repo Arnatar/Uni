@@ -62,9 +62,7 @@ public class Robot {
 						result = target;
 						break;
 					}
-				} else {
-					continue;
-				}
+				} 
 			}
 		}
 		return result;
@@ -96,8 +94,6 @@ public class Robot {
 						result = target;
 						break;
 					}
-				} else {
-					continue;
 				}
 			}
 		}
