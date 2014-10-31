@@ -7,7 +7,7 @@ import java.util.LinkedList;
 class Field {
 	private boolean[][] _game_field;
 
-	Field(String file_path) throws IOException {
+	public Field(String file_path) throws IOException {
 		_game_field = buildt_field_from_file(file_path);
 	}
 
@@ -82,7 +82,7 @@ class Field {
 	/**
 	 * analyzes if the entry corresponting to the coords is passable
 	 */
-	boolean is_passable(Coords coords) {
+	public boolean is_passable(Coords coords) {
 		if (this.is_in_field(coords)) {
 			return _game_field[coords.get_y_position()][coords.get_x_position()];
 		}
@@ -90,10 +90,7 @@ class Field {
 	}
 
 	/**
-	 * Prüft ob coords innerhalb des Feldes liegt.
-	 * 
-	 * @param coords
-	 *          Koordinaten, die zu prüfen sind
+	 * checks if coords can be adressed in this field
 	 */
 	private boolean is_in_field(Coords coords) {
 		if (coords.get_x_position() < _game_field[0].length
@@ -109,19 +106,20 @@ class Field {
 	/**
 	 * prints the field with the path to console
 	 */
-	void print_path(LinkedList<State> path) {
+	public void print_path(LinkedList<State> path) {
 		if (_game_field == null) {
-			System.out.println("Schade");
+			System.out.println("Field empty");
 		} else {
 			for (int y = 0; y < _game_field.length; y++) {
 				for (int x = 0; x < _game_field[y].length; x++) {
 					if (_game_field[y][x]) {
 						for (State e : path) {
-							if (e.get_coords().get_x_position() == x && e.get_coords().get_y_position() == y) {
-								if (e.equals(path.peekFirst())) {
+							if (e.get_coords().get_x_position() == x
+									&& e.get_coords().get_y_position() == y) {
+								if (e.get_coords().equals(Robot.get_start())) {
 									System.out.print("s");
 									break;
-								} else if (e.equals(path.peekLast())) {
+								} else if (e.get_coords().equals(Robot.get_goal())) {
 									System.out.print("g");
 									break;
 								} else {
@@ -145,16 +143,25 @@ class Field {
 	/**
 	 * prints field to console. 4 debug atm
 	 */
-	void print_field() {
+	public void print_field() {
 		if (_game_field == null) {
 			System.out.println("Schade");
 		} else {
 			for (int y = 0; y < _game_field.length; y++) {
 				for (int x = 0; x < _game_field[y].length; x++) {
-					if (_game_field[y][x])
-						System.out.print(" ");
-					else
+					if (_game_field[y][x]) {
+						if (Robot.get_start().get_x_position() == x
+								&& Robot.get_start().get_y_position() == y) {
+							System.out.print("s");
+						} else if (Robot.get_goal().get_x_position() == x
+								&& Robot.get_goal().get_y_position() == y) {
+							System.out.print("g");
+						} else {
+							System.out.print(" ");
+						}
+					} else {
 						System.out.print("x");
+					}
 				}
 				System.out.println("");
 			}
