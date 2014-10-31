@@ -81,15 +81,26 @@ class field {
 	/**
 	 * analyzes if the entry corresponting to the coords is passable
 	 */
-	boolean passable(coords coords) {
-		boolean result = false;
+	boolean is_passable(coords coords) {
+		if (this.is_in_field(coords)) {
+			return _game_field[coords.get_y_position()][coords.get_x_position()];
+		}
+		return false;
+	}
+	/**
+	 * Prüft ob coords innerhalb des Feldes liegt.
+	 * @param coords Koordinaten, die zu prüfen sind	  
+	 */
+	private boolean is_in_field(coords coords){
 		if (coords.get_x_position() < _game_field[0].length
 				&& 0 <= coords.get_x_position()
 				&& coords.get_y_position() < _game_field.length
-				&& 0 <= coords.get_y_position()) {
-			result = _game_field[coords.get_y_position()][coords.get_x_position()];
+				&& 0 <= coords.get_y_position()){
+			return true;
+			}
+		else{
+			return false;
 		}
-		return result;
 	}
 
 	/**

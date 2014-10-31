@@ -27,4 +27,36 @@ public class coords {
 	int get_y_position() {
 		return _y_position;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + _x_position;
+		result = prime * result + _y_position;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		coords other = (coords) obj;
+		if (_x_position != other._x_position)
+			return false;
+		if (_y_position != other._y_position)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "_x_position=" + _x_position + ", _y_position="
+				+ _y_position;
+	}
+	
 }
