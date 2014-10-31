@@ -1,71 +1,64 @@
 package search;
 
-public class State {
-	private int _x_position;
-	private int _y_position;
-	private State _predecessor;
+class State {
+	private State predecessor;
+	private Direction direction_to_start; 
+	private Coords coordinates;
 	
-	/**
-	 * tuple of coordinates in the maze the predecessor is not known and therefor null
+	State (Coords c, Direction to_root, State pred) {
+		this.coordinates = c;
+		this.direction_to_start = to_root;
+		this.predecessor = pred;
+	}
+		
+	public Coords get_coords(){
+		return this.coordinates;
+	}
+	
+	public State get_predecessor(){
+		return this.predecessor;
+	}
+	
+	public Direction get_direction_to_start(){
+		return this.direction_to_start;
+	}
+	
+	/*
+	 * A String which represents the path to start position by a Sequence of Directions.
 	 */
-	State(int x, int y) {
-		_x_position = x;
-		_y_position = y;
-		_predecessor = null;
-	}
-	
-	/**
-	 * tuple of coordinates in the maze + information of its predecessor
-	 */
-	State(int x, int y, State pred) {
-		_x_position = x;
-		_y_position = y;
-		_predecessor = pred;
-	}
-	
-	void set_x_position(int x) {
-		_x_position = x;
-	}
-	
-	void set_y_position(int y) {
-		_y_position = y;
-	}
-	
-	void set_predecessor(State predecessor) {
-		_predecessor = predecessor;
-	}
-	
-	int get_x_position() {
-		return _x_position;
-	}
-	
-	int get_y_position() {
-		return _y_position;
-	}
-	
-	State get_predecessor() {
-		return _predecessor;
-	}
-	
-	void print_coords() {
-		System.out.print("(" + _x_position + " " + _y_position + ")");
-	}
-	
-	public State clone() {
-		return new State(this._x_position, this._y_position, this._predecessor);
-	}
-	
-	public boolean equals(Object o) {
-		boolean test = false;
-		if (o == null)
-			return test;
-		if (!(o instanceof State))
-			return test;
-		State other = (State) o;
-		if (this.get_x_position() == other.get_x_position() 
-			&& this.get_y_position() == other.get_y_position()) {
-			test = true;
+	public String path_to_start_as_string() {
+		Direction direction = this.get_direction_to_start();
+		if (direction.equals(Direction.NONE)){
+			return "The path: START"; 
 		}
-		return test;
+		else {
+			return this.get_predecessor().path_to_start_as_string()+ " " + direction.toString()  ;
+		}	
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((coordinates == null) ? 0 : coordinates.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		State other = (State) obj;
+		if (coordinates == null) {
+			if (other.coordinates != null)
+				return false;
+		} else if (!coordinates.equals(other.coordinates))
+			return false;
+		return true;
 	}
 }

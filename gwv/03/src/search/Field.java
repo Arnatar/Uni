@@ -82,15 +82,28 @@ class Field {
 	/**
 	 * analyzes if the entry corresponting to the coords is passable
 	 */
-	boolean passable(State coords) {
-		boolean result = false;
+	boolean is_passable(Coords coords) {
+		if (this.is_in_field(coords)) {
+			return _game_field[coords.get_y_position()][coords.get_x_position()];
+		}
+		return false;
+	}
+
+	/**
+	 * Prüft ob coords innerhalb des Feldes liegt.
+	 * 
+	 * @param coords
+	 *          Koordinaten, die zu prüfen sind
+	 */
+	private boolean is_in_field(Coords coords) {
 		if (coords.get_x_position() < _game_field[0].length
 				&& 0 <= coords.get_x_position()
 				&& coords.get_y_position() < _game_field.length
 				&& 0 <= coords.get_y_position()) {
-			result = _game_field[coords.get_y_position()][coords.get_x_position()];
+			return true;
+		} else {
+			return false;
 		}
-		return result;
 	}
 
 	/**
@@ -104,7 +117,7 @@ class Field {
 				for (int x = 0; x < _game_field[y].length; x++) {
 					if (_game_field[y][x]) {
 						for (State e : path) {
-							if (e.get_x_position() == x && e.get_y_position() == y) {
+							if (e.get_coords().get_x_position() == x && e.get_coords().get_y_position() == y) {
 								if (e.equals(path.peekFirst())) {
 									System.out.print("s");
 									break;
