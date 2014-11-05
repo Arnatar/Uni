@@ -5,10 +5,9 @@ import java.util.ArrayList;
 
 public class Robot {
 	// private static final String _file_path = "fields/blatt3_environment.txt";
-	private static final String _file_path = "fields/blatt4_environment_a.txt";
+	// private static final String _file_path = "fields/blatt4_environment_a.txt";
 
-	// private static final String _file_path =
-	// "fields/blatt4_environment_b2.txt";
+	private static final String _file_path = "fields/blatt4_environment_b2.txt";
 
 	public static void main(String[] args) throws IOException {
 		Field field = new Field(_file_path);
@@ -52,7 +51,7 @@ public class Robot {
 		if (field.is_passable(x, y)) {
 			field.get_entry(x, y).setPredecessor(current_position);
 			field.get_entry(x, y).setDirection_to_start(Direction.NORTH);
-			return field.get_entry(x, y);
+			return field.portalcheck(field.get_entry(x, y));
 		} else {
 			return null;
 		}
@@ -67,7 +66,7 @@ public class Robot {
 		if (field.is_passable(x, y)) {
 			field.get_entry(x, y).setPredecessor(current_position);
 			field.get_entry(x, y).setDirection_to_start(Direction.WEST);
-			return field.get_entry(x, y);
+			return field.portalcheck(field.get_entry(x, y));
 		} else {
 			return null;
 		}
@@ -79,10 +78,10 @@ public class Robot {
 	private static State go_west(State current_position, Field field) {
 		int x = current_position.get_x_position() - 1;
 		int y = current_position.get_y_position();
-		if(field.is_passable(x, y)) {
+		if (field.is_passable(x, y)) {
 			field.get_entry(x, y).setPredecessor(current_position);
 			field.get_entry(x, y).setDirection_to_start(Direction.EAST);
-			return field.get_entry(x, y);
+			return field.portalcheck(field.get_entry(x, y));
 		} else {
 			return null;
 		}
@@ -94,10 +93,10 @@ public class Robot {
 	private static State go_north(State current_position, Field field) {
 		int x = current_position.get_x_position();
 		int y = current_position.get_y_position() + 1;
-		if(field.is_passable(x, y)) {
+		if (field.is_passable(x, y)) {
 			field.get_entry(x, y).setPredecessor(current_position);
 			field.get_entry(x, y).setDirection_to_start(Direction.SOUTH);
-			return field.get_entry(x, y);
+			return field.portalcheck(field.get_entry(x, y));
 		} else {
 			return null;
 		}

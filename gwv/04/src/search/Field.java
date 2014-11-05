@@ -11,6 +11,7 @@ public class Field {
 
 	public Field(String file_path) throws IOException {
 		_game_field = buildt_field_from_file(file_path);
+		build_portals();
 	}
 
 	/**
@@ -57,11 +58,11 @@ public class Field {
 					y++;
 					x = 0;
 				} else {
-					if(c == (int) 's') {
+					if (c == (int) 's') {
 						_start.set_x_position(x);
 						_start.set_y_position(y);
 					}
-					if(c == (int) 'g') {
+					if (c == (int) 'g') {
 						_goal.set_x_position(x);
 						_goal.set_y_position(y);
 					}
@@ -75,6 +76,33 @@ public class Field {
 			}
 		}
 		return result;
+	}
+
+	/**
+	 * builds portal-connections between all non-key-symbols and duplicates of it
+	 * (problem: 3 or more symbols)
+	 */
+	private void build_portals() {
+		for (int y = 0; y < _game_field.length; y++) {
+			for (int x = 0; x < _game_field[y].length; x++) {
+				if (is_passable(x, y)
+						&& _game_field[y][x].getRepresented_char() != (int) 'g'
+						&& _game_field[y][x].getRepresented_char() != (int) 's'
+						&& _game_field[y][x].getRepresented_char() != (int) ' ') {
+					for (int b = 0; b < _game_field.length; b++) {
+						for (int a = 0; a < _game_field[b].length; a++) {
+							if (is_passable(a, b)) {
+								if (_game_field[y][x].getRepresented_char() == _game_field[b][a]
+										.getRepresented_char()
+										&& !_game_field[y][x].equals(_game_field[b][a])) {
+									_game_field[y][x].setPortal_target(_game_field[b][a]);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -153,24 +181,32 @@ public class Field {
 			}
 		}
 	}
-	
+
 	public void reset_predecessor(int x, int y) {
-		if(is_passable(x, y)) {
+		if (is_passable(x, y)) {
 			_game_field[y][x].setPredecessor(null);
 		}
 	}
-	
+
 	public State get_entry(int x, int y) {
-		if(is_in_field(x, y))
+		if (is_in_field(x, y))
 			return _game_field[y][x];
 		else
 			return null;
 	}
-	
+
+	public State portalcheck(State current) {
+		if (current.getPortal_target() == null) {
+			return current;
+		} else {
+			return current.getPortal_target();
+		}
+	}
+
 	public State get_start() {
 		return _start;
 	}
-	
+
 	public State get_goal() {
 		return _goal;
 	}

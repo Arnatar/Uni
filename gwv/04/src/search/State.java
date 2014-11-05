@@ -9,6 +9,7 @@ public class State {
 	private int x_position;
 	private int y_position;
 	private int represented_char;
+	private State portal_target;
 
 	/**
 	 * tuple of coordinates in the maze
@@ -19,6 +20,7 @@ public class State {
 		this.direction_to_start = Direction.NONE;
 		this.predecessor = null;
 		this.represented_char = c;
+		this.portal_target = null;
 	}
 
 	State(int x, int y, char c, Direction to_root, State pred) {
@@ -27,6 +29,7 @@ public class State {
 		this.direction_to_start = to_root;
 		this.predecessor = pred;
 		this.represented_char = c;
+		this.portal_target = null;
 	}
 
 	public State get_predecessor() {
@@ -47,6 +50,14 @@ public class State {
 
 	public int get_y_position() {
 		return y_position;
+	}
+	
+	public State getPortal_target() {
+		return portal_target;
+	}
+	
+	public void setPortal_target(State portal_target) {
+		this.portal_target = portal_target;
 	}
 	
 	public void setRepresented_char(char represented_char) {
