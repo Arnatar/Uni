@@ -12,7 +12,7 @@ public class Robot {
 	private static Coords _goal_coords = new Coords(-1, -1);
 	private static Coords _start_coords = new Coords(-1, -1);
 	// options
-	private static final String _file_path = "fields/blatt3_environment.txt"; // "fields/simple.txt";
+	private static final String _file_path = "fields/blatt3_environment.txt"; //"fields/problem.txt"; // 
 
 	public static void main(String args[]) throws IOException {
 		Field field = new Field(_file_path);

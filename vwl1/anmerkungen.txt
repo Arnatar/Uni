@@ -1,0 +1,4 @@
+ceteris paribus (cp): 
+	Unter sonst gleichen Bedingungen (nur an einer Var rumschrauben)
+partielle Ableitung:
+	Isoliert den Einfluss einzelner Variablen
