@@ -16,19 +16,19 @@ public class State {
 	State(int x, int y, int c) {
 		this.x_position = x;
 		this.y_position = y;
-		this.direction_to_start = null;
+		this.direction_to_start = Direction.NONE;
 		this.predecessor = null;
 		this.represented_char = c;
 	}
-	
-	State(int x, int y, char c , Direction to_root, State pred) {
+
+	State(int x, int y, char c, Direction to_root, State pred) {
 		this.x_position = x;
 		this.y_position = y;
 		this.direction_to_start = to_root;
 		this.predecessor = pred;
 		this.represented_char = c;
 	}
-	
+
 	public State get_predecessor() {
 		return this.predecessor;
 	}
@@ -41,7 +41,6 @@ public class State {
 		return represented_char;
 	}
 
-
 	public int get_x_position() {
 		return x_position;
 	}
@@ -49,7 +48,7 @@ public class State {
 	public int get_y_position() {
 		return y_position;
 	}
-
+	
 	public void setRepresented_char(char represented_char) {
 		this.represented_char = represented_char;
 	}
@@ -61,8 +60,16 @@ public class State {
 	public void set_y_position(int y) {
 		y_position = y;
 	}
+	
+	public void setDirection_to_start(Direction direction_to_start) {
+		this.direction_to_start = direction_to_start;
+	}
+	
+	public void setPredecessor(State predecessor) {
+		this.predecessor = predecessor;
+	}
 
-	LinkedList<State> path_to_start_as_list() {
+	public LinkedList<State> path_to_start_as_list() {
 		LinkedList<State> temp = new LinkedList<State>();
 		return path_to_start_as_list(temp);
 	}

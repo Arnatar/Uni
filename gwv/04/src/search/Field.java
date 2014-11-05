@@ -6,6 +6,8 @@ import java.util.LinkedList;
 
 public class Field {
 	private State[][] _game_field;
+	private State _goal = new State(-1, -1, 'g');
+	private State _start = new State(-1, -1, 's');
 
 	public Field(String file_path) throws IOException {
 		_game_field = buildt_field_from_file(file_path);
@@ -55,14 +57,13 @@ public class Field {
 					y++;
 					x = 0;
 				} else {
-					// TODO
-					if (c == (int) 'g') {
-						// Robot.get_goal().set_x_position(x);
-						// Robot.get_goal().set_y_position(y);
+					if(c == (int) 's') {
+						_start.set_x_position(x);
+						_start.set_y_position(y);
 					}
-					if (c == (int) 's') {
-						// Robot.get_start().set_x_position(x);
-						// Robot.get_start().set_y_position(y);
+					if(c == (int) 'g') {
+						_goal.set_x_position(x);
+						_goal.set_y_position(y);
 					}
 					result[y][x] = new State(x, y, c);
 					x++;
@@ -87,11 +88,8 @@ public class Field {
 	 * checks if coords can be addressed in this field
 	 */
 	private boolean is_in_field(int x, int y) {
-		if (x < _game_field[0].length && 0 <= x && y < _game_field.length && 0 <= y) {
-			return true;
-		} else {
-			return false;
-		}
+		return x < _game_field[0].length && 0 <= x && y < _game_field.length
+				&& 0 <= y;
 	}
 
 	/**
@@ -105,20 +103,16 @@ public class Field {
 				for (int x = 0; x < _game_field[y].length; x++) {
 					if (is_passable(x, y)) {
 						for (State e : path) {
-							if (e.get_x_position() == x
-									&& e.get_y_position() == y) {
-								if (e.equals(Robot.get_start())) {
-									System.out.print("s");
-									break;
-								} else if (e.get_coords().equals(Robot.get_goal())) {
-									System.out.print("g");
-									break;
-								} else {
+							if (e.equals(_game_field[y][x])) {
+								if ((char) e.getRepresented_char() != 's'
+										&& (char) e.getRepresented_char() != 'g') {
 									System.out.print("p");
 									break;
 								}
-							} else if (e.equals(path.peekLast())) {
-								System.out.print(" ");
+							} // nicht mehr sicher warum, hier fixen wenn Problem
+							else if (e.equals(path.peekLast())) {
+								System.out.print(""
+										+ (char) _game_field[y][x].getRepresented_char());
 							}
 						}
 
@@ -140,16 +134,9 @@ public class Field {
 		} else {
 			for (int y = 0; y < _game_field.length; y++) {
 				for (int x = 0; x < _game_field[y].length; x++) {
-					if (_game_field[y][x]) {
-						if (Robot.get_start().get_x_position() == x
-								&& Robot.get_start().get_y_position() == y) {
-							System.out.print("s");
-						} else if (Robot.get_goal().get_x_position() == x
-								&& Robot.get_goal().get_y_position() == y) {
-							System.out.print("g");
-						} else {
-							System.out.print(" ");
-						}
+					if (_game_field[y][x] != null) {
+						System.out.print(""
+								+ (char) _game_field[y][x].getRepresented_char());
 					} else {
 						System.out.print("x");
 					}
@@ -157,6 +144,35 @@ public class Field {
 				System.out.println("");
 			}
 		}
+	}
+
+	public void reset_predecessors() {
+		for (int y = 0; y < _game_field.length; y++) {
+			for (int x = 0; x < _game_field[y].length; x++) {
+				_game_field[y][x].setPredecessor(null);
+			}
+		}
+	}
+	
+	public void reset_predecessor(int x, int y) {
+		if(is_passable(x, y)) {
+			_game_field[y][x].setPredecessor(null);
+		}
+	}
+	
+	public State get_entry(int x, int y) {
+		if(is_in_field(x, y))
+			return _game_field[y][x];
+		else
+			return null;
+	}
+	
+	public State get_start() {
+		return _start;
+	}
+	
+	public State get_goal() {
+		return _goal;
 	}
 
 }
