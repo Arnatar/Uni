@@ -202,6 +202,21 @@ public class Field {
 			return current.getPortal_target();
 		}
 	}
+	
+	/*
+	 * Computes the Manhattan Distance between two states. 
+	 */
+	public int compute_manhattan_distance(State possible_state){
+		State goal  = this.get_goal();
+		int goal_x  = goal.get_x_position();
+		int goal_y  = goal.get_y_position();
+		int possible_state_x = possible_state.get_x_position();
+		int possible_state_y = possible_state.get_y_position();
+		int abs_x_difference = Math.abs(goal_x - possible_state_x);
+		int abs_y_difference = Math.abs(goal_y - possible_state_y);
+		return abs_x_difference + abs_y_difference;
+		
+	}
 
 	public State get_start() {
 		return _start;

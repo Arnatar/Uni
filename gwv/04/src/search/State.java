@@ -10,6 +10,7 @@ public class State {
 	private int y_position;
 	private int represented_char;
 	private State portal_target;
+	private int path_length_to_goal;
 
 	/**
 	 * tuple of coordinates in the maze
@@ -21,8 +22,9 @@ public class State {
 		this.predecessor = null;
 		this.represented_char = c;
 		this.portal_target = null;
+		this.path_length_to_goal = 0;
 	}
-
+// Refactor Constructor?
 	State(int x, int y, char c, Direction to_root, State pred) {
 		this.x_position = x;
 		this.y_position = y;
@@ -30,8 +32,16 @@ public class State {
 		this.predecessor = pred;
 		this.represented_char = c;
 		this.portal_target = null;
+		this.path_length_to_goal = 0;
 	}
 
+	public int get_path_length_to_goal(){
+		return this.path_length_to_goal;
+	}
+	
+	public void increment_path_length(){
+		this.path_length_to_goal+=1;
+	}
 	public State get_predecessor() {
 		return this.predecessor;
 	}

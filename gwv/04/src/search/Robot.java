@@ -2,19 +2,24 @@ package search;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 public class Robot {
-	// private static final String _file_path = "fields/blatt3_environment.txt";
+	 private static final String _file_path = "fields/blatt3_environment.txt";
 	// private static final String _file_path = "fields/blatt4_environment_a.txt";
 
-	private static final String _file_path = "fields/blatt4_environment_b2.txt";
-
+	//private static final String _file_path = "fields/blatt4_environment_b2.txt";
+	
 	public static void main(String[] args) throws IOException {
 		Field field = new Field(_file_path);
 		System.out.println("Field:");
 		field.print_field();
 		System.out.println();
 		System.out.println("Starte A*:");
+		State test_state = field.get_start();
+		int manhattan_dis = field.compute_manhattan_distance(test_state);
+		System.out.println("The Manhatten Distance beween goal and start is: " + String.valueOf(manhattan_dis));
 		State astar_goal = astar(field);
 		if (astar_goal == null) {
 			System.out.println("Kein Pfad auffindbar");
@@ -26,9 +31,17 @@ public class Robot {
 	}
 
 	private static State astar(Field field) {
+		State start = field.get_start();
+		Comparator comparator = new StateComperator(field);
+		PriorityQueue<State> queue = new PriorityQueue<State>(10,comparator);
+		queue.add(start);
 		return null;
 	}
 
+	
+
+	
+	
 	/**
 	 * builds an array with all possible targets in the field for the position
 	 */
