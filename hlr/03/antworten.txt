@@ -51,3 +51,16 @@ Alternativ per sview
 14.
 Partitions: abu, cluster, compute, magny
 srun -p || sbatch -p
+
+------------- 2. -------------
+Aufgefallen:
+-Die Nodes Antworten nicht "gebündelt", es treten Vermischungen auf in der out-Datei auf (bspw erst 3 cores von west2, dann 2 von west3, dann nochmal einer von west2 usw...). Es sind auch oft die selben nodes, die früher schreiben.
+-Die verschiedenen Nodes (und teilweise Cores) haben unterschiedlich schnelle Antwortzeiten (minimal).
+
+Erklärung:
+- 100 kleine Dinge, welche sich aufsummieren, wie Nodes und Cores haben nicht identisch lange Leitungen, der Momentane State muss nicht identisch sein, kurz sie sind keine 100%en Kopien von einander. Daraus folgen kleine Overheads, welche wir hier beobachten.
+-Ähnlicher Grund wie zuvor, der Overhead durch unterschiedlch lange physikalische Leitungen sorgen hierfür.
+
+Erzeugung von timescript.out in job_script:
+Sollte eben so gut möglich sein, wie gelassen werden, da bei der folgenden Nebenläufigkeit Dateiverlust droht (es sei denn man hat eine Node-übergreifende Lösung des Reader-Writer-Problems, davon wissen wir aber nichts).
+Der Befehl sollte: echo $host: $time >> .*/path/.*/timscript.out lauten
