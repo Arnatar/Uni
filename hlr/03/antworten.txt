@@ -1,0 +1,53 @@
+------------- 1. -------------
+1.
+Batch Queuing bezeichnet das Job-Scheduling auf einem HPC, also das Verteilen der Ressourcen (respektive Kerne) auf die Jobs, welche zur Abarbeitung in einer Queue stehen.
+
+2.
+Platform LSF, IBM Tivoli Workload Scheduler, SLURM
+
+3.
+check
+
+4.
+SLURM
+
+5.
+squeue
+
+6.
+-dynamisches update der queue
+-Visualisierung => schneller zu lesen
+(-YEAH, KLICKIBUNTI)
+
+7. 
+scancel (Konsole)
+quickmenu -> cancel (sview)
+
+8.
+Ja, sofern sie alle die -s (share) Flag an srun übergeben. (untested, aber man-page behauptet das)
+
+9.
+scontrol show job id -d (Konsole)
+quickmenu -> full info
+
+10.
+möglich: backfill, wiki, wiki2, hold, builtin
+verwendet: backfill
+
+11.
+salloc -p magny -N 1
+srun hostname
+exit
+
+12.
+TODO ich weiß nicht welchen timeout sie referenzieren
+wenn sie die Standardzeit haben wollen, wenn man kein sbatch --time=x macht, dann ist das 1 min. 
+
+13.
+infos: siehe detailierter Status 
+scontrol update JobID=4223 Priority=7
+Alternativ per sview
+
+14.
+Partitions: abu, cluster, compute, magny
+srun -p || sbatch -p
