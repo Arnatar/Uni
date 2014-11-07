@@ -10,13 +10,10 @@ public class State {
 	private int y_position;
 	private int represented_char;
 	private State portal_target;
-<<<<<<< HEAD
-	private int path_length_to_goal;
-=======
 	private int start_distance;
 	private int est_goal_distance;
 	private int f_val;
->>>>>>> 0137e79db1e146afbb75972c9b1a87cb9a05ba72
+
 
 	/**
 	 * tuple of coordinates in the maze
@@ -28,30 +25,19 @@ public class State {
 		this.predecessor = null;
 		this.represented_char = c;
 		this.portal_target = null;
-<<<<<<< HEAD
-		this.path_length_to_goal = 0;
-	}
-// Refactor Constructor?
-	State(int x, int y, char c, Direction to_root, State pred) {
-		this.x_position = x;
-		this.y_position = y;
-		this.direction_to_start = to_root;
-		this.predecessor = pred;
-		this.represented_char = c;
-		this.portal_target = null;
-		this.path_length_to_goal = 0;
-	}
-=======
 		if (c == (int) 's') {
 			this.start_distance = 0;
 		} else {
 			this.start_distance = Integer.MAX_VALUE / 2;
 		}
-		this.est_goal_distance = Integer.MAX_VALUE / 2;
+		if (c == (int) 'g') {
+			this.est_goal_distance = 0;
+		} else {
+			this.est_goal_distance = Integer.MAX_VALUE / 2;
+		}
 		this.f_val = this.start_distance + this.est_goal_distance;
 	}
 
->>>>>>> 0137e79db1e146afbb75972c9b1a87cb9a05ba72
 
 	public int get_path_length_to_goal(){
 		return this.path_length_to_goal;
@@ -60,6 +46,7 @@ public class State {
 	public void increment_path_length(){
 		this.path_length_to_goal+=1;
 	}
+
 	public State get_predecessor() {
 		return this.predecessor;
 	}
@@ -132,7 +119,8 @@ public class State {
 
 	public LinkedList<State> path_to_start_as_list() {
 		LinkedList<State> temp = new LinkedList<State>();
-		return path_to_start_as_list(temp);
+		temp = path_to_start_as_list(temp);
+		return temp;
 	}
 
 	private LinkedList<State> path_to_start_as_list(LinkedList<State> result) {

@@ -27,6 +27,10 @@ public class Robot {
 			System.out.println("Pfad gefunden:");
 			// System.out.println(astar_goal.path_to_start_as_string());
 			field.print_path(astar_goal.path_to_start_as_list());
+			if (field.get_entry(4, 6) != null) {
+				System.out.println("Test: " + field.get_entry(4, 4).getF_val());
+			} else
+				System.out.println("what the fuck");
 		}
 	}
 
