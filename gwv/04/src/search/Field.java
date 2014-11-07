@@ -12,6 +12,7 @@ public class Field {
 	public Field(String file_path) throws IOException {
 		_game_field = buildt_field_from_file(file_path);
 		build_portals();
+		build_distances();
 	}
 
 	/**
@@ -106,6 +107,39 @@ public class Field {
 	}
 
 	/**
+	 * Sets estimated goal-distances for the States based on the manhattan
+	 * distance to the goal If field has a goal-target, the 2 distances are
+	 * calculated (for some parts again) but with the portal target as manhattan
+	 * source and vice versa.
+	 */
+	private void build_distances() {
+		for (int y = 0; y < _game_field.length; y++) {
+			for (int x = 0; x < _game_field[y].length; x++) {
+				if (is_passable(x, y)) {
+					if (_game_field[y][x].getPortal_target() != null) {
+						_game_field[y][x].getPortal_target().setEst_goal_distance(
+								manhattan_dist(_game_field[y][x], _goal));
+						_game_field[y][x].setEst_goal_distance(manhattan_dist(
+								_game_field[y][x].getPortal_target(), _goal));
+
+					} else {
+						_game_field[y][x].setEst_goal_distance(manhattan_dist(
+								_game_field[y][x], _goal));
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * Manhattan distance
+	 */
+	private int manhattan_dist(State source, State target) {
+		return Math.abs(source.get_x_position() - target.get_x_position())
+				+ Math.abs(source.get_y_position() - target.get_y_position());
+	}
+
+	/**
 	 * analyzes if the entry corresponding to the coords is passable
 	 */
 	public boolean is_passable(int x, int y) {
@@ -132,13 +166,17 @@ public class Field {
 					if (is_passable(x, y)) {
 						for (State e : path) {
 							if (e.equals(_game_field[y][x])) {
-								if ((char) e.getRepresented_char() != 's'
-										&& (char) e.getRepresented_char() != 'g') {
+								if ((char) e.getRepresented_char() == 'g') {
+									System.out.print("g");
+									break;
+								} else if ((char) e.getRepresented_char() == 's') {
+									System.out.print("s");
+									break;
+								} else if ((char) e.getRepresented_char() == ' ') {
 									System.out.print("p");
 									break;
 								}
-							} // nicht mehr sicher warum, hier fixen wenn Problem
-							else if (e.equals(path.peekLast())) {
+							} else if (e.equals(path.peekLast())) {
 								System.out.print(""
 										+ (char) _game_field[y][x].getRepresented_char());
 							}
@@ -154,7 +192,7 @@ public class Field {
 	}
 
 	/**
-	 * prints field to console. 4 debug atm
+	 * prints field to console
 	 */
 	public void print_field() {
 		if (_game_field == null) {
