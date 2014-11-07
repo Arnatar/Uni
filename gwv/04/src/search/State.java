@@ -5,7 +5,6 @@ import java.util.LinkedList;
 public class State {
 
 	private State predecessor;
-	private Direction direction_to_start;
 	private int x_position;
 	private int y_position;
 	private int represented_char;
@@ -20,7 +19,6 @@ public class State {
 	State(int x, int y, int c) {
 		this.x_position = x;
 		this.y_position = y;
-		this.direction_to_start = Direction.NONE;
 		this.predecessor = null;
 		this.represented_char = c;
 		this.portal_target = null;
@@ -39,10 +37,6 @@ public class State {
 
 	public State get_predecessor() {
 		return this.predecessor;
-	}
-
-	public Direction get_direction_to_start() {
-		return this.direction_to_start;
 	}
 
 	public int getRepresented_char() {
@@ -99,9 +93,6 @@ public class State {
 		y_position = y;
 	}
 
-	public void setDirection_to_start(Direction direction_to_start) {
-		this.direction_to_start = direction_to_start;
-	}
 
 	public void setPredecessor(State predecessor) {
 		this.predecessor = predecessor;
@@ -121,16 +112,6 @@ public class State {
 			result = this.get_predecessor().path_to_start_as_list(result);
 		}
 		return result;
-	}
-
-	public String path_to_start_as_string() {
-		Direction direction = this.get_direction_to_start();
-		if (direction.equals(Direction.NONE)) {
-			return "The path: START";
-		} else {
-			return this.get_predecessor().path_to_start_as_string() + " "
-					+ direction.toString();
-		}
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package search;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 
@@ -25,10 +24,6 @@ public class Robot {
 			System.out.println("Pfad gefunden:");
 			// System.out.println(astar_goal.path_to_start_as_string());
 			field.print_path(astar_goal.path_to_start_as_list());
-			if (field.get_entry(4, 6) != null) {
-				System.out.println("Test: " + field.get_entry(4, 4).getF_val());
-			} else
-				System.out.println("what the fuck");
 		}
 	}
 
@@ -50,7 +45,7 @@ public class Robot {
 			}
 			closedStates.add(current);
 			// expand current
-			ArrayList<State> targets = compute_targets(current, field);
+			LinkedList<State> targets = compute_targets(current, field);
 			for (State e : targets) {
 				if (closedStates.contains(e) || e == null) {
 					continue;
@@ -93,13 +88,13 @@ public class Robot {
 	/**
 	 * builds an array with all possible targets in the field for the position
 	 */
-	private static ArrayList<State> compute_targets(State current_position,
+	private static LinkedList<State> compute_targets(State current,
 			Field field) {
-		ArrayList<State> neighbours = new ArrayList<State>();
-		neighbours.add(go_north(current_position, field));
-		neighbours.add(go_east(current_position, field));
-		neighbours.add(go_west(current_position, field));
-		neighbours.add(go_south(current_position, field));
+		LinkedList<State> neighbours = new LinkedList<State>();
+		neighbours.add(go_north(current, field));
+		neighbours.add(go_east(current, field));
+		neighbours.add(go_west(current, field));
+		neighbours.add(go_south(current, field));
 		return neighbours;
 	}
 
@@ -108,7 +103,7 @@ public class Robot {
 	 */
 	private static State go_south(State current_position, Field field) {
 		int x = current_position.get_x_position();
-		int y = current_position.get_y_position() - 1;
+		int y = current_position.get_y_position() + 1;
 		if (field.is_passable(x, y)) {
 			return field.portalcheck(field.get_entry(x, y));
 		} else {
@@ -147,7 +142,7 @@ public class Robot {
 	 */
 	private static State go_north(State current_position, Field field) {
 		int x = current_position.get_x_position();
-		int y = current_position.get_y_position() + 1;
+		int y = current_position.get_y_position() - 1;
 		if (field.is_passable(x, y)) {
 			return field.portalcheck(field.get_entry(x, y));
 		} else {
