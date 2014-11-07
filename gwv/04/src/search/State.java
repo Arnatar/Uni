@@ -13,7 +13,6 @@ public class State {
 	private int est_goal_distance;
 	private int f_val;
 
-
 	/**
 	 * tuple of coordinates in the maze
 	 */
@@ -34,15 +33,6 @@ public class State {
 			this.est_goal_distance = Integer.MAX_VALUE / 2;
 		}
 		this.f_val = this.start_distance + this.est_goal_distance;
-	}
-
-
-	public int get_path_length_to_goal(){
-		return this.path_length_to_goal;
-	}
-	
-	public void increment_path_length(){
-		this.path_length_to_goal+=1;
 	}
 
 	public State get_predecessor() {
@@ -123,6 +113,7 @@ public class State {
 		}
 		return result;
 	}
+
 
 	@Override
 	public int hashCode() {

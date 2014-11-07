@@ -17,7 +17,7 @@
 
 \newcommand{\todo}{\textcolor{red}{\textbf{TODO}}}
 \newcommand{\authorinfo}{Arne Struck, Knut Götz}
-\newcommand{\titleinfo}{GWV-Abgabe zum 31.10.2014}
+\newcommand{\titleinfo}{GWV-Abgabe zum 7.11.2014}
 \newcommand{\qed}{\ \square}
 
 
@@ -61,7 +61,9 @@ xxxxxxxxxxxxxxxxxxxx
 \subsection*{2.}
 Bei unserer Implementation des A*-Algorithmus ist eine Terminierung sichergestellt, da alle bereits abgearbeiteten States in einer Menge gespeichert werden und neue explorte States, die beriets 
 abgearbeitet (in der Menge enthalten sind) wurden, nicht erneut betrachtet werden. Wenn alle möglichen States betrachtet wurden, bricht der Algorithmus ab und gibt aus, dass er keinen Pfad finden konnte.
+\newpage
 Ausgabe dann:
+
 \begin{verbatim}
 Field:
 xxxxxxxxxxxxxxxxxxxx
@@ -80,7 +82,22 @@ Kein Pfad auffindbar
 \end{verbatim}
 
 \subsection*{3.}
+Die Heuristik muss angepasst werden, sodass die Verkürzungen zu den einzelnen Knoten beachtet werden.
+Außerdem müssen beim Einlesen natürlich die einzelnen Portal-Paare erkannt werden, in der momentanen Implementation gilt jedes Symbol als Portal, welches weder x, 2, s noch g ist und mehr als einmal vorkommt. 
+Sollte ein Portal angesteuert werden, wird der zum Portalausgang gehörige State ausgegeben.
 
-\subsection*{4.}
-
+\begin{verbatim}
+Starte A*:
+Pfad gefunden:
+xxxxxxxxxxxxxxxxxxxx
+x2                 x
+xp      xxx        x
+xp  1   x xxxxx    x
+xppps              x
+x       x x  xxxxxxx
+x  xx xxxxx        x
+x      x      g    x
+x   1  x  2pppp    x
+xxxxxxxxxxxxxxxxxxxx
+\end{verbatim}
 \end{document}
