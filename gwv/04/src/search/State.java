@@ -29,10 +29,13 @@ public class State {
 		} else {
 			this.start_distance = Integer.MAX_VALUE / 2;
 		}
-		this.est_goal_distance = Integer.MAX_VALUE / 2;
+		if (c == (int) 'g') {
+			this.est_goal_distance = 0;
+		} else {
+			this.est_goal_distance = Integer.MAX_VALUE / 2;
+		}
 		this.f_val = this.start_distance + this.est_goal_distance;
 	}
-
 
 	public State get_predecessor() {
 		return this.predecessor;
@@ -106,7 +109,8 @@ public class State {
 
 	public LinkedList<State> path_to_start_as_list() {
 		LinkedList<State> temp = new LinkedList<State>();
-		return path_to_start_as_list(temp);
+		temp = path_to_start_as_list(temp);
+		return temp;
 	}
 
 	private LinkedList<State> path_to_start_as_list(LinkedList<State> result) {

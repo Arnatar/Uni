@@ -6,6 +6,7 @@ import java.util.LinkedList;
 
 public class Field {
 	private State[][] _game_field;
+	private boolean portal_found = false;
 	private State _goal = new State(-1, -1, 'g');
 	private State _start = new State(-1, -1, 's');
 
@@ -13,6 +14,9 @@ public class Field {
 		_game_field = buildt_field_from_file(file_path);
 		build_portals();
 		build_distances();
+		if (portal_found) {
+			build_portal_distances();
+		}
 	}
 
 	/**
@@ -97,6 +101,7 @@ public class Field {
 										.getRepresented_char()
 										&& !_game_field[y][x].equals(_game_field[b][a])) {
 									_game_field[y][x].setPortal_target(_game_field[b][a]);
+									portal_found = true;
 								}
 							}
 						}
@@ -121,7 +126,6 @@ public class Field {
 								manhattan_dist(_game_field[y][x], _goal));
 						_game_field[y][x].setEst_goal_distance(manhattan_dist(
 								_game_field[y][x].getPortal_target(), _goal));
-
 					} else {
 						_game_field[y][x].setEst_goal_distance(manhattan_dist(
 								_game_field[y][x], _goal));
@@ -129,6 +133,42 @@ public class Field {
 				}
 			}
 		}
+	}
+
+	/*
+	 * Gedanken: wenn manhattan(mir, goal) > nextportal.goalDist + manhattan()
+	 */
+	private void build_portal_distances() {
+		LinkedList<State> portals = getPortals();
+		for (int y = 0; y < _game_field.length; y++) {
+			for (int x = 0; x < _game_field[y].length; x++) {
+				if (is_passable(x, y)) {
+					for (State e : portals) {
+						if (!portals.contains(_game_field[y][x])) {
+							int tempdist = manhattan_dist(_game_field[y][x], e)
+									+ e.getEst_goal_distance();
+							if (_game_field[y][x].getEst_goal_distance() > tempdist) {
+								_game_field[y][x].setEst_goal_distance(tempdist);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private LinkedList<State> getPortals() {
+		LinkedList<State> result = new LinkedList<State>();
+		for (int y = 0; y < _game_field.length; y++) {
+			for (int x = 0; x < _game_field[y].length; x++) {
+				if (is_passable(x, y)) {
+					if (_game_field[y][x].getPortal_target() != null) {
+						result.add(_game_field[y][x]);
+					}
+				}
+			}
+		}
+		return result;
 	}
 
 	/**
