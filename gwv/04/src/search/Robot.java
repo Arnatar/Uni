@@ -7,10 +7,11 @@ import java.util.LinkedList;
 public class Robot {
 	// private static final String _file_path = "fields/blatt3_environment.txt";
 
+
 	// private static final String _file_path = "fields/blatt4_environment_a.txt";
 
-	private static final String _file_path = "fields/blatt4_environment_b2.txt";
-
+	//private static final String _file_path = "fields/blatt4_environment_b2.txt";
+	
 	public static void main(String[] args) throws IOException {
 		Field field = new Field(_file_path);
 		System.out.println("Field:");
@@ -18,6 +19,7 @@ public class Robot {
 		System.out.println();
 		System.out.println("Starte A*:");
 		State astar_goal = a_star(field);
+
 		if (astar_goal == null) {
 			System.out.println("Kein Pfad auffindbar");
 		} else {
@@ -67,9 +69,14 @@ public class Robot {
 			}
 		}
 
+
 		return null;
 	}
 
+	
+
+	
+	
 	/**
 	 * Bewertungsfunktion der open-queue
 	 */
