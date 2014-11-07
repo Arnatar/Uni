@@ -10,6 +10,9 @@ public class State {
 	private int y_position;
 	private int represented_char;
 	private State portal_target;
+	private int start_distance;
+	private int est_goal_distance;
+	private int f_val;
 
 	/**
 	 * tuple of coordinates in the maze
@@ -21,16 +24,15 @@ public class State {
 		this.predecessor = null;
 		this.represented_char = c;
 		this.portal_target = null;
+		if (c == (int) 's') {
+			this.start_distance = 0;
+		} else {
+			this.start_distance = Integer.MAX_VALUE / 2;
+		}
+		this.est_goal_distance = Integer.MAX_VALUE / 2;
+		this.f_val = this.start_distance + this.est_goal_distance;
 	}
 
-	State(int x, int y, char c, Direction to_root, State pred) {
-		this.x_position = x;
-		this.y_position = y;
-		this.direction_to_start = to_root;
-		this.predecessor = pred;
-		this.represented_char = c;
-		this.portal_target = null;
-	}
 
 	public State get_predecessor() {
 		return this.predecessor;
@@ -44,6 +46,18 @@ public class State {
 		return represented_char;
 	}
 
+	public int getEst_goal_distance() {
+		return est_goal_distance;
+	}
+
+	public int getF_val() {
+		return f_val;
+	}
+
+	public int getStart_distance() {
+		return start_distance;
+	}
+
 	public int get_x_position() {
 		return x_position;
 	}
@@ -51,15 +65,25 @@ public class State {
 	public int get_y_position() {
 		return y_position;
 	}
-	
+
 	public State getPortal_target() {
 		return portal_target;
 	}
-	
+
+	public void setEst_goal_distance(int est_goal_distance) {
+		this.est_goal_distance = est_goal_distance;
+		this.f_val = this.est_goal_distance + this.start_distance;
+	}
+
+	public void setStart_distance(int start_distance) {
+		this.start_distance = start_distance;
+		this.f_val = this.est_goal_distance + this.start_distance;
+	}
+
 	public void setPortal_target(State portal_target) {
 		this.portal_target = portal_target;
 	}
-	
+
 	public void setRepresented_char(char represented_char) {
 		this.represented_char = represented_char;
 	}
@@ -71,11 +95,11 @@ public class State {
 	public void set_y_position(int y) {
 		y_position = y;
 	}
-	
+
 	public void setDirection_to_start(Direction direction_to_start) {
 		this.direction_to_start = direction_to_start;
 	}
-	
+
 	public void setPredecessor(State predecessor) {
 		this.predecessor = predecessor;
 	}
@@ -86,9 +110,8 @@ public class State {
 	}
 
 	private LinkedList<State> path_to_start_as_list(LinkedList<State> result) {
-		Direction direction = this.get_direction_to_start();
-		if (direction.equals(Direction.NONE)) {
-			result.add(this);
+		if (this.get_predecessor() == null) {
+			result.addFirst(this);
 		} else {
 			result.addFirst(this);
 			result = this.get_predecessor().path_to_start_as_list(result);
