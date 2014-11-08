@@ -116,15 +116,30 @@ Optimisation im Code -----------------------------------------------------------
 [1] ----------------------------------------------------------------------------
 
 Die Indizes im inner loop von calculate sind vertauscht. Dies ist der Fix:
-                /* over all rows */
--               for (j = 1; j < N; j++)
-+               for (i = 1; i < N; i++)
-                {
-                        /* over all columns */
--                       for (i = 1; i < N; i++)
-+                       for (j = 1; j < N; j++)
+     /* over all rows */
+-    for (j = 1; j < N; j++)
++    for (i = 1; i < N; i++)
+     {
+             /* over all columns */
+-            for (i = 1; i < N; i++)
++            for (j = 1; j < N; j++)
 
 Begründung: die Iteration der Daten sollte sich an der Anordnung dieser im Cache orientieren. Die rows sollten "von links nach rechts" durchiteriert werden; in der originalen Implementation erfolgt die Iteration hingegen "von oben nach unten", was zu cache misses ohne Ende führt.
 Speedup: 46sec -> 34.6sec. (+32%)
 56.73% -> 42.59% frontend cycles idle.
 
+
+[2] ----------------------------------------------------------------------------
+
+Die lokale Variable `korrektur` ist überflüssig.
+
+    residuum = getResiduum(arguments, options, i, j, star);
+-   korrektur = residuum;
++   Matrix[m1][i][j] = Matrix[m2][i][j] + residuum;
++
+    residuum = (residuum < 0) ? -residuum : residuum;
+    maxresiduum = (residuum < maxresiduum) ? maxresiduum : residuum;
+
+-   Matrix[m1][i][j] = Matrix[m2][i][j] + korrektur;
+
+Der Performance-Gewinn ist allerdings kaum existent, bei -O3 gib es 1ms weniger..
