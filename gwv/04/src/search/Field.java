@@ -126,7 +126,7 @@ public class Field {
 								manhattan_dist(_game_field[y][x], _goal));
 						_game_field[y][x].setEst_goal_distance(manhattan_dist(
 								_game_field[y][x].getPortal_target(), _goal));
-					} else {
+					} else { 
 						_game_field[y][x].setEst_goal_distance(manhattan_dist(
 								_game_field[y][x], _goal));
 					}
@@ -135,8 +135,9 @@ public class Field {
 		}
 	}
 
-	/*
-	 * Gedanken: wenn manhattan(mir, goal) > nextportal.goalDist + manhattan()
+	/**
+	 * Changes Goal-Distances if the est way from current to portal to goal is shorter than
+	 * current to goal.
 	 */
 	private void build_portal_distances() {
 		LinkedList<State> portals = getPortals();
@@ -157,6 +158,9 @@ public class Field {
 		}
 	}
 
+	/**
+	 * returns a LinkedList of all found Portal-nodes
+	 */
 	private LinkedList<State> getPortals() {
 		LinkedList<State> result = new LinkedList<State>();
 		for (int y = 0; y < _game_field.length; y++) {
@@ -252,20 +256,10 @@ public class Field {
 		}
 	}
 
-	public void reset_predecessors() {
-		for (int y = 0; y < _game_field.length; y++) {
-			for (int x = 0; x < _game_field[y].length; x++) {
-				_game_field[y][x].setPredecessor(null);
-			}
-		}
-	}
-
-	public void reset_predecessor(int x, int y) {
-		if (is_passable(x, y)) {
-			_game_field[y][x].setPredecessor(null);
-		}
-	}
-
+	/**
+	 * Returns the field-entry corresponding to coords.
+	 * or null if it isnt reachable.
+	 */
 	public State get_entry(int x, int y) {
 		if (is_in_field(x, y))
 			return _game_field[y][x];
@@ -273,27 +267,16 @@ public class Field {
 			return null;
 	}
 
+	/**
+	 * checks if current state is a target 
+	 */
 	public State portalcheck(State current) {
 		if (current.getPortal_target() == null) {
 			return current;
 		} else {
+			current.getPortal_target().setEst_goal_distance(current.getEst_goal_distance());
 			return current.getPortal_target();
 		}
-	}
-	
-	/*
-	 * Computes the Manhattan Distance between two states. 
-	 */
-	public int compute_manhattan_distance(State possible_state){
-		State goal  = this.get_goal();
-		int goal_x  = goal.get_x_position();
-		int goal_y  = goal.get_y_position();
-		int possible_state_x = possible_state.get_x_position();
-		int possible_state_y = possible_state.get_y_position();
-		int abs_x_difference = Math.abs(goal_x - possible_state_x);
-		int abs_y_difference = Math.abs(goal_y - possible_state_y);
-		return abs_x_difference + abs_y_difference;
-		
 	}
 
 	public State get_start() {

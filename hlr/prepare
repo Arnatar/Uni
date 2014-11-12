@@ -9,5 +9,5 @@ id=WernerStruck
 dir=$1
 mkdir $id
 cp -r $1/* $id/
-tar -cvzf $id.tar.gz --exclude="*.out" $id
+tar -cvzf $id.tar.gz $id
 rm -rf $id

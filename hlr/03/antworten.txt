@@ -58,9 +58,9 @@ Aufgefallen:
 -Die verschiedenen Nodes (und teilweise Cores) haben unterschiedlich schnelle Antwortzeiten (minimal).
 
 Erklärung:
-- 100 kleine Dinge, welche sich aufsummieren, wie Nodes und Cores haben nicht identisch lange Leitungen, der Momentane State muss nicht identisch sein, kurz sie sind keine 100%en Kopien von einander. Daraus folgen kleine Overheads, welche wir hier beobachten.
--Ähnlicher Grund wie zuvor, der Overhead durch unterschiedlch lange physikalische Leitungen sorgen hierfür.
+- 100 kleine Dinge, welche sich aufsummieren, wie Nodes und Cores haben nicht identisch lange Leitungen, der momentane State muss nicht identisch sein, kurz sie sind keine hundertprozentigen Kopien voneinander. Daraus folgen kleine Overheads, welche wir hier beobachten.
+- Ähnlicher Grund wie zuvor, der Overhead durch unterschiedlch lange physikalische Leitungen sorgt hierfür.
 
 Erzeugung von timescript.out in job_script:
-Sollte eben so gut möglich sein, wie gelassen werden, da bei der folgenden Nebenläufigkeit Dateiverlust droht (es sei denn man hat eine Node-übergreifende Lösung des Reader-Writer-Problems, davon wissen wir aber nichts).
+Sollte ebensogut möglich sein wie gelassen werden, da bei der folgenden Nebenläufigkeit Dateiverlust droht (es sei denn man hat eine Node-übergreifende Lösung des Reader-Writer-Problems, davon wissen wir aber nichts).
 Der Befehl sollte: echo $host: $time >> .*/path/.*/timscript.out lauten

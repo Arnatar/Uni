@@ -1,0 +1,76 @@
+\documentclass[a4paper,11pt,fleqn]{scrartcl}
+\usepackage[german,ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[top=1.3in, bottom=1.2in, left=0.9in, right=0.9in]{geometry}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{url}
+\usepackage{tikz}
+\usetikzlibrary{automata,shapes}
+
+% ------------------------------------------------------
+
+% Commands
+
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO}}}
+\newcommand{\authorinfo}{Arne Struck, Knut Götz}
+\newcommand{\titleinfo}{GWV-Abgabe zum 7.11.2014}
+\newcommand{\qed}{\ \square}
+
+
+% ------------------------------------------------------
+
+% Title & Pages
+
+\title{\titleinfo}
+\author{\authorinfo}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\authorinfo}
+\fancyhead[R]{\titleinfo}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+\maketitle
+
+\section*{1}
+\subsection*{a)}
+\todo
+\subsection*{b)}
+\todo
+\subsection*{c)}
+\todo
+\subsection*{d)}
+\todo \\
+latex-tree-bsp: \\
+\begin{tikzpicture}[every state/.style={draw,ellipse,inner sep=1.5pt},
+					level 1/.style={sibling distance=8cm, level distance=2.5cm},
+			        	level 2/.style={sibling distance=4cm, level distance=2cm}]
+\node[state]{root}
+	child{ node[state]{level 1 node}				        
+		child{ node[state]{level 2 node 1}
+			edge from parent node[above left] {Beschriftung 2}
+		}
+		child{ node[state]{level 2 node 2}
+			edge from parent node[above right] {Beschriftung 3}
+		}
+	edge from parent node[right] {Beschriftung 1}
+};
+\end{tikzpicture}
+
+\section*{2}
+\todo
+
+\section*{3}
+\todo
+
+
+
+
+\end{document}
