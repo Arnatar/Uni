@@ -1,3 +1,44 @@
+\documentclass[a4paper,11pt,fleqn]{scrartcl}
+\usepackage[german,ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[top=1.3in, bottom=1.2in, left=0.9in, right=0.9in]{geometry}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{tikz}
+
+% ------------------------------------------------------
+
+% Commands
+
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO}}}
+\newcommand{\authorinfo}{Arne Struck, Jonathan Werner}
+\newcommand{\titleinfo}{HLR OPENMP, Blatt 4}
+\newcommand{\qed}{\ \square}
+
+
+% ------------------------------------------------------
+
+% Title & Pages
+
+\title{\titleinfo}
+\author{\authorinfo}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\authorinfo}
+\fancyhead[R]{\titleinfo}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+\maketitle
+\notag
+
+
 \section{Optimierung}\label{optimierung}
 
 \textbf{Sequentiell, ohne \texttt{-fopenmp}:}
@@ -76,33 +117,36 @@ Zeit benötigt: 2h. Fehlersuche? Ja, zuerst haben wir die simple
 interference function geenommen und dadurch nur ein Speedup von 4
 erreicht.
 
+
+\newpage
 \section{Messungen}\label{messungen}
 
 \subsection{Messung 1}\label{messung-1}
+\begin{center}
+\begin{tabular}[c]{l|l|l}
+procs & speedup & time in sec \\ \hline
 
-\begin{longtable}[c]{@{}lll@{}}
-\toprule
-procs & speedup & time in sec\tabularnewline
-\midrule
-\endhead
-1 (no OMP) & 1 & 120.29\tabularnewline
-1 & 1 & 120.65\tabularnewline
-2 & 2.044222298 & 59.02\tabularnewline
-3 & 2.960009814 & 40.76\tabularnewline
-4 & 4.045942321 & 29.82\tabularnewline
-5 & 4.868845843 & 24.78\tabularnewline
-6 & 5.952146029 & 20.27\tabularnewline
-7 & 6.710233593 & 17.98\tabularnewline
-8 & 7.65060241 & 15.77\tabularnewline
-9 & 8.431167016 & 14.31\tabularnewline
-10 & 9.1332324 & 13.21\tabularnewline
-11 & 9.913722268 & 12.17\tabularnewline
-12 & 9.995857498 & 12.07\tabularnewline
-\bottomrule
-\end{longtable}
+1 (no OMP) & 1 & 120.29 \\
+1 & 1 & 120.65 \\
+2 & 2.044222298 & 59.02 \\
+3 & 2.960009814 & 40.76 \\
+4 & 4.045942321 & 29.82 \\
+5 & 4.868845843 & 24.78 \\ 
+6 & 5.952146029 & 20.27 \\
+7 & 6.710233593 & 17.98 \\
+8 & 7.65060241 & 15.77 \\
+9 & 8.431167016 & 14.31 \\
+10 & 9.1332324 & 13.21 \\
+11 & 9.913722268 & 12.17 \\
+12 & 9.995857498 & 12.07 \\
+\end{tabular}
+
+\end{center}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{speedup.png}
+\includegraphics[scale=0.8]{speedup.png}
 \caption{}
 \end{figure}
+
+\end{document}
