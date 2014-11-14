@@ -7,7 +7,7 @@ env.use_ssh_config = True
 env.hosts = ['cluster']
 
 remote_wd = "/home/werner/dev/04/"
-files = 'askparams.c Makefile partdiff-seq.c partdiff-seq.h'
+files = 'askparams.c Makefile partdiff-seq.c partdiff-seq.h jobscript.slurm'
 
 def dispatcher():
     run('nginx-dispatcher.sh')
@@ -15,13 +15,27 @@ def dispatcher():
 def push():
     local("scp {} cluster:{}".format(files, remote_wd))
 
-def run_():
+def run_messung1():
     with cd(remote_wd):
         run('make')
-        for nthreads in range(2,13):
-            run('OMP_NUM_THREADS={} ./partdiff-seq 1 2 512 2 2 200'.format(nthreads))
+        # for n in range(0,1):
+        # nlines = 2**
+        nlines=1024
+        print(nlines)
+        run('OMP_NUM_THREADS=12 ./partdiff-seq 1 2 {} 2 2 2000'.format(nlines))
+
+def run_messung2():
+    with cd(remote_wd):
+        run('make')
+        for n in range(0,11):
+            nlines=2**n
+            run('nlines={} sbatch --error=err/{}.err --output=out/{}.out jobscript.slurm'.format(nlines,nlines,nlines))
 
 def deploy():
     push()
-    run_()
+    run_messung2()
 
+def get_out():
+    with cd(remote_wd):
+        run('cat run.out')
+        run('cat job.err')
