@@ -26,6 +26,8 @@
 #include <math.h>
 #include <malloc.h>
 #include <sys/time.h>
+// for usage of omp_set_num_threads
+#include <omp.h> 
 
 #include "partdiff-seq.h"
 
@@ -217,7 +219,9 @@ calculate (struct calculation_arguments const* arguments, struct calculation_res
 		pih = PI * h;
 		fpisin = 0.25 * TWO_PI_SQUARE * h * h;
 	}
-
+	
+	// sets thread-number to the number-value (reserved for this) from options
+	omp_set_num_threads(options->number);
 	while (term_iteration > 0)
 	{
 		double** Matrix_Out = arguments->Matrix[m1];
@@ -225,10 +229,10 @@ calculate (struct calculation_arguments const* arguments, struct calculation_res
 
 		maxresiduum = 0;
 
-// distribute the outer loop over the threads.
-// star and residuum have to be thread local (to not overwrite the results in other loops); thus declared as private
-// take 'guided' schedule for an extra 10% speed boost
-#pragma omp parallel for private(star, residuum), schedule(dynamic, 1)
+		// distribute the outer loop over the threads.
+		// star and residuum have to be thread local (to not overwrite the results in other loops); thus declared as private
+		// take 'guided' schedule for an extra 10% speed boost
+		#pragma omp parallel for private(star, residuum), schedule(dynamic, 1), reduction(max:maxresiduum)
 		/* over all rows */
 		for (int i = 1; i < N; i++)
 		{
