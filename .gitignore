@@ -39,3 +39,4 @@
 bin/
 deploy-jona
 .local.vimrc
+*.pyc
