@@ -38,38 +38,45 @@
 
 \begin{document}
 \maketitle
+\notag
 
 \section*{1}
 \subsection*{a)}
 Der Algorithmus erhält einen Satz und eine eine Grammtik, in der neben Terminalen (hier die einzelnen Wörter des Satzes) auch eine Menge R an Regeln gegegeben ist.
-Der Output is ein gerichteter Graph (ein Baum) der aus einer Menge von Knoten und Kanten besteht. Da die Wörter des Satzes die Knoten des Graphens bilden muss diese Menge im 
-Algorithmus nicht verändert werden. Der Algorithmus erzeugt dann sukzessive die Menge der Kanten, anhand der gegebenen Regeln der Grammatik.
-Der aktuelle Status des Parses ist gegeben durch eine Stack S, einer Liste von Wörtern des Satzes (in der Reihenfolge wie im Satz) und die Menge der Kanten.  
+Der Output ist ein gerichteter Graph (ein Baum). 
+Da die Wörter des Satzes die Knoten des Graphens bilden muss diese Menge im Algorithmus nicht verändert werden. 
+Der Algorithmus erzeugt sukzessive die Menge der Kanten, anhand der gegebenen Regeln der Grammatik.
+Der aktuelle Status des Parses ist gegeben durch eine Stack S, einer Liste von Wörtern des Satzes (in der Reihenfolge wie im Satz) und die Menge der Kanten.
 Folgende Operationen stehen dabei zur Verfügung:
 \begin{itemize}
- \item Left-Arc 
+ \item Left-Arc: \\ 
    Fügt eine Kante zwischen dem ersten Wort in der Wortliste zu dem Top of Stack Wort hinzu und popped den Stack. (Bedingungen auch angeben?)
- \item Right-Arc 
-   Fügt eine Kante zwischen dem Top of Stack Wort und ertsen Wort der Inputliste hinzu. Dabei wird das erste Wort aus der Inputliste entfernt und auf den Stack gepusht.
- \item Reduce 
+ \item Right-Arc: \\
+   Fügt eine Kante zwischen dem Top of Stack Wort und ersten Wort der Inputliste hinzu. 
+   Dabei wird das erste Wort aus der Inputliste entfernt und auf den Stack gepusht.
+ \item Reduce: \\
    Popt Top of Stack, falls es bereits einen Kante zu diesem Wort in der Kantenmenge gibt.  
- \item Shift 
+ \item Shift: \\
    Entfernt das erste Wort der Inputliste und pusht es auf den Stack.
 \end{itemize}
 \subsection*{b)}
-Der Algorithmus terminiert, wenn die Liste mit dem Input Wörtzern leer ist. Dann kann der entstandenen Dependency Graph zurückggeben werden. 
+Der Algorithmus terminiert, wenn die Liste mit dem Input Wörtern leer ist. Dann kann der entstandenen Dependency Graph zurückgeben werden. 
 \subsection*{c)}
 Ein dependency Graph muss folgende vier Bedingungen erfüllen:
 \begin{itemize}
- \item Single Head: Diese Eigenschaft fordert, dass jedes Wort nur einem übergeordneten Wort zugeordnet ist, d.h. es gibt maximal eine eingehende Kante pro Wort. 
- \item Acyclic: Diese Eigenschaft fordert einfach, dass der dependency Graph keine Zyklen aufweist.   
- \item Connected: Diese Eigenschaft fordert, dass der Graph zusammenhängend ist, d.h. wandelt man alle gerichetete Kanten in ungerichtete Kanten um, dann gibt es von jedem Knoten einen Pfad zu einem anderen Knoten. 
- \item Projective: Gibt es eine Verbindung zwischen zwei Wörtern und es gibt ein Wort zwischen diesen Wörtern. Dann muss es einen gerichteten Pfad von einem dieser beiden Wörtern zu dem dazwischenliegenden geben.    
+ \item Single Head: \\
+ Diese Eigenschaft fordert, dass jedes Wort nur einem übergeordneten Wort zugeordnet ist, d.h. es gibt maximal eine eingehende Kante pro Wort. 
+ \item Acyclic: \\
+  Diese Eigenschaft fordert einfach, dass der dependency Graph keine Zyklen aufweist.   
+ \item Connected: \\
+ Diese Eigenschaft fordert, dass der Graph zusammenhängend ist, d.h. wandelt man alle gerichetete Kanten in ungerichtete Kanten um, dann gibt es von jedem Knoten einen Pfad zu einem anderen Knoten. 
+ \item Projective: \\
+ Gibt es eine Verbindung zwischen zwei Wörtern und es gibt ein Wort zwischen diesen Wörtern. Dann muss es einen gerichteten Pfad von einem dieser beiden Wörtern zu dem dazwischenliegenden geben.    
 \end{itemize}
 
 \subsection*{d)}
 
-Man kann als Beispielsatz "Das ist ein Satz" verwenden. Dann gilt
+Man kann als Beispielsatz ''Das ist ein Satz'' verwenden, dann gilt:
 \begin{align*}
 N_w = \{Das, ist, ein, Satz\}
 \end{align*}
@@ -92,23 +99,63 @@ A = \{(ist,Das),(ist,Satz)\}
 A = \{(Das,Satz)\}
 \end{align*}
 \end{itemize}
-latex-tree-bsp:\\ 
-\begin{tikzpicture}[every state/.style={draw,ellipse,inner sep=1.5pt},
-					level 1/.style={sibling distance=8cm, level distance=2.5cm},
-			        	level 2/.style={sibling distance=4cm, level distance=2cm}]
-\node[state]{root}
-	child{ node[state]{level 1 node}				        
-		child{ node[state]{level 2 node 1}
-			edge from parent node[above left] {Beschriftung 2}
-		}
-		child{ node[state]{level 2 node 2}
-			edge from parent node[above right] {Beschriftung 3}
-		}
-	edge from parent node[right] {Beschriftung 1}
-};
-\end{tikzpicture}
 
 \section*{2}
+Input:
+\begin{align}
+	\text{List} &= \text{\{Der, Mann, isst, eine, Giraffe\}} \\ %Das nennt man großen Appetiet btw
+	\text{Stack} &= \text{\{\}} \\
+	A &= \text{\{\}} \\	
+\end{align}
+Shift:
+\begin{align}
+	\text{List} &= \text{\{Mann, isst, eine, Giraffe\}} \\ 
+	\text{Stack} &= \text{\{Der\}} \\
+	A &= \text{\{\}} \\	
+\end{align}
+Left-Arc:
+\begin{align}
+	\text{List} &= \text{\{Mann, isst, eine, Giraffe\}} \\ 
+	\text{Stack} &= \text{\{\}} \\
+	A &= \text{\{(Mann, Der)\}} \\	
+\end{align}
+shift:
+\begin{align}
+	\text{List} &= \text{\{Mann, isst, eine, Giraffe\}} \\ 
+	\text{Stack} &= \text{\{Mann\}} \\
+	A &= \text{\{(Mann, Der)\}} \\	
+\end{align}
+Left-Arc:
+\begin{align}
+	\text{List} &= \text{\{isst, eine, Giraffe\}} \\ 
+	\text{Stack} &= \text{\{\}} \\
+	A &= \text{\{(isst, Mann), (Mann, Der)\}} \\	
+\end{align}
+shift:
+\begin{align}
+	\text{List} &= \text{\{eine, Giraffe\}} \\ 
+	\text{Stack} &= \text{\{isst\}} \\
+	A &= \text{\{(isst, Mann), (Mann, Der)\}} \\	
+\end{align}
+shift:
+\begin{align}
+	\text{List} &= \text{\{Giraffe\}} \\ 
+	\text{Stack} &= \text{\{eine, isst\}} \\
+	A &= \text{\{(isst, Mann), (Mann, Der)\}} \\	
+\end{align}
+Left-Arc:
+\begin{align}
+	\text{List} &= \text{\{Giraffe\}} \\ 
+	\text{Stack} &= \text{\{isst\}} \\
+	A &= \text{\{(Giraffe, eine), (isst, Mann), (Mann, Der)\}} \\	
+\end{align}
+Right-Arc:
+\begin{align}
+	\text{List} &= \text{\{\}} \\ 
+	\text{Stack} &= \text{\{Giraffe, isst\}} \\
+	A &= \text{\{(isst, Girafffe), (Giraffe, eine), (isst, Mann), (Mann, Der)\}} \\	
+\end{align}
+
 
 \section*{3}
 \todo

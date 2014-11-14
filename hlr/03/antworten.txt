@@ -24,7 +24,8 @@ scancel (Konsole)
 quickmenu -> cancel (sview)
 
 8.
-Ja, sofern sie alle die -s (share) Flag an srun übergeben. (untested, aber man-page behauptet das)
+Ja, sofern sie alle die -s (share) Flag an srun übergeben. (untested, aber man-page behauptet das).
+Diese Funktion ist allerdings auf dem Cluster deaktiviert.
 
 9.
 scontrol show job id -d (Konsole)
@@ -40,13 +41,13 @@ srun hostname
 exit
 
 12.
-TODO ich weiß nicht welchen timeout sie referenzieren
-wenn sie die Standardzeit haben wollen, wenn man kein sbatch --time=x macht, dann ist das 1 min. 
+Timeout ist 6h.
 
 13.
 infos: siehe detailierter Status 
 scontrol update JobID=4223 Priority=7
 Alternativ per sview
+nur wenn der Parameter -nice gesetzt ist.
 
 14.
 Partitions: abu, cluster, compute, magny
