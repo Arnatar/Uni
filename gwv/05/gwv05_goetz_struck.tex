@@ -50,12 +50,15 @@ Der aktuelle Status des Parses ist gegeben durch eine Stack S, einer Liste von W
 Folgende Operationen stehen dabei zur Verfügung:
 \begin{itemize}
  \item Left-Arc: \\ 
-   Fügt eine Kante zwischen dem ersten Wort in der Wortliste zu dem Top of Stack Wort hinzu und popped den Stack. (Bedingungen auch angeben?)
+   Fügt eine Kante zwischen dem ersten Wort in der Wortliste zu dem Top of Stack Wort hinzu und popped den Stack.
  \item Right-Arc: \\
    Fügt eine Kante zwischen dem Top of Stack Wort und ersten Wort der Inputliste hinzu. 
    Dabei wird das erste Wort aus der Inputliste entfernt und auf den Stack gepusht.
+\end{itemize}
+Bedingung für diese beiden Operationen ist zum einen, dass sich eine entsprechende Regel in der Grammatik zu finden ist, und dass die Single-Head Eigenschaft nicht verletzt wird (dazu unten mehr).
+\begin{itemize}
  \item Reduce: \\
-   Popt Top of Stack, falls es bereits einen Kante zu diesem Wort in der Kantenmenge gibt.  
+   Popt Top of Stack, falls es bereits einen Kante zu diesem Wort in der Kantenmenge gibt.
  \item Shift: \\
    Entfernt das erste Wort der Inputliste und pusht es auf den Stack.
 \end{itemize}
@@ -153,14 +156,17 @@ Right-Arc:
 \begin{align}
 	\text{List} &= \text{\{\}} \\ 
 	\text{Stack} &= \text{\{Giraffe, isst\}} \\
-	A &= \text{\{(isst, Girafffe), (Giraffe, eine), (isst, Mann), (Mann, Der)\}} \\	
+	A &= \text{\{(isst, Giraffe), (Giraffe, eine), (isst, Mann), (Mann, Der)\}} \\	
 \end{align}
 
 
 \section*{3}
-\todo
-
-
-
-
+Wenn dann man den vorgestellten Algorithmus als Suchproblem beschreiben auffassen sollte kann man dies folgendermaßen modellieren. 
+Jeder Zusand im Suchraum wird beschreiben durch den Zustand des Algorithmus, d.h. durch den Stack, den verbleibenden Input und die Menge der Kanten. Der Startzustand wäre dann der Zustand, in dem der Stack leer ist, der komplette Input noch in der Liste steht und die Menge der Kanten die leere Menge ist.\\
+Die Endzustände sind dann all die Zustände in denen die Inputliste leer ist und der enstandene Graph ein wohlgeformter dependency Tree ist (Was beispielsweise nicht der Fall ist, wenn nur die Shift-Operation ausgeführt wird).\\
+Die Nachbarn eines Zustands entsprechen, dann den Zuständen, die durch die Ausführung einer der in dem Algorithmus angegebenen Schritte (Shift, Reduce, Left Arc, Right Arc) erreicht werden können. Es gibt dann nicht von jedem Zustand immer vier Kanten, da nicht immer jede der Aktionen ausgeführt werden können. Beispielsweise kann bei einem leeren Stack in keinem Fall noch ein Reduce ausgeführt werden.\\
+Der Zustandsraum steht vor dem Parsen noch nicht fest, da er nur sukzessive aus den Zuständen errechnet werden kann. Es kann erst lokal geprüft werden, welche Schritte möglich sind.
+Das durch den Algorithmus beschriebene Suchproblem is besser als die Erstellung aller möglichen Bäume, da er wie im Paper bewiesen nur linearen Zeitaufwand benötigt in Abhängigkeit der Inputlänge, während das berechnen aller möglichen Bäume wesentlich mehr Schritte benötigt.\\
+Von den bisher vorgestellten Verfahren (wir betrachten hier A*, BFS und DFS) bietet sich wohl  DFS für das hier entwickelte Verfahren an. Für A* benötigt man eine angemessene Heuristik, die hier zumindest nicht offensichtlich ist. 
+BFS ist im Gegensatz zu DFS wesentlich speicherplatzintensiver und da in diesem Fall auch nicht das Auffinden eines kürzesten Pfades im Vordergrund steht, ist DFS zu bevorzugen.
 \end{document}
