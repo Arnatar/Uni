@@ -110,7 +110,7 @@ Input:
 	\text{Stack} &= \text{\{\}} \\
 	A &= \text{\{\}} \\	
 \end{align}
-Shift:
+shift:
 \begin{align}
 	\text{List} &= \text{\{Mann, isst, eine, Giraffe\}} \\ 
 	\text{Stack} &= \text{\{Der\}} \\
@@ -124,7 +124,7 @@ Left-Arc:
 \end{align}
 shift:
 \begin{align}
-	\text{List} &= \text{\{Mann, isst, eine, Giraffe\}} \\ 
+	\text{List} &= \text{\{isst, eine, Giraffe\}} \\ 
 	\text{Stack} &= \text{\{Mann\}} \\
 	A &= \text{\{(Mann, Der)\}} \\	
 \end{align}
@@ -161,12 +161,17 @@ Right-Arc:
 
 
 \section*{3}
-Wenn dann man den vorgestellten Algorithmus als Suchproblem beschreiben auffassen sollte kann man dies folgendermaßen modellieren. 
-Jeder Zusand im Suchraum wird beschreiben durch den Zustand des Algorithmus, d.h. durch den Stack, den verbleibenden Input und die Menge der Kanten. Der Startzustand wäre dann der Zustand, in dem der Stack leer ist, der komplette Input noch in der Liste steht und die Menge der Kanten die leere Menge ist.\\
-Die Endzustände sind dann all die Zustände in denen die Inputliste leer ist und der enstandene Graph ein wohlgeformter dependency Tree ist (Was beispielsweise nicht der Fall ist, wenn nur die Shift-Operation ausgeführt wird).\\
-Die Nachbarn eines Zustands entsprechen, dann den Zuständen, die durch die Ausführung einer der in dem Algorithmus angegebenen Schritte (Shift, Reduce, Left Arc, Right Arc) erreicht werden können. Es gibt dann nicht von jedem Zustand immer vier Kanten, da nicht immer jede der Aktionen ausgeführt werden können. Beispielsweise kann bei einem leeren Stack in keinem Fall noch ein Reduce ausgeführt werden.\\
-Der Zustandsraum steht vor dem Parsen noch nicht fest, da er nur sukzessive aus den Zuständen errechnet werden kann. Es kann erst lokal geprüft werden, welche Schritte möglich sind.
-Das durch den Algorithmus beschriebene Suchproblem is besser als die Erstellung aller möglichen Bäume, da er wie im Paper bewiesen nur linearen Zeitaufwand benötigt in Abhängigkeit der Inputlänge, während das berechnen aller möglichen Bäume wesentlich mehr Schritte benötigt.\\
-Von den bisher vorgestellten Verfahren (wir betrachten hier A*, BFS und DFS) bietet sich wohl  DFS für das hier entwickelte Verfahren an. Für A* benötigt man eine angemessene Heuristik, die hier zumindest nicht offensichtlich ist. 
+Wenn dann man den vorgestellten Algorithmus als Suchproblem auffassen sollte, kann man dies wie folgt modellieren: 
+Jeder Zusand im Suchraum ist der aktuelle Zustand des Algorithmus, d.h. der Stack, der verbliebende Input und die Menge der gefundenen Kanten. 
+Der Startzustand wäre somit der Zustand in dem der Stack leer ist, der komplette Input noch in der Liste steht und die Menge der Kanten die leer ist.\\
+Die Endzustände sind dann die Zustände in denen die Inputliste leer ist und der enstandene Graph ein der Definition nach wohlgeformter dependency Tree ist (was beispielsweise nicht der Fall ist, wenn nur die Shift-Operation ausgeführt wird).\\
+Die Nachbarn eines Zustands entsprechen, dann den Zuständen, die durch die Ausführung einer der in dem Algorithmus angegebenen Schritte (Shift, Reduce, Left Arc, Right Arc) erreicht werden können. 
+Es gibt natürlich nicht von jedem Zustand immer vier Kanten, da nicht immer jede der Aktionen ausgeführt werden kann. 
+Beispielsweise kann bei einem leeren Stack in keinem Fall noch ein Reduce ausgeführt werden.\\
+Der Suchraum steht vor dem Parsen noch nicht fest, da er nur sukzessive aus den Zuständen errechnet werden kann (sofern man sich auf den Algorithmus beschränkt). 
+Es kann erst lokal geprüft werden, welche Schritte möglich sind.
+Das durch den Algorithmus beschriebene Suchproblem ist besser als die Erstellung aller möglichen Bäume, da wie im Paper bewiesen nur ein linearen Zeitaufwand in Abhängigkeit der Inputlänge benötigt wird, während allein für das Berechnen aller möglichen Kombinationen einen weitaus höheren Aufwand von nöten wird (Alle Kombinationen und davon die Potenzmenge bilden) und für das finden des Besten noch einmal ein Aufwand \(O(n)\) zu veranschlagen ist. \\
+Von den bisher vorgestellten Verfahren (wir betrachten hier A*, BFS und DFS) bietet sich wohl  DFS an. 
+A* ist unmöglich, da der Suchraum unbekannt ist.
 BFS ist im Gegensatz zu DFS wesentlich speicherplatzintensiver und da in diesem Fall auch nicht das Auffinden eines kürzesten Pfades im Vordergrund steht, ist DFS zu bevorzugen.
 \end{document}
