@@ -29,7 +29,7 @@
 // for usage of omp_set_num_threads
 #include <omp.h> 
 
-#include "partdiff-seq.h"
+#include "partdiff-openmp.h"
 
 struct calculation_arguments
 {

@@ -6,7 +6,7 @@ CFLAGS = -std=c99 -pedantic -Wall -Wextra -O2 -ggdb
 LFLAGS = $(OCFLAGS)
 LIBS   = -lm
 
-OBJS = partdiff-seq.o askparams.o
+OBJS = partdiff-openmp.o askparams.o
 
 partdiff-openmp: CFLAGS += -fopenmp
 
@@ -15,8 +15,9 @@ partdiff-openmp: CFLAGS += -fopenmp
 	$(CC) -c $(CFLAGS) $*.c
 
 # Targets ...
-all: partdiff-seq
+all: partdiff-openmp
 
+# partdiff-seq als target erhalten (obwohl fehlerbehaftet, da omp-Funktion genutzt)
 partdiff-seq: $(OBJS) Makefile
 	$(CC) $(LFLAGS) -o $@ $(OBJS) $(LIBS)
 
@@ -26,6 +27,6 @@ partdiff-openmp: $(OBJS) Makefile
 clean:
 	$(RM) *.o *~
 
-partdiff-seq.o: partdiff-seq.c Makefile
+partdiff-openmp.o: partdiff-openmp.c Makefile
 
 askparams.o: askparams.c Makefile
