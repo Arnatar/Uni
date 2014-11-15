@@ -9,6 +9,7 @@
 \usepackage{enumerate}
 \usepackage{fancyhdr}
 \usepackage{color}
+\usepackage{pgfplots}
 \usepackage{tikz}
 
 % ------------------------------------------------------
@@ -140,7 +141,6 @@ procs & speedup & time in sec \\ \hline
 11 & 9.913722268 & 12.17 \\
 12 & 9.995857498 & 12.07 \\
 \end{tabular}
-
 \end{center}
 
 \begin{figure}[htbp]
@@ -148,5 +148,55 @@ procs & speedup & time in sec \\ \hline
 \includegraphics[scale=0.8]{speedup.png}
 \caption{}
 \end{figure}
+
+Der Speedup des Programmes ist zu Anfang Linear (scheinbare Superlinearität ist auf messungenauigkeiten zurückzuführen). Dies deckt sich mit dem Amdahlschen Gesetz. Das Resultat deckt sich also mit den Erwartungen an ein gut zu parallelisierendes Programm. Um weitere Aussagen treffen zu können, müsste die Thread-Anzahl drastisch erhöht werden. Leider stößt Open-MP hier an seine Grenzen, zu mindest in Zusammenspiel mit der uns zur Verfügung stehenden Architektur.
+
+\subsection{Messung 2}
+\begin{tikzpicture}
+    \begin{axis}[
+        xmode = log,
+        ymode = log,
+        height = 10cm,
+        width = 14cm,        
+        xlabel= \text{interline count},
+        ylabel= \text{time in s}
+    ]
+    \axispath\draw
+            (7.49165,-10.02171)
+        |-  (8.31801,-11.32467)
+        node[near start,left] {$\frac{dy}{dx} = -1.58$};
+      \addplot[smooth, mark=*, blue] plot coordinates {
+        (1, 0.09)
+		(2, 0.11)
+		(4, 0.2)
+		(8, 0.37)
+		(16, 1)
+		(32, 3.4)
+		(64, 12.59)
+		(128, 48.4)
+		(256, 194)
+		(512, 760)
+    };
+    \end{axis}
+\end{tikzpicture}
+ \\ \\
+\begin{center}
+Verwendete Werte: \\ \quad \\
+	\begin{tabular}[c]{l|l}
+	interlines & time \\ \hline
+	1& 0.09 \\
+	2& 0.11 \\
+	4& 0.2 \\
+	8& 0.37 \\
+	16& 1 \\
+	32& 3.4 \\
+	64& 12.59 \\
+	128& 48.4 \\
+	256& 194 \\
+	512& 760 \\
+\end{tabular}
+\end{center}
+
+Die benötigte Zeit nimmt mit der Erhöhung der Interlinegröße zu. Diese Zunahme sollte aufgrund des Aufbaus der Matrix quadratisch-exponentiell zunehmen, da beide Dimensionen mit den Interlines um die selbe Größe wachsen. Da allerdings die Berechnung auf 12 threads aufgeteilt werden, ist nur ein Zwölftel der Zeit des rein sequentiellen Ansatzes theoretisch nötig. Diese Vermutung wird durch unsere Tests nur partiell getützt. Zu Anfang folgt die zeitliche Zunahme ungefähr diesem Muster, bei dem Übergang von 256 auf 512 Interlines nimmt die benötigte Zeit leider über die Maßen zu. Dies liegt vermutlich sowohl daran, dass die Parallelisierung nicht perfekt ist, als auch an der Tatsache dass auch Open-MP keine perfekten Parallelisierungen schafft.
 
 \end{document}
