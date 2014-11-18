@@ -3,7 +3,8 @@
 punkte_liste = [
         (200,170),
         (310,300),
-        (325,400)
+        (325,400),
+        (240,240)
         ]
 
 schnitt = sum(punkte / gesamt for punkte, gesamt in punkte_liste) / len(punkte_liste)
