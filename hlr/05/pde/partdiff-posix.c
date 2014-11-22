@@ -193,6 +193,7 @@ typedef struct {
   struct options* options; 
 } params; 
 
+// the function that gets executed by each pthread
 void *compute_parallel(void *_p) { 
   params *p = (params*) _p; 
 
@@ -272,7 +273,7 @@ calculate (struct calculation_arguments const* arguments, struct calculation_res
 		fpisin = 0.25 * TWO_PI_SQUARE * h * h;
 	}
 	
-    // pthreads stuff
+    // pthreads initialization
     int nthreads = 4;
     pthread_t threads[nthreads]; // array to hold thread information
     params *thread_params = (params*) malloc(nthreads * sizeof(params));
@@ -292,6 +293,7 @@ calculate (struct calculation_arguments const* arguments, struct calculation_res
 
 		maxresiduum = 0;
 
+        // create threads and update necessary arguments 
         for (int i = 0; i < nthreads; i++) { 
           thread_params[i].term_iteration = term_iteration;
           thread_params[i].maxresiduum = maxresiduum;
@@ -300,6 +302,7 @@ calculate (struct calculation_arguments const* arguments, struct calculation_res
           pthread_create(&threads[i], NULL, compute_parallel, (void*) &thread_params[i]); 
         }
 
+        // wait for all threads to complete
         for(int i = 0; i < nthreads; i++) {
           pthread_join(threads[i], NULL);
         }
