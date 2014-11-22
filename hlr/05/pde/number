@@ -1,0 +1,48 @@
+askparams.c:114:	return (options->number >= 1 && options->number <= MAX_THREADS);
+askparams.c:121:	return (options->method == METH_GAUSS_SEIDEL || options->method == METH_JACOBI);
+askparams.c:128:	return (options->interlines <= MAX_INTERLINES);
+askparams.c:135:	return (options->inf_func == FUNC_F0 || options->inf_func == FUNC_FPISIN);
+askparams.c:142:	return (options->termination == TERM_PREC || options->termination == TERM_ITER);
+askparams.c:149:	return (options->term_precision >= 1e-20 && options->term_precision <= 1e-4);
+askparams.c:156:	return (options->term_iteration >= 1 && options->term_iteration <= MAX_ITERATION);
+askparams.c:184:			ret = scanf("%" SCNu64, &(options->number));
+askparams.c:197:			ret = scanf("%" SCNu64, &(options->method));
+askparams.c:208:			ret = scanf("%" SCNu64, &(options->interlines));
+askparams.c:221:			ret = scanf("%" SCNu64, &(options->inf_func));
+askparams.c:234:			ret = scanf("%" SCNu64, &(options->termination));
+askparams.c:239:		if (options->termination == TERM_PREC)
+askparams.c:248:				ret = scanf("%lf", &(options->term_precision));
+askparams.c:253:			options->term_iteration = MAX_ITERATION;
+askparams.c:255:		else if (options->termination == TERM_ITER)
+askparams.c:264:				ret = scanf("%" SCNu64, &(options->term_iteration));
+askparams.c:269:			options->term_precision = 0;
+askparams.c:280:		ret = sscanf(argv[1], "%" SCNu64, &(options->number));
+askparams.c:288:		ret = sscanf(argv[2], "%" SCNu64, &(options->method));
+askparams.c:296:		ret = sscanf(argv[3], "%" SCNu64, &(options->interlines));
+askparams.c:304:		ret = sscanf(argv[4], "%" SCNu64, &(options->inf_func));
+askparams.c:312:		ret = sscanf(argv[5], "%" SCNu64, &(options->termination));
+askparams.c:320:		if (options->termination == TERM_PREC)
+askparams.c:322:			ret = sscanf(argv[6], "%lf", &(options->term_precision));
+askparams.c:323:			options->term_iteration = MAX_ITERATION;
+askparams.c:333:			ret = sscanf(argv[6], "%" SCNu64, &(options->term_iteration));
+askparams.c:334:			options->term_precision = 0;
+partdiff-seq.c:64:	arguments->N = (options->interlines * 8) + 9 - 1;
+partdiff-seq.c:65:	arguments->num_matrices = (options->method == METH_JACOBI) ? 2 : 1;
+partdiff-seq.c:162:	if (options->inf_func == FUNC_F0)
+partdiff-seq.c:201:	int term_iteration = options->term_iteration;
+partdiff-seq.c:204:	if (options->method == METH_JACOBI)
+partdiff-seq.c:215:	if (options->inf_func == FUNC_FPISIN)
+partdiff-seq.c:237:			if (options->inf_func == FUNC_FPISIN)
+partdiff-seq.c:247:				if (options->inf_func == FUNC_FPISIN)
+partdiff-seq.c:252:				if (options->termination == TERM_PREC || term_iteration == 1)
+partdiff-seq.c:276:		if (options->termination == TERM_PREC)
+partdiff-seq.c:278:			if (maxresiduum < options->term_precision)
+partdiff-seq.c:283:		else if (options->termination == TERM_ITER)
+partdiff-seq.c:306:	if (options->method == METH_GAUSS_SEIDEL)
+partdiff-seq.c:310:	else if (options->method == METH_JACOBI)
+partdiff-seq.c:316:	printf("Interlines:         %" PRIu64 "\n",options->interlines);
+partdiff-seq.c:319:	if (options->inf_func == FUNC_F0)
+partdiff-seq.c:323:	else if (options->inf_func == FUNC_FPISIN)
+partdiff-seq.c:331:	if (options->termination == TERM_PREC)
+partdiff-seq.c:335:	else if (options->termination == TERM_ITER)
+partdiff-seq.c:364:	int const interlines = options->interlines;
