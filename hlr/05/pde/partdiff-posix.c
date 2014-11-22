@@ -202,7 +202,7 @@ void *compute_parallel(void *_p) {
   int tid                       = p->tid;
   int chunk_size                = (p->N / p->nthreads);
   int start                     = tid * chunk_size + 1;
-  int end                       = start + chunk_size;
+  int end                       = start + chunk_size - 1;
 
 
   for (int i = start; i < end; i++)
