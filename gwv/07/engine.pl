@@ -16,8 +16,8 @@ prob(1, 0, 0, Result):-
 	Starter = 1,
 	battery(Battery, Key, Regulation),
 	starter(Starter, Key, Engine),
-	pump(Pump, Tank),
-	filter(Filter, Pump, Regulation),
+	pump(Pump, Tank, Regulation),
+	filter(Filter, Pump),
 	engine(Engine, Filter, Starter),
 	constraints([Starter, Pump, Engine, Filter, Tank, Key, Regulation, Battery], 
 				[starter, pump, engine, filter, tank, key, regulation, battery], 
@@ -28,8 +28,8 @@ prob(0, 1, 0, Result):-
 	Pump = 1,
 	battery(Battery, Key, Regulation),
 	starter(Starter, Key, Engine),
-	pump(Pump, Tank),
-	filter(Filter, Pump, Regulation),
+	pump(Pump, Tank, Regulation),
+	filter(Filter, Pump),
 	engine(Engine, Filter, Starter),
 	constraints([Starter, Pump, Engine, Filter, Tank, Key, Regulation, Battery], 
 				[starter, pump, engine, filter, tank, key, regulation, battery], 
@@ -41,8 +41,8 @@ prob(1, 1, 0, Result):-
 	Pump = 1,
 	battery(Battery, Key, Regulation),
 	starter(Starter, Key, Engine),
-	pump(Pump, Tank),
-	filter(Filter, Pump, Regulation),
+	pump(Pump, Tank, Regulation),
+	filter(Filter, Pump),
 	engine(Engine, Filter, Starter),
 	constraints([Starter, Pump, Engine, Filter, Tank, Key, Regulation, Battery], 
 				[starter, pump, engine, filter, tank, key, regulation, battery], 
@@ -54,8 +54,8 @@ prob(1, 1, 0, Result):-
 prob(0, 0, 0, Result):-
 	battery(Battery, Key, Regulation),
 	starter(Starter, Key, Engine),
-	pump(Pump, Tank),
-	filter(Filter, Pump, Regulation),
+	pump(Pump, Tank, Regulation),
+	filter(Filter, Pump),
 	engine(Engine, Filter, Starter),
 	constraints([Starter, Pump, Engine, Filter, Tank, Key, Regulation, Battery], 
 				[starter, pump, engine, filter, tank, key, regulation, battery], 
@@ -100,7 +100,7 @@ pump(0, 1, 0).
 pump(0, 0, 0).
 
 
-%filter(filter?, pump?, Regulation?).
+%filter(filter?, pump?).
 filter(1, 1).
 filter(0, 1).
 filter(0, 0).
