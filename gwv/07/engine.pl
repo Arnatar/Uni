@@ -95,8 +95,8 @@ starter(1, 1, 1).
 %pump(pump?, tank?, Regulation?).
 pump(1, 1, 1).
 pump(0, 1, 1).
-pump(0, 0, 1).
 pump(0, 1, 0).
+pump(0, 0, 1).
 pump(0, 0, 0).
 
 
