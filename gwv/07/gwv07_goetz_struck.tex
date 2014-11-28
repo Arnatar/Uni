@@ -43,6 +43,41 @@
 \section*{1}
 \subsection*{1.1 CSI Stellingen}
 
-
+Assumables 
+\begin{align*}
+gardener\_in\_garden, butler\_in\_garage
+\end{align*}
+Obersabvations
+\begin{align*}
+ gardener\_no\_dirt\\
+ butler\_dirt
+\end{align*}
+Rules
+\begin{align*}
+ gardener\_dirt &\gets gardener\_in\_garden\\
+ butler\_dirt &\gets butler\_in\_garage 
+\end{align*}
+Integrity Constraints
+ \begin{align*}
+  false &\gets gardener\_dirt \And gardener\_no\_dirt\\
+  false &\gets butler\_dirt \And butler\_no\_dirt 
+ \end{align*}
+Anwendung des ConflictTD-Algorithmus\\
+Hier wird immer die Menge $G$ angegeben.\\ 
+\begin{align*}
+\{false\}\\ %choose false
+\{gardener\_dirt, gardener\_no\_dirt\}\\ %choose gardener_dirt
+\{gardener\_in\_garden, gardener\_no\_dirt\}\\ % choose gardener_no_dirt
+\{gardener\_in\_garden\}\\
+\end{align*}
+Dann stoppt der Algorithmus, da $G \subseteq Assumables$ . 
+Der Konflikt ist minimal, da keine echte Teilmenge (hier nur die leere Menge) auch ein Konflikt ist.\\
+\begin{align*}
+\{false\}\\
+\{butler\_dirt, butler\_no\_dirt\}\\
+\{butler\_in\_garage,butler\_no\_dirt\}\\
+\end{align*}
+Da bei anderem Verhalten des Algorithmus kein Konflikt ermittelt werden kann, ist \{gardener\_in\_garden\} eine minimale Diagnose.
+Also war der Gärtner der Mörder.
 \subsection*{1.2 Diagnosis}
 \end{document}
