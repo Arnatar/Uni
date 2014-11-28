@@ -92,18 +92,18 @@ starter(0, 1, 1).
 starter(1, 1, 1).
 
 
-%pump(pump?, tank?).
-pump(1, 1).
-pump(0, 1).
-pump(0, 0).
+%pump(pump?, tank?, Regulation?).
+pump(1, 1, 1).
+pump(0, 1, 1).
+pump(0, 0, 1).
+pump(0, 1, 0).
+pump(0, 0, 0).
 
 
 %filter(filter?, pump?, Regulation?).
-filter(1, 1, 1).
-filter(0, 1, 1).
-filter(0, 1, 0).
-filter(0, 0, 1).
-filter(0, 0, 0).
+filter(1, 1).
+filter(0, 1).
+filter(0, 0).
 
 
 %engine(engine?, filter?, starter?).
