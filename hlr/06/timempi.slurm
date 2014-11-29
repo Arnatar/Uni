@@ -1,7 +1,8 @@
 #!/bin/sh
 
 #SBATCH --time=0:05
-#SBATCH -N 4
-#SBATCH --ntasks-per-node=1
+#SBATCH -N 2
+#SBATCH -n 6
+#    #SBATCH --ntasks-per-node=1
 #SBATCH -o j.out
-mpirun ./timempi
+mpirun ./timempi2

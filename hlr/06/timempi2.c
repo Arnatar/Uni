@@ -29,7 +29,7 @@ void master() {
 	//master Reduce
 	MPI_Reduce(&current_msec, &min_msec, 1, MPI_LONG, MPI_MIN, 0, MPI_COMM_WORLD);
 
-	printf("Minimal Mikroseconds: %ld\n", min_msec);
+	printf("minimal microseconds: %ld\n", min_msec);
 }
 
 void slave() {
@@ -54,7 +54,7 @@ void slave() {
 
 	strftime(formatedDate, sizeof(formatedDate), "%Y-%m-%d %H:%M:%S", mainTime);
 
-	snprintf(msg, msglength, "%s: %s.%ld", p_name, formatedDate, current_msec);
+	snprintf(msg, msglength, "%s with rank %d reports at %s.%ld", p_name, rank, formatedDate, current_msec);
 	
 	// send msg
 	MPI_Send(msg, msglength, MPI_CHAR, 0, 0, MPI_COMM_WORLD);
@@ -84,7 +84,7 @@ int main(int argc, char** argv) {
 
 	// Beenden der Prozesse und entsprechende Ausgabe
 	MPI_Barrier(MPI_COMM_WORLD);
-	printf("Rank %d ends now!\n", rank);
+	printf("rank %d ends now.\n", rank);
 
 	MPI_Finalize();
 	return 0;
