@@ -4,16 +4,16 @@
 #include <unistd.h> 
 #include <sys/time.h>
 
-#define MSGLENGTH 512
-#define HNAMELENGTH 32
+const int msglength 512;
+const int hnamelen 64;
 
 int size, rank;
 
 void master() {
 	for (int i = 1; i < size; i++) {
 		MPI_Status stat;
-		char msg_buf[MSGLENGTH];
-		MPI_Recv(msg_buf, MSGLENGTH, MPI_CHAR, i, 0, MPI_COMM_WORLD, &stat);
+		char msg_buf[msglength];
+		MPI_Recv(msg_buf, msglength, MPI_CHAR, i, 0, MPI_COMM_WORLD, &stat);
 		printf("%s\n", msg_buf);
 	}
 }
@@ -21,8 +21,8 @@ void master() {
 void slave() {
 
 	// get hostname
-	char p_name[HNAMELENGTH];
-	gethostname(p_name, HNAMELENGTH);
+	char p_name[hnamelen];
+	gethostname(p_name, hnamelen);
 
 	// get time
 	struct timeval time;
@@ -32,9 +32,9 @@ void slave() {
 	long current_msec = (long) time.tv_usec;
 
 	// generate and send msg
-	char msg[MSGLENGTH];
-	snprintf(msg, MSGLENGTH, "%s: %ld.%ld", p_name, current_sec, current_msec);
-	MPI_Send(msg, strnlen(msg, MSGLENGTH), MPI_CHAR, 0, 0, MPI_COMM_WORLD);
+	char msg[msglength];
+	snprintf(msg, msglength, "%s: %ld.%ld", p_name, current_sec, current_msec);
+	MPI_Send(msg, strnlen(msg, msglength), MPI_CHAR, 0, 0, MPI_COMM_WORLD);
 
 }
 
