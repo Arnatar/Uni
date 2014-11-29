@@ -4,8 +4,8 @@
 #include <unistd.h> 
 #include <sys/time.h>
 
-#define MSGLENGTH 128
-#define HNAMELENGTH 64
+#define MSGLENGTH 512
+#define HNAMELENGTH 32
 
 int size, rank;
 
@@ -29,14 +29,12 @@ int main(int argc, char** argv) {
 	struct timeval time;
 	gettimeofday(&time, NULL);
 
-	// generate Output
 	long current_sec = (long) time.tv_sec;
 	long current_msec = (long) time.tv_usec;
 
-
 	// generate and send msg
 	char msg[MSGLENGTH];
-	snprintf(msg, MSGLENGTH, "%s: %ld.%ld\n", p_name, current_sec, current_msec);
+	snprintf(msg, MSGLENGTH, "%s: %ld.%ld", p_name, current_sec, current_msec);
 	MPI_Send(msg, strnlen(msg, MSGLENGTH), MPI_CHAR, 0, 0, MPI_COMM_WORLD);
 
 
@@ -47,7 +45,7 @@ int main(int argc, char** argv) {
 			MPI_Status stat;
 			char msg_buf[MSGLENGTH];
 			MPI_Recv(msg_buf, MSGLENGTH, MPI_CHAR, i, 0, MPI_COMM_WORLD, &stat);
-			printf("%s", msg);
+			printf("%s\n", msg);
 		} 
 	}
 
