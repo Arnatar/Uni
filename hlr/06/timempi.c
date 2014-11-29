@@ -4,8 +4,8 @@
 #include <unistd.h> 
 #include <sys/time.h>
 
-const int msglength 512;
-const int hnamelen 64;
+const int msglength = 512;
+const int hnamelen = 50;
 
 int size, rank;
 
@@ -34,7 +34,7 @@ void slave() {
 	// generate and send msg
 	char msg[msglength];
 	snprintf(msg, msglength, "%s: %ld.%ld", p_name, current_sec, current_msec);
-	MPI_Send(msg, strnlen(msg, msglength), MPI_CHAR, 0, 0, MPI_COMM_WORLD);
+	MPI_Send(msg, strnlen(msg, msglength) + 1, MPI_CHAR, 0, 0, MPI_COMM_WORLD);
 
 }
 

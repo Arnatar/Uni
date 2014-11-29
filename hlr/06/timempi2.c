@@ -4,8 +4,8 @@
 #include <unistd.h> 
 #include <sys/time.h>
 
-const int msglength 512;
-const int hnamelen 64;
+const int msglength = 512;
+const int hnamelen = 64;
 
 int size, rank;
 
