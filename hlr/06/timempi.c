@@ -9,24 +9,36 @@ const int hnamelen = 50;
 
 int size, rank;
 
-void master() {
+int master() {
+	// igno master in loop
 	for (int i = 1; i < size; i++) {
 		MPI_Status stat;
 		char msg_buf[msglength];
-		MPI_Recv(msg_buf, msglength, MPI_CHAR, i, 0, MPI_COMM_WORLD, &stat);
+		// receive from slaves
+		if(MPI_Recv(msg_buf, msglength, MPI_CHAR, i, 0, MPI_COMM_WORLD, &stat) != MPI_SUCCESS) {
+			printf("Error with MPI_Recv\n");
+		}
 		printf("%s\n", msg_buf);
 	}
+
+	return 0;
 }
 
-void slave() {
+int slave() {
 
 	// get hostname
 	char p_name[hnamelen];
-	gethostname(p_name, hnamelen);
+	if (gethostname(p_name, hnamelen) != 0) {
+		printf("Error with hostname of rank %d\n", rank);
+		return -1;
+	}
 
 	// get time
 	struct timeval time;
-	gettimeofday(&time, NULL);
+	if (gettimeofday(&time, NULL) != 0) {
+		printf("Error with time at rankd %d\n", rank);
+		return -1;
+	}
 
 	long current_sec = (long) time.tv_sec;
 	long current_msec = (long) time.tv_usec;
@@ -43,7 +55,11 @@ void slave() {
 	snprintf(msg, msglength, "%s with rank %d reports at %s.%ld", p_name, rank, formatedDate, current_msec);
 	
 	// send msg
-	MPI_Send(msg, msglength, MPI_CHAR, 0, 0, MPI_COMM_WORLD);
+	if(MPI_Send(msg, msglength, MPI_CHAR, 0, 0, MPI_COMM_WORLD) != MPI_SUCCESS) {
+		printf("Error with MPI_Send at rank %d\n", rank);
+	}
+
+	return 0;
 
 }
 
@@ -60,13 +76,23 @@ int main(int argc, char** argv) {
 
 	// master-slave-diff
 	if(rank == 0) {
-		master();
+		if(master() != 0) {
+			printf("Problem at master");
+			return -1;
+		}
+		
 	} else {
-		slave();
+		if (slave() != 0) {
+			printf("Problem with slave");
+			return -1;
+		}
 	}
 
 	// Beenden der Prozesse und entsprechende Ausgabe
-	MPI_Barrier(MPI_COMM_WORLD);
+	if(MPI_Barrier(MPI_COMM_WORLD) != MPI_SUCCESS) {
+		printf("Problem with MPI_Barrier at rank %d\n", rank);
+	}
+
 	printf("rank %d ends now.\n", rank);
 
 	MPI_Finalize();
