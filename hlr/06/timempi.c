@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h> 
+#include <time.h>
 #include <sys/time.h>
 
 const int msglength = 512;
@@ -31,9 +32,14 @@ void slave() {
 	long current_sec = (long) time.tv_sec;
 	long current_msec = (long) time.tv_usec;
 
+	struct tm* mainTime;
+	mainTime = localtime(&time.tv_sec);
+
 	// generate and send msg
+	char formatedDate[msglength / 2];
 	char msg[msglength];
-	snprintf(msg, msglength, "%s: %ld.%ld", p_name, current_sec, current_msec);
+	strftime(formatedDate, sizeof(formatedDate), "%Y-%m-%d %H:%M:%S", mainTime);
+	snprintf(msg, msglength, "%s: %s.%ld", p_name, formatedDate, current_msec);
 	MPI_Send(msg, strnlen(msg, msglength) + 1, MPI_CHAR, 0, 0, MPI_COMM_WORLD);
 
 }
