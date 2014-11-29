@@ -1,6 +1,5 @@
 #include <mpi.h>
 #include <stdio.h>
-#include <string.h>
 #include <unistd.h> 
 #include <time.h>
 #include <sys/time.h>
@@ -32,15 +31,19 @@ void slave() {
 	long current_sec = (long) time.tv_sec;
 	long current_msec = (long) time.tv_usec;
 
+	// generate and formatter msg 
 	struct tm* mainTime;
 	mainTime = localtime(&time.tv_sec);
 
-	// generate and send msg
 	char formatedDate[msglength / 2];
 	char msg[msglength];
+
 	strftime(formatedDate, sizeof(formatedDate), "%Y-%m-%d %H:%M:%S", mainTime);
+
 	snprintf(msg, msglength, "%s: %s.%ld", p_name, formatedDate, current_msec);
-	MPI_Send(msg, strnlen(msg, msglength) + 1, MPI_CHAR, 0, 0, MPI_COMM_WORLD);
+	
+	// send msg
+	MPI_Send(msg, msglength, MPI_CHAR, 0, 0, MPI_COMM_WORLD);
 
 }
 
