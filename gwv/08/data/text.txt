@@ -1,0 +1,10 @@
+Start
+word1
+word2
+.
+Start
+word1
+.
+Start
+word2
+.
