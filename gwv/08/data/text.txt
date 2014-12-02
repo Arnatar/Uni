@@ -8,3 +8,8 @@ word1
 Start
 word2
 .
+Start
+test
+Start
+test
+test
