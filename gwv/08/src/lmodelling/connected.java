@@ -5,7 +5,10 @@ public class connected {
 	private String _word;
 	private int _count;
 	private double _prob;
-	
+
+	/**
+	 * Triple over word, count, probabiltiy
+	 */
 	public connected(String word) {
 		_word = word;
 		_count = 1;

@@ -26,6 +26,11 @@ public class word {
 		return _word;
 	}
 
+	/**
+	 * tries to add a word to connected list.
+	 * adds a connection if input is not in connection list.
+	 * if input is in list, increments counter.
+	 */
 	public void add_connection(String input) {
 		boolean isElement = false;
 		for (connected e : _connections) {
@@ -40,6 +45,9 @@ public class word {
 		}
 	}
 
+	/** 
+	 * prints connected words with information
+	 */
 	public void print_connected() {
 		int count = 1;
 		System.out.println("---" + _word + "---");
@@ -49,13 +57,19 @@ public class word {
 			count++;
 		}
 	}
-
+	
+	/**
+	 * set the probability for each connected word
+	 */
 	public void set_probs() {
 		for (connected e : _connections) {
 			e.set_prob(_maxCount);
 		}
 	}
 
+	/**
+	 * generates next word from current word
+	 */
 	public String evalNext() {
 		if (_connections.isEmpty()) {
 			return ".(Ende)";

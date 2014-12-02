@@ -9,11 +9,18 @@ public class markov {
 
 	private Hashtable<String, word> _modell;
 
+	
+	/**
+	 * representation of markov-chain. 
+	 */
 	public markov(String file_path) throws IOException {
 		_modell = buildt_markov_chain(file_path);
 		buildt_probs();
 	}
 
+	/**
+	 * builds a HashTable with the read words and its connections
+	 */
 	private Hashtable<String, word> buildt_markov_chain(String file_path)
 			throws IOException {
 		FileReader inStream = null;
@@ -59,6 +66,9 @@ public class markov {
 		return result;
 	}
 	
+	/**
+	 * sets probabilties for every Element of the Table 
+	 */
 	private void buildt_probs() {
 		for(Enumeration<word> e = _modell.elements(); e.hasMoreElements();) {
 			word el = e.nextElement();
@@ -66,6 +76,9 @@ public class markov {
 		}
 	}
 	
+	/**
+	 * prints and generates output for the given input with a defined length (recursive)
+	 */
 	public void print_chain(int length, String input) {
 		if(length > 0) {
 			length--;
@@ -77,12 +90,18 @@ public class markov {
 		}
 	}
 
+	/**
+	 * prints status of the chain (not recommended if you have a large base)
+	 */
 	public void print_base() {
 		for(Enumeration<word> e = _modell.elements(); e.hasMoreElements();) {
 			e.nextElement().print_connected();
 		}
 	}
 
+	/**
+	 * containment check
+	 */
 	public boolean contains(String input) {
 		return _modell.containsKey(input);
 	}

@@ -8,22 +8,30 @@ public class lmodelling {
 
 	private static final int maxLength = 10;
 	private static final int minLength = 4;
-	static final boolean showProgress = true;
+	static final boolean showProgress = false;
 	private static final boolean showBase = false;
 
 	// private static final String _file_path = "data/text.txt";
 	private static final String _file_path = "data/heiseticker-text.txt";
 
 	public static void main(String[] args) throws IOException {
+		// load file
+		long startTime = System.currentTimeMillis();
+		if(!showProgress) {
+			System.out.println("Loading in Progress.");
+		}
 		markov chains = new markov(_file_path);
 		if (showBase) {
 			chains.print_base();
 		}
-		System.out.println("Loading done \n\n");
+		
+		long endtime = System.currentTimeMillis();
+		double time = ((double) (endtime - startTime)) / 1000;
+		System.out.println("Loading in " + time + "s done \n");
 
+		// user-interaction, exit finishes prog
 		String input = "";
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
 		while (!input.equals("exit")) {
 			System.out.println("Enter String:");
 			input = br.readLine();
