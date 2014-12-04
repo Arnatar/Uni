@@ -6,9 +6,9 @@ import java.io.InputStreamReader;
 
 public class lmodelling {
 
-	private static final int maxLength = 10;
-	private static final int minLength = 4;
-	static final boolean showProgress = false;
+	private static final int maxLength = 15;
+	private static final int minLength = 5;
+	static final boolean showProgress = true;
 	private static final boolean showBase = false;
 
 	// private static final String _file_path = "data/text.txt";

@@ -9,9 +9,8 @@ public class markov {
 
 	private Hashtable<String, word> _modell;
 
-	
 	/**
-	 * representation of markov-chain. 
+	 * representation of markov-chain.
 	 */
 	public markov(String file_path) throws IOException {
 		_modell = buildt_markov_chain(file_path);
@@ -39,23 +38,29 @@ public class markov {
 				} else {
 					boolean contains = false;
 					word e = result.get(wordBuff);
-					if (e != null && !wordBuff.equals("")) {
-							e.incr_maxCount();
-							contains = true;
-					}
-					if(result.get(pred) != null) {
-						result.get(pred).add_connection(wordBuff);
-					}
-					if (!contains) {
+					if (e != null) {
+						e.incr_maxCount();
+						contains = true;
+					} else {
 						result.put(wordBuff, new word(wordBuff));
 					}
-					if (count % 1000 == 0 && lmodelling.showProgress) {
+
+					if (result.get(pred) != null) {
+						result.get(pred).add_connection(wordBuff);
+					}
+
+					if (count % 10000 == 0 && lmodelling.showProgress) {
 						System.out.println("" + count + " done");
 					}
 					pred = wordBuff;
 					wordBuff = "";
-					count++;
+					if (lmodelling.showProgress) {
+						count++;
+					}
 				}
+			}
+			if (lmodelling.showProgress) {
+				System.out.println("" + count + " done");
 			}
 		} finally {
 			if (inStream != null) {
@@ -65,22 +70,23 @@ public class markov {
 
 		return result;
 	}
-	
+
 	/**
-	 * sets probabilties for every Element of the Table 
+	 * sets probabilties for every Element of the Table
 	 */
 	private void buildt_probs() {
-		for(Enumeration<word> e = _modell.elements(); e.hasMoreElements();) {
+		for (Enumeration<word> e = _modell.elements(); e.hasMoreElements();) {
 			word el = e.nextElement();
 			el.set_probs();
 		}
 	}
-	
+
 	/**
-	 * prints and generates output for the given input with a defined length (recursive)
+	 * prints and generates output for the given input with a defined length
+	 * (recursive)
 	 */
 	public void print_chain(int length, String input) {
-		if(length > 0) {
+		if (length > 0) {
 			length--;
 			System.out.print(input + " ");
 			String nextInput = _modell.get(input).evalNext();
@@ -94,7 +100,7 @@ public class markov {
 	 * prints status of the chain (not recommended if you have a large base)
 	 */
 	public void print_base() {
-		for(Enumeration<word> e = _modell.elements(); e.hasMoreElements();) {
+		for (Enumeration<word> e = _modell.elements(); e.hasMoreElements();) {
 			e.nextElement().print_connected();
 		}
 	}
