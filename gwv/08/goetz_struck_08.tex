@@ -44,7 +44,7 @@
 \subsection*{1.1 Language Modelling}
 Für das Programm siehe Files.\\
 Die Sequenzen, die das Programm ausspuckt basieren auf der Wahrscheinlichkeit (in dem Fall abgeschätzt durch die relative Häufigkeit, die aus den Heise-Texten ermittlet wurde), dass auf ein gegebenes Wort ein bestimmtes nächstes Wort folgt. Die Sequenzen sind somit oftmals keine grammatikalisch korrekten Sätze. 
-Allerdings sollte die relative Häufigkeit des Aufeinanderfolgends von Wörtern der in ``echten'' Texten entsprechen. (Nicht sicher) Wählt man entsprechend der Worthäufigkeit in echten Texten Wörter aus und erstellt dann ausgehend von diesen Sequenzen, dann sollte auch die Worthäufigkeit der Wörter in den entstandenen Sequenzen der Worthäufigkeit in echten Texten entsprechen. 
+Allerdings sollte die relative Häufigkeit des Aufeinanderfolgends von Wörtern der in ``echten'' Texten entsprechen. Wählt man entsprechend der Worthäufigkeit in echten Texten Wörter aus und erstellt dann ausgehend von diesen Sequenzen, dann sollte auch die Worthäufigkeit der Wörter in den entstandenen Sequenzen der Worthäufigkeit in echten Texten entsprechen. 
 \subsection*{1.2 Diagnosis (cont.) }
 Die Menge der Zufallsvariablen $V$ sei
 \begin{align*}
@@ -103,5 +103,5 @@ P(Smuggler= t \vert Police=t) = 0.01\\
  P(Fever = t) = 0.013\\
 \end{align*}
 
-
+Explaining away kann bei diesem Netz beispielsweise bedeuten, dass das Schwitzen durch Fieber erklärt werden kann, obwohl es sich bei der Person auch um einen Schmuggler handelt. 
 \end{document}
