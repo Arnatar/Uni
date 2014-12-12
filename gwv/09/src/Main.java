@@ -13,6 +13,7 @@ public class Main {
 			e.printStackTrace();
 		}
 		model.analyize_file();
+		
 	}
 
 }

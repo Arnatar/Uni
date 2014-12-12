@@ -1,10 +1,13 @@
 import java.util.HashMap;
 import java.util.Map.Entry;
 public class PosTag {
-
+        // Tagname
 	String tagname = null;
+        // Übergangswahrscheinlichkeitsmap 
 	HashMap<PosTag, Float> transitions_probs = new HashMap<PosTag, Float>();
+        // Emissionswahrscheinlichkeitsmap
 	HashMap<String, Float> word_probs = new HashMap<String, Float>();
+        // Counter dienen dann als Divisor um die relativen Häufigkeiten zu berechnen
 	int number_words = 0;
 	int number_transitions  = 0;
 
@@ -18,9 +21,7 @@ public class PosTag {
 		// System.out.println("In count for tag: "+ this.toString() + " Number_t: " + this.number_transitions);
 		if (transitions_probs.containsKey(tag)){
 			float count =transitions_probs.get(tag);
-			// System.out.println("Before " + count);
 			count = count + (float)1.0;
-			// System.out.println("After " + count);
 			transitions_probs.put(tag,count);
 		}
 		else {
@@ -31,7 +32,6 @@ public class PosTag {
 	
 	void inc_count_words(String word){
 		number_words++;
-		// System.out.println("In count for tag: "+ this.toString() + " Number_w: " + this.number_words);
 		if (word_probs.containsKey(word)){
 			float count = word_probs.get(word);
 			count = count + (float)1;
@@ -47,7 +47,6 @@ public class PosTag {
 		return this.tagname;
 	}
 	// Normalizes the probabilities for the given tags, i.e. prob of next tag and emission prob for word.  
-	
 	void normalize_probabilities(){
 		// next tag probs
 		for (Entry<PosTag, Float> entry : transitions_probs.entrySet()){
@@ -58,8 +57,8 @@ public class PosTag {
 		for (Entry<String, Float> entry : word_probs.entrySet()){
 			float prob  = entry.getValue() / this.number_words; 
 			word_probs.put(entry.getKey(), prob); 
-			// System.out.println("Prob für " + key + " " +prob );
 		}
+		// Nur zur Ausgabe der berechneten Wahrscheinlichkeiten und ob diese Sinn machen (Hätte man auch gleich in der obigen Schleife berechnen können) 
 		float test = 0; 
 		for (Entry<String, Float> entry : word_probs.entrySet()){
 			float prob  =entry.getValue(); 

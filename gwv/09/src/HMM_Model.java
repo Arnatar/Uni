@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.HashMap;
 /*
  * Für das PoS-Tagger System:
- * 	Hidden States: Tags
+ *  Hidden States: Tags
  *  Observed States: Words
  * Wobei die Wahrscheinlichkeit vom i-tem Wort von der der Wahrscheinlichkeit von dem i-tem
  * Tag, welches allein von dem i-1-tem Tag abhängt. 
