@@ -233,13 +233,31 @@ initMatrices (struct calculation_arguments* arguments, struct options const* opt
 				Matrix[g][i][0] = 1.0 - offset;
                 // printf("[%d] %f %f\n", arguments->rank, offset, Matrix[g][i][0]);
                 // printf("[%d] %d \n", arguments->rank, arguments->N_global);
-				Matrix[g][i][N] = offset;
-				Matrix[g][0][i] = 1.0 - offset;
-				Matrix[g][N][i] = offset;
+				Matrix[g][i][arguments->N_global-1] = offset;
+
+
+                // if (arguments->rank = arguments->nprocs -1) {
+                //     Matrix[g][N][i] = offset;
+                // }
+
 			}
 
-			Matrix[g][N][0] = 0.0;
-			Matrix[g][0][N] = 0.0;
+            if (arguments->rank == 0) {
+                for (i = 0; i <= arguments->N_global; i++) {
+                    double offset = h * i;
+                    Matrix[g][0][i] = 1.0 - offset;
+                }
+                Matrix[g][0][arguments->N_global-1] = 0.0;
+            }
+
+            if (arguments->rank == arguments->nprocs -1) {
+                for (i = 0; i <= arguments->N_global; i++) {
+                    double offset = h * i;
+                    Matrix[g][N-1][i] = offset;
+                }
+                Matrix[g][N-1][arguments->N_global-1] = 1.0;
+            }
+
 		}
 	}
 
@@ -282,7 +300,7 @@ calculate (struct calculation_arguments const* arguments, struct calculation_res
 		pih = PI * h;
 		fpisin = 0.25 * TWO_PI_SQUARE * h * h;
 	}
-	
+
 	while (term_iteration > 0)
 	{
 		double** Matrix_Out = arguments->Matrix[m1];
@@ -417,9 +435,9 @@ calculate_mpi (struct calculation_arguments const* arguments, struct calculation
 			/* over all columns */
 			for (j = 1; j < N_global; j++)
 			{
-				star = 0.25 * (Matrix_In[i-1][j] 
-					+ Matrix_In[i][j-1] 
-					+ Matrix_In[i][j+1] 
+				star = 0.25 * (Matrix_In[i-1][j]
+					+ Matrix_In[i][j-1]
+					+ Matrix_In[i][j+1]
 					+ Matrix_In[i+1][j]);
 
 				if (options->inf_func == FUNC_FPISIN)
@@ -609,17 +627,17 @@ DisplayMatrix (struct calculation_arguments* arguments, struct calculation_resul
   double** Matrix = arguments->Matrix[results->m];
 
   for (int i = 0; i < arguments->nprocs; ++i) {
-      // if (rank == arguments->nprocs -1) 
+      // if (rank == arguments->nprocs -1)
       if (rank == i) {
           for (int j = 0; j < arguments->N; ++j) {
               if (j % (options->interlines+1) == 0) {
                   printf("[%d] ", rank);
                   for (int y = 0; y < arguments->N_global; ++y) {
-                      if (y % (options->interlines+1) == 0) {
-                          printf("%7.4f ", rank, Matrix[j][y]);
+                      if (y % (options->interlines+1) == 1) {
+                          printf("%7.4f ", rank, Matrix[j][y-1]);
                       }
                   }
-                  printf("\n");
+                  printf("%7.4f\n", rank, Matrix[j][arguments->N_global-1]);
               }
           }
       }
@@ -715,25 +733,24 @@ main (int argc, char** argv)
 	initVariables(&arguments, &results, &options, rank, nprocs);
 
     // printf("[%d] %" PRIu64 " %" PRIu64 "\n", rank, arguments.offset_start, arguments.offset_end);
-    // printf("[%d] %d\n", rank, arguments.N_global);
 
 
     // get and initialize variables and matrices
 	allocateMatrices(&arguments);
 	initMatrices(&arguments, &options);
 
-	gettimeofday(&start_time, NULL);                   /*  start timer         */
-    // solve the equation
-    if (options.method == METH_JACOBI)
-	{
-		calculate_mpi(&arguments, &results, &options); 
-	} else
-	{
-		calculate(&arguments, &results, &options);
-	}
-	
-	MPI_Barrier(MPI_COMM_WORLD);
-	gettimeofday(&comp_time, NULL);                   /*  stop timer          */
+	// gettimeofday(&start_time, NULL);                   /*  start timer         */
+    // // solve the equation
+    // if (options.method == METH_JACOBI)
+	// {
+	// 	calculate_mpi(&arguments, &results, &options);
+	// } else
+	// {
+	// 	calculate(&arguments, &results, &options);
+	// }
+
+	// MPI_Barrier(MPI_COMM_WORLD);
+	// gettimeofday(&comp_time, NULL);                   /*  stop timer          */
 
 	DisplayMatrix(&arguments, &results, &options);
 
