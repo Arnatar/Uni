@@ -102,7 +102,7 @@ initVariables (struct calculation_arguments* arguments, struct calculation_resul
 	results->stat_precision = 0;
 
 	//arguments->offset = ((arguments->N_global + 1) / nprocs) * rank;
-	argument->offset = row_amount_distribution[rank];
+	arguments->offset = row_amount_distribution[rank];
 }
 
 /* ************************************************************************ */
@@ -509,7 +509,7 @@ main (int argc, char** argv)
 	AskParams(&options, argc, argv, rank);
 
 	initVariables(&arguments, &results, &options, rank, nprocs);
-    printf("[%d] %d %d\n", rank, arguments.N_global, arguments.N);
+    printf("[%d] %" PRIu64 " %" PRIu64 "\n", rank, arguments.N_global, arguments.N);
 
     // get and initialize variables and matrices
 	allocateMatrices(&arguments);
@@ -520,7 +520,7 @@ main (int argc, char** argv)
 	// calculate(&arguments, &results, &options);
 	// gettimeofday(&comp_time, NULL);                   /*  stop timer          */
 
-	// DisplayMatrix(&arguments, &results, &options, arguments.rank, arguments.nprocs, arguments.offset, arguments.offset + arguments.N - 1);
+	DisplayMatrix(&arguments, &results, &options, arguments.rank, arguments.nprocs, arguments.offset, arguments.offset + arguments.N - 1);
 
 	// freeMatrices(&arguments);
 
