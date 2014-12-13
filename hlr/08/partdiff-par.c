@@ -39,7 +39,7 @@ struct calculation_arguments
 
 	uint64_t N_global; 			// global size of the problem
 	int rank; 				// current rank
-	int proc_num; 				// number of processes 
+	int nprocs; 				// number of processes 
 };
 
 struct calculation_results
@@ -63,11 +63,14 @@ struct timeval comp_time;        /* time when calculation completed             
 /* ************************************************************************ */
 static
 void
-initVariables (struct calculation_arguments* arguments, struct calculation_results* results, struct options const* options)
+initVariables (struct calculation_arguments* arguments, struct calculation_results* results, struct options const* options, int rank, int nprocs)
 {
 	arguments->N = (options->interlines * 8) + 9 - 1;
 	arguments->num_matrices = (options->method == METH_JACOBI) ? 2 : 1;
 	arguments->h = 1.0 / arguments->N;
+
+	arguments->rank = rank;
+	arguments->nprocs = nprocs;
 
 	results->m = 0;
 	results->stat_iteration = 0;
@@ -469,14 +472,15 @@ main (int argc, char** argv)
 
     // mpi setup ---------------------------------------------------------------
     MPI_Init(NULL, NULL);
-    int rank, nranks;
+
+    int rank, nprocs;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &nranks);
+    MPI_Comm_size(MPI_COMM_WORLD, &nprocs);
 
 	/* get parameters */
 	AskParams(&options, argc, argv, rank);
 
-	initVariables(&arguments, &results, &options);
+	initVariables(&arguments, &results, &options, rank, nprocs);
 
     // get and initialize variables and matrices
 	allocateMatrices(&arguments);       
