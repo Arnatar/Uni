@@ -235,12 +235,116 @@ initMatrices (struct calculation_arguments* arguments, struct options const* opt
 	}
 }
 
+static
+void
+calculate (struct calculation_arguments const* arguments, struct calculation_results *results, struct options const* options)
+{
+    // rather use inline loop variables, as they need to be thread local and not global
+    // for all threads --> comment them out
+	// int i, j;                                   /* local variables for loops  */
+	int m1, m2;                                 /* used as indices for old and new matrices       */
+	double star;                                /* four times center value minus 4 neigh.b values */
+	double residuum;                            /* residuum of current iteration                  */
+	double maxresiduum;                         /* maximum residuum value of a slave in iteration */
+
+	int const N = arguments->N;
+	double const h = arguments->h;
+
+	double pih = 0.0;
+	double fpisin = 0.0;
+
+	int term_iteration = options->term_iteration;
+
+	/* initialize m1 and m2 depending on algorithm */
+	if (options->method == METH_JACOBI)
+	{
+		m1 = 0;
+		m2 = 1;
+	}
+	else
+	{
+		m1 = 0;
+		m2 = 0;
+	}
+
+	if (options->inf_func == FUNC_FPISIN)
+	{
+		pih = PI * h;
+		fpisin = 0.25 * TWO_PI_SQUARE * h * h;
+	}
+	
+	while (term_iteration > 0)
+	{
+		double** Matrix_Out = arguments->Matrix[m1];
+		double** Matrix_In  = arguments->Matrix[m2];
+
+		maxresiduum = 0;
+
+		for (int i = 1; i < N; i++)
+		{
+			double fpisin_i = 0.0;
+
+			if (options->inf_func == FUNC_FPISIN)
+			{
+				fpisin_i = fpisin * sin(pih * (double)i);
+			}
+
+			/* over all columns */
+			for (int j = 1; j < N; j++)
+			{
+				star = 0.25 * (Matrix_In[i-1][j] + Matrix_In[i][j-1] + Matrix_In[i][j+1] + Matrix_In[i+1][j]);
+
+				if (options->inf_func == FUNC_FPISIN)
+				{
+					star += fpisin_i * sin(pih * (double)j);
+				}
+
+				if (options->termination == TERM_PREC || term_iteration == 1)
+				{
+					residuum = Matrix_In[i][j] - star;
+					residuum = (residuum < 0) ? -residuum : residuum;
+					maxresiduum = (residuum < maxresiduum) ? maxresiduum : residuum;
+				}
+
+				Matrix_Out[i][j] = star;
+			}
+		}
+
+		results->stat_iteration++;
+		results->stat_precision = maxresiduum;
+
+		/* exchange m1 and m2 */
+
+        // here the original code used the 'i' variable, which is now local to the loops
+        // the semantics of using it here were wrong anyway -- use a new var called 'tmp'
+        int tmp;
+		tmp = m1;
+		m1 = m2;
+		m2 = tmp;
+
+		/* check for stopping calculation, depending on termination method */
+		if (options->termination == TERM_PREC)
+		{
+			if (maxresiduum < options->term_precision)
+			{
+				term_iteration = 0;
+			}
+		}
+		else if (options->termination == TERM_ITER)
+		{
+			term_iteration--;
+		}
+	}
+
+	results->m = m2;
+}
+
 /* ************************************************************************ */
 /* calculate: solves the equation                                           */
 /* ************************************************************************ */
 static
 void
-calculate (struct calculation_arguments const* arguments, struct calculation_results *results, struct options const* options)
+calculate_mpi (struct calculation_arguments const* arguments, struct calculation_results *results, struct options const* options)
 {
 	int i, j;                                   /* local variables for loops  */
 	int m1, m2;                                 /* used as indices for old and new matrices       */
@@ -250,6 +354,12 @@ calculate (struct calculation_arguments const* arguments, struct calculation_res
 
 	int const N = arguments->N;
 	double const h = arguments->h;
+
+	int const N_global = arguments->N_global;
+	int const nprocs = arguments->nprocs;
+	int const rank = arguments->rank;
+	uint64_t offset_start = arguments->offset_start;
+	uint64_t offset_end = arguments->offset_end;
 
 	double pih = 0.0;
 	double fpisin = 0.0;
@@ -288,13 +398,19 @@ calculate (struct calculation_arguments const* arguments, struct calculation_res
 
 			if (options->inf_func == FUNC_FPISIN)
 			{
-				fpisin_i = fpisin * sin(pih * (double)i);
+				int offset = arguments->offset_start;
+                if(rank > 0)
+                	offset--;
+				fpisin_i = fpisin * sin(pih * (double)(i+offset));
 			}
 
 			/* over all columns */
-			for (j = 1; j < N; j++)
+			for (j = 1; j < N_global; j++)
 			{
-				star = 0.25 * (Matrix_In[i-1][j] + Matrix_In[i][j-1] + Matrix_In[i][j+1] + Matrix_In[i+1][j]);
+				star = 0.25 * (Matrix_In[i-1][j] 
+					+ Matrix_In[i][j-1] 
+					+ Matrix_In[i][j+1] 
+					+ Matrix_In[i+1][j]);
 
 				if (options->inf_func == FUNC_FPISIN)
 				{
@@ -312,13 +428,42 @@ calculate (struct calculation_arguments const* arguments, struct calculation_res
 			}
 		}
 
-		results->stat_iteration++;
-		results->stat_precision = maxresiduum;
+
+		// Senden der hintersten Reihe an den naechsten Rang
+		if (rank < nprocs-1){
+			MPI_Request req;
+			MPI_Isend(Matrix_In[offset_end - offset_start - 1], N+1, MPI_DOUBLE, rank+1, 0, MPI_COMM_WORLD, &req);
+			MPI_Request_free(&req);
+		}
+
+		// Senden der vordersten Reihe an den vorherigen Rang
+		if (rank > 0){
+			MPI_Request req;
+			MPI_Isend(Matrix_In[1], N+1, MPI_DOUBLE, rank-1, 0, MPI_COMM_WORLD, &req);
+			MPI_Request_free(&req);
+		}
+
+		// Empfangen der letzten Reihe des vorherigen Prozesses
+		if (rank > 0) {
+			MPI_Recv(Matrix_In[0], N+1, MPI_DOUBLE, rank-1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+		}
+
+		// Empfangen der ersten Reihe des naechsten Prozesses
+		if (rank < nprocs-1){
+			MPI_Recv(Matrix_In[offset_end - offset_start], N+1, MPI_DOUBLE, rank+1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+		}
 
 		/* exchange m1 and m2 */
 		i = m1;
 		m1 = m2;
 		m2 = i;
+
+
+		MPI_Allreduce(MPI_IN_PLACE, &maxresiduum, 1, MPI_DOUBLE, MPI_MAX, MPI_COMM_WORLD);
+
+		results->stat_iteration++;
+		results->stat_precision = maxresiduum;
+
 
 		/* check for stopping calculation, depending on termination method */
 		if (options->termination == TERM_PREC)
@@ -544,14 +689,22 @@ main (int argc, char** argv)
 	allocateMatrices(&arguments);
 	initMatrices(&arguments, &options);
 
-	// gettimeofday(&start_time, NULL);                   /*  start timer         */
+	gettimeofday(&start_time, NULL);                   /*  start timer         */
     // solve the equation
-	// calculate(&arguments, &results, &options);
-	// gettimeofday(&comp_time, NULL);                   /*  stop timer          */
+    if (options.method == METH_JACOBI)
+	{
+		calculate_mpi(&arguments, &results, &options); 
+	} else
+	{
+		calculate(&arguments, &results, &options);
+	}
+	
+	MPI_Barrier(MPI_COMM_WORLD);
+	gettimeofday(&comp_time, NULL);                   /*  stop timer          */
 
 	DisplayMatrix(&arguments, &results, &options);
 
-	// freeMatrices(&arguments);
+	freeMatrices(&arguments);
 
     MPI_Finalize();
 	return 0;
