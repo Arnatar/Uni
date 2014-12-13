@@ -439,29 +439,42 @@ calculate_mpi (struct calculation_arguments const* arguments, struct calculation
 		}
 
 
-		// Senden der hintersten Reihe an den naechsten Rang
-		if (rank < nprocs-1){
-			MPI_Request req;
-			MPI_Isend(Matrix_In[offset_end - offset_start - 1], N+1, MPI_DOUBLE, rank+1, 0, MPI_COMM_WORLD, &req);
-			MPI_Request_free(&req);
-		}
+		MPI_Request sdown;
+		MPI_Request sup;
+		MPI_Request rdown;
+		MPI_Request rup;
 
-		// Senden der vordersten Reihe an den vorherigen Rang
-		if (rank > 0){
-			MPI_Request req;
-			MPI_Isend(Matrix_In[1], N+1, MPI_DOUBLE, rank-1, 0, MPI_COMM_WORLD, &req);
-			MPI_Request_free(&req);
+		// send
+		if (rank < nprocs-1) {
+			MPI_Isend(Matrix_In[offset_end - offset_start - 1], N_global+1, MPI_DOUBLE, rank+1, 0, MPI_COMM_WORLD, &sdown);
 		}
-
-		// Empfangen der letzten Reihe des vorherigen Prozesses
 		if (rank > 0) {
-			MPI_Recv(Matrix_In[0], N+1, MPI_DOUBLE, rank-1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+			MPI_Isend(Matrix_In[1], N_global+1, MPI_DOUBLE, rank-1, 0, MPI_COMM_WORLD, &sup);
 		}
 
-		// Empfangen der ersten Reihe des naechsten Prozesses
-		if (rank < nprocs-1){
-			MPI_Recv(Matrix_In[offset_end - offset_start], N+1, MPI_DOUBLE, rank+1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+		// receive
+		if (rank > 0) {
+			MPI_Irecv(Matrix_In[0], N_global+1, MPI_DOUBLE, rank-1, 0, MPI_COMM_WORLD, &rup);
 		}
+		if (rank < nprocs-1) {
+			MPI_Irecv(Matrix_In[offset_end - offset_start], N_global+1, MPI_DOUBLE, rank+1, 0, MPI_COMM_WORLD, &rdown);
+		}
+
+		//Waiting
+		if (rank > 0) {
+			MPI_Wait(&sup, MPI_STATUS_IGNORE);
+			MPI_Wait(&rup, MPI_STATUS_IGNORE);
+		}
+		if (rank < nprocs-1) {
+			MPI_Wait(&sdown, MPI_STATUS_IGNORE);
+			MPI_Wait(&rdown, MPI_STATUS_IGNORE);
+		}
+		MPI_Barrier(MPI_COMM_WORLD);
+
+		MPI_Request_free(&sdown);
+		MPI_Request_free(&rdown);
+		MPI_Request_free(&sup);
+		MPI_Request_free(&rup);
 
 		/* exchange m1 and m2 */
 		i = m1;
@@ -616,7 +629,7 @@ DisplayMatrix (struct calculation_arguments* arguments, struct calculation_resul
                   printf("[%d] ", rank);
                   for (int y = 0; y < arguments->N_global; ++y) {
                       if (y % (options->interlines+1) == 0) {
-                          printf("%7.4f ", rank, Matrix[j][y]);
+                          printf("%7.4f ", Matrix[j][y]);
                       }
                   }
                   printf("\n");
