@@ -489,11 +489,6 @@ calculate_mpi (struct calculation_arguments const* arguments, struct calculation
 		}
 		MPI_Barrier(MPI_COMM_WORLD);
 
-		MPI_Request_free(&sdown);
-		MPI_Request_free(&rdown);
-		MPI_Request_free(&sup);
-		MPI_Request_free(&rup);
-
 		/* exchange m1 and m2 */
 		i = m1;
 		m1 = m2;
@@ -650,7 +645,7 @@ DisplayMatrix (struct calculation_arguments* arguments, struct calculation_resul
                           printf("%7.4f ", Matrix[j][y]);
                       }
                   }
-                  printf("%7.4f\n", rank, Matrix[j][arguments->N_global-1]);
+                  printf("%7.4f\n", Matrix[j][arguments->N_global-1]);
               }
           }
       }
@@ -752,15 +747,15 @@ main (int argc, char** argv)
 	allocateMatrices(&arguments);
 	initMatrices(&arguments, &options);
 
-	// gettimeofday(&start_time, NULL);                   /*  start timer         */
-    // // solve the equation
-    // if (options.method == METH_JACOBI)
-	// {
-	// 	calculate_mpi(&arguments, &results, &options);
-	// } else
-	// {
-	// 	calculate(&arguments, &results, &options);
-	// }
+	gettimeofday(&start_time, NULL);                   /*  start timer         */
+    // solve the equation
+    if (options.method == METH_JACOBI)
+	{
+		calculate_mpi(&arguments, &results, &options);
+	} else
+	{
+		calculate(&arguments, &results, &options);
+	}
 
 	// MPI_Barrier(MPI_COMM_WORLD);
 	// gettimeofday(&comp_time, NULL);                   /*  stop timer          */
