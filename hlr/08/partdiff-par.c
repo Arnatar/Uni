@@ -29,6 +29,21 @@
 
 #include "partdiff-par.h"
 
+void get_distribution(int distribution[], int nprocs, int global_amount) {
+    int base_amount = global_amount / nprocs;
+    int rest_amount = global_amount % nprocs;
+
+    int rests[nprocs];
+
+
+    for (int i = 0; i < nprocs; ++i) {
+        rests[i] = (i < rest_amount ? 1 : 0);
+    }
+    for (int i = 0; i < nprocs; ++i) {
+        distribution[i] = base_amount + rests[i];
+    }
+}
+
 struct calculation_arguments
 {
 	uint64_t  N;              /* number of spaces between lines (lines=N+1)     */
@@ -39,7 +54,7 @@ struct calculation_arguments
 
 	uint64_t N_global; 			// global size of the problem
 	int rank; 				// current rank
-	int nprocs; 				// number of processes 
+	int nprocs; 				// number of processes
 };
 
 struct calculation_results
@@ -65,7 +80,16 @@ static
 void
 initVariables (struct calculation_arguments* arguments, struct calculation_results* results, struct options const* options, int rank, int nprocs)
 {
-	arguments->N = (options->interlines * 8) + 9 - 1;
+	arguments->N_global = (options->interlines * 8) + 9 - 1;
+
+    // get local amount of rows
+    int row_amount_distribution[nprocs];
+    get_distribution(row_amount_distribution, nprocs, arguments->N_global);
+	arguments->N = rank == 0 || rank == nprocs - 1 ? 
+                        row_amount_distribution[rank]+1 :
+                        row_amount_distribution[rank]+2;
+
+
 	arguments->num_matrices = (options->method == METH_JACOBI) ? 2 : 1;
 	arguments->h = 1.0 / arguments->N;
 
@@ -481,9 +505,10 @@ main (int argc, char** argv)
 	AskParams(&options, argc, argv, rank);
 
 	initVariables(&arguments, &results, &options, rank, nprocs);
+    printf("[%d] %d %d\n", rank, arguments.N_global, arguments.N);
 
     // get and initialize variables and matrices
-	allocateMatrices(&arguments);       
+	allocateMatrices(&arguments);
 	initMatrices(&arguments, &options);
 
 	// gettimeofday(&start_time, NULL);                   /*  start timer         */
