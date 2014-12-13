@@ -44,15 +44,29 @@ void get_distribution(int distribution[], int nprocs, int global_amount) {
     }
 }
 
+int sum_array(int a[], int num_elements)
+{
+   int i, sum=0;
+   for (i=0; i<num_elements; i++)
+   {
+	 sum = sum + a[i];
+   }
+   return(sum);
+}
+
 struct calculation_arguments
 {
 	uint64_t  N;              /* number of spaces between lines (lines=N+1)     */
+	uint64_t  N_plus_ghost_rows;            
 	uint64_t  num_matrices;   /* number of matrices                             */
 	double    h;              /* length of a space between two lines            */
 	double    ***Matrix;      /* index matrix used for addressing M             */
 	double    *M;             /* two matrices with real values                  */
 
 	uint64_t N_global; 			// global size of the problem
+	uint64_t offset_start;
+	uint64_t offset_end;
+
 	int rank; 				// current rank
 	int nprocs; 				// number of processes
 };
@@ -85,9 +99,17 @@ initVariables (struct calculation_arguments* arguments, struct calculation_resul
     // get local amount of rows
     int row_amount_distribution[nprocs];
     get_distribution(row_amount_distribution, nprocs, arguments->N_global);
-	arguments->N = rank == 0 || rank == nprocs - 1 ? 
+
+	arguments->N = row_amount_distribution[rank];
+	arguments->N_plus_ghost_rows = rank == 0 || rank == nprocs - 1 ?
                         row_amount_distribution[rank]+1 :
                         row_amount_distribution[rank]+2;
+
+    // used by DisplayMatrix
+    arguments->offset_start = sum_array(row_amount_distribution, rank);
+    arguments->offset_end = rank == nprocs - 1 ?
+                        arguments->N_global-1 :
+                        sum_array(row_amount_distribution, rank+1)-1;
 
 
 	arguments->num_matrices = (options->method == METH_JACOBI) ? 2 : 1;
@@ -148,7 +170,7 @@ allocateMatrices (struct calculation_arguments* arguments)
 {
 	uint64_t i, j;
 
-	uint64_t const N = arguments->N;
+	uint64_t const N = arguments->N_plus_ghost_rows;
 
 	arguments->M = allocateMemory(arguments->num_matrices * (N + 1) * (N + 1) * sizeof(double));
 	arguments->Matrix = allocateMemory(arguments->num_matrices * sizeof(double**));
@@ -414,9 +436,13 @@ DisplayMatrix (struct calculation_arguments* arguments, struct calculation_resul
 
 static
 void
-DisplayMatrix (struct calculation_arguments* arguments, struct calculation_results* results, struct options* options, int rank, int size, int from, int to)
+DisplayMatrix (struct calculation_arguments* arguments, struct calculation_results* results, struct options* options)
 {
   int const elements = 8 * options->interlines + 9;
+  int from = arguments->offset_start;
+  int to = arguments->offset_end;
+  int rank = arguments->rank;
+  int size = arguments->nprocs;
 
   int x, y;
   double** Matrix = arguments->Matrix[results->m];
@@ -505,7 +531,8 @@ main (int argc, char** argv)
 	AskParams(&options, argc, argv, rank);
 
 	initVariables(&arguments, &results, &options, rank, nprocs);
-    printf("[%d] %d %d\n", rank, arguments.N_global, arguments.N);
+
+    // printf("[%d] %d %d %d \n", rank, arguments.N, arguments.offset_start, arguments.offset_end);
 
     // get and initialize variables and matrices
 	allocateMatrices(&arguments);
@@ -516,10 +543,21 @@ main (int argc, char** argv)
 	// calculate(&arguments, &results, &options);
 	// gettimeofday(&comp_time, NULL);                   /*  stop timer          */
 
-	// DisplayMatrix(&arguments, &results, &options);
+// DisplayMatrix (struct calculation_arguments* arguments, struct calculation_results* results, struct options* options, int rank, int size, int from, int to)
+	DisplayMatrix(&arguments, &results, &options);
 
 	// freeMatrices(&arguments);
 
     MPI_Finalize();
 	return 0;
 }
+
+ // 1.0000 0.8750 0.7500 0.6250 0.5000 0.3750 0.2500 0.1250 0.0000
+ // 0.8750 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.1250
+ // 0.7500 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.2500
+ // 0.6250 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.3750
+ // 0.5000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.5000
+ // 0.3750 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.6250
+ // 0.2500 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.7500
+ // 0.1250 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.8750
+ // 0.0000 0.1250 0.2500 0.3750 0.5000 0.6250 0.7500 0.8750 1.0000
