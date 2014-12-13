@@ -161,16 +161,16 @@ AskParams (struct options* options, int argc, char** argv, int rank)
 {
     int ret;
     // the whole interaction should only take place on one thread.
-    if (rank == 0) {
-        printf("============================================================\n");
-        printf("Program for calculation of partial differential equations.  \n");
-        printf("============================================================\n");
-        printf("(c) Dr. Thomas Ludwig, TU München.\n");
-        printf("    Thomas A. Zochler, TU München.\n");
-        printf("    Andreas C. Schmidt, TU München.\n");
-        printf("============================================================\n");
-        printf("\n");
-    }
+    // if (rank == 0) {
+    //     printf("============================================================\n");
+    //     printf("Program for calculation of partial differential equations.  \n");
+    //     printf("============================================================\n");
+    //     printf("(c) Dr. Thomas Ludwig, TU München.\n");
+    //     printf("    Thomas A. Zochler, TU München.\n");
+    //     printf("    Andreas C. Schmidt, TU München.\n");
+    //     printf("============================================================\n");
+    //     printf("\n");
+    // }
 
     // if (argc < 2)
     // {
