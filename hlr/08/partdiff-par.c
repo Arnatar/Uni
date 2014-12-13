@@ -36,6 +36,10 @@ struct calculation_arguments
 	double    h;              /* length of a space between two lines            */
 	double    ***Matrix;      /* index matrix used for addressing M             */
 	double    *M;             /* two matrices with real values                  */
+
+	uint64_t N_global; 			// global size of the problem
+	int rank; 				// current rank
+	int proc_num; 				// number of processes 
 };
 
 struct calculation_results
@@ -459,26 +463,40 @@ DisplayMatrix (struct calculation_arguments* arguments, struct calculation_resul
 int
 main (int argc, char** argv)
 {
+	MPI_Init(&argc, &argv);
+
 	struct options options;
 	struct calculation_arguments arguments;
 	struct calculation_results results;
 
+	int proc_num;
+	MPI_Comm_size(MPI_COMM_WORLD, &proc_num);
+	int rank;
+	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+	
+	arguments.proc_num = proc_num;
+	arguments.rank = rank;
+
+
 	/* get parameters */
-	AskParams(&options, argc, argv);              /* ************************* */
+	AskParams(&options, argc, argv);              			/* ************************* */
 
-	initVariables(&arguments, &results, &options);           /* ******************************************* */
+	initVariables(&arguments, &results, &options);          /* ******************************************* */
 
-	allocateMatrices(&arguments);        /*  get and initialize variables and matrices  */
-	initMatrices(&arguments, &options);            /* ******************************************* */
+	allocateMatrices(&arguments);        					/*  get and initialize variables and matrices  */
+	initMatrices(&arguments, &options);            			/* ******************************************* */
 
-	gettimeofday(&start_time, NULL);                   /*  start timer         */
-	calculate(&arguments, &results, &options);                                      /*  solve the equation  */
-	gettimeofday(&comp_time, NULL);                   /*  stop timer          */
+	gettimeofday(&start_time, NULL);                   		/*  start timer         */
+	calculate(&arguments, &results, &options);              /*  solve the equation  */
+	gettimeofday(&comp_time, NULL);                   		/*  stop timer          */
 
 	displayStatistics(&arguments, &results, &options);
 	DisplayMatrix(&arguments, &results, &options);
 
-	freeMatrices(&arguments);                                       /*  free memory     */
+	freeMatrices(&arguments);                               /*  free memory     */
+
+
+	MPI_Finalize();
 
 	return 0;
 }
