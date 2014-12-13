@@ -6,7 +6,7 @@
 /** Copyright: Prof. Dr. Thomas Ludwig                                     **/
 /**            Andreas C. Schmidt                                          **/
 /**                                                                        **/
-/** File:      partdiff-seq.c                                              **/
+/** File:      partdiff-par.c                                              **/
 /**                                                                        **/
 /** Purpose:   Partial differential equation solver for Gauss-Seidel and   **/
 /**            Jacobi method.                                              **/
@@ -27,7 +27,7 @@
 
 #include <mpi.h>
 
-#include "partdiff-seq.h"
+#include "partdiff-par.h"
 
 struct calculation_arguments
 {
