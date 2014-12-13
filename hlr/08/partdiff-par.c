@@ -38,8 +38,9 @@ struct calculation_arguments
 	double    *M;             /* two matrices with real values                  */
 
 	uint64_t N_global; 			// global size of the problem
-	int rank; 				// current rank
-	int nprocs; 				// number of processes 
+	int rank; 					// current rank
+	int nprocs; 				// number of processes
+	int offset;					// offset for calculating where the matrix is
 };
 
 struct calculation_results
@@ -491,7 +492,7 @@ main (int argc, char** argv)
 	// calculate(&arguments, &results, &options);
 	// gettimeofday(&comp_time, NULL);                   /*  stop timer          */
 
-	// DisplayMatrix(&arguments, &results, &options);
+	// DisplayMatrix(&arguments, &results, &options, arguments.rank, arguments.nprocs, arguments.offset, arguments.offset + arguments.N - 1);
 
 	// freeMatrices(&arguments);
 
