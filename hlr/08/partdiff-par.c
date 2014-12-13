@@ -174,18 +174,19 @@ allocateMatrices (struct calculation_arguments* arguments)
 {
 	uint64_t i, j;
 
-	uint64_t const N = arguments->N_plus_ghost_rows;
+	uint64_t const Y = arguments->N_plus_ghost_rows;
+	uint64_t const X = arguments->N_global;
 
-	arguments->M = allocateMemory(arguments->num_matrices * (N + 1) * (N + 1) * sizeof(double));
+	arguments->M = allocateMemory(arguments->num_matrices * (Y + 1) * (X + 1) * sizeof(double));
 	arguments->Matrix = allocateMemory(arguments->num_matrices * sizeof(double**));
 
 	for (i = 0; i < arguments->num_matrices; i++)
 	{
-		arguments->Matrix[i] = allocateMemory((N + 1) * sizeof(double*));
+		arguments->Matrix[i] = allocateMemory((Y + 1) * sizeof(double*));
 
-		for (j = 0; j <= N; j++)
+		for (j = 0; j <= Y; j++)
 		{
-			arguments->Matrix[i][j] = arguments->M + (i * (N + 1) * (N + 1)) + (j * (N + 1));
+			arguments->Matrix[i][j] = arguments->M + (i * (Y + 1) * (X + 1)) + (j * (X + 1));
 		}
 	}
 }
