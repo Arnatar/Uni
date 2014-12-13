@@ -463,8 +463,6 @@ DisplayMatrix (struct calculation_arguments* arguments, struct calculation_resul
 int
 main (int argc, char** argv)
 {
-	MPI_Init(&argc, &argv);
-
 	struct options options;
 	struct calculation_arguments arguments;
 	struct calculation_results results;
