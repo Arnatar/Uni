@@ -233,7 +233,7 @@ initMatrices (struct calculation_arguments* arguments, struct options const* opt
 				Matrix[g][i][0] = 1.0 - offset;
                 // printf("[%d] %f %f\n", arguments->rank, offset, Matrix[g][i][0]);
                 // printf("[%d] %d \n", arguments->rank, arguments->N_global);
-				Matrix[g][i][arguments->N_global-1] = offset;
+				Matrix[g][i][arguments->N_global] = offset;
 
 
                 // if (arguments->rank = arguments->nprocs -1) {
@@ -247,7 +247,7 @@ initMatrices (struct calculation_arguments* arguments, struct options const* opt
                     double offset = h * i;
                     Matrix[g][0][i] = 1.0 - offset;
                 }
-                Matrix[g][0][arguments->N_global-1] = 0.0;
+                Matrix[g][0][arguments->N_global] = 0.0;
             }
 
             if (arguments->rank == arguments->nprocs -1) {
@@ -255,7 +255,7 @@ initMatrices (struct calculation_arguments* arguments, struct options const* opt
                     double offset = h * i;
                     Matrix[g][N-1][i] = offset;
                 }
-                Matrix[g][N-1][arguments->N_global-1] = 1.0;
+                Matrix[g][N-1][arguments->N_global] = 1.0;
             }
 
 		}
@@ -645,7 +645,7 @@ DisplayMatrix (struct calculation_arguments* arguments, struct calculation_resul
                           printf("%7.4f ", Matrix[j][y]);
                       }
                   }
-                  printf("%7.4f\n", Matrix[j][arguments->N_global-1]);
+                  printf("%7.4f\n", Matrix[j][arguments->N_global]);
               }
           }
       }
