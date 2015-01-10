@@ -180,7 +180,7 @@ allocateMatrices (struct calculation_arguments* arguments)
 {
 	uint64_t i, j;
 
-	uint64_t const Y = arguments->N_plus_ghost_rows;
+	uint64_t const Y = arguments->N;
 	uint64_t const X = arguments->N_global;
 
 	arguments->M = allocateMemory(arguments->num_matrices * (Y + 1) * (X + 1) * sizeof(double));
@@ -207,6 +207,13 @@ initMatrices (struct calculation_arguments* arguments, struct options const* opt
 	uint64_t g, i, j;                                /*  local variables for loops   */
 
 	uint64_t const N = arguments->N;
+	uint64_t const N_global = arguments->N_global;
+
+	int const nprocs = arguments->nprocs;
+	int const rank = arguments->rank;
+
+	int const offset = arguments->offset_start;
+
 	double const h = arguments->h;
 	double*** Matrix = arguments->Matrix;
 
@@ -224,42 +231,36 @@ initMatrices (struct calculation_arguments* arguments, struct options const* opt
 
 	// /* initialize borders, depending on function (function 2: nothing to do) */
 	if (options->inf_func == FUNC_F0)
-	{
-		for (g = 0; g < arguments->num_matrices; g++)
-		{
-			for (i = 0; i <= N; i++)
-			{
-                double offset = h * i + (arguments->offset_start)*h;
-				Matrix[g][i][0] = 1.0 - offset;
-                // printf("[%d] %f %f\n", arguments->rank, offset, Matrix[g][i][0]);
-                // printf("[%d] %d \n", arguments->rank, arguments->N_global);
-				Matrix[g][i][arguments->N_global] = offset;
-
-
-                // if (arguments->rank = arguments->nprocs -1) {
-                //     Matrix[g][N][i] = offset;
-                // }
-
-			}
-
-            if (arguments->rank == 0) {
-                for (i = 0; i <= arguments->N_global; i++) {
-                    double offset = h * i;
-                    Matrix[g][0][i] = 1.0 - offset;
-                }
-                Matrix[g][0][arguments->N_global] = 0.0;
+    {
+        for (g = 0; g < arguments->num_matrices; g++)
+        {
+            for (i = 0; i <= N; i++)
+            {
+                Matrix[g][i][0] = 1.0 - (h * (i + offset));
+                Matrix[g][i][N_global] = h * (i + offset);
             }
-
-            if (arguments->rank == arguments->nprocs -1) {
-                for (i = 0; i <= arguments->N_global; i++) {
-                    double offset = h * i;
-                    Matrix[g][N-1][i] = offset;
-                }
-                Matrix[g][N-1][arguments->N_global] = 1.0;
+        }
+        
+        if(rank == 0)
+        for (g = 0; g < arguments->num_matrices; g++) {
+            for (i = 0; i <= N_global; i++) {
+                Matrix[g][0][i] = 1.0 - (h * i);
             }
+        }
+        
+        if(rank == nprocs - 1)
+        for (g = 0; g < arguments->num_matrices; g++) {
+            for (i = 0; i <= N_global; i++) {
+                Matrix[g][N][i] = h * i;
+            }
+        }
 
-		}
-	}
+        for (g = 0; g < arguments->num_matrices; g++)
+        {
+            Matrix[g][N][0] = 0.0;
+            Matrix[g][0][N_global] = 0.0;
+        }
+    }
 
 }
 
