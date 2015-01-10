@@ -322,23 +322,23 @@ calculate_gs (struct calculation_arguments const* arguments, struct calculation_
 		{
 			// receive communicated line
 			MPI_Recv(Matrix_Out[0], N_global + 1, MPI_DOUBLE, rank - 1,
-				rank - 1 + results->stat_iteration, MPI_COMM_WORLD, NULL);
+				rank - 1 + results->stat_iteration, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 			// receive next maxresiduumbuf
-			MPI_Recv(&maxresiduumbuf, 1, MPI_DOUBLE, rank - 1, rank - 1, MPI_COMM_WORLD, NULL);
+			MPI_Recv(&maxresiduumbuf, 1, MPI_DOUBLE, rank - 1, rank - 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 			// receive final termination flag (flag2)
-			MPI_Recv(&termin_flag2, 1, MPI_DOUBLE, rank - 1, rank - 1, MPI_COMM_WORLD, NULL);
+			MPI_Recv(&termin_flag2, 1, MPI_DOUBLE, rank - 1, rank - 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 		}
 
-		// receives from below, last rank is irelevant
+		// receives from below, last rank is irelevant, first round irelevant
 		if(results->stat_iteration > 0)
 		{
 			if(rank != nprocs - 1)
 			{
 				// reveive communicated line
 				MPI_Recv(Matrix_Out[N], N_global + 1, MPI_DOUBLE, rank + 1,
-					rank + 1 + results->stat_iteration - 1, MPI_COMM_WORLD, NULL);
+					rank + 1 + results->stat_iteration - 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 				// receive first termination flag (flag1)
-				MPI_Recv(&termin_flag1, 1, MPI_INT, rank + 1, rank + 1, MPI_COMM_WORLD, NULL);
+				MPI_Recv(&termin_flag1, 1, MPI_INT, rank + 1, rank + 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 			}
 		}
 
@@ -836,17 +836,21 @@ main (int argc, char** argv)
 	}
 
 	MPI_Barrier(MPI_COMM_WORLD);
+
 	gettimeofday(&comp_time, NULL);                   /*  stop timer          */
 
 	// final communication (top rank needs correct maxresiduum)
-	if(nprocs > 1)
+	if(options.method == METH_GAUSS_SEIDEL && nprocs > 1)
 	{
 		if(rank == 0)
-			MPI_Recv(&results.stat_precision, 1, MPI_DOUBLE, nprocs - 1, 1, MPI_COMM_WORLD, NULL);
+			MPI_Recv(&results.stat_precision, 1, MPI_DOUBLE, nprocs - 1, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 		if(rank == nprocs - 1)
 			MPI_Send(&results.stat_precision, 1, MPI_DOUBLE, 0, 1, MPI_COMM_WORLD);
 	}
 
+	if(rank == 0)
+		displayStatistics(&arguments, &results, &options);
+	MPI_Barrier(MPI_COMM_WORLD);
 	DisplayMatrix(&arguments, &results, &options);
 
 	freeMatrices(&arguments);
