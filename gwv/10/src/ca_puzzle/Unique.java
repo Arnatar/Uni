@@ -3,15 +3,15 @@ package ca_puzzle;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Unique {
+public class Unique implements IPuzzleElement {
 	
-	Set<Object> domain;
+	Set<Integer> domain;
 	final char representation;
 	
 	
 	public Unique (char c) {
 		representation = c;
-		domain = new HashSet<>();
+		domain = new HashSet<Integer>();
 		domain.add(0);
 		domain.add(1);
 		domain.add(2);
@@ -28,8 +28,12 @@ public class Unique {
 		return representation;
 	}
 	
-	public Set<Object> getDomain() {
+	public Set<Integer> getDomain() {
 		return domain;
+	}
+	
+	public void setDomain(Set<Integer> domain){
+		this.domain = domain;
 	}
 	
 	@Override
