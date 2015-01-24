@@ -3,24 +3,25 @@ package ca_puzzle;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Unique implements InterfaceUnique {
+public class Carry implements InterfaceUnique {
 
 	List<Object> domain;
 	List<Object> possibles;
 	final char representation;
 	int value;
-
-	public Unique(char c) {
-		representation = c;
+	
+	public Carry(int cId, int maxCarry) {
+		cId += 48;
+		representation = (char) cId;
 		domain = new ArrayList<>();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i <= maxCarry; i++) {
 			domain.add(i);
 		}
 		possibles = new ArrayList<>();
 		possibles.addAll(domain);
 		value = -1;
 	}
-
+	
 	@Override
 	public void removeDomainElement(Object obj) {
 		domain.remove(obj);
@@ -52,7 +53,8 @@ public class Unique implements InterfaceUnique {
 	public int GetValue() {
 		return value;
 	}
-
+	
+	
 	@Override
 	public char getRepresentation() {
 		return representation;
@@ -62,7 +64,7 @@ public class Unique implements InterfaceUnique {
 	public List<Object> getDomain() {
 		return domain;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -76,4 +78,5 @@ public class Unique implements InterfaceUnique {
 			return false;
 		return true;
 	}
+
 }
