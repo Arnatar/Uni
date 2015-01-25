@@ -57,7 +57,6 @@ public class Crypt {
 			}
 			maxCarry = maxSum / 10;
 			model[model.length - 1][i - 1] = new Carry(cId, maxCarry);
-			System.out.println(cId + ": " + maxCarry);
 			cId--;
 		}
 		model[model.length - 1][model[0].length - 1] = new Carry(0, 0);
@@ -79,45 +78,71 @@ public class Crypt {
 
 	// Wrapper for solve-function
 	public void solve() {
-		if (solve(model[0].length - 1))
+		if (solve(model[0].length - 1, 0))
 			System.out.println("yeah");
+		else
+			System.out.println("oh no");
 	}
 
-	// Solve function
-	private boolean solve(int column) {
-		if (column < 0) {
+	private boolean solve(int column, int row) {
+		if (column < 0 || row > model.length - 1) {
 			return false;
 		} else {
-			// TODO finish implementation
-			// TODO sind Teillösungen vorhanden?
-			// wähle Teillösung
-			for (int n = 0; n < model.length - 1; n++) {
-				for (Object value : model[n][column].getPossibles()) {
-					if (setValue((int) value, model[n][column])) {
-						break;
-					}
-				}
-			}
-			// TODO: solution found? (final check at column = 0)
-			// check if partial solution is legitime
-			if (constraintCheck(column)) {
-				// calc carry
-				int sum = 0;
-				for (int n = 0; n < model.length - 2; n++) {
-					if (model[n][column] != null) {
-						sum += model[n][column].GetValue();
-					}
-				}
-				model[model.length - 1][column - 1].SetValue((int) Math
-						.floor(sum / 10.0));
-				// next iteration
-				solve(column - 1);
+			if (model[model.length - 2][0].GetValue() != -1) {
 				return true;
 			} else {
-				return false; //TODO mache Teillösung rückgängig
+				while (solutionCheck()) {
+					if (model[row][column] != null) {
+						for (Object value : model[row][column].getDomain()) {
+							if (!model[row][column].getPossibles().contains(value))
+								continue;
+							if (setValue((int) value, model[row][column])) {
+								if (row < model.length - 2) {
+									if (solve(column, ++row)) {
+										return true;
+									} else {
+										if (model[row][column].getPossibles().size() > 1) {
+											resetValue((int) value, model[row][column]);
+										} else {
+											return false;
+										}
+									}
+								} else {
+									if (constraintCheck(column)) {
+										int sum = 0;
+										for (int n = 0; n < model.length - 2; n++) {
+											if (model[n][column] != null) {
+												sum += model[n][column].GetValue();
+											}
+										}
+										model[model.length - 1][column - 1].SetValue((int) Math
+												.floor(sum / 10.0));
+										if (solve(--column, 0)) {
+											return true;
+										} else {
+											if (model[row][column].getPossibles().size() > 1) {
+												resetValue((int) value, model[row][column]);
+											} else {
+												return false;
+											}
+										}
+										
+									}
+								}
+							}
+						}
+						return false;
+					} else {
+						if (row < model.length - 2) {
+							solve(column, ++row);
+						} else {
+							solve(--column, 0);
+						}
+					}
+				}
+				return false;
 			}
 		}
-		// TODO Fall: keine Teillösungen mehr übrig => nichts gefunden.
 	}
 
 	private boolean constraintCheck(int column) {
@@ -142,14 +167,66 @@ public class Crypt {
 				if (!unique.equals(self)) {
 					unique.getPossibles().remove((Object) value);
 				}
-				return true;
 			}
+			return true;
 		}
 		return false;
 	}
-	
-	
-	//TODO result-Output
+
+	private void resetValue(int value, InterfaceUnique self) {
+		self.SetValue(value);
+		for (Unique unique : uniques) {
+			if (unique.equals(self)) {
+				unique.getPossibles().add((Object) value);
+			}
+		}
+	}
+
+	private boolean solutionCheck() {
+		boolean result = false;
+		for (Unique unique : uniques) {
+			if (unique.getPossibles().size() > 1)
+				result = true;
+		}
+		return result;
+	}
+
+	public void printResult() {
+		for (int n = 0; n < model.length - 2; n++) {
+			System.out.print("  ");
+			for (int i = 0; i < model[0].length; i++) {
+				if (model[n][i] == null) {
+					System.out.print(" ");
+				} else {
+					System.out.print(model[n][i].GetValue());
+				}
+			}
+			System.out.println();
+		}
+		System.out.print("+ ");
+		for (int i = 0; i < model[0].length; i++) {
+			if (model[model.length - 1][i] == null) {
+				System.out.print(" ");
+			} else {
+				System.out.print(model[model.length - 1][i].GetValue());
+			}
+		}
+		System.out.println();
+
+		for (int i = 0; i < model[0].length + 2; i++) {
+			System.out.print("-");
+		}
+		System.out.println();
+		System.out.print("  ");
+		for (int i = 0; i < model[0].length; i++) {
+			if (model[model.length - 2][i] == null) {
+				System.out.print(" ");
+			} else {
+				System.out.print(model[model.length - 2][i].GetValue());
+			}
+		}
+		System.out.println("\n");
+	}
 
 	public void printDebug() {
 		System.out.println("Uniques:");

@@ -9,12 +9,14 @@ public class Ca_puzzle {
 	public static void main(String[] args) throws IOException {
 		
 		Crypt solver; 
-		String input = "";
+		String input = "send+more=money";
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Enter String in Format word1+word2=word3:");
-		input = br.readLine();
+		//input = br.readLine();
 		solver = new Crypt(input);
-		solver.printDebug();
+		solver.solve();
+		solver.printResult();
+		//solver.printDebug();
 		
 		/*
 		while (!input.equals("exit")) {
