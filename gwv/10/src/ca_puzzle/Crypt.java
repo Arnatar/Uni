@@ -126,8 +126,8 @@ public class Crypt {
 												return false;
 											}
 										}
-										
-									}
+									} 
+									
 								}
 							}
 						}
@@ -162,7 +162,7 @@ public class Crypt {
 	}
 
 	private boolean setValue(int value, InterfaceUnique self) {
-		if (self.SetValue(value)) {
+		if (self.GetValue() == -1 && self.SetValue(value)) {
 			for (Unique unique : uniques) {
 				if (!unique.equals(self)) {
 					unique.getPossibles().remove((Object) value);

@@ -41,7 +41,7 @@ public class Unique implements InterfaceUnique {
 	
 	@Override
 	public boolean SetValue(int val) {
-		if (domain.contains(val) || val == -1) {
+		if (possibles.contains(val) || val == -1) {
 			value = val;
 			return true;
 		}
