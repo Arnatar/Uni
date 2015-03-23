@@ -1,0 +1,25 @@
+Konkursgerüchte	NN
+drücken	VVFIN
+Kurs	NN
+der	ART
+Amazon-Aktie	NN
+
+Begleitet	ADJD
+von	APPR
+Marktgerüchten	NN
+über	APPR
+den	ART
+bevorstehenden	ADJA
+Konkurs	NN
+von	APPR
+Amazon	NE
+,	$,
+setzt	VVFIN
+die	ART
+Aktie	NN
+des	ART
+Online-Händlers	NN
+ihre	PPOSAT
+Talfahrt	NN
+fort	PTKVZ
+.	$.

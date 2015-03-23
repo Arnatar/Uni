@@ -1,0 +1,26 @@
+1.:
+ausgerechnete wahrscheinlichkeiten aufsummieren mit vorheriger 
+(for all folgenden)
+	prob += prob(vorherige).
+
+zwecks größerer genauigkeit log(prob), bringt größreren abgedeckten Bereich
+
+
+2.:
+	denk an abhängigkeit
+
+3.:
+	bring knut texen bei
+	für wahrscheinlichkeiten: an den kanten rechnen
+
+compute:
+	schreibe wahrscheinlichkeiten auf, eliminiere uninteressante,
+	multipliziere entlang der kanten,
+	normalisiere,
+	done
+
+
+09:
+modell nehmen, tab einlesen+tag
+format: wort tab tag
+bäähh mist lesen.

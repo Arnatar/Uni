@@ -1,0 +1,172 @@
+\documentclass[a4paper,11pt,fleqn]{scrartcl}
+\usepackage[german,ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[top=1.3in, bottom=1.2in, left=0.9in, right=0.9in]{geometry}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{url}
+\usepackage{tikz}
+\usetikzlibrary{automata,shapes,positioning}
+
+% ------------------------------------------------------
+
+% Commands
+
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO}}}
+\newcommand{\authorinfo}{Arne Struck, Knut Götz}
+\newcommand{\titleinfo}{GWV-Abgabe zum 21.11.2014}
+\newcommand{\qed}{\ \square}
+
+
+% ------------------------------------------------------
+
+% Title & Pages
+
+\title{\titleinfo}
+\author{\authorinfo}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\authorinfo}
+\fancyhead[R]{\titleinfo}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+\maketitle
+\notag
+
+\section*{1}
+Wir gehen im folgenden davon aus, dass die Domänen ohne vorherigen zuschleifenden Eingriffen aus dem Dezimalsystem festgelegt sind. Des weiteren haben wir einige Constraints und Constraintteile als Funktionen und die Domänen aus der Darstellung dem Platz und der Lesbarkeit geschuldet extrahiert und unterhalb notiert. \\ \\
+\begin{tikzpicture}[
+	const/.style={rectangle, draw, text centered},
+	var/.style={ellipse, draw, text centered},
+	auto,
+	node distance = 3cm
+	]
+%-------- nodes --------
+	% vars	
+    \node[var] (Y) {Y};
+	\node[var] (D) [right = 1cm of Y] {D};
+	\node[var] (E) [right = 1cm of D] {E};
+	\node[var] (N) [right = 1cm of E] {N};
+	\node[var] (R) [right = 1cm of N] {R};
+	\node[var] (O) [right = 1cm of R] {O};
+	\node[var] (S) [right = 1cm of O] {S};
+	\node[var] (M) [right = 1cm of S] {M};
+	
+	% consts		
+	\node[const] (constE) [above = of Y] {\(N + R + Ü(D,E) \equiv E\ |\mod 10 \)};
+	\node[const] (equiv)  [above right = 3.15cm and -0.25cm of N] {\(F(A,B)\)};
+    \node[const] (constO) [above = of M] {\(S + M + Ü(E,O) \equiv O |\mod 10\)};
+    
+    \node[const] (constY) [below = 7cm of constE] {\(D + E \equiv Y\ |\mod 10\)};
+	\node[const] (constN) [below = 7cm of equiv] {\(E + O + Ü(N,R) \equiv N\ |\mod 10 \)};
+	\node[const] (constM) [below = 7cm of constO] {\(M = Ü(S,M)\)};
+        
+%-------- paths --------
+	%equiv
+	\path (equiv) edge [] (Y);
+	\path (equiv) edge [] (D);
+	\path (equiv) edge [] (E);
+	\path (equiv) edge [] (N);
+	\path (equiv) edge [] (R);
+	\path (equiv) edge [] (O);
+	\path (equiv) edge [] (S);
+	\path (equiv) edge [] (M);
+	
+	%constY	
+	\path (constY) edge [] (Y);
+	\path (constY) edge [] (D);
+	\path (constY) edge [] (E);
+	
+	%constE	
+	\path (constE) edge [] (D);
+	\path (constE) edge [] (E);
+	\path (constE) edge [] (N);
+	
+	%constN
+	\path (constN) edge [] (D);
+	\path (constN) edge [] (E);
+	\path (constN) edge [] (N);
+	\path (constN) edge [] (R);
+	\path (constN) edge [] (O);
+	
+	%constO
+	\path (constO) edge [] (D);
+	\path (constO) edge [] (E);
+	\path (constO) edge [] (N);
+	\path (constO) edge [] (R);
+	\path (constO) edge [] (O);
+	\path (constO) edge [] (S);
+	\path (constO) edge [] (M);
+	
+	%constM
+	\path (constM) edge [] (D);
+	\path (constM) edge [] (E);
+	\path (constM) edge [] (N);
+	\path (constM) edge [] (R);
+	\path (constM) edge [] (O);
+	\path (constM) edge [] (S);
+	\path (constM) edge [] (M);	
+\end{tikzpicture}
+
+\quad \\
+
+\begin{tabular}{ccccc}
+
+\underline{Domains:} && \underline{Überträge:} && 
+\underline{Funktion:} \\	
+\(
+\begin{array}{lcl}
+	 Y &=& \{0,1,2,3,4,5,6,7,8,9\} \\
+	 D &=& \{0,1,2,3,4,5,6,7,8,9\} \\
+	 E &=& \{0,1,2,3,4,5,6,7,8,9\} \\
+	 N &=& \{0,1,2,3,4,5,6,7,8,9\} \\
+	 R &=& \{0,1,2,3,4,5,6,7,8,9\} \\
+	 O &=& \{0,1,2,3,4,5,6,7,8,9\} \\
+	 S &=& \{0,1,2,3,4,5,6,7,8,9\} \\
+	 M &=& \{0,1,2,3,4,5,6,7,8,9\} \\
+\end{array}
+\)
+
+&\quad &
+
+\(
+\begin{array}{lcl}
+	Ü(D,E) &=& \lfloor \frac{D+E}{10} \rfloor \\
+	Ü(N,R) &=& \lfloor \frac{N+R+Ü(D,E)}{10} \rfloor \\
+	Ü(E,O) &=& \lfloor \frac{E+O+Ü(N,R)}{10} \rfloor \\
+	Ü(S,M) &=& \lfloor \frac{S+M+Ü(E,O)}{10} \rfloor \\
+	\\ \\ \\
+\end{array}
+\)
+
+&\quad &
+
+\(
+\begin{array}{lcl}
+	F(A,B)&=& A \neq B \\
+	\\ \\ \\ \\ \\ \\ \\ 
+\end{array}
+\)
+\end{tabular}
+
+
+\section*{2}
+Als Mensch hat man viele Variationen des trial-and-error als Herangehensweise zur Auswahl.
+Dies kann natürlich beliebig strukturiert geschehen.
+Die Variationen ergeben sich daraus, wie stark die entsprechenden Constraints in die verschiedenen Versuche hereinfließen.
+Ein Beginn für eine Constraintlose Herangehensweise wäre für A1 das erste Wort zu wählen.
+Dies führt leider zu nichts, da es für D2 und D3 keine Wörter zur Verfügung stehen, die mit 'd' beginnen.
+Solche Constraints (ein solches hat so eben zum Scheitern geführt) können nun soweit die ''Rechenkapazität'' des Gehirns ausreicht in beliebiger Menge in die Auswahl der zu testenden Worte mit einfließen. 
+
+
+\section*{3}
+\section*{4}
+	siehe Files.
+\end{document}

@@ -1,0 +1,103 @@
+B IP:
+Aller für Endverbrauch bestimmten Waaren + Dienstleistungen, die in einem Land über einen bestimmten Zeitraum produziert werden
+(Inlandskonzept)
+
+BSP:
+Aller für Endverbrauch bestimmten Waaren + Dienstleistungen, die von den Einwohnern eines Landes über einen bestimmten Zeitraum produziert werden
+(Inländerkonzept)
+
+Berechnungsmethoden (derer sind angeblich 3):
+1.: Entstehungsrechnung:
+	Produktionswert - Vorleistungen = Bruttowertschöpfung
+	BIP = Bruttowertschöpfung + Gütersteuern - Subventionen 
+
+2.: Verwendungsrechnung:
+	BIP = Konsumentennachfrage + Investitionsgüternachfrage + Staatliche Nachfrage + (Export - Import)
+	kurz (anscheinend wichtig): Y = C + I + G + NX; NX = (EX - IM)
+
+3.: Verteilungsrechnung:
+	Arbeitnehmerentgelt + Unternehmens - /Vermögenseinkommen = Volkseinkommen
+	Volkseinkommen + Produktions & Importabgaben + Abschreibungen = Bruttonationaleinkommen - Primäreinkommen aus Rest der Welt = BIP
+
+Kritik am BIP als Wohlstandsindikator:
+	-keine Darstellung nicht monitärer Faktoren (Lebenserwartung, Krankheitsraten, etc)
+	-keine Berücksichtigung von Ungleichverteilungen
+	-keine Berücksichtigung von Nachhaltigkeit (Verbrauch von nicht regenerativer Ressourcen)
+	-Durch Aufbauarbeit nach Katastrophe gesteigertes BIP trotz kein Wohlstandsgewinn
+	-Keine "Glücksdarstellung"
+	-Keine Berücksichtigung unentgeltlicher Tätigkeiten (Haushalt, Eigenanbau)
+	-Kriminelle Wertschöpfungen gehen ein (persönliche Anmerkung)
+	-Durch Veränderungen Vergleichspotential geschmälert
+	-Gebrauchthandel nicht berücksichtigt
+
+Alternative Faktoren:
+	-Lebenserwartung
+	-"Infrastrukturindex"
+	-Umfragen
+	-Gini-Koeffizient (berücksichtigt Verteilung des Gesamteinkommens)
+	-Human Developement Index (UN)
+	-Nationaler Wohlfahrtindex
+
+Vorteile: 
+	-Berücksichtigen nicht-monitäre Größen
+	-Auskünfte über Fairness-Aspekte
+
+Nachteile:
+	-oft nur eine Dimension des Wohlstandes betrachtet
+	-Vergleichbarkeit nicht gut möglich, da Länderabhängige Berechnungen der verschiedenen Indikatoren & Indizes
+
+
+nominales und reales BIP berechnen:
+	nominal BIP = \sum_{i = 0}^n preis_i * menge_i |i sei ein Produkt
+	BSP 2009: 0.25 * 100 + 1.5 * 50 = 100 (€)
+		2010: 0.5 * 100 + 3 * 100 = 350 (€)
+
+reales BIP (nominales BIP deflationiert, meistens auf einem Basisjahr basiert dargestellt):
+	2010 mit Basisjahr 2009: 0.25 * 100 + 1.5 * 100 = 175 (€)
+
+anmerkung: realer Wert = nominal Wert / Preisniveau
+
+interessante Anmerkung: 
+gilt auch für Schuldniveau, nominale Schuldendarstellung haben keine Aussagekraft => Irreführung
+gleiches für unsere Rekordsteuereinnahmen
+
+BIP-Deflator (ist ein Preisnieveau):
+	BIP-Deflator = Preisniveau = nominal / real
+
+
+Cobb Douglas Produktionsformel:
+	Y = Menge des produzierten Outputs
+	A = verfügbares technologisches Wissen
+	K = Realkapital
+	L = Anzahl der Arbeitskräfte
+	\beta = Elastizität des Outputs in Bezug auf den Arbeitseinsatz
+	\alpha = Elastizität des Outputs in Bezug auf den Kapitaleinsatz (wie steig der Output, wenn der Kapitaleinsatz steigt/sinkt)
+
+	Y = AF(K,L) = A * K^\alpha * L^\beta
+
+	Aufgabe mit Werten (siehe Zettel):
+	>>> 1.0 * 49.0 ** (1.0 / 2.0)  * 81.0 ** (1.0/2.0)
+	63.0
+
+
+Homogene Funktionen: Y(x*K, x*L) = x^r * Y(K, L)
+r: Homogenitätsgrad
+
+\alpha + \beta = r
+r<1 abnehmende Skalenerträge
+r>1 zunehmende Skalenerträge
+
+3c) (migrantendiskussion:)
+Migration alleine erhöht das Wachstumspotential einer Volkswirtschaft nicht zwangsläufig,
+Integration in den Arbeitsmarkt und die Gesellschaft sind Voraussetzungen
+
+3d)
+Y / L = AF(K,L) / L = (A * K^\alpha * L^\beta) / L = (A * K^\alpha) / L
+BSP: K/L = 4 & A = 1 => 4^(1/2)
+Was soll der Zauber?: Berechnung pro Kopf
+
+wie stellt man skalarerträge fest: y = (2*k)^(1/2) \approx 2.83
+=> keine verdopplung => sinkende skalenerträge
+
+3e)
+plot k^(1/2)

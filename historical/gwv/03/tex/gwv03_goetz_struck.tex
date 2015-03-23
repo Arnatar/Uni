@@ -1,0 +1,114 @@
+\documentclass[a4paper,11pt,fleqn]{scrartcl}
+\usepackage[german,ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[top=1.3in, bottom=1.2in, left=0.9in, right=0.9in]{geometry}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{url}
+
+% ------------------------------------------------------
+
+% Commands
+
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO}}}
+\newcommand{\authorinfo}{Arne Struck, Knut Götz}
+\newcommand{\titleinfo}{GWV-Abgabe zum 31.10.2014}
+\newcommand{\qed}{\ \square}
+
+
+% ------------------------------------------------------
+
+% Title & Pages
+
+\title{\titleinfo}
+\author{\authorinfo}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\authorinfo}
+\fancyhead[R]{\titleinfo}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+\maketitle
+
+\section*{1.1}
+\subsection*{1.}
+Repräsentation: siehe java-files.
+\subsection*{2.}
+BFS-Impl: siehe java-files. \\
+Beispieloutput (eigentlich keine linebreaks, die sind nur für verbatim):
+\begin{verbatim}
+Starting BFS.
+Goal found!
+The path: START EAST EAST EAST NORTH NORTH NORTH EAST EAST EAST EAST SOUTH 
+EAST EAST EAST EAST SOUTH SOUTH WEST WEST WEST SOUTH SOUTH SOUTH EAST EAST
+xxxxxxxxxxxxxxxxxxxx
+x      ppppp       x
+x      pxxxppppp   x
+x      px xxxxxp   x
+x   sppp  x pppp   x
+x       x x pxxxxxxx
+x  xx xxxxx p      x
+x      x    ppg    x
+x      x           x
+xxxxxxxxxxxxxxxxxxxx
+\end{verbatim}
+
+\newpage
+
+\subsection*{3.}
+DFS-Impl: siehe java-files. \\
+Beispieloutput (eigentlich keine linebreaks, die sind nur für verbatim):
+\begin{verbatim}
+Starting DFS
+Goal found!
+The path: START NORTH NORTH NORTH EAST EAST EAST EAST EAST EAST EAST EAST 
+EAST EAST EAST EAST EAST EAST SOUTH SOUTH WEST WEST WEST SOUTH WEST WEST 
+WEST WEST SOUTH SOUTH EAST EAST EAST SOUTH
+xxxxxxxxxxxxxxxxxxxx
+x   pppppppppppppppx
+x   p   xxx       px
+x   p   x xxxxxppppx
+x   s     xppppp   x
+x       x xp xxxxxxx
+x  xx xxxxxpppp    x
+x      x      g    x
+x      x           x
+xxxxxxxxxxxxxxxxxxxx
+\end{verbatim}
+
+\subsection*{4.}
+\begin{itemize}
+	\item DFS findet nicht den kürzesten Pfad.\\
+    \item DFS besucht potentiell weniger Knoten, als BFS (best case)\\
+    \item BFS kann unter umständen eine größere Frontier aufbauen
+\end{itemize}
+
+\subsection*{5.}
+Geht man davon aus, dass es in dem Maze ein Ziel gibt, dass das Ziel vom Start zu erreichen ist, d.h. es gibt einen Pfad und dass das Maze nicht extrem groß ist (sodass es bei BFS zu Speicherproblemen führt), dann sehen wir keine Probleme.
+Weitere Bedingungen für unsere Implementation sind, dass genau ein Start und ein Ziel definiert ist.
+Beide Suchverfahren werden (früher oder später) einen Pfad finden.\\
+Allerdings sind die Suchverfahren für bestimmte Environments besser bzw. schlechter geeignet.
+
+\begin{verbatim}
+xxxxxxxxx
+xg      x
+x       x
+x       x
+x       x
+x       x
+x      sx
+xxxxxxxxx
+\end{verbatim}
+\newpage
+Ein BFS besucht in diesem Fall alle Punkte während eine DFS, die zuerst nach Westen und (wenn Westen blockiert) dann nach Norden sucht, wesentlich schneller das Ziel erreicht. \\
+Ein Maze, dass BFS bevorzugt wäre schwieriger (nur mit Wissen über die Reihenfolge in der der spezifische DFS auf den Stack pusht) zu konstruieren, dies ist allerdings bei weitem nicht unmöglich.
+\subsection*{6.}
+Man kann DFS so erweitern, dass auch der kürzeste Pfad gefunden wird. Dann müssen alle möglichen Pfade betrachtet und daraufhin in ihrer Länge verglichen werden. Damit treibt man jedoch die Raumkomplexität in die Höhe.
+\end{document}
