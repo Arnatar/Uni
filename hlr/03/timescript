@@ -1,6 +1,0 @@
-#!/bin/bash
-
-host=$(hostname)
-time=$(date +%s.%3N)
-
-echo $host: $time
