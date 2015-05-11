@@ -17,7 +17,7 @@
 \setbeamercolor{block title}{bg=darkred}
 \setbeamercolor*{item}{fg=darkred!90}
 
-\title{Wochenbericht 02}
+\title{Wochenbericht 02.5}
 \subtitle{}
 \author{Arne Struck}
 \institute{Universität Hamburg, Fachschaft Informatik, Abschlussarbeitenseminar}
@@ -35,7 +35,7 @@
         	\begin{itemize}
 	        	\item Exposé Anfangen
         		\item mit TAMS auf ein Thema einigen
-        		\item Ausarbeitung des Themas \(\Rightarrow\) fertig zur Anmeldung
+        		\item Ausarbeitung des Themas
         		\item Literatursuche
         		\item Einarbeitung in das Thema
         	\end{itemize}
@@ -57,7 +57,7 @@
 
 \begin{frame}{Themenvorschläge zur Ausarbeitung}
 \begin{block}{}
-	Analyse von größeren Datenmengen (Klimadaten) durch Hadoop-Erweiterungen mit anschließender Geschwindigkeitsanalyse \\
+	Analyse von größeren Datenmengen (Klimadaten) durch Hadoop(-Erweiterungen) mit anschließender Geschwindigkeitsanalyse \\
 	HPC is dying: \cite{hpcDies}
 \end{block}
 \begin{block}<2>{}
@@ -67,26 +67,29 @@
 \end{frame}
 
 \begin{frame}{neuer (alter) Plan}
-	\begin{itemize}
-		\item Thema wählen
-	    \item Exposé nochmal anfangen
-        \item mit WR Ausarbeitung des Themas (\(\Rightarrow\) fertig zur Anmeldung?)
-		\item Literatursuche
-    	\item Einarbeitung in das Thema
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{grober Plan nach der Anmeldung}
-	\begin{tabular}[ht]{|l|p{4cm}|l|}
-		\hline
-		\textbf{Phase} & \textbf{Gegenstand} & \textbf{veranschlagte Zeit} \\ \hline
-		Recherche & Literaturrecherche \newline Theorieteil der Arbeit & 2 Wochen \\ \hline
-		Design & Theoretische Umsetzung & 3 Wochen \\ \hline
-		Implementation & Implementation, \newline Datenerhebung, etc. & 2 Wochen \\ \hline
-		Evaluation & Analyse, \newline Interpretation & 2 Wochen \\ \hline
-		Abschluss & Schluss schreiben und Überarbeitung & 1 Woche \\ \hline
-		Restzeit & Pufferzone für Phasen, die länger dauern & 2 Wochen \\ \hline
-	\end{tabular}
+\begin{columns}[t]
+    \begin{column}{.5\textwidth}      	
+      	\begin{block}{Plan:}
+        	\begin{itemize}
+				\item Thema wählen
+	   			\item Exposé nochmal anfangen
+		        \item mit WR Ausarbeitung des Themas
+				\item Literatursuche
+		    	\item Einarbeitung in das Thema
+			\end{itemize}
+    	\end{block}
+    \end{column}
+	\begin{column}{.5\textwidth}
+		\uncover<2> {
+		\begin{block}{done (this week):}
+        	\begin{itemize}
+	        	\item Einarbeitung in Hadoop und R
+    	    	\item weitere Beschäftigungen mit Themen
+        	\end{itemize}
+		\end{block}
+		}
+	\end{column}
+\end{columns}
 \end{frame}
 
 \setbeamertemplate{bibliography item}{\insertbiblabel}
