@@ -15,6 +15,7 @@
 *.ist
 *.lof
 *.log
+*.bak
 *.lot
 *.maf
 *.mtc
