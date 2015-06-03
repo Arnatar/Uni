@@ -1,0 +1,151 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[ngerman]{babel}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{color}
+
+
+\definecolor{darkred}{rgb}{0.75,0,0.3}
+\usetheme{Ilmenau}
+\usecolortheme{beaver}
+\setbeamercovered{invisible}
+\beamertemplatenavigationsymbolsempty % macht die Navigationsleiste weg
+\setbeamercolor{block body}{bg=darkred!7.5}
+\setbeamercolor{block title}{bg=darkred}
+\setbeamercolor*{item}{fg=darkred!90}
+
+\lstset{
+  basicstyle=\footnotesize
+}
+
+\title{Wochenbericht 3}
+\subtitle{}
+\author{Arne Struck}
+\institute{Universität Hamburg, Fachschaft Informatik, Abschlussarbeitenseminar}
+\date{\today}
+
+\begin{document}
+\begin{frame}
+\maketitle
+\end{frame}
+\begin{frame}{Thema:}
+	\begin{block}{}
+		Analyse und Nachverarbeitung großer wissenschaftlicher Datenmengen mit Big-Data-Tools
+	\end{block}
+\end{frame}
+
+
+\begin{frame}{Was ist passiert?}
+\begin{columns}[t]
+    \begin{column}{.5\textwidth}      	
+      	\begin{block}{Plan:}
+        	\begin{itemize}
+				\item Thema wählen
+	   			\item Exposé nochmal anfangen
+		        \item mit WR Ausarbeitung des Themas
+				\item Literatursuche
+		    	\item Einarbeitung in das Thema
+			\end{itemize}
+    	\end{block}
+    \end{column}
+	\begin{column}{.5\textwidth}
+		\uncover<2> {
+		\begin{block}{umgesetzt:}
+        	\begin{itemize}
+        		\item Thema gewählt (sort of)
+	        	\item Einarbeitung in Hadoop
+	        	\begin{itemize}
+	        		\item Aufsetzen eines 1 Node Clusters
+	        		\item Einrichtung von Pig
+	        		\item Einrichtung von Hive 
+	        	\end{itemize}
+	        	\item Ein wenig damit gearbeitet
+    	    	\item Exposé angefangen
+    	    	\item Literatursuche (leider nicht all zu erfolgreich)
+    	    	\item SciDB angesehen
+        	\end{itemize}
+		\end{block}
+		}
+	\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Apache Hadoop}
+	\begin{block}{}
+		Freies Java-Framework zur Berechnung von parallelisierbaren Problemen auf verteilten Systemen. 
+		Die Verteilung erfolgt halbautomatisiert.
+	\end{block}		
+	\quad \\
+	\uncover<2-3> {
+	Hauptkomponenten:
+	\begin{itemize}
+		\item HDFS (Hadoop distributed file system)
+		\item MapReduce Implementation
+	\end{itemize} 
+	}
+
+	\uncover<3> {
+	Einige Erweiterungen (+Hauptfunktion):
+	\begin{itemize}
+		\item Hive (SQL-artige Abfragesprache HiveQL)
+		\item Pig (Skriptsprache, um MapReduce overhead zu verringern)
+	\end{itemize}
+	}
+\end{frame}
+
+\begin{frame}[fragile]{HiveQl select statement}
+\begin{lstlisting}
+[WITH CommonTableExpression (, CommonTableExpression)*]    
+SELECT [ALL | DISTINCT] select_expr, select_expr, ...
+FROM table_reference
+[WHERE where_condition]
+[GROUP BY col_list]
+[CLUSTER BY col_list
+  | [DISTRIBUTE BY col_list] [SORT BY col_list]
+]
+[LIMIT number]
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Pig (Latin)}
+Pig:
+\begin{itemize}
+	\item Pig environment
+	\item Pig Latin
+\end{itemize}
+
+Pig Latin:
+\begin{itemize}
+	\item Load \(\Rightarrow\) Transform \(\Rightarrow\) Dump or Store
+	\item Ausführung per Konsole, Interpreter oder eingebettet in Java Programme
+	\item Was passiert: Script wird per MapReduce auf den Cluster verteilt und ausgeführt 
+	\item (Angeblich) komplett, aber UDFs (User defined functions) in Java, Javascript, Python, Ruby möglich
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Plan für die nächsten Wochen:}
+	\begin{block}{Plan}
+		\begin{itemize}
+			\item Konflikt beseitigen
+			\item Thema/Titel konkretisieren
+			\item Kenntnisse erweitern
+			\item Exposé endlich fertig stellen
+			\item Anmelden
+			\item Literatursuche
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+\setbeamercolor{bibliography item}{parent=palette primary}
+\setbeamercolor*{bibliography entry title}{parent=palette primary}
+\begin{frame}[shrink=10]{References}
+\nocite{*}
+\bibliographystyle{alpha}
+\bibliography{literature} 
+\end{frame}
+
+\end{document}

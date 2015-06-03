@@ -57,7 +57,7 @@
 
 \begin{titlepage}
 	\begin{center}
-		{\titlefont\huge PLATZHALTER \par}
+		{\titlefont\huge (Arbeitstitel: Geschwindigkeitsanalyse eines Hadoop-Systems in Bezug auf wissenschaftliche / Klima-Daten) \par}
 
 		\bigskip
 		\bigskip
@@ -80,7 +80,7 @@
 		E-Mail-Adresse: 
 			& \href{mailto:1struck@informatik.uni-hamburg.de}{1struck@informatik.uni-hamburg.de} \\ 
 		%Matrikelnummer: & 1234567 \\
-		Studiengang: & Informatik \\
+		Studiengang: & Bsc. Informatik \\
 		\\
 		Betreuer: & Julian Kunkel \\
 		\\
@@ -93,11 +93,28 @@
    
 \tableofcontents
 
-\chapter{Problemstellung}
-\label{Problemstellung}
-
 \chapter{Motivation}
 \label{Motivation}
+Der Bereich des High Performance Computing ist seit Jahrzehnten ein wichtiges Forschungs- und Anwendungsgebiet der Informatik.
+Oftmals befasst sich das High Performance Computing mit Fragen der Meteorologie, Klimatologie, theoretischen Physik und Biologie.
+Die Lösungen dieser Fragen wird durch die Simulation von Modellen aus dem entsprechenden Bereich und die Analyse von gemessenen und berechneten Daten approximiert. \\
+Dies sind meist sehr rechenintensive Tätigkeiten, daher sind extrem leistungsstarke Rechner von Nöten.
+Heutzutage werden zu diesem Zweck meistens Cluster, also verteilte Rechensysteme eingesetzt.
+Bei der Realisierung der oben erwähnten Tätigkeiten auf verteilten Systemen ist die Frage der Parallelisierung von Berechnungen eine entscheidende. 
+Im High Performance Computing Bereich wird dies seit Jahrzehnten großteilig durch Message Passing Interface MPI (beispielsweise implementiert durch Open MPI) erreicht \cite{HLR}. \\
+Durch das Aufkommen des Internets als Massenmedium in den letzten beiden Jahrzehnten hat sich eine Ökonomie entwickelt, welche große Datenmengen managen und verarbeiten muss.
+Auch diese Ökonomie, deren Geschäftsfeld allgemein als Big Data bezeichnet wird, setzt stark auf verteilte Systeme.
+Allerdings wird hier nicht auf MPI für das Arbeiten auf verteilten Systemen gesetzt, sondern andere Lösungen für die Problematiken, welche verteilte Berechnungen mit sich bringen, bevorzugt.
+Als Beispiel für solche Lösungen wären spark und hadoop zu nennen, welche nicht auf dem MPI-Technologie Stack aufbauen, sondern neue Herangehensweisen darstellen. \\
+Diese Herangehensweisen versprechen leichtere Nutzbarkeit und Umsetzbarkeit durch Reduktion des durch die Parallelisierung bedingten Overheads im Programm, sowie höhere Flexibilität des Codes.
+Analysen der Interessenlagen bezüglich der verschiedenen Herangehensweisen weisen auf einen Trend in Richtung der Lösungen der Big Data Unternehmen auf \cite{hpcDies}.
+Die ''Big Data Unternehmen'' besitzen weiterhin das Potential High Performance Computing in Größenordnungen anzubieten, welche durchaus die der HPC Community übersteigen (erste Tendenzen in diese Richtung sind momentan zu beobachten \cite{HLR}). \\
+Wegen der Verschiebung der Interessenslagen, der relativen Schwerfälligkeit MPIs und nicht zuletzt der Übermacht der Privatwirtschaft drängen sich für das klassische HPC die Frage auf, beziehungsweise ob die Lösungen aus der Big Data Ökonomie leistungstechnisch mit MPI konkurrieren können und somit eine zumindest partielle Alternative auch für die momentane High Performance Computing Community darstellen.
+
+
+
+\chapter{Problemstellung}
+\label{Problemstellung}
 
 
 \chapter{Theoretischer Hintergrund}
@@ -108,13 +125,32 @@
 
 \chapter{Zeitplan}
 \label{Zeitplan}
+\begin{table}[h]
+\begin{center}
+\begin{tabular} {|l|p{4cm}|l|}
+	\hline
+	\textbf{Phase} & \textbf{Gegenstand} & \textbf{veranschlagte Zeit} \\ \hline
+	Recherche & Literaturrecherche \newline Theorieteil der Arbeit & 2 Wochen \\ \hline
+	Design & Theoretische Umsetzung & 3 Wochen \\ \hline
+	Implementation & Implementation, \newline Datenerhebung, etc. & 2 Wochen \\ \hline
+	Evaluation & Analyse, \newline Interpretation & 2 Wochen \\ \hline
+	Abschluss & Schluss schreiben und Überarbeitung & 1 Woche \\ \hline
+	Restzeit & Pufferzone für Phasen, die länger dauern & 2 Wochen \\ \hline
+\end{tabular}
+\end{center}
+\caption{Zeitplan}
+\label{tab:timeplan}
+\end{table}
+Hierbei ist zu beachten, dass dies die Bearbeitungsdauer widerspiegelt und nicht den Bearbteitungszeitraum.
+Die Restzeit ist für die Arbeiten vorgesehen, bei denen sich herauskristalisiert, dass die veranschlagte Zeit nicht genügt.
+Da der Tag der Anmeldung noch nicht final steht, kann ich leider keine Angaben für den Bearbeitungszeitraum machen.
 
 
 
 
 
 \nocite{*}
-\bibliographystyle{plain}
+\bibliographystyle{alpha}
 \bibliography{literature}
 
 % wird wohl nicht nötig sein, aber falls wider erwarten was auftaucht
