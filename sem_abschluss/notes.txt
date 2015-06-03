@@ -1,0 +1,17 @@
+BigData:
+hadoop (apache lizenz => open software): 
+	-(Java)Framework für verteilt arbeitende Software
+	-based on:
+		-eigenes verteiltes Dateisystem (inspiriert vom google file system)
+		-MapReduce impl
+			-MapReduce: google Algorithmus zur Verteilung von Berechnung in verteilten Systemen
+Erweiterungen:
+	-Hive: Erweiterung von Hadoop um SQL-artige Abfragesprache (Facebook, open source inzwischen)
+	-Pig: Verspricht: 
+		-einfach erstellbare highlevel MapReduce Programme
+		-eigenständige Optimierungen
+
+I/O:
+	soll in trainingsdaten für machine learning zur Klassifikation der IO unterschiedlicher Programme münden
+	IO macht großen Teil der Performancefaktoren aus, dennoch relativ wenig erforscht => DKRZ hat selber keine Ahnung wie viel Performance durch mangelnde IO flöten geht.
+	Monitor-systeme: "Quanteneigenschaften" durch overhead beim Messen. 
