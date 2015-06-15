@@ -15,3 +15,6 @@ I/O:
 	soll in trainingsdaten für machine learning zur Klassifikation der IO unterschiedlicher Programme münden
 	IO macht großen Teil der Performancefaktoren aus, dennoch relativ wenig erforscht => DKRZ hat selber keine Ahnung wie viel Performance durch mangelnde IO flöten geht.
 	Monitor-systeme: "Quanteneigenschaften" durch overhead beim Messen. 
+
+
+	Latex: ToDo Notes für Stichpunkte
