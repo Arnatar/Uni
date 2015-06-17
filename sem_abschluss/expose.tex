@@ -33,6 +33,8 @@
 \usepackage{pgf}
 \usepackage{amsmath}
 \usepackage{placeins}
+\usepackage{titletoc}
+\usepackage{todonotes}
 
 \lstset{
 	basicstyle=\ttfamily,
@@ -57,7 +59,7 @@
 
 \begin{titlepage}
 	\begin{center}
-		{\titlefont\huge (Arbeitstitel: Geschwindigkeitsanalyse eines Hadoop-Systems in Bezug auf wissenschaftliche / Klima-Daten) \par}
+		{\titlefont\huge Arbeitstitel: Analyse Wissenschaftlicher Daten mit BigData Werkzeugen \par}
 
 		\bigskip
 		\bigskip
@@ -90,11 +92,13 @@
 
 \thispagestyle{empty}
 
-   
+\newpage\null\thispagestyle{empty}\newpage
 \tableofcontents
+\newpage\null\thispagestyle{empty}\newpage
 
-\chapter{Motivation}
-\label{Motivation}
+\chapter{Einleitung}
+\label{einleitung}
+\section{Motivation}
 Der Bereich des High Performance Computing ist seit Jahrzehnten ein wichtiges Forschungs- und Anwendungsgebiet der Informatik.
 Oftmals befasst sich das High Performance Computing mit Fragen der Meteorologie, Klimatologie, theoretischen Physik und Biologie.
 Die Lösungen dieser Fragen wird durch die Simulation von Modellen aus dem entsprechenden Bereich und die Analyse von gemessenen und berechneten Daten approximiert. \\
@@ -105,23 +109,41 @@ Im High Performance Computing Bereich wird dies seit Jahrzehnten großteilig dur
 Durch das Aufkommen des Internets als Massenmedium in den letzten beiden Jahrzehnten hat sich eine Ökonomie entwickelt, welche große Datenmengen managen und verarbeiten muss.
 Auch diese Ökonomie, deren Geschäftsfeld allgemein als Big Data bezeichnet wird, setzt stark auf verteilte Systeme.
 Allerdings wird hier nicht auf MPI für das Arbeiten auf verteilten Systemen gesetzt, sondern andere Lösungen für die Problematiken, welche verteilte Berechnungen mit sich bringen, bevorzugt.
-Als Beispiel für solche Lösungen wären spark und hadoop zu nennen, welche nicht auf dem MPI-Technologie Stack aufbauen, sondern neue Herangehensweisen darstellen. \\
+Als Beispiel für Komplettlösungen wären spark und hadoop zu nennen, welche nicht auf dem MPI-Technologie Stack aufbauen. 
+Allerdings existieren auch Werkzeuge, welche sich in die bisherigen Systeme leichter integrieren lassen, wie das Data Base Management System Rasdaman. \\
 Diese Herangehensweisen versprechen leichtere Nutzbarkeit und Umsetzbarkeit durch Reduktion des durch die Parallelisierung bedingten Overheads im Programm, sowie höhere Flexibilität des Codes.
 Analysen der Interessenlagen bezüglich der verschiedenen Herangehensweisen weisen auf einen Trend in Richtung der Lösungen der Big Data Unternehmen auf \cite{hpcDies}.
 Die ''Big Data Unternehmen'' besitzen weiterhin das Potential High Performance Computing in Größenordnungen anzubieten, welche durchaus die der HPC Community übersteigen (erste Tendenzen in diese Richtung sind momentan zu beobachten \cite{HLR}). \\
-Wegen der Verschiebung der Interessenslagen, der relativen Schwerfälligkeit MPIs und nicht zuletzt der Übermacht der Privatwirtschaft drängen sich für das klassische HPC die Frage auf, beziehungsweise ob die Lösungen aus der Big Data Ökonomie leistungstechnisch mit MPI konkurrieren können und somit eine zumindest partielle Alternative auch für die momentane High Performance Computing Community darstellen.
+Wegen der Verschiebung der Interessenslagen, der relativen Schwerfälligkeit MPIs und nicht zuletzt der Übermacht der Privatwirtschaft drängen sich für das klassische HPC die Frage auf, beziehungsweise ob die Lösungen aus der Big Data Ökonomie leistungstechnisch mit MPI konkurrieren können und somit eine zumindest partielle Alternative auch für die momentane High Performance Computing Community darstellen.\\
+Die momentane Messungslage deutet darauf hin, dass die Werkzeuge aus der Big Data Industrie für die Berechnung von Simmulationen nicht ausreicht \cite{HLR}.
+Allerdings ist es möglich, dass ihre Leistungsfähigkeit für die Nachbereitung und Analysetätigkeiten im HPC-Bereich ausreichend ist. \\
+\todo[inline]{2-3 Sätze Beschreibung gestalten}
 
-
+\section{Zielsetzung}
+\todo[inline]{Analyse der Eignung der gewählten Werkzeuge zur Nachbereitung wissenschaftlicher Daten, ausformulieren}
 
 \chapter{Problemstellung}
 \label{Problemstellung}
-
+\todo[inline, caption={}]{\begin{itemize}
+	\item Wahl der Werkzeuge
+	\item Entwurf von Testdaten
+	\item Herangehensweise an Eignungsanalyse
+	\item Bewertungskriterien erstellen
+\end{itemize}}
 
 \chapter{Theoretischer Hintergrund}
 \label{Theoretischer Hintergrund}
+\todo[inline]{Beschreibung der Nachbereitung des wissenschaftlichen Rechnens}
 
 \chapter{Methodik und Vorgehensweise}
 \label{Methodik und Vorgehensweise}
+In diesem Kapitel wird ein Vorgehen bei der Lösung der in \ref{Problemstellung} beschriebenen Problemstellung entworfen.
+\section{Design}
+Für die 
+\section{Implemenatation}
+
+\section{Ergebnisevaluation}
+
 
 \chapter{Zeitplan}
 \label{Zeitplan}
@@ -130,24 +152,58 @@ Wegen der Verschiebung der Interessenslagen, der relativen Schwerfälligkeit MPI
 \begin{tabular} {|l|p{4cm}|l|}
 	\hline
 	\textbf{Phase} & \textbf{Gegenstand} & \textbf{veranschlagte Zeit} \\ \hline
-	Recherche & Literaturrecherche \newline Theorieteil der Arbeit & 2 Wochen \\ \hline
-	Design & Theoretische Umsetzung & 3 Wochen \\ \hline
-	Implementation & Implementation, \newline Datenerhebung, etc. & 2 Wochen \\ \hline
-	Evaluation & Analyse, \newline Interpretation & 2 Wochen \\ \hline
+	Recherche & Literaturrecherche \newline Theorieteil der Arbeit & 1 Woche \\ \hline
+	Design & Theoretische Umsetzung & 2 Wochen \\ \hline
+	Werkzeug 1 & Implementation, \newline Datenerhebung, mit Werkzeug 1 & 2 Wochen \\ \hline
+	Werkzeug 2 & Implementation, \newline Datenerhebung, mit Werkzeug 2 & 2 Wochen \\ \hline
+	Werkzeug 3 & Implementation, \newline Datenerhebung, mit Werkzeug 3 & 2 Wochen \\ \hline
+	Evaluation & Analyse, \newline Interpretation & 1 Woche \\ \hline
 	Abschluss & Schluss schreiben und Überarbeitung & 1 Woche \\ \hline
-	Restzeit & Pufferzone für Phasen, die länger dauern & 2 Wochen \\ \hline
+	Restzeit & Pufferzone für Phasen, die länger dauern & 1 Woche \\ \hline
 \end{tabular}
 \end{center}
 \caption{Zeitplan}
 \label{tab:timeplan}
 \end{table}
-Hierbei ist zu beachten, dass dies die Bearbeitungsdauer widerspiegelt und nicht den Bearbteitungszeitraum.
-Die Restzeit ist für die Arbeiten vorgesehen, bei denen sich herauskristalisiert, dass die veranschlagte Zeit nicht genügt.
-Da der Tag der Anmeldung noch nicht final steht, kann ich leider keine Angaben für den Bearbeitungszeitraum machen.
+\todo[inline]{Bearbeitungsdauer widerspiegelt, nicht der Bearbteitungszeitraum}
+\todo[inline]{Restzeit ist für Arbeiten vorgesehen, bei denen sich herauskristalisiert, dass die veranschlagte Zeit nicht genügt.}
 
 
+\chapter{Vorschlag Struktur der Arbeit}
+\label{strukturBa}
+\titlecontents{chapter}[0pt]{}{}{}{}
+\contentsline {chapter}{\numberline {1}Einleitung}{}{} 
+\contentsline {section}{\numberline {1.1}Motivation}{}{} 
+\contentsline {section}{\numberline {1.2}Zielsetzung}{}{}
+\contentsline {chapter}{\numberline {2}Grundlagen}{}{} 
+\contentsline {section}{\numberline {2.1}Beschreibung Werkzeug 1}{}{}
+\todo[inline, size=\small]{wahrscheinlich R mit Big Data Erweiterungen}
+\contentsline {section}{\numberline {2.2}Beschreibung Werkzeug 2}{}{}
+\todo[inline, size=\small]{wahrscheinlich SciDB}
+\contentsline {section}{\numberline {2.3}Beschreibung Werkzeug 3}{}{}
+\todo[inline, size=\small]{wahrscheinlich Rasdaman}
+\contentsline {chapter}{\numberline {3}Anforderungen}{}{}
+\contentsline {chapter}{\numberline {4}Design}{}{}
+\contentsline {section}{\numberline {4.1}Entwurf Bewerungskriterien}{}{}
+\contentsline {section}{\numberline {4.2}Entwurf Funktionalitäten}{}{}
+\contentsline {section}{\numberline {4.3}Entwurf Testdatensätze}{}{}
+\contentsline {chapter}{\numberline {5}Implementation}{}{}
+\contentsline {section}{\numberline {5.1}Implementationen der Funktionalitäten}{}{}
+\contentsline {section}{\numberline {5.2}Optimierungen der Testdaten}{}{}
+\contentsline {chapter}{\numberline {6}Evaluation}{}{}
+\contentsline {section}{\numberline {6.1}Vergleich der gemessenen Daten}{}{}
+\contentsline {section}{\numberline {6.2}Vergleich der gemessenen Daten (optimierte Datenspeicherung)}{}{}
+\contentsline {section}{\numberline {6.3}Interpretation möglicher Anwendungsfälle}{}{}
+\contentsline {chapter}{\numberline {7}Schluss}{}{}
+\contentsline {section}{\numberline {7.1}Zusammenfassung}{}{}
+\contentsline {section}{\numberline {7.2}Fazit}{}{}
+\contentsline {section}{\numberline {7.3}Ausblick}{}{}
+\contentsfinish
 
-
+\chapter{Möglicher Ausblick}
+\label{ausblick}
+Die gestalteten und implementierten Funktionalitäten können die Grundlage einer Erweiterung für wissenschaftliches Rechnen für das am besten geeignete Werkzeug darstellen.
+\todo[inline]{Erweitern}
 
 \nocite{*}
 \bibliographystyle{alpha}
