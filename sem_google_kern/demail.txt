@@ -1,0 +1,25 @@
+demail
+Intention:
+	-rechtskräftiges digitales dokument (ähnlich zum einschreiben)
+	-sonderstellungsmerkmal gegenüber googlemail bspw.
+	
+	
+Eigenschaften:
+	-(theoretisch) ende-zu-ende verschlüsselter mail-verkehr
+	-ansonsten tls(ssl3.0) basierte transportweg verschlüsselung
+	-mailkonto (versand und abholbestätigung (einschreiben))
+	-auf ausweis basierte personenzuordnung (bei der beantragung einer solche adresse => nichtg "klickbar")
+	-kostenpflichtig
+	-cloudspeicher
+	
+Kritik:
+	-bullshit made in germany:
+		https://www.youtube.com/watch?v=p56aVppK2W4
+	-sicherheit komplett kaputt (ccc)
+	
+	
+stirbt vor sich hin
+
+
+
+email made in germany

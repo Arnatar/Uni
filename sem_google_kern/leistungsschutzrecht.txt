@@ -1,0 +1,30 @@
+Lex Google - wie schnell eine maßnahme backfired
+vg media- verband deutscher printmedien
+
+snippets, die angeboten werden müssen bezahlt werden.
+u.a. google news, aber auch google dienst selber.
+
+pro:
+	-snippets (von artikeln) stellen für internetdienste attraktivität zu verfügung, werbeeinnahmen werden aber nicht geteilt
+		http://www.tagesschau.de/inland/leistungsschutzrechtfaq102.html
+	-zeitungen sterben, schützt uns (bundesverband deutscher zeitungsverleger)
+		http://www.bdzv.de/medienpolitik/leistungsschutzrecht-fakten/
+contra:
+	-Urheberrecht reicht aus
+	-Indizierungsausschluss möglich
+	-beiderseitiges serviceverhältnis (wer mehr als ein snippet will, geht auf die ursprungsseite)
+	-"gelbe seiten zahlen auch nicht fürs auflisten"
+	-umsetzungsprobleme bei der indizierung (da agbs maschinenlesbar?)
+
+
+ablauf:
+-beschlossen.
+-viele dienste (bspw yahoo) weigern sich für snippets zu zahlen, stellen die indizierung der printmedienseiten auf ihen news seiten ab.
+-google macht das gleiche (zeitlich versetzt)
+-besucherzahlen auf vga-media seiten brechen ein
+-vg-media klagt gegen google, weil missbrauch des quasimonopols => zwang zur geldzahlung?!
+-google gewinnt
+-gegenüber google knicken vg-media mitglieder ein und erlauben die indizierung kostenlos-
+=> googles marktmacht zementiert
+
+=>wenn man etwas machen möchte, um die internetkonzerne einzuschränken in ihrer marktmacht, dann verdammt nochmal geht euch informieren und hört nicht nur auf die lobbygruppe (viele hatten so einen verlauf vorhergesagt (bspw max plank institut)

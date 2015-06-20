@@ -1,0 +1,37 @@
+Definition:
+	Gleichberechtigte Transport aller Daten in Datennetzen
+	oder doch die erklärung, die den tag beanspruckt?:
+	http://www.heise.de/ct/ausgabe/2013-16-Irrtuemer-in-Sachen-Netzneutralitaet-2318284.html
+	
+
+
+	-wichtig im Kampf gegen Monopole, da ansonsten Monopole sich priorisierungen von isps und netzbetreibern erkaufen, was ihre services attraktiver macht.
+	-telekommunikationsverordnung eu parlament weiterhin für netzneutralität, rat dagegen
+		http://www.europarl.europa.eu/sides/getDoc.do?type=REPORT&reference=A8-2015-0019&language=DE
+		will netzneutralität im recht verankern
+	-zero rating scheiße => 2 klassen internet
+	-ausbeutung der freien kommunikation zu gunsten der isps
+
+google sieht netzneutralität als basis fürs inet
+http://engine.is/wp-content/uploads/Company_Sign_On_Letter_051414.pdf
+und hat dafür gelobbyt
+http://www.wired.com/2015/02/google-net-neutrality/
+
+https://www.google.com/takeaction/action/freeandopen/index.html?utm_medium=social&utm_source=googleplus&utm_campaign=netneutrality
+http://www.washingtonpost.com/blogs/the-switch/wp/2014/09/10/googles-studied-silence-on-net-neutrality-has-finally-broken/
+
+	
+		
+wie sehr darf ich auf öttinger rumhacken? pls, der lobby-depp hat es verdient...
+https://www.youtube.com/watch?v=_ZaaSC7Eg4s
+http://www.neurope.eu/article/oettinger-speech-baffles-tech-experts-everyone-else/
+vorherige digitalkommissarin neelie kroes nicht besser
+http://www.faz.net/aktuell/politik/ausland/amerika/netzneutralitaet-obama-fordert-verbot-von-ueberholspuren-im-internet-13259216.html
+
+merkel dagegen
+http://www.zeit.de/digital/internet/2014-12/merkel-netzneutralitaet-spezialdienste-freies-internet-digitalisierung
+obama dafür
+
+
+mobil ist alles scheiße:
+https://netzpolitik.org/2015/unser-report-deckt-auf-verletzungen-der-netzneutralitaet-sind-in-deutschland-schon-jetzt-eher-die-regel/

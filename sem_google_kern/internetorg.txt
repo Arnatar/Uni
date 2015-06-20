@@ -1,0 +1,32 @@
+-Non profit organisation
+-Kooperation zwischen facebook, samsung, mediatek, opera software, nokia, qualcomm
+-Ziel:
+	-Internet für alle
+	-Zugang kostengünstig ("entwicklung kostengünstiger technologie)
+	-effizient gelöst (bspw. stelitenlösung für sehr dünne besiedlung, datenkompression)
+	-"Internet für jeden Menschen auf dieser Erde zugänglich zu machen, ist zu groß und zu wichtig für ein Unternehmen, eine Gruppe oder eine Regierung alleine"
+	-Quelle: https://www.internet.org/about 
+	-Ursprünglich nur Partnerprogramme, inzwischen auch mit bewerbung
+	
+-https://developers.facebook.com/docs/internet-org/participation-guidelines :
+	-We reserve the right to reject or remove services that fail to meet these guidelines.
+	-Any data (e.g., proxy requests) or reporting we provide is deemed Facebook confidential information and cannot be used by you for any advertising purposes or shared with third parties.
+	-Submission and/or approval by Facebook does not guarantee that your site(s) will be made available through the Internet.org.
+	-Veränderungen vorbehalten (rausschmissklausel)
+	=> Internet soll zu facebook morphen?
+	
+Kritik:
+offener Brief von ngos an zuckerberg:	
+	https://www.facebook.com/notes/accessnoworg/open-letter-to-mark-zuckerberg-regarding-internetorg-net-neutrality-privacy-and-/935857379791271 :
+	-Facebook möchte internet neu definieren und übernehmen
+	-Internet.org bietet keinen echten Internetzugang, sondern einen durch Facebook gefilterten
+		=> Netzneutralitätsverletzung
+		=> Verletzung der Meinungsfreiheit durch Zero rating modell (seiten, die isps nicht als datenvolumen zählen, da verhandlungen und recht klein)
+	-Sicherheitstechnik nicht wirklich sicher (kein TLS oder SSL oder HTTPS)
+
+
+	-http://qz.com/333313/milliions-of-facebook-users-have-no-idea-theyre-using-the-internet/
+	-mehr selbst erklärte facebook, als internet nutzer in "3. welt ländern"
+	
+	
+	
