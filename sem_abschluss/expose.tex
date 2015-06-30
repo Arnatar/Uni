@@ -112,12 +112,26 @@ Allerdings wird hier nicht auf MPI für das Arbeiten auf verteilten Systemen ges
 Als Beispiel für Komplettlösungen wären spark und hadoop zu nennen, welche nicht auf dem MPI-Technologie Stack aufbauen. 
 Allerdings existieren auch Werkzeuge, welche sich in die bisherigen Systeme leichter integrieren lassen, wie das Data Base Management System Rasdaman. \\
 Diese Herangehensweisen versprechen leichtere Nutzbarkeit und Umsetzbarkeit durch Reduktion des durch die Parallelisierung bedingten Overheads im Programm, sowie höhere Flexibilität des Codes.
-Analysen der Interessenlagen bezüglich der verschiedenen Herangehensweisen weisen auf einen Trend in Richtung der Lösungen der Big Data Unternehmen auf \cite{hpcDies}.
+Analysen der Interessenlagen bezüglich der verschiedenen Herangehensweisen weisen auf einen Trend in Richtung der Lösungen der Big Data Unternehmen hin, wie in Abbildung \ref{fig:hpcdies1} und \ref{fig:hpcdies2} zu sehen. 
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.8]{./pics/jobgraph.png}
+\caption{Jobangebote im betrachteten Bereich}
+\label{fig:hpcdies1}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1\textwidth, height=150px]{./pics/trends.png}
+\caption{Google Trends: MPI, Spark, Hadoop}
+\label{fig:hpcdies2}
+\end{figure}
 Die ''Big Data Unternehmen'' besitzen weiterhin das Potential High Performance Computing in Größenordnungen anzubieten, welche durchaus die der HPC Community übersteigen (erste Tendenzen in diese Richtung sind momentan zu beobachten \cite{HLR}). \\
 Wegen der Verschiebung der Interessenlagen, der relativen Schwerfälligkeit MPIs und nicht zuletzt der Übermacht der Privatwirtschaft drängen sich für das klassische HPC die Frage auf, beziehungsweise ob die Lösungen aus der Big Data Ökonomie leistungstechnisch mit MPI konkurrieren können und somit eine zumindest partielle Alternative auch für die momentane High Performance Computing Community darstellen.\\
 Die momentane Messungslage deutet darauf hin, dass die Werkzeuge aus der Big Data Industrie für die Berechnung von Simulationen nicht ausreicht \cite{HLR}.
 Allerdings ist es möglich, dass ihre Leistungsfähigkeit für die Nachbereitung und Analysetätigkeiten im HPC-Bereich ausreichend ist. \\
 \todo[inline]{hier kurze Beschreibung gestalten der Nachbereitung gestalten?}
+\FloatBarrier
 
 \section{Zielsetzung}
 \label{ziel}
@@ -136,11 +150,17 @@ Ein weiteres Teilproblem der Eignungsbewertung stellt der Entwurf einheitlicher,
 Hierzu sollten die Daten sowohl eine ausreichende Größe besitzen, als auch aus dem High Performance Computing stammen. \\
 Des weiteren muss eine Herangehensweise zur eigentlichen Eignungsanalyse gestaltet werden. 
 Dieses Teilproblem gliedert sich in zwei Problemteile, zum einen die Definition der Bewertungskriterien, zum anderen Definitionen standardisierter Beispielfunktionalitäten und Herangehensweisen an die Messungen.
+\todo[inline]{unsicher, ob im Sinne des Erfinders}
 
 
 \chapter{Theoretischer Hintergrund}
 \label{Theoretischer Hintergrund}
-\todo[inline]{Beschreibung der Nachbereitung des wissenschaftlichen Rechnens}
+Im HPC-Bereich werden heutzutage große, berechnungsintensive Modelle berechnet. 
+Im wissenschaftlichen Bereich heißt dies, dass es sich um Modelle komplexer Systeme handelt.
+Ein Beispiel wäre hier ein Klimamodell, wobei Einzelheiten wie Wolkensysteme bis hin zu Verdunstungsmengen im Meer berechnet werden.
+Dies ist nötig, da sich bei solchen Systemen, wie dem Klima alle Teilsysteme sich gegenseitig beeinflussen und das Einführen von nicht berechneten Einflüssen durch Konstanten oder das nicht beachten selbiger Einflüsse zu den Ungenauigkeiten der Berechnungen beiträgt. \\
+ 
+\todo[inline]{verlängern}
 
 \chapter{Methodik und Vorgehensweise}
 \label{Methodik und Vorgehensweise}
@@ -149,11 +169,26 @@ In diesem Kapitel wird ein Vorgehen bei der Lösung der in \ref{Problemstellung}
 Nach einer Entscheidung für die Werkzeuge, müssen zu erst die Testdaten zusammengestellt werden.
 Es werden größere Datenmengen benötigt werden, um die Leistungsstärke der Werkzeuge sachgemäß bewerten zu können.
 Allerdings werden auch verschiedene Daten für die Testdaten benötigt. \\
-Der nächste Schritt stellt die Aufstellung geeigneter Vergleichsmetriken dar, welche in den verschiedenen Werkzeugen implementiert werden müssen.
+Der nächste Schritt stellt die Aufstellung geeigneter Vergleichsmetriken dar, welche in den verschiedenen Werkzeugen implementiert werden müssen. \\
+Für Implementationszeit und Berechnungszeit ist die Vergleichsmetrik offensichtlich.
+Dagegen muss für den Benutzerkomfort eine Vergleichsmetrik entworfen werden, hierbei sollten die Einfachheit der Bedienung, die Einarbeitungszeit, Installationszeit ihre Rollen spielen.
+Natürlich handelt es sich hierbei um partiell subjektive Bewertungen, worauf allerdings viele schlecht diskretisierbaren Probleme hinauslaufen. 
+Sie müssen allerdings als solche gekennzeichnet werden.
 
-\section{Implementation}
+\section{Implementation und Verlauf}
+Zu erst müssen die festgelegten Vergleichsmetriken in den verschiedenen Werkzeugen implementiert werden.
+Diese bestehen zum einen aus verschiedenen exemplarischen, in dieser Form auftretender Queries auf die Daten, weiteres Filtern mit anschließender Interpolation und, oder Darstellung der Ergebnisse.
+Hierbei müssen sowohl die Implementationszeit, der Benutzerkomfort, als auch die Berechnungszeit gemessen werden. \\
+Nachdem die Tests auf den standardisierten Testdaten durchgeführt wurden, sollen im Anschluss die Testdaten auf die Anforderungen der Werkzeuge optimiert werden. 
+Hierauf folgt ein zweiter Berechnungsdurchlauf, welcher zeigen soll ob eine abgestimmte Modifikation der Testdaten auf das jeweilige Werkzeug eine Leistungsverbesserung ergibt, wobei auch die Modifikationszeit berücksichtigt werden muss. 
+Dies sollte auch einen Einfluss auf die Bewertung des Benutzerkomforts haben, wenn die Optimierung von vorhandenen Datensätzen für den Nutzer unangenehme Mengen an Mehraufwand mit sich bringt. \\
+Alle Berechnungen müssen mehrmals durchgeführt werden, um dem Einfluss von Outliern bei den Messungen vorzubeugen. \\
 
 \section{Ergebnisevaluation}
+Nun müssen die verschiedenen Messergebnisse verglichen werden, sowohl mit denen von CDOs, als auch mit denen der gewählten Werkzeuge.
+Die Messungsergebnisse dürfen in den Zeitkomponenten nicht die von CDO überschreiten, um das Werkzeug als geeignet zu bewerten. \\
+Des weiteren muss bewertet werden für welche Anwendungsgebiete und Zwecke das entsprechende Werkzeug geeignet ist, beispielsweise die Eignung für interaktives Arbeiten und oder interaktive Darstellung nach der Bearbeitung. 
+Die Bewertung hierzu sollte in Relation zu den Möglichkeiten der bisherigen Verfahrensweisen stehen.
 
 
 \chapter{Zeitplan}
@@ -195,7 +230,7 @@ Der nächste Schritt stellt die Aufstellung geeigneter Vergleichsmetriken dar, w
 \todo[inline, size=\small]{wahrscheinlich Rasdaman}
 \contentsline {chapter}{\numberline {3}Anforderungen}{}{}
 \contentsline {chapter}{\numberline {4}Design}{}{}
-\contentsline {section}{\numberline {4.1}Entwurf Bewerungskriterien}{}{}
+\contentsline {section}{\numberline {4.1}Entwurf Bewertungskriterien}{}{}
 \contentsline {section}{\numberline {4.2}Entwurf Funktionalitäten}{}{}
 \contentsline {section}{\numberline {4.3}Entwurf Testdatensätze}{}{}
 \contentsline {chapter}{\numberline {5}Implementation}{}{}
@@ -213,13 +248,14 @@ Der nächste Schritt stellt die Aufstellung geeigneter Vergleichsmetriken dar, w
 
 \chapter{Möglicher Ausblick}
 \label{ausblick}
-Die gestalteten und implementierten Funktionalitäten können die Grundlage einer Erweiterung für wissenschaftliches Rechnen für das am besten geeignete Werkzeug darstellen.
+Die gestalteten und implementierten Funktionalitäten könnten die Grundlage einer Erweiterung für wissenschaftliches Rechnen für das am besten geeignete Werkzeug darstellen.
+Des weiteren wird, je nach Ergebnis der Arbeit unter Umständen ein erweiterter Praxistest des entsprechenden Werkzeugs von Nöten sein.
 \todo[inline]{Erweitern}
 
 \nocite{*}
 \bibliographystyle{alpha}
 \bibliography{literature}
-
+\todo[inline]{Quellen aktualisieren (ich hasse bibtex pflegen)}
 % wird wohl nicht nötig sein, aber falls wider erwarten was auftaucht
 %\listoffigures
 
