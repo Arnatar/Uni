@@ -86,7 +86,7 @@
 		\\
 		Betreuer: & Julian Kunkel \\
 		\\
-		Hamburg, den \today
+		Hamburg, den 21. Juni 2015%\today
 	\end{tabular}\par}
 \end{titlepage}
 
@@ -108,6 +108,7 @@ Bei der Realisierung der oben erwähnten Tätigkeiten auf verteilten Systemen is
 Im High Performance Computing Bereich wird dies seit Jahrzehnten großteilig durch Message Passing Interface MPI (beispielsweise implementiert durch Open MPI) erreicht \cite{HLR}. \\
 Durch das Aufkommen des Internets als Massenmedium in den letzten beiden Jahrzehnten hat sich eine Ökonomie entwickelt, welche große Datenmengen managen und verarbeiten muss.
 Auch diese Ökonomie, deren Geschäftsfeld allgemein als Big Data bezeichnet wird, setzt stark auf verteilte Systeme.
+
 Allerdings wird hier nicht auf MPI für das Arbeiten auf verteilten Systemen gesetzt, sondern andere Lösungen für die Problematiken, welche verteilte Berechnungen mit sich bringen, bevorzugt.
 Als Beispiel für Komplettlösungen wären spark und hadoop zu nennen, welche nicht auf dem MPI-Technologie Stack aufbauen. 
 Allerdings existieren auch Werkzeuge, welche sich in die bisherigen Systeme leichter integrieren lassen, wie das Data Base Management System Rasdaman. \\
@@ -119,7 +120,6 @@ Analysen der Interessenlagen bezüglich der verschiedenen Herangehensweisen weis
 \caption{Jobangebote im betrachteten Bereich}
 \label{fig:hpcdies1}
 \end{figure}
-
 \begin{figure}[ht]
 \centering
 \includegraphics[width=1\textwidth, height=150px]{./pics/trends.png}
@@ -150,6 +150,7 @@ Ein weiteres Teilproblem der Eignungsbewertung stellt der Entwurf einheitlicher,
 Hierzu sollten die Daten sowohl eine ausreichende Größe besitzen, als auch aus dem High Performance Computing stammen. \\
 Des weiteren muss eine Herangehensweise zur eigentlichen Eignungsanalyse gestaltet werden. 
 Dieses Teilproblem gliedert sich in zwei Problemteile, zum einen die Definition der Bewertungskriterien, zum anderen Definitionen standardisierter Beispielfunktionalitäten und Herangehensweisen an die Messungen.
+
 \todo[inline]{unsicher, ob im Sinne des Erfinders}
 
 
@@ -159,8 +160,27 @@ Im HPC-Bereich werden heutzutage große, berechnungsintensive Modelle berechnet.
 Im wissenschaftlichen Bereich heißt dies, dass es sich um Modelle komplexer Systeme handelt.
 Ein Beispiel wäre hier ein Klimamodell, wobei Einzelheiten wie Wolkensysteme bis hin zu Verdunstungsmengen im Meer berechnet werden.
 Dies ist nötig, da sich bei solchen Systemen, wie dem Klima alle Teilsysteme sich gegenseitig beeinflussen und das Einführen von nicht berechneten Einflüssen durch Konstanten oder das nicht beachten selbiger Einflüsse zu den Ungenauigkeiten der Berechnungen beiträgt. \\
- 
-\todo[inline]{verlängern}
+Dies bedeutet, dass die Ergebnisdaten aus vielen verschiedenen Daten in großen Mengen besteht, von denen für die Meisten Fälle nicht alle relevant sind.
+Für das Beispiel des Klimamodells bedeutet dies, dass die meisten berechneten Daten für jemanden, der sich beispielsweise für die Entwicklung von Temperatudaten nicht von Nöten sind. 
+Da dies zweifellos nicht die einzelne Anwendungsmöglichkeit darstellt, lohnt es sich allerdings die anderen Daten zu berechnen.
+Hier setzt die Nachbereitung ein. \\
+Diese Datenmengen bedeuten allerdings, dass auch die Nachbereitung ein rechenintensiver Prozess ist.
+Bei der Nachbereitung handelt es sich nicht nur um das einfache Abfragen oder Filtern aus dem Datenbestand, sondern um mögliche weitere Berechnungen mithilfe der Daten, das Erstellen von Vergleichsstatistiken oder Visualisierungen.
+Außer im Fall der weiteren Berechnungen, welche parallelisiert werden könnten, sind die meisten Standardvorgehen selbst keine High-Performance-Applications \cite{ppLargeEarth}.
+Des weiteren werden öfters Workarounds für größere Datenmengen gebraucht und für größere, in einem Grid organisierten Datenmengen, welche im HPC Bereich üblich sind, siehe \ref{fig:grid}.
+\begin{figure}[ht]
+\centering
+\missingfigure{\Huge This is a HPC grid}
+\caption{Grid Layout in HPC}
+\label{fig:grid}
+\end{figure}
+Tatsächlich kann dieser Teil der Nachbereitung bereits bei der Klimaberechnung ein Bottle-Neck darstellen \cite{HLR} \cite{ppLargeEarth}.
+\todo[inline,caption={}]{
+\begin{itemize}
+\item noch etwas über CDO (Climate Data Operators), gerade am DKRZ genutzt (commandozeilen-tool für den zweck)?
+\item Datenaufteilung vs Codeaufteilung (datenaufteilung relevant, weil grids erwähnt)
+\item wobei: wie viel grundlagen für hpc?
+\end{itemize}}
 
 \chapter{Methodik und Vorgehensweise}
 \label{Methodik und Vorgehensweise}
