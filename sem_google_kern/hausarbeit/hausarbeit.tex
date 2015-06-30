@@ -1,0 +1,239 @@
+\documentclass[
+	12pt,
+	a4paper,
+	BCOR10mm,
+	%chapterprefix,
+	DIV14,
+	listof=totoc,
+	bibliography=totoc,
+	headsepline
+]{scrreprt}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{lmodern}
+
+\usepackage[footnote]{acronym}
+\usepackage[page,toc]{appendix}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage[pdfborder={0 0 0}]{hyperref}
+\usepackage[htt]{hyphenat}
+\usepackage{listings}
+\usepackage{lscape}
+\usepackage{microtype}
+\usepackage{nicefrac}
+\usepackage{subfig}
+\usepackage{textcomp}
+\usepackage[subfigure,titles]{tocloft}
+\usepackage{units}
+\usepackage{pgf}
+\usepackage{amsmath}
+\usepackage{placeins}
+\usepackage{titletoc}
+\usepackage{todonotes}
+
+\lstset{
+	basicstyle=\ttfamily,
+	frame=single,
+	numbers=left,
+	language=C,
+	breaklines=true,
+	breakatwhitespace=true,
+	postbreak=\hbox{$\hookrightarrow$ },
+	showstringspaces=false,
+	tabsize=4
+}
+
+\renewcommand*{\lstlistlistingname}{Listing catalog}
+
+\renewcommand*{\appendixname}{Appendix}
+\renewcommand*{\appendixtocname}{Appendices}
+\renewcommand*{\appendixpagename}{Appendices}
+
+
+\begin{document}
+\begin{titlepage}
+	\begin{center}
+		{\titlefont\huge Handelt die Politik netzpolitisch im Sinne der Bevölkerung? \par}
+
+		\bigskip
+		\bigskip
+
+		{\titlefont\Large --- Hausarbeit ---\par}
+
+		\bigskip
+		\bigskip
+
+		{\large Seminar: Des Googles Kern\\
+		Fachbereich Informatik\\
+		Fakultät für Mathematik, Informatik und Naturwissenschaften\\
+		Universität Hamburg\par}
+	\end{center}
+
+	\vfill
+
+	{\large \begin{tabular}{ll}
+		Vorgelegt von: & Arne Struck \\
+		E-Mail-Adresse: 
+			& \href{mailto:1struck@informatik.uni-hamburg.de}{1struck@informatik.uni-hamburg.de} \\ 
+		%Matrikelnummer: & 1234567 \\
+		Studiengang: & Bsc. Informatik \\
+		\\
+		Veranstalter: & Prof. Arno Rolf\\
+		\\
+		Hamburg, den \today
+	\end{tabular}\par}
+\end{titlepage}
+
+\thispagestyle{empty}
+
+\newpage\null\thispagestyle{empty}\newpage
+\tableofcontents
+\newpage\null\thispagestyle{empty}\newpage
+
+\chapter{Einleitung}
+\label{intro}
+
+\section{Themenumriss}
+\label{themeintro}
+\todo[inline,caption={}]{
+\begin{itemize}
+\item ca 25 Jahre Netzpolitik
+\item von obskur bis zum Großteil aktuell
+\item Internet = wichtig für Demokratie (Quelle)
+\item daher Grundsatz: Freies Netz wichtig
+\item Probleme: dauerhafte veränderung blabla
+\end{itemize}}
+
+\section{Ziele der Arbeit}
+\label{aims}
+\todo[inline,caption={}]{
+\begin{itemize}
+\item funktioniert Netzpolitik im Sinne der Bürger?
+\item definieren
+\item Beratung
+\item Einschränkungen von Freiheiten für Sicherheit zeigen
+\item anders als google? (ja, da google = return of data investment, staat = nichts)
+\item Staat Aufgabe verfehlt (Besseres zusammenleben der Bürger gewährleisten)
+\end{itemize}}
+
+\section{Aufbau}
+\label{structure}
+\todo[inline,caption={}]{
+\begin{itemize}
+\item Hauptteil:
+\begin{itemize}
+\item erst: Wozu brauchen wir Netzpolitik Definition
+\item Beispiele für aktuelle Netzpolitik mit jeweiligem Verlauf
+\item dabei Vergleich zu google zeigen
+\end{itemize}
+\item Endteil:
+\begin{itemize}
+\item Zusammenfassung
+\item Bewertung
+\item wie kann es weitergehen?
+\end{itemize}
+\end{itemize}
+}
+
+\chapter{Hauptteil}
+\label{main}
+\section{Warum brauchen wir ein freies Netz?}
+\todo[inline,caption={}]{
+\begin{itemize}
+\item immer mehr nr 1 Infoquelle (Quelle?)
+\item Grundsatz informationelle Selbstbestimmung
+\item Überwachung führt zu ''Feigheit'' (Quelle)
+\end{itemize}}
+
+\section{Beeinlussung der Politik}
+\label{lobby}
+\todo[inline,caption={}]{
+\begin{itemize}
+\item Öttinger 98\% Beratungen von Lobbyisten der Netzbetreiber
+\item safetheinternet
+\item internet für alle neuland
+\item \(\Rightarrow\) Politiker Ahnungslos \(\Rightarrow\) Entscheidungsträger?!
+\end{itemize}
+}
+
+\section{Überwachung}
+\label{survailance}
+\todo[inline,caption={}]{
+\begin{itemize}
+\item 2.-3. Versuch für Vorratsdatenspeicherung
+\item Antiterrordatei
+\item pro contra
+\item ganz viele Probleme damit (Quellen)
+\begin{itemize}
+\item Generalverdacht
+\item Missbrauchsmöglichkeiten
+\item technisch sichere Umsetzung
+\item Zugriffsrechte
+\item Politikerlügen
+\end{itemize}
+\item Bundestrojaner
+\end{itemize}}
+
+\section{Leistungsschutzrecht}
+\label{LSR}
+\todo[inline,caption={}]{
+\begin{itemize}
+\item Verlauf
+\item Erpressung?
+\item weiteres Lobbyismusproblem
+\item durch Ahnungslosigkeit der Politiker google gestärkt
+\end{itemize}}
+
+\section{De-Mail}
+\label{demail}
+\todo[inline,caption={}]{
+\begin{itemize}
+\item bullshit made in germany, nothing more said
+\end{itemize}}
+
+\section{Netzneutralität}
+\label{netneutr}
+\todo[inline,caption={}]{
+\begin{itemize}
+\item was ist das?
+\item warum wichtig?
+\item wiederhole pro und contra punkte
+\item vs roaming :(
+\item irrtümer der Netzneutralität c't
+\end{itemize}}
+
+
+\chapter{Schluss}
+\label{end}
+\section{Fazit}
+\label{conclusion}
+\todo[inline,caption={}]{
+\begin{itemize}
+\item nochmal punkte zusammenfassen
+\item Politik glänzt durch Inkompetenz und oder einseitiger Beeinflussung
+\item Tun ähnliches bis schlimmeres, als Google und co
+\item Aber: anderer Auftrag => Verfehlt, mäh
+\end{itemize}
+}
+
+\section{Ausblick}
+\label{lookout}
+\todo[inline]{
+naja werden ich dann sehen, sowas wie: wenn wir uns nicht ändern, dann problem
+}
+
+\nocite{*}
+\bibliographystyle{alpha}
+\bibliography{literature}
+
+\listoftables
+
+\listoffigures
+
+
+\end{document}
