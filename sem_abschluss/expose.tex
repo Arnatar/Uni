@@ -114,22 +114,29 @@ Allerdings existieren auch Werkzeuge, welche sich in die bisherigen Systeme leic
 Diese Herangehensweisen versprechen leichtere Nutzbarkeit und Umsetzbarkeit durch Reduktion des durch die Parallelisierung bedingten Overheads im Programm, sowie höhere Flexibilität des Codes.
 Analysen der Interessenlagen bezüglich der verschiedenen Herangehensweisen weisen auf einen Trend in Richtung der Lösungen der Big Data Unternehmen auf \cite{hpcDies}.
 Die ''Big Data Unternehmen'' besitzen weiterhin das Potential High Performance Computing in Größenordnungen anzubieten, welche durchaus die der HPC Community übersteigen (erste Tendenzen in diese Richtung sind momentan zu beobachten \cite{HLR}). \\
-Wegen der Verschiebung der Interessenslagen, der relativen Schwerfälligkeit MPIs und nicht zuletzt der Übermacht der Privatwirtschaft drängen sich für das klassische HPC die Frage auf, beziehungsweise ob die Lösungen aus der Big Data Ökonomie leistungstechnisch mit MPI konkurrieren können und somit eine zumindest partielle Alternative auch für die momentane High Performance Computing Community darstellen.\\
-Die momentane Messungslage deutet darauf hin, dass die Werkzeuge aus der Big Data Industrie für die Berechnung von Simmulationen nicht ausreicht \cite{HLR}.
+Wegen der Verschiebung der Interessenlagen, der relativen Schwerfälligkeit MPIs und nicht zuletzt der Übermacht der Privatwirtschaft drängen sich für das klassische HPC die Frage auf, beziehungsweise ob die Lösungen aus der Big Data Ökonomie leistungstechnisch mit MPI konkurrieren können und somit eine zumindest partielle Alternative auch für die momentane High Performance Computing Community darstellen.\\
+Die momentane Messungslage deutet darauf hin, dass die Werkzeuge aus der Big Data Industrie für die Berechnung von Simulationen nicht ausreicht \cite{HLR}.
 Allerdings ist es möglich, dass ihre Leistungsfähigkeit für die Nachbereitung und Analysetätigkeiten im HPC-Bereich ausreichend ist. \\
-\todo[inline]{2-3 Sätze Beschreibung gestalten}
+\todo[inline]{hier kurze Beschreibung gestalten der Nachbereitung gestalten?}
 
 \section{Zielsetzung}
-\todo[inline]{Analyse der Eignung der gewählten Werkzeuge zur Nachbereitung wissenschaftlicher Daten, ausformulieren}
+\label{ziel}
+Diese Arbeit soll nun die zuvor erwähnte Eignung einiger ''Big Data'' Werkzeuge im Bezug auf die Nachbereitung wissenschaftlicher Daten analysieren.
+Hierzu muss sowohl ein Vergleich untereinander, als auch zu den bisherigen Verfahrensweisen gezogen werden.
+Für einen aussagekräftigen Vergleich für die Nutzbarkeit sind sowohl eine Bewertung des Bedienkomforts, als auch ein Vergleich der jeweiligen Einarbeitungszeiten und Nutzungszeiten.
+
 
 \chapter{Problemstellung}
 \label{Problemstellung}
-\todo[inline, caption={}]{\begin{itemize}
-	\item Wahl der Werkzeuge
-	\item Entwurf von Testdaten
-	\item Herangehensweise an Eignungsanalyse
-	\item Bewertungskriterien erstellen
-\end{itemize}}
+Um das in \ref{ziel} definierte Ziel zu erreichen müssen viele Problematiken gelöst werden.
+Da die Palette der in Frage kommenden Werkzeuge nahezu keine Grenzen kennt, muss eine Auswahl orientiert am begrenzten Zeitraum der Arbeit getroffen werden.
+Da sowohl eine Einarbeitungszeit in die jeweiligen Werkzeuge, als auch eine Umsetzung für jedes Werkzeug von Nöten sind, aber auch eine gewisse Varianz von Nöten ist, wären 3 Werkzeuge eine naheliegende Wahl. 
+Um die Integrierbarkeit in andere Systeme zu gewährleisten und die Einarbeitungszeit nicht durch das Aufsetzen ganzer Systeme zu beschränken, sollte die Wahl auf nicht Komplettlösungen eingeschränkt werden. \\
+Ein weiteres Teilproblem der Eignungsbewertung stellt der Entwurf einheitlicher, geeigneter Testdaten dar.
+Hierzu sollten die Daten sowohl eine ausreichende Größe besitzen, als auch aus dem High Performance Computing stammen. \\
+Des weiteren muss eine Herangehensweise zur eigentlichen Eignungsanalyse gestaltet werden. 
+Dieses Teilproblem gliedert sich in zwei Problemteile, zum einen die Definition der Bewertungskriterien, zum anderen Definitionen standardisierter Beispielfunktionalitäten und Herangehensweisen an die Messungen.
+
 
 \chapter{Theoretischer Hintergrund}
 \label{Theoretischer Hintergrund}
@@ -139,8 +146,12 @@ Allerdings ist es möglich, dass ihre Leistungsfähigkeit für die Nachbereitung
 \label{Methodik und Vorgehensweise}
 In diesem Kapitel wird ein Vorgehen bei der Lösung der in \ref{Problemstellung} beschriebenen Problemstellung entworfen.
 \section{Design}
-Für die 
-\section{Implemenatation}
+Nach einer Entscheidung für die Werkzeuge, müssen zu erst die Testdaten zusammengestellt werden.
+Es werden größere Datenmengen benötigt werden, um die Leistungsstärke der Werkzeuge sachgemäß bewerten zu können.
+Allerdings werden auch verschiedene Daten für die Testdaten benötigt. \\
+Der nächste Schritt stellt die Aufstellung geeigneter Vergleichsmetriken dar, welche in den verschiedenen Werkzeugen implementiert werden müssen.
+
+\section{Implementation}
 
 \section{Ergebnisevaluation}
 
