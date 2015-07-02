@@ -54,6 +54,8 @@
 \renewcommand*{\appendixtocname}{Appendices}
 \renewcommand*{\appendixpagename}{Appendices}
 
+\newboolean{todos}
+\setboolean{todos}{false}
 
 \begin{document}
 \begin{titlepage}
@@ -98,8 +100,20 @@
 \chapter{Einleitung}
 \label{intro}
 
-\section{Themenumriss}
+\section{Themenumriss Netzpolitik}
 \label{themeintro}
+Nach nun ca. 25 Jahren Netzpolitik hat diese eine große Veränderung hinter sich.
+Was um 1990, als das Internet anfing durch die Entwicklung der Grundlagen des World Wide Webs sich als Massenmedium zu etablieren, noch obskure Gedanken einiger weniger war, hat sich heutzutage als immer wichtiger werdender Teil der Bürgerrechte etabliert.
+Zumindest legen die in letzter Zeit immer stärker in die Öffentlichkeit tretenden Diskussionen zwischen Bürgerrechtlern, Aktivisten auf der einen Seite und den verschiedensten Interessenvertretern auf der anderen Seite diesen Schluss nahe. \\
+Medien sind für eine lebendige Demokratie in den meisten ihrer Formen eine Grundvoraussetzung, unter anderem da der Wähler eine informierte Entscheidung treffen muss.
+Nun hat sich das Internet zu einer der Hauptinformationsquellen für die Generationen unter 50 entwickelt, wenn es nicht gar die wichtigste für diese ist.
+Somit ist es nicht verwunderlich, dass Aktivistengruppen das Internet trotz all seiner Schwächen von äußeren Einflüssen beschützen wollen.
+Aus solchen Beweggründen resultieren Grundsätze wie: ein freies Netz ist eine wichtige Grundlage für unsere Gesellschaft und daher zu bewahren. \\
+Da das Internet als Teil der modernen Informationstechnologie relativ schnellen, massiven Veränderungen unterliegt ist es sowohl für Politik, als auch für alle Interessenverbände schwierig Handlungsweisen zu entwickeln, welche ihren Interessen entspricht.
+Ein weiteres Problem in der Netzpolitik stellen selbstredend die verschiedenen Interessenlagen dar, welche sich unter Umständen diametral gegenüberstehen.
+Hier können sich große Probleme entwickeln, wenn technische Notwendigkeiten oder Unternehmensinteressen den Grundsätzen gegenüberstehen.
+
+\ifthenelse{\boolean{todos}}{
 \todo[inline,caption={}]{
 \begin{itemize}
 \item ca 25 Jahre Netzpolitik
@@ -108,9 +122,17 @@
 \item daher Grundsatz: Freies Netz wichtig
 \item Probleme: dauerhafte veränderung blabla
 \end{itemize}}
+}
+{}
 
 \section{Ziele der Arbeit}
 \label{aims}
+Das Ziel dieser Hausarbeit soll die vergangene, aber vor allem die momentane Netzpolitik zu analysieren in Hinblick auf ihre Verträglichkeit mit den Interessen der Bürger.
+Hierzu müssen ebenjene Interessen definiert werden.
+Des weiteren soll untersucht werden, ob und wenn ja in wie fern sich die Vorgehensweise der Politik gegenüber den Bürgern unterscheidet.
+Zum Ende wird eine Bilanz gezogen werden, ob die Politik ihrem Auftrag als Volksvertreter nachkommt oder nicht.
+
+\ifthenelse{\boolean{todos}}{
 \todo[inline,caption={}]{
 \begin{itemize}
 \item funktioniert Netzpolitik im Sinne der Bürger?
@@ -120,9 +142,19 @@
 \item anders als google? (ja, da google = return of data investment, staat = nichts)
 \item Staat Aufgabe verfehlt (Besseres zusammenleben der Bürger gewährleisten)
 \end{itemize}}
+}{}
+
 
 \section{Aufbau}
 \label{structure}
+Im Hauptteil wird zu erst beschrieben, warum ein von äußeren Einflüssen bewahrtes Internet wichtig für die Bevölkerung ist.
+Im Anschluss steht ein kleiner Einblick in die Entscheidungsfindungsprozesse der Entscheidungsträger und woher sie ihre Informationen beziehen.
+Darauf soll eine Beschreibung der aktuellen Problematiken im Bereich Netzpolitik folgen.
+Hierbei sind der Verlauf, die verschiedenen beteiligten Parteien und ihre Positionen zu beachten, darauf soll eine vorläufige Bewertung gezogen werden, welche die aktuelle Lage in Bezug auf die wahrscheinlichsten Interessen der Bevölkerung bewertet. \\
+Im finalen Teil sollen zu erst die einzelnen Teilbefunde zusammengefasst werden, worauf eine finale Bewertung erstellt wird.
+Am Ende soll ein Ausblick stehen, welcher aufzeigt ob und wenn ja was verändert werden könnte, um in Zukunft auf dem selben Level dazustehen, wie heute.
+
+\ifthenelse{\boolean{todos}}{
 \todo[inline,caption={}]{
 \begin{itemize}
 \item Hauptteil:
@@ -139,19 +171,32 @@
 \end{itemize}
 \end{itemize}
 }
+}{}
 
 \chapter{Hauptteil}
 \label{main}
-\section{Warum brauchen wir ein freies Netz?}
+\section{Warum braucht die Bevölkerung ein freies Netz?}
+Das Bedürfnis der Bürger, der Wille der Bevölkerung an sich kann zwar nicht existieren, da ein Volk eine Ansammlung von Individuen darstellt.
+Allerdings kann angenommen werden, dass eine stabile, informierte Demokratie im Interesse der meisten Bürger liegt. 
+Das heutige Internet ist in der ersten Welt das am meisten genutzte Massenmedium.
+Nicht nur haben die bisherigen Massenmedien einen Auftritt und somit durchs Internet zu erreichen, sondern stellen weitere Möglichkeiten zu Informationsverbreitung dar.
+Zwar kann im Internet theoretisch jeder auch falsche Informationen verbreiten, allerdings kann dies durch eine medienkompetente Bevölkerung ausgeglichen werden.
+
+
+\ifthenelse{\boolean{todos}}{
 \todo[inline,caption={}]{
 \begin{itemize}
 \item immer mehr nr 1 Infoquelle (Quelle?)
 \item Grundsatz informationelle Selbstbestimmung
 \item Überwachung führt zu ''Feigheit'' (Quelle)
 \end{itemize}}
+}{}
+
 
 \section{Beeinlussung der Politik}
 \label{lobby}
+
+\ifthenelse{\boolean{todos}}{
 \todo[inline,caption={}]{
 \begin{itemize}
 \item Öttinger 98\% Beratungen von Lobbyisten der Netzbetreiber
@@ -160,9 +205,12 @@
 \item \(\Rightarrow\) Politiker Ahnungslos \(\Rightarrow\) Entscheidungsträger?!
 \end{itemize}
 }
+}{}
 
 \section{Überwachung}
 \label{survailance}
+
+\ifthenelse{\boolean{todos}}{
 \todo[inline,caption={}]{
 \begin{itemize}
 \item 2.-3. Versuch für Vorratsdatenspeicherung
@@ -178,9 +226,12 @@
 \end{itemize}
 \item Bundestrojaner
 \end{itemize}}
+}{}
 
 \section{Leistungsschutzrecht}
 \label{LSR}
+
+\ifthenelse{\boolean{todos}}{
 \todo[inline,caption={}]{
 \begin{itemize}
 \item Verlauf
@@ -188,16 +239,21 @@
 \item weiteres Lobbyismusproblem
 \item durch Ahnungslosigkeit der Politiker google gestärkt
 \end{itemize}}
+}{}
 
 \section{De-Mail}
 \label{demail}
+\ifthenelse{\boolean{todos}}{
 \todo[inline,caption={}]{
 \begin{itemize}
 \item bullshit made in germany, nothing more said
 \end{itemize}}
+}{}
 
 \section{Netzneutralität}
 \label{netneutr}
+
+\ifthenelse{\boolean{todos}}{
 \todo[inline,caption={}]{
 \begin{itemize}
 \item was ist das?
@@ -206,12 +262,14 @@
 \item vs roaming :(
 \item irrtümer der Netzneutralität c't
 \end{itemize}}
-
+}{}
 
 \chapter{Schluss}
 \label{end}
 \section{Fazit}
 \label{conclusion}
+
+\ifthenelse{\boolean{todos}}{
 \todo[inline,caption={}]{
 \begin{itemize}
 \item nochmal punkte zusammenfassen
@@ -220,20 +278,24 @@
 \item Aber: anderer Auftrag => Verfehlt, mäh
 \end{itemize}
 }
+}{}
 
 \section{Ausblick}
 \label{lookout}
+
+\ifthenelse{\boolean{todos}}{
 \todo[inline]{
 naja werden ich dann sehen, sowas wie: wenn wir uns nicht ändern, dann problem
 }
+}{}
 
 \nocite{*}
 \bibliographystyle{alpha}
 \bibliography{literature}
 
-\listoftables
+%\listoftables
 
-\listoffigures
+%\listoffigures
 
 
 \end{document}
